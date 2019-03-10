@@ -98,14 +98,18 @@
 
 
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="Quick guide book: Clone repo1$ git clone Initialize new repo Initialize and push it to a new repo in Github123456$ git init$ git remote add origin https://github.com/ShuoGH/REPONAME.git# add the repo">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Git Use">
 <meta property="og:url" content="http://yoursite.com/2019/03/10/Git-Use/index.html">
 <meta property="og:site_name" content="Go To Deeper">
+<meta property="og:description" content="Quick guide book: Clone repo1$ git clone Initialize new repo Initialize and push it to a new repo in Github123456$ git init$ git remote add origin https://github.com/ShuoGH/REPONAME.git# add the repo">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-10T22:55:58.971Z">
+<meta property="og:updated_time" content="2019-03-10T23:32:55.680Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git Use">
+<meta name="twitter:description" content="Quick guide book: Clone repo1$ git clone Initialize new repo Initialize and push it to a new repo in Github123456$ git init$ git remote add origin https://github.com/ShuoGH/REPONAME.git# add the repo">
 
 
 
@@ -356,7 +360,7 @@
                 
               
 
-              <time title="Created: 2019-03-10 22:35:32 / Modified: 22:55:58" itemprop="dateCreated datePublished" datetime="2019-03-10T22:35:32+00:00">2019-03-10</time>
+              <time title="Created: 2019-03-10 22:35:32 / Modified: 23:32:55" itemprop="dateCreated datePublished" datetime="2019-03-10T22:35:32+00:00">2019-03-10</time>
             
 
             
@@ -413,7 +417,17 @@
       
 
       
-        
+        <p>Quick guide book:</p>
+<h1 id="Clone-repo"><a href="#Clone-repo" class="headerlink" title="Clone repo"></a>Clone repo</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span></span><br></pre></td></tr></table></figure>
+<h1 id="Initialize-new-repo"><a href="#Initialize-new-repo" class="headerlink" title="Initialize new repo"></a>Initialize new repo</h1><p> Initialize and push it to a new repo in Github<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br><span class="line">$ git remote add origin https://github.com/ShuoGH/REPONAME.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># add the repo in the github website in advance</span></span><br><span class="line">$ git push -u origin master   <span class="comment"># first to push </span></span><br><span class="line">$ git push origin master  <span class="comment">#after the first time</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Branch"><a href="#Branch" class="headerlink" title="Branch"></a>Branch</h1><p>Some commend about the branches:</p>
+<h2 id="List-branches"><a href="#List-branches" class="headerlink" title="List branches:"></a>List branches:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+<h2 id="Check-out-branch"><a href="#Check-out-branch" class="headerlink" title="Check out branch"></a>Check out branch</h2><p>If you want to checkout to a branch directly, just use:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout origin/xxbranch</span><br></pre></td></tr></table></figure></p>
+<p>To create a local branch,<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b xx origin/xxbranch</span><br><span class="line"><span class="comment"># or use </span></span><br><span class="line">git checkout -t origin/xxbranch` <span class="comment"># it will create a branch with same name.</span></span><br><span class="line"><span class="comment"># or use `fetch`</span></span><br><span class="line">git fetch origin xxbranch:xx <span class="comment"># (in this way, it won't checkout to the new branch automatically)</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Delete-branch"><a href="#Delete-branch" class="headerlink" title="Delete branch"></a>Delete branch</h2><p>To delete the remote branch:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;remote_name&gt; --delete &lt;branch_name&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="Operation-on-Files"><a href="#Operation-on-Files" class="headerlink" title="Operation on Files"></a>Operation on Files</h1><p>To rm the local file and make the change into git:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git rm xx </span><br><span class="line">git commit -m <span class="string">"xxxx"</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Show-the-git-tree"><a href="#Show-the-git-tree" class="headerlink" title="Show the git tree"></a>Show the git tree</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --graph --pretty=oneline --abbrev-commit</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -433,6 +447,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+        </div>
       
 
       
@@ -495,8 +515,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -536,6 +565,23 @@
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -583,6 +629,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Clone-repo"><span class="nav-number">1.</span> <span class="nav-text">Clone repo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Initialize-new-repo"><span class="nav-number">2.</span> <span class="nav-text">Initialize new repo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Branch"><span class="nav-number">3.</span> <span class="nav-text">Branch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#List-branches"><span class="nav-number">3.1.</span> <span class="nav-text">List branches:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Check-out-branch"><span class="nav-number">3.2.</span> <span class="nav-text">Check out branch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-branch"><span class="nav-number">3.3.</span> <span class="nav-text">Delete branch</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Operation-on-Files"><span class="nav-number">4.</span> <span class="nav-text">Operation on Files</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Show-the-git-tree"><span class="nav-number">5.</span> <span class="nav-text">Show the git tree</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
