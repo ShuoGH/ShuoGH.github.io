@@ -14,7 +14,7 @@
 
 <html class="theme-next pisces" lang>
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -161,7 +161,7 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -172,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -447,7 +447,7 @@
 <h2 id="Transfer-the-entire-file-folder"><a href="#Transfer-the-entire-file-folder" class="headerlink" title="Transfer the entire file folder"></a>Transfer the entire file folder</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The formmer path is the `from` location, the latter one is the destination.</span><br><span class="line">scp -r xxx@xxx.ecs.soton.ac.uk:/home/sa2y18/mydocuments/4_dataMining ~/Desktop/</span><br></pre></td></tr></table></figure>
 <h2 id="Transfer-a-single-file"><a href="#Transfer-a-single-file" class="headerlink" title="Transfer a single file"></a>Transfer a single file</h2><p>no <code>-r</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp xxx@xxx.ecs.soton.ac.uk:PATH LOCALPATH</span><br></pre></td></tr></table></figure></p>
 <hr>
-<h1 id="Use-Jupyter"><a href="#Use-Jupyter" class="headerlink" title="Use Jupyter"></a>Use Jupyter</h1><p>Run jupyter on the remote and open it from local port. You can follow the instruction: [<a href="http://fizzylogic.nl/2017/11/06/edit-jupyter-notebooks-over-ssh/]" target="_blank" rel="noopener">http://fizzylogic.nl/2017/11/06/edit-jupyter-notebooks-over-ssh/]</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --no-browser --port=8080  <span class="comment"># run on the remote machine</span></span><br><span class="line"></span><br><span class="line">ssh -N -L 8080:localhost:8080 xxx@xxx.ecs.soton.ac.uk  <span class="comment"># run in the local machine terminal</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Use-Jupyter"><a href="#Use-Jupyter" class="headerlink" title="Use Jupyter"></a>Use Jupyter</h1><p>Run jupyter on the remote and open it from local port. You can follow the instruction: [<a href="http://fizzylogic.nl/2017/11/06/edit-jupyter-notebooks-over-ssh/" target="_blank" rel="noopener">http://fizzylogic.nl/2017/11/06/edit-jupyter-notebooks-over-ssh/</a>]<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --no-browser --port=8080  <span class="comment"># run on the remote machine</span></span><br><span class="line"></span><br><span class="line">ssh -N -L 8080:localhost:8080 xxx@xxx.ecs.soton.ac.uk  <span class="comment"># run in the local machine terminal</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -569,7 +569,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -592,7 +592,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -617,7 +619,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -858,7 +864,24 @@
   
 
 
-  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+  <script src="/js/src/next-boot.js?v=7.0.1"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
   
@@ -883,6 +906,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
 
