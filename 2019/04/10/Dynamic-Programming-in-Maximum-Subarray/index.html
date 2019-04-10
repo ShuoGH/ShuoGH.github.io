@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="Sometimes you don’t want to see the blog in the first time as you haven’t finished it.In this case, you can use the draft. Initialize draft and publish1234$ hexo new draft &quot;draft name&quot;$ #before publis">
-<meta name="keywords" content="Hexo">
+  <meta name="description" content="Dynamic Programming in Maximum SubarrayWhen I did the problem in Leetcode, the problem of 53 is about the maximum subarray. I got in touch about the DP algorithm, which is very useful for solving this">
+<meta name="keywords" content="Algorithm,Dynamic Programming">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo writing">
-<meta property="og:url" content="http://yoursite.com/2019/03/11/Hexo-writing/index.html">
+<meta property="og:title" content="Dynamic Programming in Maximum Subarray">
+<meta property="og:url" content="http://yoursite.com/2019/04/10/Dynamic-Programming-in-Maximum-Subarray/index.html">
 <meta property="og:site_name" content="We Need to Go Deeper">
-<meta property="og:description" content="Sometimes you don’t want to see the blog in the first time as you haven’t finished it.In this case, you can use the draft. Initialize draft and publish1234$ hexo new draft &quot;draft name&quot;$ #before publis">
+<meta property="og:description" content="Dynamic Programming in Maximum SubarrayWhen I did the problem in Leetcode, the problem of 53 is about the maximum subarray. I got in touch about the DP algorithm, which is very useful for solving this">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-11T23:44:38.412Z">
+<meta property="og:updated_time" content="2019-04-10T10:36:15.658Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo writing">
-<meta name="twitter:description" content="Sometimes you don’t want to see the blog in the first time as you haven’t finished it.In this case, you can use the draft. Initialize draft and publish1234$ hexo new draft &quot;draft name&quot;$ #before publis">
+<meta name="twitter:title" content="Dynamic Programming in Maximum Subarray">
+<meta name="twitter:description" content="Dynamic Programming in Maximum SubarrayWhen I did the problem in Leetcode, the problem of 53 is about the maximum subarray. I got in touch about the DP algorithm, which is very useful for solving this">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/11/Hexo-writing/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/10/Dynamic-Programming-in-Maximum-Subarray/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>Hexo writing | We Need to Go Deeper</title>
+  <title>Dynamic Programming in Maximum Subarray | We Need to Go Deeper</title>
   
 
 
@@ -332,7 +332,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/11/Hexo-writing/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/10/Dynamic-Programming-in-Maximum-Subarray/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuo An">
@@ -349,7 +349,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hexo writing
+          <h1 class="post-title" itemprop="name headline">Dynamic Programming in Maximum Subarray
 
               
             
@@ -375,7 +375,7 @@
                 
               
 
-              <time title="Created: 2019-03-11 23:15:16 / Modified: 23:44:38" itemprop="dateCreated datePublished" datetime="2019-03-11T23:15:16+00:00">2019-03-11</time>
+              <time title="Created: 2019-04-10 11:25:39 / Modified: 11:36:15" itemprop="dateCreated datePublished" datetime="2019-04-10T11:25:39+01:00">2019-04-10</time>
             
 
             
@@ -397,7 +397,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
 
                 
                 
@@ -439,9 +439,15 @@
       
 
       
-        <p>Sometimes you don’t want to see the blog in the first time as you haven’t finished it.<br>In this case, you can use the <code>draft</code>.</p>
-<h1 id="Initialize-draft-and-publish"><a href="#Initialize-draft-and-publish" class="headerlink" title="Initialize draft and publish"></a>Initialize draft and publish</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new draft <span class="string">"draft name"</span></span><br><span class="line">$ <span class="comment">#before publishing, recommend to use Hexo clean</span></span><br><span class="line">$ <span class="comment"># hexo clean</span></span><br><span class="line">$ hexo publish <span class="string">"draft name"</span></span><br></pre></td></tr></table></figure>
-<h1 id="Other-use-skills"><a href="#Other-use-skills" class="headerlink" title="Other use skills"></a>Other use skills</h1><p><strong> Add the link</strong><br><code>[words](link url)</code></p>
+        <h1 id="Dynamic-Programming-in-Maximum-Subarray"><a href="#Dynamic-Programming-in-Maximum-Subarray" class="headerlink" title="Dynamic Programming in Maximum Subarray"></a>Dynamic Programming in Maximum Subarray</h1><p>When I did the problem in Leetcode, the problem of <a href="https://leetcode.com/problems/maximum-subarray/" target="_blank" rel="noopener">53</a> is about the maximum subarray. I got in touch about the DP algorithm, which is very useful for solving this problem, converting the $O(n^3)$ to $O(n)$ complexity.</p>
+<p>There are basically three approachs for this problem, the most time consuming one is the most straightforward and simple for user to come up with. Better one is the <code>DP algorithm</code>, which we are going to talk about.</p>
+<h3 id="Problem-description"><a href="#Problem-description" class="headerlink" title="Problem description:"></a>Problem description:</h3><p>Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.</p>
+<p><strong>Example</strong>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: [-2,1,-3,4,-1,2,1,-5,4],</span><br><span class="line">Output: 6</span><br><span class="line">Explanation: [4,-1,2,1] has the largest sum = 6.</span><br></pre></td></tr></table></figure></p>
+<p><strong>Answer</strong>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def maxSubArray(self, nums: List[int]) -&gt; int:</span><br><span class="line">        <span class="string">''</span><span class="string">'</span></span><br><span class="line"><span class="string">        DP algorithm</span></span><br><span class="line"><span class="string">        '</span><span class="string">''</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        dp = [0]*(n)</span><br><span class="line">        dp[0] = nums[0]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(1,n):</span><br><span class="line">            dp[i] = max(dp[i-1] + nums[i], nums[i])</span><br><span class="line">        <span class="built_in">return</span> max(dp)</span><br></pre></td></tr></table></figure></p>
+<p>See the video for more details:<br><div class="video-container"><iframe src="//www.youtube.com/embed/2MmGzdiKR9Y" frameborder="0" allowfullscreen></iframe></div></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ol>
+<li><a href="https://www.youtube.com/watch?v=2MmGzdiKR9Y" target="_blank" rel="noopener">Lecture</a> from Youtube. </li>
+</ol>
 
       
     </div>
@@ -465,7 +471,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+            <a href="/tags/Dynamic-Programming/" rel="tag"># Dynamic Programming</a>
           
         </div>
       
@@ -478,8 +486,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/11/Git-add-ignore/" rel="next" title="Git add ignore">
-                <i class="fa fa-chevron-left"></i> Git add ignore
+              <a href="/2019/04/09/Computation-Graph-and-Back-Propagation/" rel="next" title="Computation Graph and Back Propagation">
+                <i class="fa fa-chevron-left"></i> Computation Graph and Back Propagation
               </a>
             
           </div>
@@ -487,10 +495,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/12/Beyond-Accuracy-Precision-and-Recall/" rel="prev" title="Beyond Accuracy: Precision and Recall">
-                Beyond Accuracy: Precision and Recall <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -693,7 +697,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Initialize-draft-and-publish"><span class="nav-number">1.</span> <span class="nav-text">Initialize draft and publish</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-use-skills"><span class="nav-number">2.</span> <span class="nav-text">Other use skills</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dynamic-Programming-in-Maximum-Subarray"><span class="nav-number">1.</span> <span class="nav-text">Dynamic Programming in Maximum Subarray</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-description"><span class="nav-number">1.0.1.</span> <span class="nav-text">Problem description:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">1.1.</span> <span class="nav-text">Reference:</span></a></li></ol></div>
             
 
           </div>
