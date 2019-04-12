@@ -328,6 +328,184 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/11/Git-add-ignore/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/11/Git-add-ignore/" class="post-title-link" itemprop="url">Git add ignore</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-11 23:11:26 / Modified: 23:39:51" itemprop="dateCreated datePublished" datetime="2019-03-11T23:11:26+00:00">2019-03-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="What’s-gitignore-for"><a href="#What’s-gitignore-for" class="headerlink" title="What’s gitignore for:"></a>What’s gitignore for:</h1><p>The files which you don’t want to upload or list in your git history, such as “.DS_store” or some other data files. You can achieve this by adding the <code>.gitignore</code> file into your git repo. </p>
+<h1 id="Mac-DS-store"><a href="#Mac-DS-store" class="headerlink" title="Mac .DS_store"></a>Mac .DS_store</h1><p>gitignore can set globally or just add a single file into your repo. You can find the doc in this <a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">link</a>.</p>
+<ul>
+<li>所有空行或者以注释符号 ＃ 开头的行都会被 git 忽略，空行可以为了可读性分隔段落，# 表明注释。</li>
+<li>第一个 / 会匹配路径的根目录，举个栗子，”/*.html”会匹配”index.html”，而不是”d/index.html”。</li>
+<li>通配符 <em> 匹配任意个任意字符，? 匹配一个任意字符。需要注意的是通配符不会匹配文件路径中的 /，举个栗子，”d/</em>.html”会匹配”d/index.html”，但不会匹配”d/a/b/c/index.html”。</li>
+<li>两个连续的星号 ** 有特殊含义：<ul>
+<li>以 <strong>/ 开头表示匹配所有的文件夹，例如 </strong>/test.md 匹配所有的test.md文件。</li>
+<li>以 /<strong> 结尾表示匹配文件夹内所有内容，例如 a/</strong> 匹配文件夹a中所有内容。</li>
+<li>连续星号 <strong> 前后分别被 / 夹住表示匹配0或者多层文件夹，例如 a/</strong>/b 匹配到 a/b 、a/x/b 、a/x/y/b 等。</li>
+</ul>
+</li>
+<li>前缀 ! 的模式表示如果前面匹配到被忽略，则重新添加回来。如果匹配到的父文件夹还是忽略状态，该文件还是保持忽略状态。如果路径名第一个字符为 ! ，则需要在前面增加 \ 进行转义。</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">git doc</a></li>
+<li><a href="https://orianna-zzo.github.io/sci-tech/2018-01/mac%E4%B8%ADgit%E5%BF%BD%E7%95%A5.ds_store%E6%96%87%E4%BB%B6/" target="_blank" rel="noopener">Mac中Git忽略.DS_Store文件</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/10/Git-Use/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -704,7 +882,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -774,7 +952,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -1029,6 +1209,8 @@
 
   
   
+    
+      
     
       
     

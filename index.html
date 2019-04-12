@@ -328,6 +328,186 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/12/Note-1-Linear-Regression-and-Logistic-Regression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/12/Note-1-Linear-Regression-and-Logistic-Regression/" class="post-title-link" itemprop="url">Note-1: Linear Regression and Logistic Regression</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-12 11:12:15 / Modified: 11:46:49" itemprop="dateCreated datePublished" datetime="2019-04-12T11:12:15+01:00">2019-04-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear Regression"></a>Linear Regression</h2><h3 id="What’s-Liear-Regression"><a href="#What’s-Liear-Regression" class="headerlink" title="What’s Liear Regression"></a>What’s Liear Regression</h3><p>Linear Regression is a approach to modelling the relationship between a scalar response( or a <strong>dependent variable</strong>) and one or more explanatory variables. </p>
+<p>It is written as the linear formula: $f(x)=w^T x+b$</p>
+<p>Given the features values of $n$ data points, we can train to get a linear model which can fit the data set properly. When the new data point is fed into the model, we can predict the value.</p>
+<p>We are going to find the optimal weights value:</p>
+<script type="math/tex; mode=display">(w^*,b^*)= \underset{(w,b)}{\operatorname{argmix}}\sum^m_{i=1}(f(x_i)-y_i)^2</script><p>The close form solution can be calculated through the derivative. Of course, you can also use Gradient descent to find the optimal parameters, but it’s not necessary.</p>
+<h3 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h3><p>The advantages of linear regression are that it’s simple and easy to implement, and the time complexity is small.</p>
+<h2 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h2><h3 id="Why-Logistic-Regression"><a href="#Why-Logistic-Regression" class="headerlink" title="Why Logistic Regression"></a>Why Logistic Regression</h3><p>Though the name of Logistic Regression includes <strong>regression</strong>, it’t not really a regression model. It’s for classification task. In this aspect, we can call <strong>Logistic Regression Analysis</strong>.</p>
+<p>Since we have Linear Regression to do the <strong>regression</strong> task to predict the value for a new data set. Actually it can be used to predict the <strong>class</strong> for a given data. We can just set the threshold, if the predicted value is above the threshold, then it is classified into class 1, on the other hand, the data is classified into class 0.</p>
+<p>However, there is a drawback when we use linear regression to do classification. We should set <strong>lots of thresholds</strong> according to different cases. And that’s why Logistic Regreesion came out.</p>
+<h3 id="What’s-Logistic-Regression"><a href="#What’s-Logistic-Regression" class="headerlink" title="What’s Logistic Regression"></a>What’s Logistic Regression</h3><p>$y=g(w^Tx+b)$</p>
+<p>The $g$ function, from unit-stop function to sigmoid function, can convert the predicted value into corresponding class.</p>
+<script type="math/tex; mode=display">
+sign(x)=\begin{cases}
+1,&x>0 \\ 0.5,&x=0 \cr 0,&x<0
+\end{cases}</script><p>Unit-step doesn’t have a very good property, it can easy to do derivativation. Then we use the sigmoid function. It has the format like this:</p>
+<script type="math/tex; mode=display">y=\frac{1}{1+e^{-z}}</script><p><code>The sigmoid function squash the predicted value into 0 and 1, and now we can just set one threshold and do the classification task.</code></p>
+<h3 id="Log-Odds-another-way-to-interprete-LR"><a href="#Log-Odds-another-way-to-interprete-LR" class="headerlink" title="Log Odds - another way to interprete LR"></a>Log Odds - another way to interprete LR</h3><p>Log odds is another way to interprete the logistic regression. For more details, see the chapter 3 in 《机器学习 周志华》.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>《机器学习》 周志华</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/10/Dynamic-Programming-in-Maximum-Subarray/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1852,184 +2032,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/11/Git-add-ignore/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/11/Git-add-ignore/" class="post-title-link" itemprop="url">Git add ignore</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-11 23:11:26 / Modified: 23:39:51" itemprop="dateCreated datePublished" datetime="2019-03-11T23:11:26+00:00">2019-03-11</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="What’s-gitignore-for"><a href="#What’s-gitignore-for" class="headerlink" title="What’s gitignore for:"></a>What’s gitignore for:</h1><p>The files which you don’t want to upload or list in your git history, such as “.DS_store” or some other data files. You can achieve this by adding the <code>.gitignore</code> file into your git repo. </p>
-<h1 id="Mac-DS-store"><a href="#Mac-DS-store" class="headerlink" title="Mac .DS_store"></a>Mac .DS_store</h1><p>gitignore can set globally or just add a single file into your repo. You can find the doc in this <a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">link</a>.</p>
-<ul>
-<li>所有空行或者以注释符号 ＃ 开头的行都会被 git 忽略，空行可以为了可读性分隔段落，# 表明注释。</li>
-<li>第一个 / 会匹配路径的根目录，举个栗子，”/*.html”会匹配”index.html”，而不是”d/index.html”。</li>
-<li>通配符 <em> 匹配任意个任意字符，? 匹配一个任意字符。需要注意的是通配符不会匹配文件路径中的 /，举个栗子，”d/</em>.html”会匹配”d/index.html”，但不会匹配”d/a/b/c/index.html”。</li>
-<li>两个连续的星号 ** 有特殊含义：<ul>
-<li>以 <strong>/ 开头表示匹配所有的文件夹，例如 </strong>/test.md 匹配所有的test.md文件。</li>
-<li>以 /<strong> 结尾表示匹配文件夹内所有内容，例如 a/</strong> 匹配文件夹a中所有内容。</li>
-<li>连续星号 <strong> 前后分别被 / 夹住表示匹配0或者多层文件夹，例如 a/</strong>/b 匹配到 a/b 、a/x/b 、a/x/y/b 等。</li>
-</ul>
-</li>
-<li>前缀 ! 的模式表示如果前面匹配到被忽略，则重新添加回来。如果匹配到的父文件夹还是忽略状态，该文件还是保持忽略状态。如果路径名第一个字符为 ! ，则需要在前面增加 \ 进行转义。</li>
-</ul>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li><a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">git doc</a></li>
-<li><a href="https://orianna-zzo.github.io/sci-tech/2018-01/mac%E4%B8%ADgit%E5%BF%BD%E7%95%A5.ds_store%E6%96%87%E4%BB%B6/" target="_blank" rel="noopener">Mac中Git忽略.DS_Store文件</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2078,7 +2080,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2148,7 +2150,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -2402,9 +2406,9 @@
       
     
       
-        
-      
     
+      
+        
       
     
       
