@@ -373,7 +373,7 @@
                 
               
 
-              <time title="Created: 2019-04-12 11:12:15 / Modified: 11:46:49" itemprop="dateCreated datePublished" datetime="2019-04-12T11:12:15+01:00">2019-04-12</time>
+              <time title="Created: 2019-04-12 11:12:15 / Modified: 14:02:58" itemprop="dateCreated datePublished" datetime="2019-04-12T11:12:15+01:00">2019-04-12</time>
             
 
             
@@ -441,7 +441,13 @@
 <h2 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h2><h3 id="Why-Logistic-Regression"><a href="#Why-Logistic-Regression" class="headerlink" title="Why Logistic Regression"></a>Why Logistic Regression</h3><p>Though the name of Logistic Regression includes <strong>regression</strong>, it’t not really a regression model. It’s for classification task. In this aspect, we can call <strong>Logistic Regression Analysis</strong>.</p>
 <p>Since we have Linear Regression to do the <strong>regression</strong> task to predict the value for a new data set. Actually it can be used to predict the <strong>class</strong> for a given data. We can just set the threshold, if the predicted value is above the threshold, then it is classified into class 1, on the other hand, the data is classified into class 0.</p>
 <p>However, there is a drawback when we use linear regression to do classification. We should set <strong>lots of thresholds</strong> according to different cases. And that’s why Logistic Regreesion came out.</p>
-<h3 id="What’s-Logistic-Regression"><a href="#What’s-Logistic-Regression" class="headerlink" title="What’s Logistic Regression"></a>What’s Logistic Regression</h3><p>$y=g(w^Tx+b)$</p>
+<h3 id="What’s-Logistic-Regression"><a href="#What’s-Logistic-Regression" class="headerlink" title="What’s Logistic Regression"></a>What’s Logistic Regression</h3><p><strong>Some key words in Logistic Regression</strong>:</p>
+<ul>
+<li>Hypothesis: Data points are Bernoulli distributed</li>
+<li>Maximum likelihood to get the cost function </li>
+<li>Gradient descent or Newton method to find the optimal solution</li>
+</ul>
+<p>Given the generalized linear model: $y=g^{-1}(w^Tx+b)$, the $g(\cdot)$ is called link function.</p>
 <p>The $g$ function, from unit-stop function to sigmoid function, can convert the predicted value into corresponding class.</p>
 <script type="math/tex; mode=display">
 sign(x)=\begin{cases}
