@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="Computation Graph, Back Propagation, Forward and Reversed Auto Differentiation计算图，反向传播，前向和后向自动求导。">
-<meta name="keywords" content="Deep Learning,Machine Learning">
+  <meta name="description" content="IntroductionGaussian DistributionMixed Gaussian DistributionOptimization MethodReference： 知乎 高斯混合模型(GMM) 知乎 一文详解高斯混合模型原理 《统计学习方法》第九章 - EM算法及其推广——李航">
+<meta name="keywords" content="Machine Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Computation Graph and Back Propagation">
-<meta property="og:url" content="http://yoursite.com/2019/04/09/Computation-Graph-and-Back-Propagation/index.html">
+<meta property="og:title" content="Gaussian Mixed Model(GMM) and EM algorithm">
+<meta property="og:url" content="http://yoursite.com/2019/04/14/Gaussian-Mixed-Model-GMM-and-EM-algorithm/index.html">
 <meta property="og:site_name" content="We Need to Go Deeper">
-<meta property="og:description" content="Computation Graph, Back Propagation, Forward and Reversed Auto Differentiation计算图，反向传播，前向和后向自动求导。">
+<meta property="og:description" content="IntroductionGaussian DistributionMixed Gaussian DistributionOptimization MethodReference： 知乎 高斯混合模型(GMM) 知乎 一文详解高斯混合模型原理 《统计学习方法》第九章 - EM算法及其推广——李航">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-09T16:53:21.746Z">
+<meta property="og:updated_time" content="2019-04-14T16:45:37.536Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Computation Graph and Back Propagation">
-<meta name="twitter:description" content="Computation Graph, Back Propagation, Forward and Reversed Auto Differentiation计算图，反向传播，前向和后向自动求导。">
+<meta name="twitter:title" content="Gaussian Mixed Model(GMM) and EM algorithm">
+<meta name="twitter:description" content="IntroductionGaussian DistributionMixed Gaussian DistributionOptimization MethodReference： 知乎 高斯混合模型(GMM) 知乎 一文详解高斯混合模型原理 《统计学习方法》第九章 - EM算法及其推广——李航">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/09/Computation-Graph-and-Back-Propagation/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/14/Gaussian-Mixed-Model-GMM-and-EM-algorithm/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>Computation Graph and Back Propagation | We Need to Go Deeper</title>
+  <title>Gaussian Mixed Model(GMM) and EM algorithm | We Need to Go Deeper</title>
   
 
 
@@ -332,7 +332,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/Computation-Graph-and-Back-Propagation/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/14/Gaussian-Mixed-Model-GMM-and-EM-algorithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuo An">
@@ -349,7 +349,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Computation Graph and Back Propagation
+          <h1 class="post-title" itemprop="name headline">Gaussian Mixed Model(GMM) and EM algorithm
 
               
             
@@ -375,7 +375,7 @@
                 
               
 
-              <time title="Created: 2019-04-09 17:50:40 / Modified: 17:53:21" itemprop="dateCreated datePublished" datetime="2019-04-09T17:50:40+01:00">2019-04-09</time>
+              <time title="Created: 2019-04-14 17:33:50 / Modified: 17:45:37" itemprop="dateCreated datePublished" datetime="2019-04-14T17:33:50+01:00">2019-04-14</time>
             
 
             
@@ -397,7 +397,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">Deep Learning</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
 
                 
                 
@@ -439,7 +439,11 @@
       
 
       
-        <h1 id="Computation-Graph-Back-Propagation-Forward-and-Reversed-Auto-Differentiation"><a href="#Computation-Graph-Back-Propagation-Forward-and-Reversed-Auto-Differentiation" class="headerlink" title="Computation Graph, Back Propagation, Forward and Reversed Auto Differentiation"></a>Computation Graph, Back Propagation, Forward and Reversed Auto Differentiation</h1><p>计算图，反向传播，前向和后向自动求导。</p>
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Gaussian-Distribution"><a href="#Gaussian-Distribution" class="headerlink" title="Gaussian Distribution"></a>Gaussian Distribution</h2><h2 id="Mixed-Gaussian-Distribution"><a href="#Mixed-Gaussian-Distribution" class="headerlink" title="Mixed Gaussian Distribution"></a>Mixed Gaussian Distribution</h2><h2 id="Optimization-Method"><a href="#Optimization-Method" class="headerlink" title="Optimization Method"></a>Optimization Method</h2><h2 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h2><ol>
+<li>知乎 <a href="https://zhuanlan.zhihu.com/p/30483076" target="_blank" rel="noopener">高斯混合模型(GMM)</a></li>
+<li>知乎 <a href="https://zhuanlan.zhihu.com/p/31103654" target="_blank" rel="noopener">一文详解高斯混合模型原理</a></li>
+<li>《统计学习方法》第九章 - EM算法及其推广——李航</li>
+</ol>
 
       
     </div>
@@ -463,8 +467,6 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
-          
             <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
           
         </div>
@@ -478,8 +480,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/08/Print-in-Python3/" rel="next" title="Print in Python3">
-                <i class="fa fa-chevron-left"></i> Print in Python3
+              <a href="/2019/04/14/Note-2-Feature-Engineering/" rel="next" title="Note-2 Feature Engineering">
+                <i class="fa fa-chevron-left"></i> Note-2 Feature Engineering
               </a>
             
           </div>
@@ -488,8 +490,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/10/Dynamic-Programming-in-Maximum-Subarray/" rel="prev" title="Dynamic Programming in Maximum Subarray">
-                Dynamic Programming in Maximum Subarray <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/15/Interview-1-QuantumBlack-Experience/" rel="prev" title="Interview-1 QuantumBlack Data Science Intern">
+                Interview-1 QuantumBlack Data Science Intern <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -699,7 +701,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Computation-Graph-Back-Propagation-Forward-and-Reversed-Auto-Differentiation"><span class="nav-number">1.</span> <span class="nav-text">Computation Graph, Back Propagation, Forward and Reversed Auto Differentiation</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gaussian-Distribution"><span class="nav-number">2.</span> <span class="nav-text">Gaussian Distribution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mixed-Gaussian-Distribution"><span class="nav-number">3.</span> <span class="nav-text">Mixed Gaussian Distribution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimization-Method"><span class="nav-number">4.</span> <span class="nav-text">Optimization Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference："><span class="nav-number">5.</span> <span class="nav-text">Reference：</span></a></li></ol></div>
             
 
           </div>

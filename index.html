@@ -328,6 +328,369 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/Interview-1-QuantumBlack-Experience/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/15/Interview-1-QuantumBlack-Experience/" class="post-title-link" itemprop="url">Interview-1 QuantumBlack Data Science Intern</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-15 16:11:59 / Modified: 16:46:26" itemprop="dateCreated datePublished" datetime="2019-04-15T16:11:59+01:00">2019-04-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>记第一次在英国公司面试</p>
+<h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><p>第一次面试，quantum black这个公司，面试官是两个小姐姐。公司整体人很好，刚进门的时候有小哥路过还打招呼问我，后来在餐厅等候的时候还有小哥问我吃不吃巧克力，公司整体氛围相当不错。面试官也特别友善。</p>
+<p>面试开始先有一个简单的introduction，让面试官认识你。没有准备好这个brief introduction。</p>
+<p>面试过程表现不太好。。。感觉一是因为英语不够熟练，刚开始不太能get到小姐姐的问题，表现不好。二是后面technical方面的问题的时候，我忘了一些模型的细节，后面详细写。</p>
+<h2 id="case-part"><a href="#case-part" class="headerlink" title="case part"></a>case part</h2><p>第一部分是实际案例部分，案例问题是关于fraud detection。给定一组很大的银行的交易数据，such as 100million条，其中200条是诈骗交易，我们要进行诈骗交易的检测。</p>
+<p>第一步让我构建feature，觉得能从之前的数据中构建出来什么feature。最开始没太理解，后来也没答好，确实不知道能构建什么feature</p>
+<p>第二步让我建立模型来解决这个问题。我提出使用逻辑回归模型来进行预测。接着会来一连串的问题，为什么会选用逻辑回归来预测？ 我要如何训练和测试这个模型？</p>
+<ul>
+<li>关于loss function这一块，问我如何构建。 我说使用交叉熵，但是我忘了交叉熵的公式了。。。。</li>
+<li>metric to evaluate 这个模型，我说可以使用confusion matrix。要求来画出混淆矩阵，紧张了一下没画出来，后来画出来了。问到了precision，recall和f值。结合案例又问了问题，问我应该重点关注哪个值，这里回答不好。。。</li>
+<li>如何split training data set。这个数据严重不平衡，如何做。。。。我也不知道回答的好还是不好。。先说80 20 split，后来说可以使用cross validation来进行交叉检验。小姐姐针对这个问题提出疑问，可能有的fold没有fraud point。。。</li>
+</ul>
+<p>这部分整体感觉，有点崩，也有些超时。感觉这里应该有自己的独立思考，根据相应的案例进行变通，应该是要跟面试官进行discuss的，我没做好心理准备，导致被面试官牵着走，效果也不好。模型不应该一成不变，应该根据相应的case有不同变通。</p>
+<h2 id="technical-part"><a href="#technical-part" class="headerlink" title="technical part"></a>technical part</h2><p>这一块不是case，是要问理论的部分。这一块刚开始其实还是比较自信的，因为自我感觉理论掌握的还不错。</p>
+<ol>
+<li><p>ROC curve<br>之前看过ROC curve，但是这次死活也想不起来。。。难受，这个东西业界用的比较多，之前看过一次，但是这次之前忘了看，实属失误</p>
+</li>
+<li><p>逻辑回归<br>这里小姐姐结合线性回归和逻辑回归来问我问题。 还好前几天看官网案例的时候看到逻辑回归用的比较多，提前准备了一下。这里主要看线性回归和逻辑回归的理解。分别问到了线性回归的方程表现形式，loss function是什么，梯度下降又是什么（这里画图来描述），如何使用梯度下降进行优化（不必要推导导数公式）。</p>
+</li>
+</ol>
+<p>接着问了逻辑回归和线性回归之间的联系。时间限制，我写了一个公式，小姐姐知道了我的意思就开始下一个问题了。</p>
+<ol>
+<li><p>其他非线性分类的模型<br>我回答了 SVM，接着让我描述SVM和他的原理。我说svm基本状态是线性分类的，要做到非线性要用kernel。接着让我描述kernel，kernel是什么。这一块花的时间比较多，我有时候没有搞明白她的意思。其实kernel我也没有办法说的很清楚，这一块是个失误。</p>
+</li>
+<li><p>tree - ensemble<br>还好我提前也准备了这一块，集成学习这一块。可惜boosting部分忘记了细节，太紧张了没回答上来。</p>
+</li>
+</ol>
+<p>bagging，我描述了bagging的idea。小姐姐针对bagging问了我问题，这些models是一个model吗，是不是不同。</p>
+<p>boosting，描述的没有很清楚。我没讲清楚如何训练互补的model。。。。。。给data set赋予权重，每个数据都有不同的权重（最开始没讲清楚），然后讲如何通过一个$\alpha$来变换之前之后的权重。（太紧张了，又没有提前准备，没回答好）</p>
+<p>之后时间到了，结束。</p>
+<h2 id="经验教训"><a href="#经验教训" class="headerlink" title="经验教训"></a>经验教训</h2><ol>
+<li>准备好开头的小介绍  *重要</li>
+<li>练习好英语，case discuss部分要灵活变通，表现自己的思考  ****重要</li>
+<li>ROC curve  *重要，忘记准备了</li>
+<li>SVM kernel *重要，学会讲这个东西</li>
+<li>boosting  *重要，忘记准备，本身会</li>
+<li>技术的问题都问的很详细，不会问你深度学习相关的东西，就只是问你base model的问题。准备时候要有侧重点，还好我提前看过了官网上的往期project，对知道他应该更多的问传统机器学习模型部分。但是一些具体的细节需要更加深入的理解，达到能给别人讲的程度。  ****重要 </li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/14/Gaussian-Mixed-Model-GMM-and-EM-algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/14/Gaussian-Mixed-Model-GMM-and-EM-algorithm/" class="post-title-link" itemprop="url">Gaussian Mixed Model(GMM) and EM algorithm</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-14 17:33:50 / Modified: 17:45:37" itemprop="dateCreated datePublished" datetime="2019-04-14T17:33:50+01:00">2019-04-14</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Gaussian-Distribution"><a href="#Gaussian-Distribution" class="headerlink" title="Gaussian Distribution"></a>Gaussian Distribution</h2><h2 id="Mixed-Gaussian-Distribution"><a href="#Mixed-Gaussian-Distribution" class="headerlink" title="Mixed Gaussian Distribution"></a>Mixed Gaussian Distribution</h2><h2 id="Optimization-Method"><a href="#Optimization-Method" class="headerlink" title="Optimization Method"></a>Optimization Method</h2><h2 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h2><ol>
+<li>知乎 <a href="https://zhuanlan.zhihu.com/p/30483076" target="_blank" rel="noopener">高斯混合模型(GMM)</a></li>
+<li>知乎 <a href="https://zhuanlan.zhihu.com/p/31103654" target="_blank" rel="noopener">一文详解高斯混合模型原理</a></li>
+<li>《统计学习方法》第九章 - EM算法及其推广——李航</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/14/Note-2-Feature-Engineering/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1621,7 +1984,7 @@ sign(x)=\begin{cases}
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-22 17:21:54" itemprop="dateModified" datetime="2019-03-22T17:21:54+00:00">2019-03-22</time>
+                <time title="Modified: 2019-04-14 17:33:02" itemprop="dateModified" datetime="2019-04-14T17:33:02+01:00">2019-04-14</time>
               
             
           </span>
@@ -1686,366 +2049,12 @@ sign(x)=\begin{cases}
 </ul>
 <h2 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h2><p>用于比较弱的model。</p>
 <p>Adaboost</p>
+<p>Can convert the weak learner to strong learner(classifier).</p>
 <p>我自己的一个简单Adaboost <a href="https://github.com/ShuoGH/datascience/blob/master/Adaboost.ipynb" target="_blank" rel="noopener">demo</a></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
 <li>台湾大学李宏毅的<a href="https://www.youtube.com/watch?v=tH9FH1DH5n0" target="_blank" rel="noopener">视频</a></li>
 <li>课程资源: <a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML16.html" target="_blank" rel="noopener">Hung-yi Lee</a></li>
 </ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/Linux-Use/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/20/Linux-Use/" class="post-title-link" itemprop="url">Linux Use</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-20 15:34:34 / Modified: 15:35:35" itemprop="dateCreated datePublished" datetime="2019-03-20T15:34:34+00:00">2019-03-20</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>This blog records some basic commends about the use in Linux Server.</p>
-<h1 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h1><p>SSH is used to make connection with the remote server.</p>
-<h2 id="Connect-the-server"><a href="#Connect-the-server" class="headerlink" title="Connect the server"></a>Connect the server</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh xxx@xxx.ecs.soton.ac.uk</span><br></pre></td></tr></table></figure>
-<h2 id="Close-the-connection"><a href="#Close-the-connection" class="headerlink" title="Close the connection"></a>Close the connection</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
-<h1 id="SCP"><a href="#SCP" class="headerlink" title="SCP"></a>SCP</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SCP is <span class="keyword">for</span> transport between the <span class="built_in">local</span> and remote.</span><br></pre></td></tr></table></figure>
-<h2 id="Transfer-the-entire-file-folder"><a href="#Transfer-the-entire-file-folder" class="headerlink" title="Transfer the entire file folder"></a>Transfer the entire file folder</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The formmer path is the `from` location, the latter one is the destination.</span><br><span class="line">scp -r xxx@xxx.ecs.soton.ac.uk:/home/sa2y18/mydocuments/4_dataMining ~/Desktop/</span><br></pre></td></tr></table></figure>
-<h2 id="Transfer-a-single-file"><a href="#Transfer-a-single-file" class="headerlink" title="Transfer a single file"></a>Transfer a single file</h2><p>no <code>-r</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp xxx@xxx.ecs.soton.ac.uk:PATH LOCALPATH</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h1 id="Use-Jupyter"><a href="#Use-Jupyter" class="headerlink" title="Use Jupyter"></a>Use Jupyter</h1><p>Run jupyter on the remote and open it from local port. You can follow the instruction: [<a href="http://fizzylogic.nl/2017/11/06/edit-jupyter-notebooks-over-ssh/" target="_blank" rel="noopener">http://fizzylogic.nl/2017/11/06/edit-jupyter-notebooks-over-ssh/</a>]<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --no-browser --port=8080  <span class="comment"># run on the remote machine</span></span><br><span class="line"></span><br><span class="line">ssh -N -L 8080:localhost:8080 xxx@xxx.ecs.soton.ac.uk  <span class="comment"># run in the local machine terminal</span></span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/12/Beyond-Accuracy-Precision-and-Recall/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/12/Beyond-Accuracy-Precision-and-Recall/" class="post-title-link" itemprop="url">Beyond Accuracy: Precision and Recall</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-12 09:36:32 / Modified: 10:11:03" itemprop="dateCreated datePublished" datetime="2019-03-12T09:36:32+00:00">2019-03-12</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>After training a model, there are some metrics to measure the performance of the model. The <code>accuracy</code> is the common one. Besides, there are other things to measure the performance.</p>
-<p><strong>Given four cases of the results</strong>:<br>True positive (TP): actually positive, predictive is positive which is true<br>False positive (FP): actually negative, predictive is positive which is false (type 1 error)<br>True negative (TN): actually negative, predictive is negative which is true<br>False negative (FN): actually positive, predictive is negative which is false (type 2 error)</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:right">True</th>
-<th style="text-align:center">False</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Positve</td>
-<td style="text-align:right">TP</td>
-<td style="text-align:center">FP</td>
-</tr>
-<tr>
-<td style="text-align:left">Negative</td>
-<td style="text-align:right">TN</td>
-<td style="text-align:center">FN</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>$ Precision = \frac{TP}{TP+FP} $<br>$ Recall = \frac{TP}{TP+FN} $</p>
 
           
         
@@ -2135,7 +2144,7 @@ sign(x)=\begin{cases}
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2168,7 +2177,9 @@ sign(x)=\begin{cases}
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2207,7 +2218,9 @@ sign(x)=\begin{cases}
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -2464,8 +2477,6 @@ sign(x)=\begin{cases}
     
       
     
-      
-        
       
     
   

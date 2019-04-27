@@ -328,6 +328,361 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/Linux-Use/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/20/Linux-Use/" class="post-title-link" itemprop="url">Linux Use</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-20 15:34:34 / Modified: 15:35:35" itemprop="dateCreated datePublished" datetime="2019-03-20T15:34:34+00:00">2019-03-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>This blog records some basic commends about the use in Linux Server.</p>
+<h1 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h1><p>SSH is used to make connection with the remote server.</p>
+<h2 id="Connect-the-server"><a href="#Connect-the-server" class="headerlink" title="Connect the server"></a>Connect the server</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh xxx@xxx.ecs.soton.ac.uk</span><br></pre></td></tr></table></figure>
+<h2 id="Close-the-connection"><a href="#Close-the-connection" class="headerlink" title="Close the connection"></a>Close the connection</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+<h1 id="SCP"><a href="#SCP" class="headerlink" title="SCP"></a>SCP</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SCP is <span class="keyword">for</span> transport between the <span class="built_in">local</span> and remote.</span><br></pre></td></tr></table></figure>
+<h2 id="Transfer-the-entire-file-folder"><a href="#Transfer-the-entire-file-folder" class="headerlink" title="Transfer the entire file folder"></a>Transfer the entire file folder</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The formmer path is the `from` location, the latter one is the destination.</span><br><span class="line">scp -r xxx@xxx.ecs.soton.ac.uk:/home/sa2y18/mydocuments/4_dataMining ~/Desktop/</span><br></pre></td></tr></table></figure>
+<h2 id="Transfer-a-single-file"><a href="#Transfer-a-single-file" class="headerlink" title="Transfer a single file"></a>Transfer a single file</h2><p>no <code>-r</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp xxx@xxx.ecs.soton.ac.uk:PATH LOCALPATH</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="Use-Jupyter"><a href="#Use-Jupyter" class="headerlink" title="Use Jupyter"></a>Use Jupyter</h1><p>Run jupyter on the remote and open it from local port. You can follow the instruction: [<a href="http://fizzylogic.nl/2017/11/06/edit-jupyter-notebooks-over-ssh/" target="_blank" rel="noopener">http://fizzylogic.nl/2017/11/06/edit-jupyter-notebooks-over-ssh/</a>]<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --no-browser --port=8080  <span class="comment"># run on the remote machine</span></span><br><span class="line"></span><br><span class="line">ssh -N -L 8080:localhost:8080 xxx@xxx.ecs.soton.ac.uk  <span class="comment"># run in the local machine terminal</span></span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/12/Beyond-Accuracy-Precision-and-Recall/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/12/Beyond-Accuracy-Precision-and-Recall/" class="post-title-link" itemprop="url">Beyond Accuracy: Precision and Recall</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-12 09:36:32 / Modified: 10:11:03" itemprop="dateCreated datePublished" datetime="2019-03-12T09:36:32+00:00">2019-03-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>After training a model, there are some metrics to measure the performance of the model. The <code>accuracy</code> is the common one. Besides, there are other things to measure the performance.</p>
+<p><strong>Given four cases of the results</strong>:<br>True positive (TP): actually positive, predictive is positive which is true<br>False positive (FP): actually negative, predictive is positive which is false (type 1 error)<br>True negative (TN): actually negative, predictive is negative which is true<br>False negative (FN): actually positive, predictive is negative which is false (type 2 error)</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:right">True</th>
+<th style="text-align:center">False</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Positve</td>
+<td style="text-align:right">TP</td>
+<td style="text-align:center">FP</td>
+</tr>
+<tr>
+<td style="text-align:left">Negative</td>
+<td style="text-align:right">TN</td>
+<td style="text-align:center">FN</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>$ Precision = \frac{TP}{TP+FP} $<br>$ Recall = \frac{TP}{TP+FN} $</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/11/Hexo-writing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1045,7 +1400,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1078,7 +1433,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -1117,7 +1474,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -1355,6 +1714,12 @@
 
   
   
+    
+      
+    
+      
+        
+      
     
       
     
