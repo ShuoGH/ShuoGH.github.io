@@ -373,7 +373,7 @@
                 
               
 
-              <time title="Created: 2019-05-01 00:07:49 / Modified: 00:10:06" itemprop="dateCreated datePublished" datetime="2019-05-01T00:07:49+01:00">2019-05-01</time>
+              <time title="Created: 2019-05-01 00:07:49 / Modified: 00:45:11" itemprop="dateCreated datePublished" datetime="2019-05-01T00:07:49+01:00">2019-05-01</time>
             
 
             
@@ -433,8 +433,15 @@
         
           
             <p>差分自编码器，跟普通的自编码器不同，有着他自己特殊的地方。</p>
+<p>通过编码器学习图像的编码，得到其潜在表征向量（这里学习其作为高斯分布的参数）。</p>
+<p>为了训练encoder和decoder，loss function由两部分组成：</p>
+<ul>
+<li>KL divergence来表示隐含向量与标准正态分布之间差异的loss</li>
+<li>另外一个loss使用生成图片与原图片的均方误差来表示</li>
+</ul>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
 <li>部分公式推导 <a href="http://skyhigh233.com/blog/2018/04/05/vae/" target="_blank" rel="noopener">KL divergence</a></li>
+<li>Github <a href="https://github.com/pytorch/examples/blob/master/vae/main.py" target="_blank" rel="noopener">example code</a></li>
 </ol>
 
           
