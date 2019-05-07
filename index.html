@@ -328,6 +328,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/07/Linux-Server-set-thread-for-Pytorch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/07/Linux-Server-set-thread-for-Pytorch/" class="post-title-link" itemprop="url">Linux Server set thread for Pytorch</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-07 01:57:42 / Modified: 02:02:38" itemprop="dateCreated datePublished" datetime="2019-05-07T01:57:42+01:00">2019-05-07</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>During the time of doing my course work for Advanced Machine Learning, I ran my deep learning scripts on the server. In the first time, I saw the %CPU of my job was always very high. (And then, the admin killed my job since it stuck other jobs…sorry, i didn’t know this at that time)</p>
+<p>To avoid the effect on other users, before runing our Pytorch scripts, we should run the following code in the beginning to set the thread. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OMP_NUM_THREADS=1</span><br><span class="line"><span class="built_in">export</span> OMP_NUM_THREADS</span><br></pre></td></tr></table></figure>
+<p>This allow us to use only one thread in our one job.</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/Git-Rebase-to-keep-commit-log-clean/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1866,206 +2030,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/27/Kaggle-Competition-Humpback-Whale-Identification/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/27/Kaggle-Competition-Humpback-Whale-Identification/" class="post-title-link" itemprop="url">Kaggle Competition: Humpback Whale Identification</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-27 14:49:12" itemprop="dateCreated datePublished" datetime="2019-04-27T14:49:12+01:00">2019-04-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-28 14:05:58" itemprop="dateModified" datetime="2019-04-28T14:05:58+01:00">2019-04-28</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kaggle/" itemprop="url" rel="index"><span itemprop="name">Kaggle</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Kaggle竞赛第一名方案解读</p>
-<h2 id="Description-of-Competition"><a href="#Description-of-Competition" class="headerlink" title="Description of Competition"></a>Description of Competition</h2><p>目的：构建算法识别鲸鱼个体</p>
-<p>难点：</p>
-<ul>
-<li>训练样本的严重不均衡</li>
-<li>存在接近三分之一的无标注（new whale）数据</li>
-</ul>
-<p>Some new terminology:</p>
-<ul>
-<li>Few-shot learning: <a href="https://blog.csdn.net/xhw205/article/details/79491649" target="_blank" rel="noopener">what’s few shot learning</a></li>
-<li>细粒度分类: that’s why we need mask. <a href="https://www.imooc.com/article/30053" target="_blank" rel="noopener">mask-CNN</a>,<a href="https://cloud.tencent.com/developer/article/1010499" target="_blank" rel="noopener">什么是mask</a></li>
-<li>triplet loss: ？？？</li>
-<li>SE-resneXt154: 一个新的分类模型</li>
-<li>伪标签：？？</li>
-</ul>
-<hr>
-<p><strong>Pipeline：</strong></p>
-<h2 id="Input-of-the-models"><a href="#Input-of-the-models" class="headerlink" title="Input of the models"></a>Input of the models</h2><ul>
-<li>RGB+mask</li>
-<li>Data Augmentation:<ul>
-<li>有人提出鲸鱼尾部不对称，翻转之后是新的类别</li>
-</ul>
-</li>
-</ul>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>kaggle competition: <a href="https://www.kaggle.com/c/humpback-whale-identification" target="_blank" rel="noopener">Humpback Whale Identification</a></li>
-<li>机器之心: <a href="https://zhuanlan.zhihu.com/p/58496385" target="_blank" rel="noopener">Kaggle第一名竞赛方案解读</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2114,7 +2078,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
