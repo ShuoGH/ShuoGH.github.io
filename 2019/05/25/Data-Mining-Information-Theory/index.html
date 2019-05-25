@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="We Need to Go Deeper">
 <meta property="og:description" content="Information Theory and Feature Selection Outline: Information Entropy Mutual information for feature selection    InformationInformation, also can be seen as uncertainty and surprise. $I=-log_2{p(x)}$">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-25T10:16:40.637Z">
+<meta property="og:updated_time" content="2019-05-25T22:46:34.623Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Data Mining Information Theory">
 <meta name="twitter:description" content="Information Theory and Feature Selection Outline: Information Entropy Mutual information for feature selection    InformationInformation, also can be seen as uncertainty and surprise. $I=-log_2{p(x)}$">
@@ -375,7 +375,7 @@
                 
               
 
-              <time title="Created: 2019-05-25 11:14:32 / Modified: 11:16:40" itemprop="dateCreated datePublished" datetime="2019-05-25T11:14:32+01:00">2019-05-25</time>
+              <time title="Created: 2019-05-25 11:14:32 / Modified: 23:46:34" itemprop="dateCreated datePublished" datetime="2019-05-25T11:14:32+01:00">2019-05-25</time>
             
 
             
@@ -451,22 +451,19 @@
 <h2 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h2><p>Information, also can be seen as <strong>uncertainty</strong> and <strong>surprise</strong>.</p>
 <p>$I=-log_2{p(x)}$ Since the $p(x)$ is the probability of event $x$, the value $&lt;1$.</p>
 <p><strong>Shannon entropy:</strong></p>
-<p>$H(p)=-\sum_{x} p(x) \log _{2} p(x)$</p>
-<p>( entropy = the probability of an event * information of this event )</p>
+<script type="math/tex; mode=display">H(p)=-\sum_{x} p(x) \log _{2} p(x)</script><p>( entropy = the probability of an event * information of this event )</p>
 <p>Shannon entropy is the measure of uncertainty. </p>
 <p>(香农熵描述的是混乱程度，而且information这个概念其实也是从这个角度给出的，不确定性越大，这个事件携带的信息越多。)</p>
 <h2 id="K-L-Divergence"><a href="#K-L-Divergence" class="headerlink" title="K-L Divergence"></a>K-L Divergence</h2><p>Two probability distribution $f(x)$ and $g(x)$, the K-L divergence is :</p>
-<p>$D(f | g)=\sum_{x \in X} f(x) \log \frac{f(x)}{g(x)}$</p>
-<ul>
+<script type="math/tex; mode=display">D(f \| g)=\sum_{x \in X} f(x) \log \frac{f(x)}{g(x)}</script><ul>
 <li>Compare the entropy of two distribution over the same random variable</li>
 <li>Heuristically: number of additional bits encoding a random variable with distribution $f(x)$ using $g(x)$.</li>
 </ul>
 <p>It can be seen as the $D(f|g) =\sum_{x \in X} [-f(x)log_2 g(x)+f(x)log_2f(x)] $, the first term is to encode $f(x)$ using the the encoding method of $g(x)$.Therefore, it can be seen as the distance between two encoding function ( or distribution). </p>
 <p>When minimizing K-L against a fixed reference distribution $p$, the task is euivalent to minimizing <strong>cross entropies</strong>. It can be written as: $D(f|g) =\sum_{x \in X}f(x)log_2f(x) - \sum_{x \in X}f(x)log_2 g(x) $</p>
 <p>The second term is what we use in the cross entropy loss function.</p>
-<h2 id="Conditional-Entropy"><a href="#Conditional-Entropy" class="headerlink" title="Conditional Entropy"></a>Conditional Entropy</h2><p>The $I$ is <strong>realized information</strong>, which is the difference between the entropy of $H(C)$ and the contional entropy $H(C|X=x)$.</p>
-<p>$I[C ; X=x]=H(C)-H(C | X=x)$</p>
-<p>Given the observation of $X$, the entropy of $C$ is decrease, which is written as $H(C | X=x)$.</p>
+<h2 id="Conditional-Entropy"><a href="#Conditional-Entropy" class="headerlink" title="Conditional Entropy"></a>Conditional Entropy</h2><p>The $I$ is <strong>realized information</strong>, which is the difference between the entropy of $H(C)$ and the contional entropy $H(C|X=x)$. And the realized information is defined as:</p>
+<script type="math/tex; mode=display">I[C ; X=x]=H(C)-H(C | X=x)</script><p>Given the observation of $X$, the entropy of $C$ is decrease, which is written as $H(C | X=x)$.</p>
 <p>The realized information is not necessarily positive. If it is negative, the entropy will increase.</p>
 <p>Form of the contional entropy (from <strong>PRML</strong>): $H(Y | X)=-\sum_{x_{i}, y_{j}}^{m, n} p\left(x_{i}, y_{j}\right) \cdot \log _{2} p\left(y_{j} | x_{i}\right)$ </p>
 <h2 id="Mutual-Information"><a href="#Mutual-Information" class="headerlink" title="Mutual Information"></a>Mutual Information</h2><p>Mutual information is the expected information a <strong>feature</strong> gives us about a classs:</p>
@@ -509,7 +506,7 @@
 <p>The entropy of C: $H(C)=57/102 \cdot log_2(57/102)+ 45/102\cdot log_2(45/102)=0.99$</p>
 <p>$H[C|X=”paint”]=0$ ,since the “paint” can be certain that the story is about art.</p>
 <p>$H[C|X=”not paint”]=1.0$, which we can calculate from the distribution.</p>
-<p>$I[C;X]=H[C]-Pr(x=1)H[C|X=1]-Pr(X=0)H[C|X=0]\\=0.99-12/102<em>0-90/102 </em>1 =0.11$</p>
+<p>$I[C;X]=H[C]-Pr(x=1)H[C|X=1]-Pr(X=0)H[C|X=0]$ = 0.99-12/102<em>0-90/102 </em>1 =0.11 </p>
 <p>Therefore, the mutual information is 0.11, which is the expected reduction in uncertainly.</p>
 <p>During the process of building the decision tree, the <strong>information gain</strong> is another form of mutual information. See the <a href="https://www.zhihu.com/question/39436574" target="_blank" rel="noopener">zhihu</a> for more detail.</p>
 <p>And this is the way which most people use to find the informative features.</p>
@@ -583,6 +580,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/05/25/Discriminative-and-Generative-Models/" rel="prev" title="Discriminative and Generative Models">
+                Discriminative and Generative Models <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -652,7 +653,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
