@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Radial Basis Function]]></title>
+    <url>%2F2019%2F05%2F26%2FRadial-Basis-Function%2F</url>
+    <content type="text"><![CDATA[Radial basis functionradial basis function is that each basis function depends only on the radial distance (typically Euclidean) from a centre $\mu_j$, so that $\phi_j(x)=h(x-\mu_j)$. $f(x)$ is expressed as a linear combination of radial basis functions, onecentred on every data point f(\mathbf{x})=\sum_{n=1}^{N} w_{n} h\left(\left\|\mathbf{x}-\mathbf{x}_{n}\right\|\right)The values of the coefficients ${w_n}$ are found by least squares. RBF Network(to be continued) Reference ML学习笔记之——径向基网络) Bishop PRML chapter 6.3]]></content>
+      <categories>
+        <category>Machine Learning</category>
+      </categories>
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Matrix Derivatives]]></title>
     <url>%2F2019%2F05%2F26%2FMatrix-Derivatives%2F</url>
     <content type="text"><![CDATA[Common Used in Machine LearningThere are two types of layout in the expression of matrix derivatives: denominator and numberator layout. Here we always use the denominator layout. vector to vector \frac{\partial \mathbf{A} \mathbf{x}}{\partial \mathbf{x}}=\mathbf{A}^{\top}\frac{\partial \mathbf{x}^{\top} \mathbf{A}}{\partial \mathbf{x}}= \mathbf{A} scaler to vector \frac{\partial \mathbf{x}^{\top} \mathbf{A} \mathbf{x}}{\partial \mathbf{x}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right) \mathbf{x}\frac{\partial \mathbf{x}^{\mathbf{T}} \mathbf{x}}{\partial \mathbf{x}}=2 \mathbf{x}These two conclusions are very popular in the derivative calculation of Machine Learning. Reference 矩阵求导、几种重要的矩阵及常用的矩阵求导公式]]></content>
