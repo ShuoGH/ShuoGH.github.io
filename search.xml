@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Matrix Derivatives]]></title>
+    <url>%2F2019%2F05%2F26%2FMatrix-Derivatives%2F</url>
+    <content type="text"><![CDATA[Common Used in Machine LearningThere are two types of layout in the expression of matrix derivatives: denominator and numberator layout. Here we always use the denominator layout. vector to vector \frac{\partial \mathbf{A} \mathbf{x}}{\partial \mathbf{x}}=\mathbf{A}^{\top}\frac{\partial \mathbf{x}^{\top} \mathbf{A}}{\partial \mathbf{x}}= \mathbf{A} scaler to vector \frac{\partial \mathbf{x}^{\top} \mathbf{A} \mathbf{x}}{\partial \mathbf{x}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right) \mathbf{x}\frac{\partial \mathbf{x}^{\mathbf{T}} \mathbf{x}}{\partial \mathbf{x}}=2 \mathbf{x}These two conclusions are very popular in the derivative calculation of Machine Learning. Reference 矩阵求导、几种重要的矩阵及常用的矩阵求导公式]]></content>
+      <categories>
+        <category>Linear Algebra</category>
+      </categories>
+      <tags>
+        <tag>Linear Algebra</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Naive Bayes]]></title>
     <url>%2F2019%2F05%2F26%2FNaive-Bayes%2F</url>
     <content type="text"><![CDATA[What is Generative ModelsSee the last article: discriminative models and generative models. The Naive Bayes belongs to the generative models, which model the distribution of the posterior and the process of generating the inputs. Assumption of Naive BayesThe naive bayes assumption is that all the data is conditionally independent, so if $D=(d_i|i=1,…,n)$ then p(\mathcal{D} | \boldsymbol{\theta})=\prod_{i=1}^{n} p\left(d_{i} | \boldsymbol{\theta}\right)(which also shown in the PRML P46) Example of implementing spam filterTo implement a spam filter we can treat all the words in the email as independent of each other. Given an email $\left\langle w_{1}, w_{2}, \dots, w_{n}\right\rangle$ we can compute the probability of it being spam as p(\operatorname{spam} | \mathcal{D})=\frac{\prod_{i=1}^{n} p\left(w_{i} | \operatorname{spam}\right) p(\operatorname{spam})}{p(\mathcal{D})}where the $p(spam)$ is the empirically measured frequency of spam emails. To compute the likelihood we use a database of spam and non spam emails p\left(w_{i} | s p a m\right)=\frac{\# \text { of occurances of } w_{i} \text { in spam database }}{\# \text { of words in spam database }}Here I use the assumption we mentioned above, the likelihood $p(D|spam)$ is defined by the multiplication of each $p(w_i|spam)$. (We might include pseudo counts to make this more robust). The probability of the data $D$ is p(\mathcal{D})=p(\mathcal{D} | \operatorname{spam}) p(\operatorname{spam})+p(\mathcal{D} | \neg \operatorname{spam}) p(\neg \operatorname{spam})We use exactly the same procedure to compute $p(D|\neg spam)$ as we did to compute the $p(D|spam)$. By calculating the posterior probabilities, we can get the approximate prediction on whether the email is spam or not. Reference Bishop PRML chapter 1.5.4 Shuogh blog: Discriminative and generative models AML(comp3008) 2012-2013 exam paper]]></content>
