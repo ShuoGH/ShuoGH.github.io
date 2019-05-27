@@ -357,6 +357,189 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Bias-and-Variance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/27/Bias-and-Variance/" class="post-title-link" itemprop="url">Bias and Variance</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-27 16:53:50 / Modified: 17:01:05" itemprop="dateCreated datePublished" datetime="2019-05-27T16:53:50+01:00">2019-05-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Bias-and-Variance"><a href="#Bias-and-Variance" class="headerlink" title="Bias and Variance"></a>Bias and Variance</h2><p>A good learner classifier should have a good <strong>generalisation error</strong>.     </p>
+<ul>
+<li>Generalisation: how well do we do on unseen data as opposed to the training data</li>
+</ul>
+<p>The problems in the Machine Learning can be over-constrained and under-constrained.</p>
+<ul>
+<li>Over-constrained: We have conflicting data to deal with. There are more equations than variables. In this case, the learner has insufficient flexibility to correctly predict all the training data. To solve this problem, we can minimise an error function, which means that we find a machine that explained the training data as best it can.</li>
+<li>Under-constrained: There are many possible solutions that are consistent with the data . Need to choose a plausible solution.</li>
+</ul>
+<p><strong>Bias</strong>: the generalisation performance of the mean machine. </p>
+<script type="math/tex; mode=display">\hat{f}_{m}(\boldsymbol{x})=\mathbb{E}_{\mathcal{D}}\left[\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)\right]</script><p>which $\hat{f}_{m}(\boldsymbol{x})$ is the mean predictor(machine) value. And the bias is defined as</p>
+<script type="math/tex; mode=display">B=\sum_{x \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}</script><p>（可以看成最终训练出的分类器在训练集上进行预测，得到的所有值的平均值与每一个原target计算error）</p>
+<p><strong>Variance</strong>: measures the expected variation from the average machine due to the fluctuations caused by the using a finite training set.</p>
+<script type="math/tex; mode=display">V=\mathbb{E}_{\mathcal{D}}\left[\sum_{x \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}\right]</script><p>（训练出来的分类器，对每个训练集的输入进行预测，计算这些值的分布的方差）</p>
+<h2 id="Decomposition"><a href="#Decomposition" class="headerlink" title="Decomposition"></a>Decomposition</h2><p>The formulas of bias and variance are already defined above. Here we are going to show the decomposition.</p>
+<p>The expected generalisation（平均泛化误差） is written as</p>
+<script type="math/tex; mode=display">\overline{E}_{G}=\mathbb{E}_{\mathcal{D}}\left[E_{G}\left(\boldsymbol{w}_{\mathcal{D}}\right)\right]=\mathbb{E}_{\mathcal{D}}\left[\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-f(\boldsymbol{x})\right)^{2}\right]</script><script type="math/tex; mode=display">=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x}) \mathbb{E}_{\mathcal{D}}\left[\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-f(\boldsymbol{x})\right)^{2}\right]</script><script type="math/tex; mode=display">=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x}) \mathbb{E}_{\mathcal{D}}\left[\left(\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)+\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)\right)^{2}\right]</script><script type="math/tex; mode=display">\begin{aligned}=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})( & \mathbb{E}_{\mathcal{D}}\left[\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}+\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}\right] \\ &+\mathbb{E}_{\mathcal{D}}\left[2\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)\right] ) \end{aligned}</script><p>The second term will vanish sicne the $\hat{f}_{m}(\boldsymbol{x})=\mathbb{E}_{\mathcal{D}}\left[\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)\right]$. Finally we can rewrite the generalisation formula as </p>
+<script type="math/tex; mode=display">\begin{aligned} \mathbb{E}_{\mathcal{D}}\left[E_{G}\left(\boldsymbol{w}_{\mathcal{D}}\right)\right]=\mathbb{E}_{\mathcal{D}} &\left[\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}\right] \\+\sum & \sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}=V+B \end{aligned}</script><h2 id="Bias-Variance-Dilemma"><a href="#Bias-Variance-Dilemma" class="headerlink" title="Bias-Variance Dilemma"></a>Bias-Variance Dilemma</h2><p>The composition mentioned above encodes how sensitive the machine is to the data. </p>
+<p>The dilemma arises because a simple machine will typically have a large bias, but small variance, while a complicated machine will have a small bias but large variance.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Adam slide01 COMP6208</li>
+<li>Additional reading Bishop PRML Chapter 3.2</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Kernel-Tricks/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2046,169 +2229,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/09/Deep-Learning-RNN-sequence-model/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/09/Deep-Learning-RNN-sequence-model/" class="post-title-link" itemprop="url">Deep Learning RNN sequence model</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-09 00:40:19 / Modified: 00:43:54" itemprop="dateCreated datePublished" datetime="2019-05-09T00:40:19+01:00">2019-05-09</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">Deep Learning</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Take down the note when I came accross the bugs during doing the lab 7.3. </p>
-<p>The key words:<br><code>pack padded sequence</code>, <code>pad packed sequence</code>, the output of <code>lstm</code> model.</p>
-<p>The code is listed below:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImprovedRNN</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, input_dim, embedding_dim, hidden_dim, output_dim)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        </span><br><span class="line">        self.embedding = nn.Embedding(input_dim, embedding_dim)</span><br><span class="line">        <span class="comment"># YOUR CODE HERE</span></span><br><span class="line">        self.lstm=nn.LSTM(embedding_dim,hidden_dim,batch_first=<span class="literal">True</span>)</span><br><span class="line"><span class="comment">#         raise NotImplementedError()</span></span><br><span class="line">        self.fc = nn.Linear(hidden_dim, output_dim)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, text_len)</span>:</span></span><br><span class="line">        text, lengths = text_len</span><br><span class="line">        embedded = self.embedding(text)</span><br><span class="line"><span class="comment">#         print(embedded.data.size())  # (sentence length, batch_size,hidden_dim)</span></span><br><span class="line"><span class="comment">#         print(lengths)           # the tensor(size 64), contains the length of sizes</span></span><br><span class="line">        embedded = nn.utils.rnn.pack_padded_sequence(embedded, lengths)</span><br><span class="line"><span class="comment">#         print(embedded.data.size()) # the packed_sequence record the series data and the tensor recording each length </span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># YOUR CODE HERE</span></span><br><span class="line"><span class="comment">#         print(embedded[0].size())</span></span><br><span class="line">        _,(last_state,_)=self.lstm(embedded)</span><br><span class="line"><span class="comment">#         lstm_out_pad,length_sentence=nn.utils.rnn.pad_packed_sequence(lstm_out)</span></span><br><span class="line">        print(last_state.size())</span><br><span class="line"><span class="comment">#         lstm_final_out=lstm_out_pad[length_sentence-1]  # just use the final timestep output</span></span><br><span class="line"><span class="comment">#       lstm_out_pad [0] is the data and [1] records the length of each sentence</span></span><br><span class="line"><span class="comment">#         print("...",lstm_out.data.size(),"\n ssss",type(lstm_out.data))</span></span><br><span class="line"><span class="comment">#         print("\n haha...",lstm_out_pad)</span></span><br><span class="line"><span class="comment">#         print(lstm_out_pad[0][-1][63])</span></span><br><span class="line"><span class="comment">#         length_63=lstm_out_pad[-1][63]  # Use [-1] can't get real last one </span></span><br><span class="line"><span class="comment">#         print("I'm the length of first sentence:",length_63)</span></span><br><span class="line"><span class="comment">#         print("i'm the data:",lstm_out_pad[0][length_63-1],lstm_out_pad[0][length_63 - 1][63])</span></span><br><span class="line"><span class="comment">#         print("im the length list:",lstm_out_pad[-1])</span></span><br><span class="line"><span class="comment">#         print(lstm_final_out.size())</span></span><br><span class="line">        out=self.fc(lstm_final_out)</span><br><span class="line"><span class="comment">#         print("emm heng?")</span></span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"><span class="comment">#         raise NotImplementedError()</span></span><br><span class="line">        </span><br><span class="line">INPUT_DIM = len(TEXT.vocab)  <span class="comment"># 25002</span></span><br><span class="line">EMBEDDING_DIM = <span class="number">50</span></span><br><span class="line">HIDDEN_DIM = <span class="number">100</span></span><br><span class="line">OUTPUT_DIM = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">imodel = ImprovedRNN(INPUT_DIM, EMBEDDING_DIM, HIDDEN_DIM, OUTPUT_DIM)</span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Train and evaluate the model</span></span><br><span class="line"><span class="comment"># YOUR CODE HERE</span></span><br><span class="line">optimizer = optim.Adam(model.parameters(), lr=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">torchbearer_trial = Trial(imodel, optimizer, criterion, metrics=[<span class="string">'acc'</span>, <span class="string">'loss'</span>]).to(device)</span><br><span class="line">torchbearer_trial.with_generators(train_generator=MyIter(train_iterator), val_generator=MyIter(valid_iterator), test_generator=MyIter(test_iterator))</span><br><span class="line"><span class="comment"># torchbearer_trial.with_train_generator(MyIter(train_iterator))</span></span><br><span class="line">torchbearer_trial.run(epochs=<span class="number">5</span>)</span><br><span class="line">torchbearer_trial.predict()</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2257,7 +2277,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

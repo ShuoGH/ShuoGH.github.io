@@ -96,25 +96,25 @@
 
 
 
-  <meta name="description" content="Linear RegressionWhat’s Liear RegressionLinear Regression is a approach to modelling the relationship between a scalar response( or a dependent variable) and one or more explanatory variables.  It is">
-<meta name="keywords" content="Machine Learning,Note">
+  <meta name="description" content="Bias and VarianceA good learner classifier should have a good generalisation error.       Generalisation: how well do we do on unseen data as opposed to the training data  The problems in the Machine">
+<meta name="keywords" content="Machine Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Note-1: Linear Regression and Logistic Regression">
-<meta property="og:url" content="http://yoursite.com/2019/04/12/Note-1-Linear-Regression-and-Logistic-Regression/index.html">
+<meta property="og:title" content="Bias and Variance">
+<meta property="og:url" content="http://yoursite.com/2019/05/27/Bias-and-Variance/index.html">
 <meta property="og:site_name" content="We Need to Go Deeper">
-<meta property="og:description" content="Linear RegressionWhat’s Liear RegressionLinear Regression is a approach to modelling the relationship between a scalar response( or a dependent variable) and one or more explanatory variables.  It is">
+<meta property="og:description" content="Bias and VarianceA good learner classifier should have a good generalisation error.       Generalisation: how well do we do on unseen data as opposed to the training data  The problems in the Machine">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-12T14:15:10.333Z">
+<meta property="og:updated_time" content="2019-05-27T16:01:05.472Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Note-1: Linear Regression and Logistic Regression">
-<meta name="twitter:description" content="Linear RegressionWhat’s Liear RegressionLinear Regression is a approach to modelling the relationship between a scalar response( or a dependent variable) and one or more explanatory variables.  It is">
+<meta name="twitter:title" content="Bias and Variance">
+<meta name="twitter:description" content="Bias and VarianceA good learner classifier should have a good generalisation error.       Generalisation: how well do we do on unseen data as opposed to the training data  The problems in the Machine">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/12/Note-1-Linear-Regression-and-Logistic-Regression/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/27/Bias-and-Variance/">
 
 
 
@@ -124,7 +124,7 @@
   };
 </script>
 
-  <title>Note-1: Linear Regression and Logistic Regression | We Need to Go Deeper</title>
+  <title>Bias and Variance | We Need to Go Deeper</title>
   
 
 
@@ -361,7 +361,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/12/Note-1-Linear-Regression-and-Logistic-Regression/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Bias-and-Variance/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuo An">
@@ -378,7 +378,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Note-1: Linear Regression and Logistic Regression
+          <h1 class="post-title" itemprop="name headline">Bias and Variance
 
               
             
@@ -404,7 +404,7 @@
                 
               
 
-              <time title="Created: 2019-04-12 11:12:15 / Modified: 15:15:10" itemprop="dateCreated datePublished" datetime="2019-04-12T11:12:15+01:00">2019-04-12</time>
+              <time title="Created: 2019-05-27 16:53:50 / Modified: 17:01:05" itemprop="dateCreated datePublished" datetime="2019-05-27T16:53:50+01:00">2019-05-27</time>
             
 
             
@@ -468,33 +468,28 @@
       
 
       
-        <h2 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear Regression"></a>Linear Regression</h2><h3 id="What’s-Liear-Regression"><a href="#What’s-Liear-Regression" class="headerlink" title="What’s Liear Regression"></a>What’s Liear Regression</h3><p>Linear Regression is a approach to modelling the relationship between a scalar response( or a <strong>dependent variable</strong>) and one or more explanatory variables. </p>
-<p>It is written as the linear formula: $f(x)=w^T x+b$</p>
-<p>Given the features values of $n$ data points, we can train to get a linear model which can fit the data set properly. When the new data point is fed into the model, we can predict the value.</p>
-<p>We are going to find the optimal weights value:</p>
-<script type="math/tex; mode=display">(w^*,b^*)= \underset{(w,b)}{\operatorname{argmix}}\sum^m_{i=1}(f(x_i)-y_i)^2</script><p>The close form solution can be calculated through the derivative. Of course, you can also use Gradient descent to find the optimal parameters, but it’s not necessary.</p>
-<h3 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h3><p>The advantages of linear regression are that it’s simple and easy to implement, and the time complexity is small.</p>
-<h2 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h2><h3 id="Why-Logistic-Regression"><a href="#Why-Logistic-Regression" class="headerlink" title="Why Logistic Regression"></a>Why Logistic Regression</h3><p>Though the name of Logistic Regression includes <strong>regression</strong>, it’t not really a regression model. It’s for classification task. In this aspect, we can call <strong>Logistic Regression Analysis</strong>.</p>
-<p>Since we have Linear Regression to do the <strong>regression</strong> task to predict the value for a new data set. Actually it can be used to predict the <strong>class</strong> for a given data. We can just set the threshold, if the predicted value is above the threshold, then it is classified into class 1, on the other hand, the data is classified into class 0.</p>
-<p>However, there is a drawback when we use linear regression to do classification. We should set <strong>lots of thresholds</strong> according to different cases. And that’s why Logistic Regreesion came out.</p>
-<h3 id="What’s-Logistic-Regression"><a href="#What’s-Logistic-Regression" class="headerlink" title="What’s Logistic Regression"></a>What’s Logistic Regression</h3><p><strong>Some key words in Logistic Regression</strong>:</p>
+        <h2 id="Bias-and-Variance"><a href="#Bias-and-Variance" class="headerlink" title="Bias and Variance"></a>Bias and Variance</h2><p>A good learner classifier should have a good <strong>generalisation error</strong>.     </p>
 <ul>
-<li>Hypothesis: Data points are Bernoulli distributed</li>
-<li>Maximum likelihood to get the cost function </li>
-<li>Gradient descent or Newton method to find the optimal solution</li>
+<li>Generalisation: how well do we do on unseen data as opposed to the training data</li>
 </ul>
-<p>Given the generalized linear model: $y=g^{-1}(w^Tx+b)$, the $g(\cdot)$ is called link function.</p>
-<p>The $g$ function, from unit-stop function to sigmoid function, can convert the predicted value into corresponding class.</p>
-<script type="math/tex; mode=display">
-sign(x)=\begin{cases}
-1,&x>0 \\ 0.5,&x=0 \cr 0,&x<0
-\end{cases}</script><p>Unit-step doesn’t have a very good property, it can easy to do derivativation. Then we use the sigmoid function. It has the format like this:</p>
-<script type="math/tex; mode=display">y=\frac{1}{1+e^{-z}}</script><p><code>The sigmoid function squash the predicted value into 0 and 1, and now we can just set one threshold and do the classification task.</code></p>
-<h3 id="Log-Odds-another-way-to-interprete-LR"><a href="#Log-Odds-another-way-to-interprete-LR" class="headerlink" title="Log Odds - another way to interprete LR"></a>Log Odds - another way to interprete LR</h3><p>Log odds is another way to interprete the logistic regression. For more details, see the chapter 3 in 《机器学习 周志华》.</p>
+<p>The problems in the Machine Learning can be over-constrained and under-constrained.</p>
+<ul>
+<li>Over-constrained: We have conflicting data to deal with. There are more equations than variables. In this case, the learner has insufficient flexibility to correctly predict all the training data. To solve this problem, we can minimise an error function, which means that we find a machine that explained the training data as best it can.</li>
+<li>Under-constrained: There are many possible solutions that are consistent with the data . Need to choose a plausible solution.</li>
+</ul>
+<p><strong>Bias</strong>: the generalisation performance of the mean machine. </p>
+<script type="math/tex; mode=display">\hat{f}_{m}(\boldsymbol{x})=\mathbb{E}_{\mathcal{D}}\left[\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)\right]</script><p>which $\hat{f}_{m}(\boldsymbol{x})$ is the mean predictor(machine) value. And the bias is defined as</p>
+<script type="math/tex; mode=display">B=\sum_{x \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}</script><p>（可以看成最终训练出的分类器在训练集上进行预测，得到的所有值的平均值与每一个原target计算error）</p>
+<p><strong>Variance</strong>: measures the expected variation from the average machine due to the fluctuations caused by the using a finite training set.</p>
+<script type="math/tex; mode=display">V=\mathbb{E}_{\mathcal{D}}\left[\sum_{x \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}\right]</script><p>（训练出来的分类器，对每个训练集的输入进行预测，计算这些值的分布的方差）</p>
+<h2 id="Decomposition"><a href="#Decomposition" class="headerlink" title="Decomposition"></a>Decomposition</h2><p>The formulas of bias and variance are already defined above. Here we are going to show the decomposition.</p>
+<p>The expected generalisation（平均泛化误差） is written as</p>
+<script type="math/tex; mode=display">\overline{E}_{G}=\mathbb{E}_{\mathcal{D}}\left[E_{G}\left(\boldsymbol{w}_{\mathcal{D}}\right)\right]=\mathbb{E}_{\mathcal{D}}\left[\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-f(\boldsymbol{x})\right)^{2}\right]</script><script type="math/tex; mode=display">=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x}) \mathbb{E}_{\mathcal{D}}\left[\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-f(\boldsymbol{x})\right)^{2}\right]</script><script type="math/tex; mode=display">=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x}) \mathbb{E}_{\mathcal{D}}\left[\left(\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)+\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)\right)^{2}\right]</script><script type="math/tex; mode=display">\begin{aligned}=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})( & \mathbb{E}_{\mathcal{D}}\left[\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}+\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}\right] \\ &+\mathbb{E}_{\mathcal{D}}\left[2\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)\right] ) \end{aligned}</script><p>The second term will vanish sicne the $\hat{f}_{m}(\boldsymbol{x})=\mathbb{E}_{\mathcal{D}}\left[\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)\right]$. Finally we can rewrite the generalisation formula as </p>
+<script type="math/tex; mode=display">\begin{aligned} \mathbb{E}_{\mathcal{D}}\left[E_{G}\left(\boldsymbol{w}_{\mathcal{D}}\right)\right]=\mathbb{E}_{\mathcal{D}} &\left[\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}\right] \\+\sum & \sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}=V+B \end{aligned}</script><h2 id="Bias-Variance-Dilemma"><a href="#Bias-Variance-Dilemma" class="headerlink" title="Bias-Variance Dilemma"></a>Bias-Variance Dilemma</h2><p>The composition mentioned above encodes how sensitive the machine is to the data. </p>
+<p>The dilemma arises because a simple machine will typically have a large bias, but small variance, while a complicated machine will have a small bias but large variance.</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>《机器学习》 周志华</li>
-<li>Python数据科学 <a href="https://mp.weixin.qq.com/s/BJxdDz7DQg5QIWzzgNQrgA" target="_blank" rel="noopener">机器学习笔记</a></li>
-<li><a href="https://www.zhihu.com/question/37031188" target="_blank" rel="noopener">最小二乘法的本质是什么</a></li>
+<li>Adam slide01 COMP6208</li>
+<li>Additional reading Bishop PRML Chapter 3.2</li>
 </ol>
 
       
@@ -521,8 +516,6 @@ sign(x)=\begin{cases}
           
             <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
           
-            <a href="/tags/Note/" rel="tag"># Note</a>
-          
         </div>
       
 
@@ -534,8 +527,8 @@ sign(x)=\begin{cases}
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/10/Dynamic-Programming-in-Maximum-Subarray/" rel="next" title="Dynamic Programming in Maximum Subarray">
-                <i class="fa fa-chevron-left"></i> Dynamic Programming in Maximum Subarray
+              <a href="/2019/05/27/Kernel-Tricks/" rel="next" title="Kernel Tricks">
+                <i class="fa fa-chevron-left"></i> Kernel Tricks
               </a>
             
           </div>
@@ -543,10 +536,6 @@ sign(x)=\begin{cases}
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/14/Note-2-Feature-Engineering/" rel="prev" title="Note-2 Feature Engineering">
-                Note-2 Feature Engineering <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -773,7 +762,7 @@ sign(x)=\begin{cases}
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-Regression"><span class="nav-number">1.</span> <span class="nav-text">Linear Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What’s-Liear-Regression"><span class="nav-number">1.1.</span> <span class="nav-text">What’s Liear Regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advantage"><span class="nav-number">1.2.</span> <span class="nav-text">Advantage</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logistic-Regression"><span class="nav-number">2.</span> <span class="nav-text">Logistic Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Why-Logistic-Regression"><span class="nav-number">2.1.</span> <span class="nav-text">Why Logistic Regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#What’s-Logistic-Regression"><span class="nav-number">2.2.</span> <span class="nav-text">What’s Logistic Regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Log-Odds-another-way-to-interprete-LR"><span class="nav-number">2.3.</span> <span class="nav-text">Log Odds - another way to interprete LR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bias-and-Variance"><span class="nav-number">1.</span> <span class="nav-text">Bias and Variance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Decomposition"><span class="nav-number">2.</span> <span class="nav-text">Decomposition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bias-Variance-Dilemma"><span class="nav-number">3.</span> <span class="nav-text">Bias-Variance Dilemma</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>

@@ -1,952 +1,431 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>Kernel Tricks</title>
-      <link href="/2019/05/27/Kernel-Tricks/"/>
-      <url>/2019/05/27/Kernel-Tricks/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Kernels"><a href="#Kernels" class="headerlink" title="Kernels"></a>Kernels</h2><p>Many linear parametric models can be re-cast into an equivalent ‘dual represen-<br>tation’ in which the predictions are also based on linear combinations of a <em>kernel<br>function</em> evaluated at the training data points. As we shall see, for models which are based on a fixed nonlinear <em>feature space</em> mapping $\phi(x)$, the <strong><em>kernel</em></strong> function is given by the relation</p><script type="math/tex; mode=display">k\left(\mathbf{x}, \mathbf{x}^{\prime}\right)=\boldsymbol{\phi}(\mathbf{x})^{\mathrm{T}} \boldsymbol{\phi}\left(\mathbf{x}^{\prime}\right)</script><p><strong>Dual Representation and Kernel</strong>: See an classical example of SVM from this <a href="https://shuogh.github.io/2019/05/26/SVM-Slack-Variable-and-Kernel/" target="_blank" rel="noopener">blog</a>.</p><p><strong>Some common forms of kernels</strong>:</p><p>$\begin{aligned} \text{Linear Kernel 线性核 } \kappa \left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j} \\ \text{Polynomial Kernel 多项式核 }\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\left(\boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}\right)^{d} \\ \text{Gaussian Kernel 高斯核 }\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\exp \left(-\frac{\left|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right|^{2}}{2 \sigma^{2}}\right) \\ \text{Laplace Kernel 拉普拉斯核 }\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\exp \left(-\frac{\left|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right|}{\sigma}\right) \\ \text{Sigmoid Kernel }\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\tanh \left(\beta \boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}+\theta\right)\end{aligned}$</p><p>By replacing the $-\frac{1}{2\sigma^2}$ with $\lambda$ in the Gaussian Kernel, we can get the RBF kernel, which can be express as $\exp \left(-\gamma|\boldsymbol{x}-\boldsymbol{y}|^{2}\right)$.</p><p><strong>Note</strong> that the feature vector that corresponds to the Gaussian kernel has infinite dimensionality.</p><h2 id="Kernel-Tricks"><a href="#Kernel-Tricks" class="headerlink" title="Kernel Tricks"></a>Kernel Tricks</h2><p>So, what is kernel?</p><p>In machine learning, a “<strong>kernel</strong>” is usually used to refer to the kernel trick, a method of using a linear classifier to solve a non-linear problem. The kernel function implicitly defined the mapping which maps the low-dimensionality to high dimensionality.</p><p>We can therefore work directly in terms of kernels and avoid the explicit introduction of the feature vector $ \phi(x)$,</p><h2 id="Constructing-Kernels"><a href="#Constructing-Kernels" class="headerlink" title="Constructing Kernels"></a>Constructing Kernels</h2><p>One approach to build valid kernel is to choose a feature space mapping $\phi(x)$ and use it to find the corresponding kernel. Here the kernel function is defined for one-dimensional input space by</p><script type="math/tex; mode=display">k\left(x, x^{\prime}\right)=\phi(x)^{\mathrm{T}} \boldsymbol{\phi}\left(x^{\prime}\right)=\sum_{i=1}^{M} \phi_{i}(x) \phi_{i}\left(x^{\prime}\right)</script><p>Where $\phi(x)$ is the basis function.</p><p>Another approach is to construct the kernel directly. In this way, we should have a method to test whether the kernel we build is valid. A <strong>necessary and sufficient condition</strong> for a function $k(x, x)$ to be a valid kernel (Shawe-Taylor and Cristianini, 2004) is that the Gram matrix K,whose elements are given by $k(x_n, x_m)$, should be positive semidefinite for all possible choices of the set ${x_n}$. Note that a positive semidefinite matrix is not the same thing as a matrix whose elements are nonnegative.</p><p>One powerful technique for constructing new kernels is to build out of simple kernels as building blocks.</p><p>See the following properties(in the PRML book $P_{296}$)</p><hr><h2 id="Some-Questions-about-the-Kernel"><a href="#Some-Questions-about-the-Kernel" class="headerlink" title="Some Questions about the Kernel"></a>Some Questions about the Kernel</h2><ol><li><p>why it is important that the kernel function is positive semi-definite?</p><p>Kernel functions need to be positive semi-definite so that they have sensible(non-negative) distances. That is the margins are positive.</p></li><li><p>Three <strong><em>properties</em></strong> that a positive semi-definite kernel should have:shuogh</p><ul><li><p>The eigenvalues of a positive semi-definite kernel function are non-negative</p></li><li><p>A positive semi-definite kernel function can always be written as </p><script type="math/tex; mode=display">K(x,y)=\sum_i \phi_i(x)\phi_i(y)</script><p>for some set of real functions $\phi_i(x)$</p></li><li><p>The quadratic form satisfies</p><script type="math/tex; mode=display">\int f(\boldsymbol{x}) K(\boldsymbol{x}, \boldsymbol{y}) f(\boldsymbol{y}) \mathrm{d} \boldsymbol{x} \mathrm{d} \boldsymbol{y} \geq 0</script><p>for any real function $f(x)$.</p></li></ul></li><li><p>Why kernel trick allows an SVM to separete data points that are not linearly separable?</p><p>The kernel trick projects data into the extended feature space(the space of eigenfunctions of the kernel). Although an SVM finds a linear separating plane in this extended space, as the extended features are typically a non-linear function of the original features. This correspondins to finding a non-linear separating surface in the original space.</p></li></ol><hr><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>周志华 《机器学习》</li><li>Bishop PRML Chapter 6</li></ol>]]></content>
-      
-      
+<search>
+  <entry>
+    <title><![CDATA[Bias and Variance]]></title>
+    <url>%2F2019%2F05%2F27%2FBias-and-Variance%2F</url>
+    <content type="text"><![CDATA[Bias and VarianceA good learner classifier should have a good generalisation error. Generalisation: how well do we do on unseen data as opposed to the training data The problems in the Machine Learning can be over-constrained and under-constrained. Over-constrained: We have conflicting data to deal with. There are more equations than variables. In this case, the learner has insufficient flexibility to correctly predict all the training data. To solve this problem, we can minimise an error function, which means that we find a machine that explained the training data as best it can. Under-constrained: There are many possible solutions that are consistent with the data . Need to choose a plausible solution. Bias: the generalisation performance of the mean machine. \hat{f}_{m}(\boldsymbol{x})=\mathbb{E}_{\mathcal{D}}\left[\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)\right]which $\hat{f}_{m}(\boldsymbol{x})$ is the mean predictor(machine) value. And the bias is defined as B=\sum_{x \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}（可以看成最终训练出的分类器在训练集上进行预测，得到的所有值的平均值与每一个原target计算error） Variance: measures the expected variation from the average machine due to the fluctuations caused by the using a finite training set. V=\mathbb{E}_{\mathcal{D}}\left[\sum_{x \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}\right]（训练出来的分类器，对每个训练集的输入进行预测，计算这些值的分布的方差） DecompositionThe formulas of bias and variance are already defined above. Here we are going to show the decomposition. The expected generalisation（平均泛化误差） is written as \overline{E}_{G}=\mathbb{E}_{\mathcal{D}}\left[E_{G}\left(\boldsymbol{w}_{\mathcal{D}}\right)\right]=\mathbb{E}_{\mathcal{D}}\left[\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-f(\boldsymbol{x})\right)^{2}\right]=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x}) \mathbb{E}_{\mathcal{D}}\left[\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-f(\boldsymbol{x})\right)^{2}\right]=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x}) \mathbb{E}_{\mathcal{D}}\left[\left(\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)+\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)\right)^{2}\right]\begin{aligned}=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})( & \mathbb{E}_{\mathcal{D}}\left[\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}+\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}\right] \\ &+\mathbb{E}_{\mathcal{D}}\left[2\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)\right] ) \end{aligned}The second term will vanish sicne the $\hat{f}_{m}(\boldsymbol{x})=\mathbb{E}_{\mathcal{D}}\left[\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)\right]$. Finally we can rewrite the generalisation formula as \begin{aligned} \mathbb{E}_{\mathcal{D}}\left[E_{G}\left(\boldsymbol{w}_{\mathcal{D}}\right)\right]=\mathbb{E}_{\mathcal{D}} &\left[\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}\right] \\+\sum & \sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}=V+B \end{aligned}Bias-Variance DilemmaThe composition mentioned above encodes how sensitive the machine is to the data. The dilemma arises because a simple machine will typically have a large bias, but small variance, while a complicated machine will have a small bias but large variance. Reference Adam slide01 COMP6208 Additional reading Bishop PRML Chapter 3.2]]></content>
       <categories>
-          
-          <category> Machine Learning </category>
-          
+        <category>Machine Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Radial Basis Function, RBF network</title>
-      <link href="/2019/05/27/Radial-Basis-Function-RBF-network/"/>
-      <url>/2019/05/27/Radial-Basis-Function-RBF-network/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Radial-basis-function"><a href="#Radial-basis-function" class="headerlink" title="Radial basis function"></a>Radial basis function</h2><p><em>radial basis function</em> is that each basis function depends only on the radial distance (typically Euclidean) from a centre $\mu_j$, so that $\phi_j(x)=h(x-\mu_j)$.</p><p>$f(x)$ is expressed as a linear combination of radial basis functions, one<br>centred on every data point</p><script type="math/tex; mode=display">f(\mathbf{x})=\sum_{n=1}^{N} w_{n} h\left(\left\|\mathbf{x}-\mathbf{x}_{n}\right\|\right)</script><p>The values of the coefficients ${w_n}$ are found by least squares.</p><h2 id="RBF-Network"><a href="#RBF-Network" class="headerlink" title="RBF Network"></a>RBF Network</h2><p>(to be continued)</p><p><strong>Question: What are the similarities and differences between MLP, RBF networks and SVMs? </strong></p><ul><li>All three techniques are based on the perceptron. In MLPs, the earlier layers are perceptrons, in RBFs they are radial basis functions and SVMs thet are the features corresponding to the eigenvalues of a kernel.</li><li>All three can be used for regression and classification.</li><li>MLPs are trained using back-propagation of errors. They have non-unique solution. Complexity depends on nunber of hidden nodes. Liable to over-fit the training data. Often use ad hoc methods such as early stopping to stop over-fitting. Can have many output nodes.</li><li>RBFs typically use unsupervised learning to choose the centres for the input layer. The labelled data used to train the final layer(a perceptron). Training is fast. Can have many output nodes. Often use regulariser on the output layer. The solution found is unique. </li><li>SVMs use a kernel function to perform a mapping into a very high dimensional feature space. An optimally stable perceptron is used in the feature space. This controls the capacity of the learning machine reducing the problem of over-fitting. The learning algorithm uses quadratic optimisation. The computation complexity grows as the number training patterns cubed. For very large datasets SVMs can become impractical. The solution found is unque.</li></ul><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>ML学习笔记之——<a href="http://ghx0x0.github.io/2015/06/11/ML-RBFnet/" target="_blank" rel="noopener">径向基网络</a></li><li>Bishop PRML chapter 6.3</li><li>question from (COMP3008 2009-2010 Q4)</li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Kernel Tricks]]></title>
+    <url>%2F2019%2F05%2F27%2FKernel-Tricks%2F</url>
+    <content type="text"><![CDATA[KernelsMany linear parametric models can be re-cast into an equivalent ‘dual represen-tation’ in which the predictions are also based on linear combinations of a kernelfunction evaluated at the training data points. As we shall see, for models which are based on a fixed nonlinear feature space mapping $\phi(x)$, the kernel function is given by the relation k\left(\mathbf{x}, \mathbf{x}^{\prime}\right)=\boldsymbol{\phi}(\mathbf{x})^{\mathrm{T}} \boldsymbol{\phi}\left(\mathbf{x}^{\prime}\right)Dual Representation and Kernel: See an classical example of SVM from this blog. Some common forms of kernels: $\begin{aligned} \text{Linear Kernel 线性核 } \kappa \left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j} \\ \text{Polynomial Kernel 多项式核 }\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\left(\boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}\right)^{d} \\ \text{Gaussian Kernel 高斯核 }\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\exp \left(-\frac{\left|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right|^{2}}{2 \sigma^{2}}\right) \\ \text{Laplace Kernel 拉普拉斯核 }\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\exp \left(-\frac{\left|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right|}{\sigma}\right) \\ \text{Sigmoid Kernel }\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\tanh \left(\beta \boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}+\theta\right)\end{aligned}$ By replacing the $-\frac{1}{2\sigma^2}$ with $\lambda$ in the Gaussian Kernel, we can get the RBF kernel, which can be express as $\exp \left(-\gamma|\boldsymbol{x}-\boldsymbol{y}|^{2}\right)$. Note that the feature vector that corresponds to the Gaussian kernel has infinite dimensionality. Kernel TricksSo, what is kernel? In machine learning, a “kernel” is usually used to refer to the kernel trick, a method of using a linear classifier to solve a non-linear problem. The kernel function implicitly defined the mapping which maps the low-dimensionality to high dimensionality. We can therefore work directly in terms of kernels and avoid the explicit introduction of the feature vector $ \phi(x)$, Constructing KernelsOne approach to build valid kernel is to choose a feature space mapping $\phi(x)$ and use it to find the corresponding kernel. Here the kernel function is defined for one-dimensional input space by k\left(x, x^{\prime}\right)=\phi(x)^{\mathrm{T}} \boldsymbol{\phi}\left(x^{\prime}\right)=\sum_{i=1}^{M} \phi_{i}(x) \phi_{i}\left(x^{\prime}\right)Where $\phi(x)$ is the basis function. Another approach is to construct the kernel directly. In this way, we should have a method to test whether the kernel we build is valid. A necessary and sufficient condition for a function $k(x, x)$ to be a valid kernel (Shawe-Taylor and Cristianini, 2004) is that the Gram matrix K,whose elements are given by $k(x_n, x_m)$, should be positive semidefinite for all possible choices of the set ${x_n}$. Note that a positive semidefinite matrix is not the same thing as a matrix whose elements are nonnegative. One powerful technique for constructing new kernels is to build out of simple kernels as building blocks. See the following properties(in the PRML book $P_{296}$) Some Questions about the Kernel why it is important that the kernel function is positive semi-definite? Kernel functions need to be positive semi-definite so that they have sensible(non-negative) distances. That is the margins are positive. Three properties that a positive semi-definite kernel should have:shuogh The eigenvalues of a positive semi-definite kernel function are non-negative A positive semi-definite kernel function can always be written as K(x,y)=\sum_i \phi_i(x)\phi_i(y)for some set of real functions $\phi_i(x)$ The quadratic form satisfies \int f(\boldsymbol{x}) K(\boldsymbol{x}, \boldsymbol{y}) f(\boldsymbol{y}) \mathrm{d} \boldsymbol{x} \mathrm{d} \boldsymbol{y} \geq 0for any real function $f(x)$. Why kernel trick allows an SVM to separete data points that are not linearly separable? The kernel trick projects data into the extended feature space(the space of eigenfunctions of the kernel). Although an SVM finds a linear separating plane in this extended space, as the extended features are typically a non-linear function of the original features. This correspondins to finding a non-linear separating surface in the original space. Reference 周志华 《机器学习》 Bishop PRML Chapter 6]]></content>
       <categories>
-          
-          <category> Machine Learning </category>
-          
+        <category>Machine Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>SVM, Slack Variable and Kernel</title>
-      <link href="/2019/05/26/SVM-Slack-Variable-and-Kernel/"/>
-      <url>/2019/05/26/SVM-Slack-Variable-and-Kernel/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Maximize-margin"><a href="#Maximize-margin" class="headerlink" title="Maximize margin"></a>Maximize margin</h2><p>The basic idea of SVM is to maximize the margin between the support vectors and the hyperplane. </p><p>The margin can be expressed as $r=\frac{\left|\boldsymbol{w}^{\mathrm{T}} \boldsymbol{x}+b\right|}{|\boldsymbol{w}|}$</p><p>For the binary classification task $y\in(-1,+1)$, the equation satisfies: </p><script type="math/tex; mode=display">y_i(w^Tx_i+b)\geqslant r\|w\|</script><p>Since the $w$ and $b$ can be scaled, we can get the condition </p><script type="math/tex; mode=display">y_i(w'^Tx_i+b')\geqslant 1</script><p>where $w’=\frac{w}{r}, b’=\frac{b}{r}$. </p><p>In the maximizing margin process, we only consider the support vectors which locate on the margin of hyperplane. These vectors satisfy the equation, therefore, the margin can be written as $\gamma=\frac{2}{|\boldsymbol{w}|}$. </p><p>Maximizing the margin is equivalent to </p><script type="math/tex; mode=display">\min _{\boldsymbol{w}, b} \frac{1}{2}\|\boldsymbol{w}\|^{2}</script><script type="math/tex; mode=display">\text { s.t. } \quad y_{i}\left(\boldsymbol{w}^{\mathrm{T}} \boldsymbol{x}_{i}+b\right) \geqslant 1, \quad i=1,2, \ldots, m</script><h2 id="Lagrangian"><a href="#Lagrangian" class="headerlink" title="Lagrangian"></a>Lagrangian</h2><p>To solve the optimization problem, apply the Lagrangian multiplier, and we get the form of the question:</p><script type="math/tex; mode=display">L(w,b,\alpha)=\frac{1}{2}\|w\|^2-\sum_i^p \alpha_i(y_i(w^Tx_i+b-1))</script><script type="math/tex; mode=display">\begin{array}{l}{\text { s.t. } \sum_{i=1}^{m} \alpha_{i} y_{i}=0} \\ {\alpha_{i} \geqslant 0, \quad i=1,2, \ldots, m}\end{array}</script><h2 id="Dual-Form"><a href="#Dual-Form" class="headerlink" title="Dual Form"></a>Dual Form</h2><p>Before applying the kernel functions, the dual representations are introduced.</p><p>Using the lagrandian multiplier, we convert our problem from $\min _{\boldsymbol{w}, b} \frac{1}{2}|\boldsymbol{w}|^{2}$ to $\min _{\boldsymbol{w}, b}\max_{\boldsymbol{\alpha}} L(w,b,\alpha)$. And it is equivalent to  </p><script type="math/tex; mode=display">\max_{\boldsymbol{\alpha}}\{ \min _{\boldsymbol{w}, b} L(w,b,\alpha)\}</script><p>To minimize the inner loss function, we calculate the partial derivative of $w$ and $b$, and make them equal to $0$, an then we get the the </p><script type="math/tex; mode=display">\begin{aligned} \boldsymbol{w}=& \sum_{i=1}^{m} \alpha_{i} y_{i} \boldsymbol{x}_{i} \\ 0 &=\sum_{i=1}^{m} \alpha_{i} y_{i} \end{aligned}</script><p>Substitute the results back to the origin $L(w,b,\alpha)$ loss function, now the dual representation is </p><script type="math/tex; mode=display">\max _{\boldsymbol{\alpha}} \left ( \sum_{i=1}^{m} \alpha_{i}-\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j} \boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j} \right)</script><script type="math/tex; mode=display">\begin{array}{l}{\text { s.t. } \sum_{i=1}^{m} \alpha_{i} y_{i}=0} \\ {\alpha_{i} \geqslant 0, \quad i=1,2, \ldots, m}\end{array}</script><p>Then we can apply the kernel.</p><p>Assum the kernel function which has the form like this </p><script type="math/tex; mode=display">\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\left\langle\phi\left(\boldsymbol{x}_{i}\right), \phi\left(\boldsymbol{x}_{j}\right)\right\rangle=\phi\left(\boldsymbol{x}_{i}\right)^{\mathrm{T}} \phi\left(\boldsymbol{x}_{j}\right)</script><p>Write the matrix form $K=\boldsymbol\phi(\boldsymbol x)\boldsymbol\phi(\boldsymbol y)$, and rewrite the dual representation as the matrix form </p><script type="math/tex; mode=display">\boldsymbol c^T \boldsymbol\alpha-\frac{1}{2}\boldsymbol\alpha^T K \boldsymbol\alpha</script><p>with the constraints.</p><hr><p>The advantage of using the kernel trick: blog <a href="https://shuogh.github.io/2019/05/27/Kernel-Tricks/" target="_blank" rel="noopener">Kernel Function</a></p><p>Some common form of kernels: blog <a href="https://shuogh.github.io/2019/05/27/Kernel-Tricks/" target="_blank" rel="noopener">Kernel Function</a></p><hr><h2 id="Slack-Variable"><a href="#Slack-Variable" class="headerlink" title="Slack Variable"></a>Slack Variable</h2><p>对于不能完全分隔开的情况，引入松弛变量，使硬间隔(hard margin)转换成弱间隔(soft margin)。落在软间隔中的点才是我们要关注的东西，所以之后的slack variable只有在间隔内的才是不等于0的。</p><p>The form of classification constraints are replaced with</p><script type="math/tex; mode=display">\begin{array}{c}{\text { s.t. } \quad y_{i}\left(\boldsymbol{w}^{\mathrm{T}} \boldsymbol{x}_{i}+b\right) \geqslant 1-\xi_{i}} \\ {\xi_{i} \geqslant 0, i=1,2, \ldots, m}\end{array}</script><p>Each slack variable is for one training data point. </p><p>Data points with $ \xi_n=0$ are correctly classified and are either on the margin or on the correct side of the margin. Points for which $0&lt;\xi_{n} \leqslant 1$ lie inside the margin, but on the correct boundary, and those data points for which $\xi_n&gt;1$ lie on the wrong side of the decision boundary and are misclassified. </p><p>Slack variable allow for overlapping class distributions, however this framework is still sensitive to outliers because the penalty for misclassification increase linearly with $\xi$. (错误分类的离群点，会有很大的 $\xi$ 绝对值)</p><p>Therefore, the function we are going to <strong>minimize</strong> is </p><script type="math/tex; mode=display">C \sum_{n=1}^{N} \xi_{n}+\frac{1}{2}\|\mathbf{w}\|^{2}</script><p>where the parameter $C&gt;0$ controls the trade-off between the salck variable penality and the margin. Because any point that is misclassified has $\xi_n&gt;1$, it follows that the $\sum_{n} \xi_{n}$ is an upper bound on the number of misclassified points. Therefore, the parameter $C$ is analogous to a regularization coefficient because it controls the trade-off between minimizing training errors and controlling the model complexity. In the limit $C \rightarrow \infty$, we will recover the earlier SVM with the hard margin. </p><p>The corresponding Lagrangian is given by</p><script type="math/tex; mode=display">L(\mathbf{w}, b, \mathbf{a})=\frac{1}{2}\|\mathbf{w}\|^{2}+C \sum_{n=1}^{N} \xi_{n}-\sum_{n=1}^{N} a_{n}\left\{t_{n} y\left(\mathbf{x}_{n}\right)-1+\xi_{n}\right\}-\sum_{n=1}^{N} \mu_{n} \xi_{n}</script><p>and there are the constraints(see the book)</p><p>We can also convert it to the dual form and during the calculating the derivative, we get the another constraint $0 \leqslant a_{n} \leqslant C$. </p><p><code>(since there are a lot of content which can be written down. I will omit these information. If you want to get to know more, see the Chapter 7.1.1 of PRML of Bishop)</code></p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>周志华 《机器学习》</li><li>Bishop PRML Chapter 7.1.1</li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Radial Basis Function, RBF network]]></title>
+    <url>%2F2019%2F05%2F27%2FRadial-Basis-Function-RBF-network%2F</url>
+    <content type="text"><![CDATA[Radial basis functionradial basis function is that each basis function depends only on the radial distance (typically Euclidean) from a centre $\mu_j$, so that $\phi_j(x)=h(x-\mu_j)$. $f(x)$ is expressed as a linear combination of radial basis functions, onecentred on every data point f(\mathbf{x})=\sum_{n=1}^{N} w_{n} h\left(\left\|\mathbf{x}-\mathbf{x}_{n}\right\|\right)The values of the coefficients ${w_n}$ are found by least squares. RBF Network(to be continued) Question: What are the similarities and differences between MLP, RBF networks and SVMs? All three techniques are based on the perceptron. In MLPs, the earlier layers are perceptrons, in RBFs they are radial basis functions and SVMs thet are the features corresponding to the eigenvalues of a kernel. All three can be used for regression and classification. MLPs are trained using back-propagation of errors. They have non-unique solution. Complexity depends on nunber of hidden nodes. Liable to over-fit the training data. Often use ad hoc methods such as early stopping to stop over-fitting. Can have many output nodes. RBFs typically use unsupervised learning to choose the centres for the input layer. The labelled data used to train the final layer(a perceptron). Training is fast. Can have many output nodes. Often use regulariser on the output layer. The solution found is unique. SVMs use a kernel function to perform a mapping into a very high dimensional feature space. An optimally stable perceptron is used in the feature space. This controls the capacity of the learning machine reducing the problem of over-fitting. The learning algorithm uses quadratic optimisation. The computation complexity grows as the number training patterns cubed. For very large datasets SVMs can become impractical. The solution found is unque. Reference ML学习笔记之——径向基网络 Bishop PRML chapter 6.3 question from (COMP3008 2009-2010 Q4)]]></content>
       <categories>
-          
-          <category> Machine Learning </category>
-          
+        <category>Machine Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Matrix Derivatives</title>
-      <link href="/2019/05/26/Matrix-Derivatives/"/>
-      <url>/2019/05/26/Matrix-Derivatives/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Common-Used-in-Machine-Learning"><a href="#Common-Used-in-Machine-Learning" class="headerlink" title="Common Used in Machine Learning"></a>Common Used in Machine Learning</h2><p>There are two types of layout in the expression of matrix derivatives: denominator and numberator layout.</p><p>Here we always use the denominator layout.</p><ol><li>vector to vector</li></ol><script type="math/tex; mode=display">\frac{\partial \mathbf{A} \mathbf{x}}{\partial \mathbf{x}}=\mathbf{A}^{\top}</script><script type="math/tex; mode=display">\frac{\partial \mathbf{x}^{\top} \mathbf{A}}{\partial \mathbf{x}}= \mathbf{A}</script><ol><li>scaler to vector</li></ol><script type="math/tex; mode=display">\frac{\partial \mathbf{x}^{\top} \mathbf{A} \mathbf{x}}{\partial \mathbf{x}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right) \mathbf{x}</script><script type="math/tex; mode=display">\frac{\partial \mathbf{x}^{\mathbf{T}} \mathbf{x}}{\partial \mathbf{x}}=2 \mathbf{x}</script><p>These two conclusions are very popular in the derivative calculation of Machine Learning.</p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>矩阵求导、几种重要的矩阵及常用的<a href="https://blog.csdn.net/daaikuaichuan/article/details/80620518" target="_blank" rel="noopener">矩阵求导公式</a></li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[SVM, Slack Variable and Kernel]]></title>
+    <url>%2F2019%2F05%2F26%2FSVM-Slack-Variable-and-Kernel%2F</url>
+    <content type="text"><![CDATA[Maximize marginThe basic idea of SVM is to maximize the margin between the support vectors and the hyperplane. The margin can be expressed as $r=\frac{\left|\boldsymbol{w}^{\mathrm{T}} \boldsymbol{x}+b\right|}{|\boldsymbol{w}|}$ For the binary classification task $y\in(-1,+1)$, the equation satisfies: y_i(w^Tx_i+b)\geqslant r\|w\|Since the $w$ and $b$ can be scaled, we can get the condition y_i(w'^Tx_i+b')\geqslant 1where $w’=\frac{w}{r}, b’=\frac{b}{r}$. In the maximizing margin process, we only consider the support vectors which locate on the margin of hyperplane. These vectors satisfy the equation, therefore, the margin can be written as $\gamma=\frac{2}{|\boldsymbol{w}|}$. Maximizing the margin is equivalent to \min _{\boldsymbol{w}, b} \frac{1}{2}\|\boldsymbol{w}\|^{2}\text { s.t. } \quad y_{i}\left(\boldsymbol{w}^{\mathrm{T}} \boldsymbol{x}_{i}+b\right) \geqslant 1, \quad i=1,2, \ldots, mLagrangianTo solve the optimization problem, apply the Lagrangian multiplier, and we get the form of the question: L(w,b,\alpha)=\frac{1}{2}\|w\|^2-\sum_i^p \alpha_i(y_i(w^Tx_i+b-1))\begin{array}{l}{\text { s.t. } \sum_{i=1}^{m} \alpha_{i} y_{i}=0} \\ {\alpha_{i} \geqslant 0, \quad i=1,2, \ldots, m}\end{array}Dual FormBefore applying the kernel functions, the dual representations are introduced. Using the lagrandian multiplier, we convert our problem from $\min _{\boldsymbol{w}, b} \frac{1}{2}|\boldsymbol{w}|^{2}$ to $\min _{\boldsymbol{w}, b}\max_{\boldsymbol{\alpha}} L(w,b,\alpha)$. And it is equivalent to \max_{\boldsymbol{\alpha}}\{ \min _{\boldsymbol{w}, b} L(w,b,\alpha)\}To minimize the inner loss function, we calculate the partial derivative of $w$ and $b$, and make them equal to $0$, an then we get the the \begin{aligned} \boldsymbol{w}=& \sum_{i=1}^{m} \alpha_{i} y_{i} \boldsymbol{x}_{i} \\ 0 &=\sum_{i=1}^{m} \alpha_{i} y_{i} \end{aligned}Substitute the results back to the origin $L(w,b,\alpha)$ loss function, now the dual representation is \max _{\boldsymbol{\alpha}} \left ( \sum_{i=1}^{m} \alpha_{i}-\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j} \boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j} \right)\begin{array}{l}{\text { s.t. } \sum_{i=1}^{m} \alpha_{i} y_{i}=0} \\ {\alpha_{i} \geqslant 0, \quad i=1,2, \ldots, m}\end{array}Then we can apply the kernel. Assum the kernel function which has the form like this \kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\left\langle\phi\left(\boldsymbol{x}_{i}\right), \phi\left(\boldsymbol{x}_{j}\right)\right\rangle=\phi\left(\boldsymbol{x}_{i}\right)^{\mathrm{T}} \phi\left(\boldsymbol{x}_{j}\right)Write the matrix form $K=\boldsymbol\phi(\boldsymbol x)\boldsymbol\phi(\boldsymbol y)$, and rewrite the dual representation as the matrix form \boldsymbol c^T \boldsymbol\alpha-\frac{1}{2}\boldsymbol\alpha^T K \boldsymbol\alphawith the constraints. The advantage of using the kernel trick: blog Kernel Function Some common form of kernels: blog Kernel Function Slack Variable对于不能完全分隔开的情况，引入松弛变量，使硬间隔(hard margin)转换成弱间隔(soft margin)。落在软间隔中的点才是我们要关注的东西，所以之后的slack variable只有在间隔内的才是不等于0的。 The form of classification constraints are replaced with \begin{array}{c}{\text { s.t. } \quad y_{i}\left(\boldsymbol{w}^{\mathrm{T}} \boldsymbol{x}_{i}+b\right) \geqslant 1-\xi_{i}} \\ {\xi_{i} \geqslant 0, i=1,2, \ldots, m}\end{array}Each slack variable is for one training data point. Data points with $ \xi_n=0$ are correctly classified and are either on the margin or on the correct side of the margin. Points for which $0&lt;\xi_{n} \leqslant 1$ lie inside the margin, but on the correct boundary, and those data points for which $\xi_n&gt;1$ lie on the wrong side of the decision boundary and are misclassified. Slack variable allow for overlapping class distributions, however this framework is still sensitive to outliers because the penalty for misclassification increase linearly with $\xi$. (错误分类的离群点，会有很大的 $\xi$ 绝对值) Therefore, the function we are going to minimize is C \sum_{n=1}^{N} \xi_{n}+\frac{1}{2}\|\mathbf{w}\|^{2}where the parameter $C&gt;0$ controls the trade-off between the salck variable penality and the margin. Because any point that is misclassified has $\xi_n&gt;1$, it follows that the $\sum_{n} \xi_{n}$ is an upper bound on the number of misclassified points. Therefore, the parameter $C$ is analogous to a regularization coefficient because it controls the trade-off between minimizing training errors and controlling the model complexity. In the limit $C \rightarrow \infty$, we will recover the earlier SVM with the hard margin. The corresponding Lagrangian is given by L(\mathbf{w}, b, \mathbf{a})=\frac{1}{2}\|\mathbf{w}\|^{2}+C \sum_{n=1}^{N} \xi_{n}-\sum_{n=1}^{N} a_{n}\left\{t_{n} y\left(\mathbf{x}_{n}\right)-1+\xi_{n}\right\}-\sum_{n=1}^{N} \mu_{n} \xi_{n}and there are the constraints(see the book) We can also convert it to the dual form and during the calculating the derivative, we get the another constraint $0 \leqslant a_{n} \leqslant C$. (since there are a lot of content which can be written down. I will omit these information. If you want to get to know more, see the Chapter 7.1.1 of PRML of Bishop) Reference 周志华 《机器学习》 Bishop PRML Chapter 7.1.1]]></content>
       <categories>
-          
-          <category> Linear Algebra </category>
-          
+        <category>Machine Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Linear Algebra </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Naive Bayes</title>
-      <link href="/2019/05/26/Naive-Bayes/"/>
-      <url>/2019/05/26/Naive-Bayes/</url>
-      
-        <content type="html"><![CDATA[<h2 id="What-is-Generative-Models"><a href="#What-is-Generative-Models" class="headerlink" title="What is Generative Models"></a>What is Generative Models</h2><p>See the last article: <code>discriminative models and generative models</code>.</p><p>The Naive Bayes belongs to the generative models, which model the distribution of the posterior and the process of generating the inputs.</p><h2 id="Assumption-of-Naive-Bayes"><a href="#Assumption-of-Naive-Bayes" class="headerlink" title="Assumption of Naive Bayes"></a>Assumption of Naive Bayes</h2><p>The naive bayes assumption is that all the data is conditionally independent, so if $D=(d_i|i=1,…,n)$ then </p><script type="math/tex; mode=display">p(\mathcal{D} | \boldsymbol{\theta})=\prod_{i=1}^{n} p\left(d_{i} | \boldsymbol{\theta}\right)</script><p>(which also shown in the PRML P46)</p><h2 id="Example-of-implementing-spam-filter"><a href="#Example-of-implementing-spam-filter" class="headerlink" title="Example of implementing spam filter"></a>Example of implementing spam filter</h2><p>To implement a spam filter we can treat all the words in the email as independent of each other. Given an email $\left\langle w_{1}, w_{2}, \dots, w_{n}\right\rangle$ we can compute the probability of it being spam as </p><script type="math/tex; mode=display">p(\operatorname{spam} | \mathcal{D})=\frac{\prod_{i=1}^{n} p\left(w_{i} | \operatorname{spam}\right) p(\operatorname{spam})}{p(\mathcal{D})}</script><p>where the $p(spam)$ is the empirically measured frequency of spam emails. To compute the likelihood we use a database of spam and non spam emails</p><script type="math/tex; mode=display">p\left(w_{i} | s p a m\right)=\frac{\# \text { of occurances of } w_{i} \text { in spam database }}{\# \text { of words in spam database }}</script><p>Here I use the assumption we mentioned above, the likelihood $p(D|spam)$ is defined by the multiplication of each $p(w_i|spam)$. (We might include pseudo counts to make this more robust). The probability of the data $D$ is</p><script type="math/tex; mode=display">p(\mathcal{D})=p(\mathcal{D} | \operatorname{spam}) p(\operatorname{spam})+p(\mathcal{D} | \neg \operatorname{spam}) p(\neg \operatorname{spam})</script><p>We use exactly the same procedure to compute $p(D|\neg spam)$ as we did to compute the $p(D|spam)$. </p><p>By calculating the posterior probabilities, we can get the approximate prediction on whether the email is spam or not.</p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>Bishop PRML chapter 1.5.4</li><li>Shuogh blog: <a href="https://shuogh.github.io/2019/05/25/Discriminative-and-Generative-Models/" target="_blank" rel="noopener">Discriminative and generative models</a></li><li>AML(comp3008) 2012-2013 exam paper </li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Matrix Derivatives]]></title>
+    <url>%2F2019%2F05%2F26%2FMatrix-Derivatives%2F</url>
+    <content type="text"><![CDATA[Common Used in Machine LearningThere are two types of layout in the expression of matrix derivatives: denominator and numberator layout. Here we always use the denominator layout. vector to vector \frac{\partial \mathbf{A} \mathbf{x}}{\partial \mathbf{x}}=\mathbf{A}^{\top}\frac{\partial \mathbf{x}^{\top} \mathbf{A}}{\partial \mathbf{x}}= \mathbf{A} scaler to vector \frac{\partial \mathbf{x}^{\top} \mathbf{A} \mathbf{x}}{\partial \mathbf{x}}=\left(\mathbf{A}+\mathbf{A}^{\top}\right) \mathbf{x}\frac{\partial \mathbf{x}^{\mathbf{T}} \mathbf{x}}{\partial \mathbf{x}}=2 \mathbf{x}These two conclusions are very popular in the derivative calculation of Machine Learning. Reference 矩阵求导、几种重要的矩阵及常用的矩阵求导公式]]></content>
       <categories>
-          
-          <category> Machine Learning </category>
-          
+        <category>Linear Algebra</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Discriminative and Generative Models</title>
-      <link href="/2019/05/25/Discriminative-and-Generative-Models/"/>
-      <url>/2019/05/25/Discriminative-and-Generative-Models/</url>
-      
-        <content type="html"><![CDATA[<p>The classification problem can be broken down into two seperate stages: </p><ul><li>The <em>inference</em> stage: train data to learn a model for $p(C_k|x)$</li><li>The <em>decision</em> stage: use these posterior probabilities to make optimal class assignments </li></ul><p>To solve the classification, there are actually <strong>three</strong> distinct approaches.</p><h2 id="Generative-Models"><a href="#Generative-Models" class="headerlink" title="Generative Models"></a>Generative Models</h2><p>To solve the <em>inference</em> problem, we should determine the class-conditional densities $p(x|C_k)$ for each class $C_k$ individually. Also infer the prior class probabilities $p(C_k)$. Then use Bayes’ theorem in the form</p><script type="math/tex; mode=display">p\left(\mathcal{C}_{k} | \mathbf{x}\right)=\frac{p\left(\mathbf{x} | \mathcal{C}_{k}\right) p\left(\mathcal{C}_{k}\right)}{p(\mathbf{x})}</script><p>to find the posterior class probabilities $p(C_k|x)$. </p><p>For the denominator, it can be calculated by <script type="math/tex">p(\mathbf{x})=\sum_{k} p\left(\mathbf{x} | \mathcal{C}_{k}\right) p\left(\mathcal{C}_{k}\right)</script>.</p><p>Equivalently, the joint distribution $p(x,C_k)$ can also be modelled directly and then normalize to obtain the posterior probabilities. </p><p>Given the posterior probabilities, we use decision theory to determine class membership for each input $x$. This kind of method is called <em>generative models</em>, which model the distribution of inputs as well as the outputs. The name “<em>generative</em>“ is because by sampling from them it is possible to generate synthetic data points in the input space.</p><p>The <strong>examples</strong> of generative models:</p><ul><li>Naive Bayes, Latent Dirichlet allocation, Gaussian Process…</li></ul><h2 id="Discriminative-Models"><a href="#Discriminative-Models" class="headerlink" title="Discriminative Models"></a>Discriminative Models</h2><p>Solve the inference problem of determining the posterior class probabilities $p(C_k|x)$, and then make prediction using decision theory. </p><p>The methods which model the posterior probabilities $p(C_k|x)$ <strong><em>directly</em></strong> are called <em>discriminative models</em>. </p><p><strong>or </strong></p><p>Find a function $f(x)$, called a discriminant function, which maps each input $x$ directly onto a class label. </p><p><strong>Examples</strong> of discriminative models:</p><ul><li>kNN, perceptron, decision tree, linear regression, logistics regression, SVM, neural network…</li></ul><h2 id="The-Merits-of-Each-Method"><a href="#The-Merits-of-Each-Method" class="headerlink" title="The Merits of Each Method"></a>The Merits of Each Method</h2><p><strong><em>Generative models</em></strong> are most demanding, since it involve finding the joint distribution over both $x$ and $C_k$. For many application, $X$ have high dimensionality and consequently we may need a large training set in order to be able to determine the <strong>class-conditional densities</strong> （类条件概率密度，就是后验概率，我们的目标）to reasonable accuracy.<br>One distinctive use case of the generative models is <em>outlier detection</em> （离群点检测）. The margin density of data $p(x)$ can be determined using the formula menetioned above. It is usefule for detecting new data points that have low probability under the model and for which the predictions may be of low accuracy, which is know as <em>outlier detection</em> and <em>novelty detection</em>.</p><p><strong><em>Discriminative approaches</em></strong> is simpler. The second approach can obtain the posterior probabilities $p(C_k|x)$ directly from the data points. The thrid approach is much simpler, in which we use the training data to find a discriminant function $f(x)$ that maps each $x$ directly onto a class label (It combine the inference and decision stages into a single learning problem). However, in the third method, we no loner have access to posterior probabilities.</p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>Bishop PRML Chapter 1.5.4</li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Linear Algebra</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Naive Bayes]]></title>
+    <url>%2F2019%2F05%2F26%2FNaive-Bayes%2F</url>
+    <content type="text"><![CDATA[What is Generative ModelsSee the last article: discriminative models and generative models. The Naive Bayes belongs to the generative models, which model the distribution of the posterior and the process of generating the inputs. Assumption of Naive BayesThe naive bayes assumption is that all the data is conditionally independent, so if $D=(d_i|i=1,…,n)$ then p(\mathcal{D} | \boldsymbol{\theta})=\prod_{i=1}^{n} p\left(d_{i} | \boldsymbol{\theta}\right)(which also shown in the PRML P46) Example of implementing spam filterTo implement a spam filter we can treat all the words in the email as independent of each other. Given an email $\left\langle w_{1}, w_{2}, \dots, w_{n}\right\rangle$ we can compute the probability of it being spam as p(\operatorname{spam} | \mathcal{D})=\frac{\prod_{i=1}^{n} p\left(w_{i} | \operatorname{spam}\right) p(\operatorname{spam})}{p(\mathcal{D})}where the $p(spam)$ is the empirically measured frequency of spam emails. To compute the likelihood we use a database of spam and non spam emails p\left(w_{i} | s p a m\right)=\frac{\# \text { of occurances of } w_{i} \text { in spam database }}{\# \text { of words in spam database }}Here I use the assumption we mentioned above, the likelihood $p(D|spam)$ is defined by the multiplication of each $p(w_i|spam)$. (We might include pseudo counts to make this more robust). The probability of the data $D$ is p(\mathcal{D})=p(\mathcal{D} | \operatorname{spam}) p(\operatorname{spam})+p(\mathcal{D} | \neg \operatorname{spam}) p(\neg \operatorname{spam})We use exactly the same procedure to compute $p(D|\neg spam)$ as we did to compute the $p(D|spam)$. By calculating the posterior probabilities, we can get the approximate prediction on whether the email is spam or not. Reference Bishop PRML chapter 1.5.4 Shuogh blog: Discriminative and generative models AML(comp3008) 2012-2013 exam paper]]></content>
       <categories>
-          
-          <category> Machine Learning </category>
-          
+        <category>Machine Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Data Mining Information Theory</title>
-      <link href="/2019/05/25/Data-Mining-Information-Theory/"/>
-      <url>/2019/05/25/Data-Mining-Information-Theory/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Information-Theory-and-Feature-Selection"><a href="#Information-Theory-and-Feature-Selection" class="headerlink" title="Information Theory and Feature Selection"></a>Information Theory and Feature Selection</h1><ul><li>Outline:<ul><li>Information</li><li>Entropy</li><li>Mutual information</li><li>for feature selection</li></ul></li></ul><h2 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h2><p>Information, also can be seen as <strong>uncertainty</strong> and <strong>surprise</strong>.</p><p>$I=-log_2{p(x)}$ Since the $p(x)$ is the probability of event $x$, the value $&lt;1$.</p><p><strong>Shannon entropy:</strong></p><script type="math/tex; mode=display">H(p)=-\sum_{x} p(x) \log _{2} p(x)</script><p>( entropy = the probability of an event * information of this event )</p><p>Shannon entropy is the measure of uncertainty. </p><p>(香农熵描述的是混乱程度，而且information这个概念其实也是从这个角度给出的，不确定性越大，这个事件携带的信息越多。)</p><h2 id="K-L-Divergence"><a href="#K-L-Divergence" class="headerlink" title="K-L Divergence"></a>K-L Divergence</h2><p>Two probability distribution $f(x)$ and $g(x)$, the K-L divergence is :</p><script type="math/tex; mode=display">D(f \| g)=\sum_{x \in X} f(x) \log \frac{f(x)}{g(x)}</script><ul><li>Compare the entropy of two distribution over the same random variable</li><li>Heuristically: number of additional bits encoding a random variable with distribution $f(x)$ using $g(x)$.</li></ul><p>It can be seen as the $D(f|g) =\sum_{x \in X} [-f(x)log_2 g(x)+f(x)log_2f(x)] $, the first term is to encode $f(x)$ using the the encoding method of $g(x)$.Therefore, it can be seen as the distance between two encoding function ( or distribution). </p><p>When minimizing K-L against a fixed reference distribution $p$, the task is euivalent to minimizing <strong>cross entropies</strong>. It can be written as: $D(f|g) =\sum_{x \in X}f(x)log_2f(x) - \sum_{x \in X}f(x)log_2 g(x) $</p><p>The second term is what we use in the cross entropy loss function.</p><h2 id="Conditional-Entropy"><a href="#Conditional-Entropy" class="headerlink" title="Conditional Entropy"></a>Conditional Entropy</h2><p>The $I$ is <strong>realized information</strong>, which is the difference between the entropy of $H(C)$ and the contional entropy $H(C|X=x)$. And the realized information is defined as:</p><script type="math/tex; mode=display">I[C ; X=x]=H(C)-H(C | X=x)</script><p>Given the observation of $X$, the entropy of $C$ is decrease, which is written as $H(C | X=x)$.</p><p>The realized information is not necessarily positive. If it is negative, the entropy will increase.</p><p>Form of the contional entropy (from <strong>PRML</strong>): $H(Y | X)=-\sum_{x_{i}, y_{j}}^{m, n} p\left(x_{i}, y_{j}\right) \cdot \log _{2} p\left(y_{j} | x_{i}\right)$ </p><h2 id="Mutual-Information"><a href="#Mutual-Information" class="headerlink" title="Mutual Information"></a>Mutual Information</h2><p>Mutual information is the expected information a <strong>feature</strong> gives us about a classs:</p><p>$I[C ; X]=H(C)-\sum \operatorname{Pr}(X=x) H(C | X=x)$</p><p>Note:</p><ul><li>Mutual information is always positive.</li><li>Is only 0 when the X and C are statistically independent.</li><li>Is symmetric in X and C</li></ul><p><strong>Example of calculating the mutual information</strong>:</p><div class="table-container"><table><thead><tr><th></th><th style="text-align:center">Indicator X</th><th></th></tr></thead><tbody><tr><td>Class $C$</td><td style="text-align:center">“Paint”</td><td>“Not Paint”</td></tr><tr><td>Art</td><td style="text-align:center">12</td><td>45</td></tr><tr><td>Music</td><td style="text-align:center"></td><td>45</td></tr></tbody></table></div><p>The entropy of C: $H(C)=57/102 \cdot log_2(57/102)+ 45/102\cdot log_2(45/102)=0.99$</p><p>$H[C|X=”paint”]=0$ ,since the “paint” can be certain that the story is about art.</p><p>$H[C|X=”not paint”]=1.0$, which we can calculate from the distribution.</p><p>$I[C;X]=H[C]-Pr(x=1)H[C|X=1]-Pr(X=0)H[C|X=0]$ = 0.99-12/102<em>0-90/102 </em>1 =0.11 </p><p>Therefore, the mutual information is 0.11, which is the expected reduction in uncertainly.</p><p>During the process of building the decision tree, the <strong>information gain</strong> is another form of mutual information. See the <a href="https://www.zhihu.com/question/39436574" target="_blank" rel="noopener">zhihu</a> for more detail.</p><p>And this is the way which most people use to find the informative features.</p><h2 id="Joint-and-Conditional-Entropy"><a href="#Joint-and-Conditional-Entropy" class="headerlink" title="Joint and Conditional Entropy"></a>Joint and Conditional Entropy</h2><p>$H[X, Y]=-\sum_{x, y} \operatorname{Pr}(X=x, Y=y) \log _{2} \operatorname{Pr}(X=x, Y=y)$</p><p>Kind of the joint distribution. </p><p>Using this, conditional mutual information can be derivated:</p><p>$I[C ; Y | X]=H[C | X]-H[C | Y, X]$</p><ul><li>we ask how much information does Y contain about C if we “control” for X.</li></ul><h2 id="Interaction"><a href="#Interaction" class="headerlink" title="Interaction"></a>Interaction</h2><p>Contional mutual information $I [C ; Y | X]$ is positive:</p><ul><li><p>But might be smaller/larger/equal to $I[C;Y]$</p></li><li><p>If $I[C;Y|X]=0$: C and Y are conditionally independent given X; Otherwise there is an interaction between X and Y(regarding their information about C)</p></li><li><p>$I[C;Y|X]&lt;I[C;Y]$: Some of the information in Y about C is redundant given X</p></li><li><p>Use this to define the <strong>interaction information</strong>: $I(C;Y;X)=I(C;Y|X)-I(C;Y)$</p><p>(Actually not very familiar with this interaction)</p></li></ul><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>CAML机器学习系列2：<a href="https://www.cnblogs.com/maybe2030/p/5514841.html" target="_blank" rel="noopener">深入浅出ML之Entropy-Based家族</a></li><li>The slide from Markus: <a href="https://www.southampton.ac.uk/~mb1a10/stats/Information.pdf" target="_blank" rel="noopener">information</a> </li><li>Bishop PRML</li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Discriminative and Generative Models]]></title>
+    <url>%2F2019%2F05%2F25%2FDiscriminative-and-Generative-Models%2F</url>
+    <content type="text"><![CDATA[The classification problem can be broken down into two seperate stages: The inference stage: train data to learn a model for $p(C_k|x)$ The decision stage: use these posterior probabilities to make optimal class assignments To solve the classification, there are actually three distinct approaches. Generative ModelsTo solve the inference problem, we should determine the class-conditional densities $p(x|C_k)$ for each class $C_k$ individually. Also infer the prior class probabilities $p(C_k)$. Then use Bayes’ theorem in the form p\left(\mathcal{C}_{k} | \mathbf{x}\right)=\frac{p\left(\mathbf{x} | \mathcal{C}_{k}\right) p\left(\mathcal{C}_{k}\right)}{p(\mathbf{x})}to find the posterior class probabilities $p(C_k|x)$. For the denominator, it can be calculated by p(\mathbf{x})=\sum_{k} p\left(\mathbf{x} | \mathcal{C}_{k}\right) p\left(\mathcal{C}_{k}\right). Equivalently, the joint distribution $p(x,C_k)$ can also be modelled directly and then normalize to obtain the posterior probabilities. Given the posterior probabilities, we use decision theory to determine class membership for each input $x$. This kind of method is called generative models, which model the distribution of inputs as well as the outputs. The name “generative“ is because by sampling from them it is possible to generate synthetic data points in the input space. The examples of generative models: Naive Bayes, Latent Dirichlet allocation, Gaussian Process… Discriminative ModelsSolve the inference problem of determining the posterior class probabilities $p(C_k|x)$, and then make prediction using decision theory. The methods which model the posterior probabilities $p(C_k|x)$ directly are called discriminative models. or Find a function $f(x)$, called a discriminant function, which maps each input $x$ directly onto a class label. Examples of discriminative models: kNN, perceptron, decision tree, linear regression, logistics regression, SVM, neural network… The Merits of Each MethodGenerative models are most demanding, since it involve finding the joint distribution over both $x$ and $C_k$. For many application, $X$ have high dimensionality and consequently we may need a large training set in order to be able to determine the class-conditional densities （类条件概率密度，就是后验概率，我们的目标）to reasonable accuracy.One distinctive use case of the generative models is outlier detection （离群点检测）. The margin density of data $p(x)$ can be determined using the formula menetioned above. It is usefule for detecting new data points that have low probability under the model and for which the predictions may be of low accuracy, which is know as outlier detection and novelty detection. Discriminative approaches is simpler. The second approach can obtain the posterior probabilities $p(C_k|x)$ directly from the data points. The thrid approach is much simpler, in which we use the training data to find a discriminant function $f(x)$ that maps each $x$ directly onto a class label (It combine the inference and decision stages into a single learning problem). However, in the third method, we no loner have access to posterior probabilities. Reference Bishop PRML Chapter 1.5.4]]></content>
       <categories>
-          
-          <category> Data Mining </category>
-          
+        <category>Machine Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Data Mining </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Python Init Modules</title>
-      <link href="/2019/05/14/Python-Init-Modules/"/>
-      <url>/2019/05/14/Python-Init-Modules/</url>
-      
-        <content type="html"><![CDATA[<p>__init__.py 文件的作用是将文件夹变为一个Python模块,Python 中的每个模块的包中，都有__init__.py 文件。</p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>Python __init__.py <a href="https://www.cnblogs.com/Lands-ljk/p/5880483.html" target="_blank" rel="noopener">作用详解</a> </li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Data Mining Information Theory]]></title>
+    <url>%2F2019%2F05%2F25%2FData-Mining-Information-Theory%2F</url>
+    <content type="text"><![CDATA[Information Theory and Feature Selection Outline: Information Entropy Mutual information for feature selection InformationInformation, also can be seen as uncertainty and surprise. $I=-log_2{p(x)}$ Since the $p(x)$ is the probability of event $x$, the value $&lt;1$. Shannon entropy: H(p)=-\sum_{x} p(x) \log _{2} p(x)( entropy = the probability of an event * information of this event ) Shannon entropy is the measure of uncertainty. (香农熵描述的是混乱程度，而且information这个概念其实也是从这个角度给出的，不确定性越大，这个事件携带的信息越多。) K-L DivergenceTwo probability distribution $f(x)$ and $g(x)$, the K-L divergence is : D(f \| g)=\sum_{x \in X} f(x) \log \frac{f(x)}{g(x)} Compare the entropy of two distribution over the same random variable Heuristically: number of additional bits encoding a random variable with distribution $f(x)$ using $g(x)$. It can be seen as the $D(f|g) =\sum_{x \in X} [-f(x)log_2 g(x)+f(x)log_2f(x)] $, the first term is to encode $f(x)$ using the the encoding method of $g(x)$.Therefore, it can be seen as the distance between two encoding function ( or distribution). When minimizing K-L against a fixed reference distribution $p$, the task is euivalent to minimizing cross entropies. It can be written as: $D(f|g) =\sum_{x \in X}f(x)log_2f(x) - \sum_{x \in X}f(x)log_2 g(x) $ The second term is what we use in the cross entropy loss function. Conditional EntropyThe $I$ is realized information, which is the difference between the entropy of $H(C)$ and the contional entropy $H(C|X=x)$. And the realized information is defined as: I[C ; X=x]=H(C)-H(C | X=x)Given the observation of $X$, the entropy of $C$ is decrease, which is written as $H(C | X=x)$. The realized information is not necessarily positive. If it is negative, the entropy will increase. Form of the contional entropy (from PRML): $H(Y | X)=-\sum_{x_{i}, y_{j}}^{m, n} p\left(x_{i}, y_{j}\right) \cdot \log _{2} p\left(y_{j} | x_{i}\right)$ Mutual InformationMutual information is the expected information a feature gives us about a classs: $I[C ; X]=H(C)-\sum \operatorname{Pr}(X=x) H(C | X=x)$ Note: Mutual information is always positive. Is only 0 when the X and C are statistically independent. Is symmetric in X and C Example of calculating the mutual information: Indicator X Class $C$ “Paint” “Not Paint” Art 12 45 Music 45 The entropy of C: $H(C)=57/102 \cdot log_2(57/102)+ 45/102\cdot log_2(45/102)=0.99$ $H[C|X=”paint”]=0$ ,since the “paint” can be certain that the story is about art. $H[C|X=”not paint”]=1.0$, which we can calculate from the distribution. $I[C;X]=H[C]-Pr(x=1)H[C|X=1]-Pr(X=0)H[C|X=0]$ = 0.99-12/1020-90/102 1 =0.11 Therefore, the mutual information is 0.11, which is the expected reduction in uncertainly. During the process of building the decision tree, the information gain is another form of mutual information. See the zhihu for more detail. And this is the way which most people use to find the informative features. Joint and Conditional Entropy$H[X, Y]=-\sum_{x, y} \operatorname{Pr}(X=x, Y=y) \log _{2} \operatorname{Pr}(X=x, Y=y)$ Kind of the joint distribution. Using this, conditional mutual information can be derivated: $I[C ; Y | X]=H[C | X]-H[C | Y, X]$ we ask how much information does Y contain about C if we “control” for X. InteractionContional mutual information $I [C ; Y | X]$ is positive: But might be smaller/larger/equal to $I[C;Y]$ If $I[C;Y|X]=0$: C and Y are conditionally independent given X; Otherwise there is an interaction between X and Y(regarding their information about C) $I[C;Y|X]&lt;I[C;Y]$: Some of the information in Y about C is redundant given X Use this to define the interaction information: $I(C;Y;X)=I(C;Y|X)-I(C;Y)$ (Actually not very familiar with this interaction) Reference CAML机器学习系列2：深入浅出ML之Entropy-Based家族 The slide from Markus: information Bishop PRML]]></content>
       <categories>
-          
-          <category> Python </category>
-          
+        <category>Data Mining</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Python </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Deep Learning Batch Normalization</title>
-      <link href="/2019/05/13/Deep-Learning-Batch-Normalization/"/>
-      <url>/2019/05/13/Deep-Learning-Batch-Normalization/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Why-we-need-batch-normalization-in-neural-network"><a href="#Why-we-need-batch-normalization-in-neural-network" class="headerlink" title="Why we need batch normalization in neural network?"></a>Why we need batch normalization in neural network?</h1><h2 id><a href="#" class="headerlink" title=" "></a> </h2><p>It can help the neural network to converge more quickly.</p><p>Make the different features into the same scale, get rid of the influence of different scale.</p><p>防止梯度爆炸和梯度消失</p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>zhihu: <a href="https://www.zhihu.com/question/281816000" target="_blank" rel="noopener">神经网络中的归一化除了减少计算量，还有什么作用？</a></li><li>towards data science: <a href="https://towardsdatascience.com/batch-normalization-in-neural-networks-1ac91516821c" target="_blank" rel="noopener">Batch normalization in Neural Networks</a></li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Data Mining</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Python Init Modules]]></title>
+    <url>%2F2019%2F05%2F14%2FPython-Init-Modules%2F</url>
+    <content type="text"><![CDATA[__init__.py 文件的作用是将文件夹变为一个Python模块,Python 中的每个模块的包中，都有__init__.py 文件。 Reference Python __init__.py 作用详解]]></content>
       <categories>
-          
-          <category> Deep Learning </category>
-          
+        <category>Python</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Deep Learning </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Deep Learning RNN sequence model</title>
-      <link href="/2019/05/09/Deep-Learning-RNN-sequence-model/"/>
-      <url>/2019/05/09/Deep-Learning-RNN-sequence-model/</url>
-      
-        <content type="html"><![CDATA[<p>Take down the note when I came accross the bugs during doing the lab 7.3. </p><p>The key words:<br><code>pack padded sequence</code>, <code>pad packed sequence</code>, the output of <code>lstm</code> model.</p><p>The code is listed below:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImprovedRNN</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, input_dim, embedding_dim, hidden_dim, output_dim)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        </span><br><span class="line">        self.embedding = nn.Embedding(input_dim, embedding_dim)</span><br><span class="line">        <span class="comment"># YOUR CODE HERE</span></span><br><span class="line">        self.lstm=nn.LSTM(embedding_dim,hidden_dim,batch_first=<span class="literal">True</span>)</span><br><span class="line"><span class="comment">#         raise NotImplementedError()</span></span><br><span class="line">        self.fc = nn.Linear(hidden_dim, output_dim)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, text_len)</span>:</span></span><br><span class="line">        text, lengths = text_len</span><br><span class="line">        embedded = self.embedding(text)</span><br><span class="line"><span class="comment">#         print(embedded.data.size())  # (sentence length, batch_size,hidden_dim)</span></span><br><span class="line"><span class="comment">#         print(lengths)           # the tensor(size 64), contains the length of sizes</span></span><br><span class="line">        embedded = nn.utils.rnn.pack_padded_sequence(embedded, lengths)</span><br><span class="line"><span class="comment">#         print(embedded.data.size()) # the packed_sequence record the series data and the tensor recording each length </span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># YOUR CODE HERE</span></span><br><span class="line"><span class="comment">#         print(embedded[0].size())</span></span><br><span class="line">        _,(last_state,_)=self.lstm(embedded)</span><br><span class="line"><span class="comment">#         lstm_out_pad,length_sentence=nn.utils.rnn.pad_packed_sequence(lstm_out)</span></span><br><span class="line">        print(last_state.size())</span><br><span class="line"><span class="comment">#         lstm_final_out=lstm_out_pad[length_sentence-1]  # just use the final timestep output</span></span><br><span class="line"><span class="comment">#       lstm_out_pad [0] is the data and [1] records the length of each sentence</span></span><br><span class="line"><span class="comment">#         print("...",lstm_out.data.size(),"\n ssss",type(lstm_out.data))</span></span><br><span class="line"><span class="comment">#         print("\n haha...",lstm_out_pad)</span></span><br><span class="line"><span class="comment">#         print(lstm_out_pad[0][-1][63])</span></span><br><span class="line"><span class="comment">#         length_63=lstm_out_pad[-1][63]  # Use [-1] can't get real last one </span></span><br><span class="line"><span class="comment">#         print("I'm the length of first sentence:",length_63)</span></span><br><span class="line"><span class="comment">#         print("i'm the data:",lstm_out_pad[0][length_63-1],lstm_out_pad[0][length_63 - 1][63])</span></span><br><span class="line"><span class="comment">#         print("im the length list:",lstm_out_pad[-1])</span></span><br><span class="line"><span class="comment">#         print(lstm_final_out.size())</span></span><br><span class="line">        out=self.fc(lstm_final_out)</span><br><span class="line"><span class="comment">#         print("emm heng?")</span></span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"><span class="comment">#         raise NotImplementedError()</span></span><br><span class="line">        </span><br><span class="line">INPUT_DIM = len(TEXT.vocab)  <span class="comment"># 25002</span></span><br><span class="line">EMBEDDING_DIM = <span class="number">50</span></span><br><span class="line">HIDDEN_DIM = <span class="number">100</span></span><br><span class="line">OUTPUT_DIM = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">imodel = ImprovedRNN(INPUT_DIM, EMBEDDING_DIM, HIDDEN_DIM, OUTPUT_DIM)</span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Train and evaluate the model</span></span><br><span class="line"><span class="comment"># YOUR CODE HERE</span></span><br><span class="line">optimizer = optim.Adam(model.parameters(), lr=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">torchbearer_trial = Trial(imodel, optimizer, criterion, metrics=[<span class="string">'acc'</span>, <span class="string">'loss'</span>]).to(device)</span><br><span class="line">torchbearer_trial.with_generators(train_generator=MyIter(train_iterator), val_generator=MyIter(valid_iterator), test_generator=MyIter(test_iterator))</span><br><span class="line"><span class="comment"># torchbearer_trial.with_train_generator(MyIter(train_iterator))</span></span><br><span class="line">torchbearer_trial.run(epochs=<span class="number">5</span>)</span><br><span class="line">torchbearer_trial.predict()</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Deep Learning Batch Normalization]]></title>
+    <url>%2F2019%2F05%2F13%2FDeep-Learning-Batch-Normalization%2F</url>
+    <content type="text"><![CDATA[Why we need batch normalization in neural network? It can help the neural network to converge more quickly. Make the different features into the same scale, get rid of the influence of different scale. 防止梯度爆炸和梯度消失 Reference zhihu: 神经网络中的归一化除了减少计算量，还有什么作用？ towards data science: Batch normalization in Neural Networks]]></content>
       <categories>
-          
-          <category> Deep Learning </category>
-          
+        <category>Deep Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Deep Learning </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Linux Server set thread for Pytorch</title>
-      <link href="/2019/05/07/Linux-Server-set-thread-for-Pytorch/"/>
-      <url>/2019/05/07/Linux-Server-set-thread-for-Pytorch/</url>
-      
-        <content type="html"><![CDATA[<p>During the time of doing my course work for Advanced Machine Learning, I ran my deep learning scripts on the server. In the first time, I saw the %CPU of my job was always very high. (And then, the admin killed my job since it stuck other jobs…sorry, i didn’t know this at that time)</p><p>To avoid the effect on other users, before runing our Pytorch scripts, we should run the following code in the beginning to set the thread. </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OMP_NUM_THREADS=1</span><br><span class="line"><span class="built_in">export</span> OMP_NUM_THREADS</span><br></pre></td></tr></table></figure><p>This allow us to use only one thread in our one job.</p>]]></content>
-      
-      
+      <tags>
+        <tag>Deep Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Deep Learning RNN sequence model]]></title>
+    <url>%2F2019%2F05%2F09%2FDeep-Learning-RNN-sequence-model%2F</url>
+    <content type="text"><![CDATA[Take down the note when I came accross the bugs during doing the lab 7.3. The key words:pack padded sequence, pad packed sequence, the output of lstm model. The code is listed below: 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354class ImprovedRNN(nn.Module): def __init__(self, input_dim, embedding_dim, hidden_dim, output_dim): super().__init__() self.embedding = nn.Embedding(input_dim, embedding_dim) # YOUR CODE HERE self.lstm=nn.LSTM(embedding_dim,hidden_dim,batch_first=True)# raise NotImplementedError() self.fc = nn.Linear(hidden_dim, output_dim) def forward(self, text_len): text, lengths = text_len embedded = self.embedding(text)# print(embedded.data.size()) # (sentence length, batch_size,hidden_dim)# print(lengths) # the tensor(size 64), contains the length of sizes embedded = nn.utils.rnn.pack_padded_sequence(embedded, lengths)# print(embedded.data.size()) # the packed_sequence record the series data and the tensor recording each length # YOUR CODE HERE# print(embedded[0].size()) _,(last_state,_)=self.lstm(embedded)# lstm_out_pad,length_sentence=nn.utils.rnn.pad_packed_sequence(lstm_out) print(last_state.size())# lstm_final_out=lstm_out_pad[length_sentence-1] # just use the final timestep output# lstm_out_pad [0] is the data and [1] records the length of each sentence# print("...",lstm_out.data.size(),"\n ssss",type(lstm_out.data))# print("\n haha...",lstm_out_pad)# print(lstm_out_pad[0][-1][63])# length_63=lstm_out_pad[-1][63] # Use [-1] can't get real last one # print("I'm the length of first sentence:",length_63)# print("i'm the data:",lstm_out_pad[0][length_63-1],lstm_out_pad[0][length_63 - 1][63])# print("im the length list:",lstm_out_pad[-1])# print(lstm_final_out.size()) out=self.fc(lstm_final_out)# print("emm heng?") return out# raise NotImplementedError() INPUT_DIM = len(TEXT.vocab) # 25002EMBEDDING_DIM = 50HIDDEN_DIM = 100OUTPUT_DIM = 1imodel = ImprovedRNN(INPUT_DIM, EMBEDDING_DIM, HIDDEN_DIM, OUTPUT_DIM)# TODO: Train and evaluate the model# YOUR CODE HEREoptimizer = optim.Adam(model.parameters(), lr=0.01)torchbearer_trial = Trial(imodel, optimizer, criterion, metrics=['acc', 'loss']).to(device)torchbearer_trial.with_generators(train_generator=MyIter(train_iterator), val_generator=MyIter(valid_iterator), test_generator=MyIter(test_iterator))# torchbearer_trial.with_train_generator(MyIter(train_iterator))torchbearer_trial.run(epochs=5)torchbearer_trial.predict()]]></content>
       <categories>
-          
-          <category> Linux </category>
-          
+        <category>Deep Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Linux </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Git Rebase to keep commit log clean</title>
-      <link href="/2019/05/05/Git-Rebase-to-keep-commit-log-clean/"/>
-      <url>/2019/05/05/Git-Rebase-to-keep-commit-log-clean/</url>
-      
-        <content type="html"><![CDATA[<p>There always be the cases that we are developing a new feature on seperate branch when we are using <code>Git</code>. There are many commit log like “fix type”, “correct the error” etc. When we merge the branch to <code>master</code> branch, we don’t want these stupid commit log appear in the commit log of <code>master</code> branch. </p><p>To merge <code>development</code> branch to <code>master</code> branch:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git merge development</span><br></pre></td></tr></table></figure></p><p>If we want to make our commit log clean, then you should use <code>rebase</code>.</p><h2 id="Rebase"><a href="#Rebase" class="headerlink" title="Rebase"></a>Rebase</h2><p>example:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开始开发一个新 feature</span></span><br><span class="line">$ git checkout -b new-feature master</span><br><span class="line"><span class="comment"># 改了一些代码</span></span><br><span class="line">$ git commit -a -m <span class="string">"Start developing a feature"</span></span><br><span class="line"><span class="comment"># 刚刚的修改有点问题，再改一下</span></span><br><span class="line">$ git commit -a -m <span class="string">"Fix something from the previous commit"</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 紧急修复，直接在 master 分支上改点东西</span></span><br><span class="line">$ git checkout master</span><br><span class="line"><span class="comment"># 改了一些代码</span></span><br><span class="line">$ git commit -a -m <span class="string">"Fix security hole"</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 开始交互式地 rebase 了</span></span><br><span class="line">$ git checkout new-feature</span><br><span class="line">$ git rebase -i master</span><br></pre></td></tr></table></figure></p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>Git tips: <a href="https://www.lovelucy.info/git-tips-combine-commits-keep-your-branch-clean.html" target="_blank" rel="noopener">合并 commit 保持分支干净整洁</a></li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Deep Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux Server set thread for Pytorch]]></title>
+    <url>%2F2019%2F05%2F07%2FLinux-Server-set-thread-for-Pytorch%2F</url>
+    <content type="text"><![CDATA[During the time of doing my course work for Advanced Machine Learning, I ran my deep learning scripts on the server. In the first time, I saw the %CPU of my job was always very high. (And then, the admin killed my job since it stuck other jobs…sorry, i didn’t know this at that time) To avoid the effect on other users, before runing our Pytorch scripts, we should run the following code in the beginning to set the thread. 12OMP_NUM_THREADS=1export OMP_NUM_THREADS This allow us to use only one thread in our one job.]]></content>
       <categories>
-          
-          <category> Git </category>
-          
+        <category>Linux</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Git </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Linux Run Script even after logging out</title>
-      <link href="/2019/05/02/Linux-Run-Script-even-after-logging-out/"/>
-      <url>/2019/05/02/Linux-Run-Script-even-after-logging-out/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Nohup"><a href="#Nohup" class="headerlink" title="Nohup"></a>Nohup</h2><ul><li>image_haha</li></ul><h2 id="Rerference"><a href="#Rerference" class="headerlink" title="Rerference"></a>Rerference</h2><ol><li>linux后台执行命令：<a href="https://blog.csdn.net/liuyanfeier/article/details/62422742" target="_blank" rel="noopener">&amp;和nohup</a></li><li>Nohup Command in Linux: <a href="https://linuxhint.com/nohup_command_linux/" target="_blank" rel="noopener">Linux Hint</a></li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Git Rebase to keep commit log clean]]></title>
+    <url>%2F2019%2F05%2F05%2FGit-Rebase-to-keep-commit-log-clean%2F</url>
+    <content type="text"><![CDATA[There always be the cases that we are developing a new feature on seperate branch when we are using Git. There are many commit log like “fix type”, “correct the error” etc. When we merge the branch to master branch, we don’t want these stupid commit log appear in the commit log of master branch. To merge development branch to master branch:12git checkout mastergit merge development If we want to make our commit log clean, then you should use rebase. Rebaseexample:123456789101112131415# 开始开发一个新 feature$ git checkout -b new-feature master# 改了一些代码$ git commit -a -m "Start developing a feature"# 刚刚的修改有点问题，再改一下$ git commit -a -m "Fix something from the previous commit" # 紧急修复，直接在 master 分支上改点东西$ git checkout master# 改了一些代码$ git commit -a -m "Fix security hole" # 开始交互式地 rebase 了$ git checkout new-feature$ git rebase -i master Reference Git tips: 合并 commit 保持分支干净整洁]]></content>
       <categories>
-          
-          <category> Linux </category>
-          
+        <category>Git</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Linux </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>VAE Variational Autoencoder</title>
-      <link href="/2019/05/01/VAE-Variational-Autoencoder/"/>
-      <url>/2019/05/01/VAE-Variational-Autoencoder/</url>
-      
-        <content type="html"><![CDATA[<p>差分自编码器，跟普通的自编码器不同，有着他自己特殊的地方。</p><p>通过编码器学习图像的编码，得到其潜在表征向量（这里学习其作为高斯分布的参数）。</p><p>为了训练encoder和decoder，loss function由两部分组成：</p><ul><li>KL divergence来表示隐含向量与标准正态分布之间差异的loss</li><li>另外一个loss使用生成图片与原图片的均方误差来表示</li></ul><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>部分公式推导 <a href="http://skyhigh233.com/blog/2018/04/05/vae/" target="_blank" rel="noopener">KL divergence</a></li><li>Github <a href="https://github.com/pytorch/examples/blob/master/vae/main.py" target="_blank" rel="noopener">example code</a></li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux Run Script even after logging out]]></title>
+    <url>%2F2019%2F05%2F02%2FLinux-Run-Script-even-after-logging-out%2F</url>
+    <content type="text"><![CDATA[Nohup image_haha Rerference linux后台执行命令：&amp;和nohup Nohup Command in Linux: Linux Hint]]></content>
       <categories>
-          
-          <category> Deep Learning </category>
-          
+        <category>Linux</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-            <tag> Deep Learning </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Next() in Python</title>
-      <link href="/2019/04/30/Next-in-Python/"/>
-      <url>/2019/04/30/Next-in-Python/</url>
-      
-        <content type="html"><![CDATA[<p>To fetch a item from generator, <code>next()</code> can be used: <code>Return the next item from the iterator.</code></p><p>If a variable is not a generator, <code>next()</code> can be used along with <code>iter()</code>.</p><p><strong>Python code snippet</strong>:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">next(a)</span><br><span class="line"><span class="comment"># output: TypeError: 'list' object is not an iterator</span></span><br><span class="line"></span><br><span class="line">b=iter(a)</span><br><span class="line">next(b)</span><br><span class="line"><span class="comment"># output: 1</span></span><br><span class="line">next(b)</span><br><span class="line"><span class="comment">#  output: 2</span></span><br><span class="line">next(b)</span><br><span class="line"><span class="comment">#  output: 3</span></span><br><span class="line">next(b)</span><br><span class="line"><span class="comment">#  StopIteration</span></span><br></pre></td></tr></table></figure></p><p>My case:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># dataset construction</span></span><br><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.ToTensor(), <span class="comment"># convert to tensor</span></span><br><span class="line">    transforms.Lambda(<span class="keyword">lambda</span> x: x.view(image_dim)) <span class="comment"># flatten into vector</span></span><br><span class="line">    ])</span><br><span class="line"></span><br><span class="line">train_set = torchvision.datasets.FashionMNIST(</span><br><span class="line">    root=<span class="string">'./data/FashionMNIST'</span></span><br><span class="line">    ,train=<span class="literal">True</span></span><br><span class="line">    ,download=<span class="literal">True</span></span><br><span class="line">    ,transform=transform</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">train_loader = torch.utils.data.DataLoader(</span><br><span class="line">    train_set, batch_size=batch_size</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Fetch images by next() function</span></span><br><span class="line"><span class="comment"># Since the obj returned by DataLoader was not iterator, I also used iter()</span></span><br><span class="line">images = next(iter(train_loader))</span><br></pre></td></tr></table></figure></p>]]></content>
-      
-      
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[VAE Variational Autoencoder]]></title>
+    <url>%2F2019%2F05%2F01%2FVAE-Variational-Autoencoder%2F</url>
+    <content type="text"><![CDATA[差分自编码器，跟普通的自编码器不同，有着他自己特殊的地方。 通过编码器学习图像的编码，得到其潜在表征向量（这里学习其作为高斯分布的参数）。 为了训练encoder和decoder，loss function由两部分组成： KL divergence来表示隐含向量与标准正态分布之间差异的loss 另外一个loss使用生成图片与原图片的均方误差来表示 Reference 部分公式推导 KL divergence Github example code]]></content>
       <categories>
-          
-          <category> Python </category>
-          
+        <category>Deep Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Python </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Sklearn Split Train and Test</title>
-      <link href="/2019/04/30/Sklearn-Split-Train-and-Test/"/>
-      <url>/2019/04/30/Sklearn-Split-Train-and-Test/</url>
-      
-        <content type="html"><![CDATA[<p>There are several ways to split the data set into training data set and test data set.</p><p>In this blog, I will talk about the difference between these approaches.</p><h2 id="sklearn-model-selection-train-test-split"><a href="#sklearn-model-selection-train-test-split" class="headerlink" title="sklearn.model_selection.train_test_split"></a>sklearn.model_selection.train_test_split</h2><p>Doc: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html" target="_blank" rel="noopener">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html</a></p><h2 id="sklearn-model-selection-ShuffleSplit"><a href="#sklearn-model-selection-ShuffleSplit" class="headerlink" title="sklearn.model_selection.ShuffleSplit"></a>sklearn.model_selection.ShuffleSplit</h2><p>Doc: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ShuffleSplit.html" target="_blank" rel="noopener">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ShuffleSplit.html</a></p>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+        <tag>Deep Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Next() in Python]]></title>
+    <url>%2F2019%2F04%2F30%2FNext-in-Python%2F</url>
+    <content type="text"><![CDATA[To fetch a item from generator, next() can be used: Return the next item from the iterator. If a variable is not a generator, next() can be used along with iter(). Python code snippet:12345678910111213a=[1,2,3]next(a)# output: TypeError: 'list' object is not an iteratorb=iter(a)next(b)# output: 1next(b)# output: 2next(b)# output: 3next(b)# StopIteration My case:1234567891011121314151617181920212223242526import torchimport torchvisionimport torchvision.transforms as transformsbatch_size = 256# dataset constructiontransform = transforms.Compose([ transforms.ToTensor(), # convert to tensor transforms.Lambda(lambda x: x.view(image_dim)) # flatten into vector ])train_set = torchvision.datasets.FashionMNIST( root='./data/FashionMNIST' ,train=True ,download=True ,transform=transform)train_loader = torch.utils.data.DataLoader( train_set, batch_size=batch_size)# Fetch images by next() function# Since the obj returned by DataLoader was not iterator, I also used iter()images = next(iter(train_loader))]]></content>
       <categories>
-          
-          <category> Machine Learning </category>
-          
+        <category>Python</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-            <tag> Sklearn </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Better style for Python Programming</title>
-      <link href="/2019/04/29/Better-style-for-Python-Programming/"/>
-      <url>/2019/04/29/Better-style-for-Python-Programming/</url>
-      
-        <content type="html"><![CDATA[<p>How to write better code with good style</p><p>Here is a guide.</p><p>机器之心：<a href="https://www.jiqizhixin.com/articles/2019-04-29-5" target="_blank" rel="noopener">PyTorch最佳实践，怎样才能写出一手风格优美的代码</a></p>]]></content>
-      
-      
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Sklearn Split Train and Test]]></title>
+    <url>%2F2019%2F04%2F30%2FSklearn-Split-Train-and-Test%2F</url>
+    <content type="text"><![CDATA[There are several ways to split the data set into training data set and test data set. In this blog, I will talk about the difference between these approaches. sklearn.model_selection.train_test_splitDoc: https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html sklearn.model_selection.ShuffleSplitDoc: https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ShuffleSplit.html]]></content>
       <categories>
-          
-          <category> Others </category>
-          
+        <category>Machine Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Programming </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Pytorch CUDA experience</title>
-      <link href="/2019/04/29/Pytorch-CUDA-experience/"/>
-      <url>/2019/04/29/Pytorch-CUDA-experience/</url>
-      
-        <content type="html"><![CDATA[<p>In my experience of using the lab server to train my model, I met the problem of OOM(out of memory). Here I attach some solution and thinking in the following article.</p><p>Assume such scenario:</p><ul><li>The default CUDA is full and even you want to do <code>torch.tensor([1,2,3]).cuda()</code> you will get <strong>OOM</strong> error.</li></ul><p>You shoul trying to choose another GPU.</p><h2 id="CUDA-VISIBLE-DEVICES"><a href="#CUDA-VISIBLE-DEVICES" class="headerlink" title="CUDA_VISIBLE_DEVICES"></a>CUDA_VISIBLE_DEVICES</h2><h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">os.environ[&apos;CUDA_VISIBLE_DEVICES&apos;] = &apos;2,3&apos;</span><br></pre></td></tr></table></figure><p>Add this piece of code into your <strong>script</strong> file, and when your execute your code, you will use the corrsponding GPU.<br>(<strong>Note</strong>: This will not be useful in <strong>Jupyter</strong> Notebook.)</p><p>OR</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CUDA_VISIBLE_DEVICES=2 python test.py</span><br></pre></td></tr></table></figure><p>When you execute your script file, add the <code>CUDA_VISIBLE_DEVICES=2</code> in the begining. Then the script will run on the certain GPU.</p><h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><p>Even you set your GPU of 2 or 3 using this way, in the output, the device will show <code>tensor([1, 2, 3], device=&#39;cuda:0&#39;)</code>. </p><ul><li>From pytorch forum of <a href="https://discuss.pytorch.org/t/cuda-visible-device-is-of-no-use/10018/8" target="_blank" rel="noopener">@pjavia ‘s answer</a>:<br>  <code>@MrTuo This is how pytorch 0.4.1 convention works. If you say CUDA_VISIBLE_DEVICES=2, 3. Then for pytorch GPU - 2 is cuda:0 and GPU - 3 is cuda:1. Just check your code is consistent with this convention or not?</code></li></ul><p>And I tested on the torch 1.0.1, it seems also consistent with this answer.</p><h2 id="Torch-cuda"><a href="#Torch-cuda" class="headerlink" title="Torch.cuda"></a>Torch.cuda</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">torch.cuda.set_device(1)</span><br><span class="line"></span><br><span class="line">torch.tensor([1,2,3]).cuda()</span><br><span class="line"># output: tensor([1, 2, 3], device=&apos;cuda:1&apos;)</span><br></pre></td></tr></table></figure><p>This code of first line is useful on <strong>Jupyter</strong> Notebook. When you set certain GPU device, the following code will use this GPU.</p><p>It’s kind of set the GPU environment.</p><h2 id="Torch-device"><a href="#Torch-device" class="headerlink" title="Torch.device"></a>Torch.device</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">device = torch.device(&apos;cuda:3&apos;)</span><br><span class="line"># X = X.to(device)</span><br></pre></td></tr></table></figure><p>Set a device of certain GPU, when you are executing the code, transfer the variable into the device(it can also be <code>CPU</code>).</p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li><a href="https://jdhao.github.io/2018/04/02/pytorch-gpu-usage/" target="_blank" rel="noopener">Set Default GPU in PyTorch</a></li><li>Pytorch forum: <a href="https://discuss.pytorch.org/t/cuda-visible-device-is-of-no-use/10018/8" target="_blank" rel="noopener">CUDA_VISIBLE_DEVICE is of no use </a></li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+        <tag>Sklearn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Better style for Python Programming]]></title>
+    <url>%2F2019%2F04%2F29%2FBetter-style-for-Python-Programming%2F</url>
+    <content type="text"><![CDATA[How to write better code with good style Here is a guide. 机器之心：PyTorch最佳实践，怎样才能写出一手风格优美的代码]]></content>
       <categories>
-          
-          <category> Deep Learning </category>
-          
+        <category>Others</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Deep Learning </tag>
-            
-            <tag> Pytorch </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Linux Commands when using Server</title>
-      <link href="/2019/04/28/Linux-Commands-when-using-Server/"/>
-      <url>/2019/04/28/Linux-Commands-when-using-Server/</url>
-      
-        <content type="html"><![CDATA[<p>When I am using the lab server, there are some commands that I need to use to see the situation of server.</p><h2 id="top"><a href="#top" class="headerlink" title="top"></a>top</h2><p>作用等同于任务管理器</p><p>You can see the CPU, Memory situation by using this command.</p><h2 id="nvidia-smi"><a href="#nvidia-smi" class="headerlink" title="nvidia-smi"></a>nvidia-smi</h2><p>See the GPU situation, the GPU memory and the some other things.</p><h2 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -u [username]</span><br></pre></td></tr></table></figure><p>To see the jobs of one user in this server.</p><h2 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h2><p>To see the current working dir path:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $PWD</span><br></pre></td></tr></table></figure></p><h2 id="Rerference"><a href="#Rerference" class="headerlink" title="Rerference"></a>Rerference</h2><ol><li>每天一个linux命令（44）：<a href="https://www.cnblogs.com/peida/archive/2012/12/24/2831353.html" target="_blank" rel="noopener">top命令</a></li><li>CUDA之nvidia-smi命令 <a href="https://blog.csdn.net/Bruce_0712/article/details/63683787" target="_blank" rel="noopener">详解</a> </li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Pytorch CUDA experience]]></title>
+    <url>%2F2019%2F04%2F29%2FPytorch-CUDA-experience%2F</url>
+    <content type="text"><![CDATA[In my experience of using the lab server to train my model, I met the problem of OOM(out of memory). Here I attach some solution and thinking in the following article. Assume such scenario: The default CUDA is full and even you want to do torch.tensor([1,2,3]).cuda() you will get OOM error. You shoul trying to choose another GPU. CUDA_VISIBLE_DEVICESCode12import osos.environ[&apos;CUDA_VISIBLE_DEVICES&apos;] = &apos;2,3&apos; Add this piece of code into your script file, and when your execute your code, you will use the corrsponding GPU.(Note: This will not be useful in Jupyter Notebook.) OR 1CUDA_VISIBLE_DEVICES=2 python test.py When you execute your script file, add the CUDA_VISIBLE_DEVICES=2 in the begining. Then the script will run on the certain GPU. NoteEven you set your GPU of 2 or 3 using this way, in the output, the device will show tensor([1, 2, 3], device=&#39;cuda:0&#39;). From pytorch forum of @pjavia ‘s answer: @MrTuo This is how pytorch 0.4.1 convention works. If you say CUDA_VISIBLE_DEVICES=2, 3. Then for pytorch GPU - 2 is cuda:0 and GPU - 3 is cuda:1. Just check your code is consistent with this convention or not? And I tested on the torch 1.0.1, it seems also consistent with this answer. Torch.cuda1234torch.cuda.set_device(1)torch.tensor([1,2,3]).cuda()# output: tensor([1, 2, 3], device=&apos;cuda:1&apos;) This code of first line is useful on Jupyter Notebook. When you set certain GPU device, the following code will use this GPU. It’s kind of set the GPU environment. Torch.device12device = torch.device(&apos;cuda:3&apos;)# X = X.to(device) Set a device of certain GPU, when you are executing the code, transfer the variable into the device(it can also be CPU). Reference Set Default GPU in PyTorch Pytorch forum: CUDA_VISIBLE_DEVICE is of no use]]></content>
       <categories>
-          
-          <category> Linux </category>
-          
+        <category>Deep Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Linux </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Linux Server virtual env</title>
-      <link href="/2019/04/28/Linux-Server-virtual-env/"/>
-      <url>/2019/04/28/Linux-Server-virtual-env/</url>
-      
-        <content type="html"><![CDATA[<p><strong>How to create the virtual env in the server of lab.</strong></p><p>In my group coursework for the advanced ML, I want to run the code of the first solution in this competition. The requirments wasn’t satisfied in the server, so I want to create virtual env to built such environment. This blog records the process of building envirment to run deep learning task.</p><h2 id="virtualenv"><a href="#virtualenv" class="headerlink" title="virtualenv"></a>virtualenv</h2><p>If your linux server already has the <code>virtualenv</code> module, you can use virtual env to create virtual environment. You can check it using <code>pip list</code>.</p><p>In my try, I tried to install the <code>virtualenv</code> in the beginning. I found that the permmission is denied, since I don’t have the root access on this server supplied by teachers.</p><p>I found the reason and solution in this <a href="https://github.com/googlesamples/assistant-sdk-python/issues/236" target="_blank" rel="noopener">issue</a>. Therefore, I did another try which is the following one.</p><h2 id="Python-m-venv"><a href="#Python-m-venv" class="headerlink" title="Python -m venv"></a>Python -m venv</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 -m venv env</span><br><span class="line">source ./env/bin/activate</span><br></pre></td></tr></table></figure><p>This solution just needs you to have the Python in your system (any Linux has the Python within system). In this way, I can activate the virual environment and <code>pip install</code> the specific modules.</p><h2 id="我的解决方案"><a href="#我的解决方案" class="headerlink" title="我的解决方案"></a>我的解决方案</h2><p>目标：python3.6 </p><p>过程：    </p><ol><li>python -m env</li><li>在python创建出来的虚拟环境中安装virtualenv</li><li>通过virtualenv创建对应python3.6版本的虚拟环境</li></ol><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>an issue on Github: <a href="https://github.com/googlesamples/assistant-sdk-python/issues/236" target="_blank" rel="noopener">Permission denied</a></li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Deep Learning</tag>
+        <tag>Pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux Commands when using Server]]></title>
+    <url>%2F2019%2F04%2F28%2FLinux-Commands-when-using-Server%2F</url>
+    <content type="text"><![CDATA[When I am using the lab server, there are some commands that I need to use to see the situation of server. top作用等同于任务管理器 You can see the CPU, Memory situation by using this command. nvidia-smiSee the GPU situation, the GPU memory and the some other things. ps1ps -u [username] To see the jobs of one user in this server. echoTo see the current working dir path:1echo $PWD Rerference 每天一个linux命令（44）：top命令 CUDA之nvidia-smi命令 详解]]></content>
       <categories>
-          
-          <category> Linux </category>
-          
+        <category>Linux</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Linux </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Kaggle Competition: Humpback Whale Identification</title>
-      <link href="/2019/04/27/Kaggle-Competition-Humpback-Whale-Identification/"/>
-      <url>/2019/04/27/Kaggle-Competition-Humpback-Whale-Identification/</url>
-      
-        <content type="html"><![CDATA[<p>Kaggle竞赛第一名方案解读</p><h2 id="Description-of-Competition"><a href="#Description-of-Competition" class="headerlink" title="Description of Competition"></a>Description of Competition</h2><p>目的：构建算法识别鲸鱼个体</p><p>难点：</p><ul><li>训练样本的严重不均衡</li><li>存在接近三分之一的无标注（new whale）数据</li></ul><p>Some new terminology:</p><ul><li>Few-shot learning: <a href="https://blog.csdn.net/xhw205/article/details/79491649" target="_blank" rel="noopener">what’s few shot learning</a></li><li>细粒度分类: that’s why we need mask. <a href="https://www.imooc.com/article/30053" target="_blank" rel="noopener">mask-CNN</a>,<a href="https://cloud.tencent.com/developer/article/1010499" target="_blank" rel="noopener">什么是mask</a></li><li>triplet loss: ？？？</li><li>SE-resneXt154: 一个新的分类模型</li><li>伪标签：？？</li></ul><hr><p><strong>Pipeline：</strong></p><h2 id="Input-of-the-models"><a href="#Input-of-the-models" class="headerlink" title="Input of the models"></a>Input of the models</h2><ul><li>RGB+mask</li><li>Data Augmentation:<ul><li>有人提出鲸鱼尾部不对称，翻转之后是新的类别</li></ul></li></ul><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>kaggle competition: <a href="https://www.kaggle.com/c/humpback-whale-identification" target="_blank" rel="noopener">Humpback Whale Identification</a></li><li>机器之心: <a href="https://zhuanlan.zhihu.com/p/58496385" target="_blank" rel="noopener">Kaggle第一名竞赛方案解读</a></li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux Server virtual env]]></title>
+    <url>%2F2019%2F04%2F28%2FLinux-Server-virtual-env%2F</url>
+    <content type="text"><![CDATA[How to create the virtual env in the server of lab. In my group coursework for the advanced ML, I want to run the code of the first solution in this competition. The requirments wasn’t satisfied in the server, so I want to create virtual env to built such environment. This blog records the process of building envirment to run deep learning task. virtualenvIf your linux server already has the virtualenv module, you can use virtual env to create virtual environment. You can check it using pip list. In my try, I tried to install the virtualenv in the beginning. I found that the permmission is denied, since I don’t have the root access on this server supplied by teachers. I found the reason and solution in this issue. Therefore, I did another try which is the following one. Python -m venv12python3 -m venv envsource ./env/bin/activate This solution just needs you to have the Python in your system (any Linux has the Python within system). In this way, I can activate the virual environment and pip install the specific modules. 我的解决方案目标：python3.6 过程： python -m env 在python创建出来的虚拟环境中安装virtualenv 通过virtualenv创建对应python3.6版本的虚拟环境 Reference an issue on Github: Permission denied]]></content>
       <categories>
-          
-          <category> Kaggle </category>
-          
+        <category>Linux</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-            <tag> Deep Learning </tag>
-            
-            <tag> Kaggle </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Interview-1 QuantumBlack Data Science Intern</title>
-      <link href="/2019/04/15/Interview-1-QuantumBlack-Experience/"/>
-      <url>/2019/04/15/Interview-1-QuantumBlack-Experience/</url>
-      
-        <content type="html"><![CDATA[<p>记第一次在英国公司面试</p><h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><p>第一次面试，quantum black这个公司，面试官是两个小姐姐。公司整体人很好，刚进门的时候有小哥路过还打招呼问我，后来在餐厅等候的时候还有小哥问我吃不吃巧克力，公司整体氛围相当不错。面试官也特别友善。</p><p>面试开始先有一个简单的introduction，让面试官认识你。没有准备好这个brief introduction。</p><p>面试过程表现不太好。。。感觉一是因为英语不够熟练，刚开始不太能get到小姐姐的问题，表现不好。二是后面technical方面的问题的时候，我忘了一些模型的细节，后面详细写。</p><h2 id="case-part"><a href="#case-part" class="headerlink" title="case part"></a>case part</h2><p>第一部分是实际案例部分，案例问题是关于fraud detection。给定一组很大的银行的交易数据，such as 100million条，其中200条是诈骗交易，我们要进行诈骗交易的检测。</p><p>第一步让我构建feature，觉得能从之前的数据中构建出来什么feature。最开始没太理解，后来也没答好，确实不知道能构建什么feature</p><p>第二步让我建立模型来解决这个问题。我提出使用逻辑回归模型来进行预测。接着会来一连串的问题，为什么会选用逻辑回归来预测？ 我要如何训练和测试这个模型？</p><ul><li>关于loss function这一块，问我如何构建。 我说使用交叉熵，但是我忘了交叉熵的公式了。。。。</li><li>metric to evaluate 这个模型，我说可以使用confusion matrix。要求来画出混淆矩阵，紧张了一下没画出来，后来画出来了。问到了precision，recall和f值。结合案例又问了问题，问我应该重点关注哪个值，这里回答不好。。。</li><li>如何split training data set。这个数据严重不平衡，如何做。。。。我也不知道回答的好还是不好。。先说80 20 split，后来说可以使用cross validation来进行交叉检验。小姐姐针对这个问题提出疑问，可能有的fold没有fraud point。。。</li></ul><p>这部分整体感觉，有点崩，也有些超时。感觉这里应该有自己的独立思考，根据相应的案例进行变通，应该是要跟面试官进行discuss的，我没做好心理准备，导致被面试官牵着走，效果也不好。模型不应该一成不变，应该根据相应的case有不同变通。</p><h2 id="technical-part"><a href="#technical-part" class="headerlink" title="technical part"></a>technical part</h2><p>这一块不是case，是要问理论的部分。这一块刚开始其实还是比较自信的，因为自我感觉理论掌握的还不错。</p><ol><li><p>ROC curve<br>之前看过ROC curve，但是这次死活也想不起来。。。难受，这个东西业界用的比较多，之前看过一次，但是这次之前忘了看，实属失误</p></li><li><p>逻辑回归<br>这里小姐姐结合线性回归和逻辑回归来问我问题。 还好前几天看官网案例的时候看到逻辑回归用的比较多，提前准备了一下。这里主要看线性回归和逻辑回归的理解。分别问到了线性回归的方程表现形式，loss function是什么，梯度下降又是什么（这里画图来描述），如何使用梯度下降进行优化（不必要推导导数公式）。</p></li></ol><p>接着问了逻辑回归和线性回归之间的联系。时间限制，我写了一个公式，小姐姐知道了我的意思就开始下一个问题了。</p><ol><li><p>其他非线性分类的模型<br>我回答了 SVM，接着让我描述SVM和他的原理。我说svm基本状态是线性分类的，要做到非线性要用kernel。接着让我描述kernel，kernel是什么。这一块花的时间比较多，我有时候没有搞明白她的意思。其实kernel我也没有办法说的很清楚，这一块是个失误。</p></li><li><p>tree - ensemble<br>还好我提前也准备了这一块，集成学习这一块。可惜boosting部分忘记了细节，太紧张了没回答上来。</p></li></ol><p>bagging，我描述了bagging的idea。小姐姐针对bagging问了我问题，这些models是一个model吗，是不是不同。</p><p>boosting，描述的没有很清楚。我没讲清楚如何训练互补的model。。。。。。给data set赋予权重，每个数据都有不同的权重（最开始没讲清楚），然后讲如何通过一个$\alpha$来变换之前之后的权重。（太紧张了，又没有提前准备，没回答好）</p><p>之后时间到了，结束。</p><h2 id="经验教训"><a href="#经验教训" class="headerlink" title="经验教训"></a>经验教训</h2><ol><li>准备好开头的小介绍  *重要</li><li>练习好英语，case discuss部分要灵活变通，表现自己的思考  ****重要</li><li>ROC curve  *重要，忘记准备了</li><li>SVM kernel *重要，学会讲这个东西</li><li>boosting  *重要，忘记准备，本身会</li><li>技术的问题都问的很详细，不会问你深度学习相关的东西，就只是问你base model的问题。准备时候要有侧重点，还好我提前看过了官网上的往期project，对知道他应该更多的问传统机器学习模型部分。但是一些具体的细节需要更加深入的理解，达到能给别人讲的程度。  ****重要 </li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Kaggle Competition: Humpback Whale Identification]]></title>
+    <url>%2F2019%2F04%2F27%2FKaggle-Competition-Humpback-Whale-Identification%2F</url>
+    <content type="text"><![CDATA[Kaggle竞赛第一名方案解读 Description of Competition目的：构建算法识别鲸鱼个体 难点： 训练样本的严重不均衡 存在接近三分之一的无标注（new whale）数据 Some new terminology: Few-shot learning: what’s few shot learning 细粒度分类: that’s why we need mask. mask-CNN,什么是mask triplet loss: ？？？ SE-resneXt154: 一个新的分类模型 伪标签：？？ Pipeline： Input of the models RGB+mask Data Augmentation: 有人提出鲸鱼尾部不对称，翻转之后是新的类别 Reference kaggle competition: Humpback Whale Identification 机器之心: Kaggle第一名竞赛方案解读]]></content>
       <categories>
-          
-          <category> Others </category>
-          
+        <category>Kaggle</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Interview </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Gaussian Mixed Model(GMM) and EM algorithm</title>
-      <link href="/2019/04/14/Gaussian-Mixed-Model-GMM-and-EM-algorithm/"/>
-      <url>/2019/04/14/Gaussian-Mixed-Model-GMM-and-EM-algorithm/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Gaussian-Distribution"><a href="#Gaussian-Distribution" class="headerlink" title="Gaussian Distribution"></a>Gaussian Distribution</h2><h2 id="Mixed-Gaussian-Distribution"><a href="#Mixed-Gaussian-Distribution" class="headerlink" title="Mixed Gaussian Distribution"></a>Mixed Gaussian Distribution</h2><h2 id="Optimization-Method"><a href="#Optimization-Method" class="headerlink" title="Optimization Method"></a>Optimization Method</h2><h2 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h2><ol><li>知乎 <a href="https://zhuanlan.zhihu.com/p/30483076" target="_blank" rel="noopener">高斯混合模型(GMM)</a></li><li>知乎 <a href="https://zhuanlan.zhihu.com/p/31103654" target="_blank" rel="noopener">一文详解高斯混合模型原理</a></li><li>《统计学习方法》第九章 - EM算法及其推广——李航</li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+        <tag>Deep Learning</tag>
+        <tag>Kaggle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Interview-1 QuantumBlack Data Science Intern]]></title>
+    <url>%2F2019%2F04%2F15%2FInterview-1-QuantumBlack-Experience%2F</url>
+    <content type="text"><![CDATA[记第一次在英国公司面试 introduction第一次面试，quantum black这个公司，面试官是两个小姐姐。公司整体人很好，刚进门的时候有小哥路过还打招呼问我，后来在餐厅等候的时候还有小哥问我吃不吃巧克力，公司整体氛围相当不错。面试官也特别友善。 面试开始先有一个简单的introduction，让面试官认识你。没有准备好这个brief introduction。 面试过程表现不太好。。。感觉一是因为英语不够熟练，刚开始不太能get到小姐姐的问题，表现不好。二是后面technical方面的问题的时候，我忘了一些模型的细节，后面详细写。 case part第一部分是实际案例部分，案例问题是关于fraud detection。给定一组很大的银行的交易数据，such as 100million条，其中200条是诈骗交易，我们要进行诈骗交易的检测。 第一步让我构建feature，觉得能从之前的数据中构建出来什么feature。最开始没太理解，后来也没答好，确实不知道能构建什么feature 第二步让我建立模型来解决这个问题。我提出使用逻辑回归模型来进行预测。接着会来一连串的问题，为什么会选用逻辑回归来预测？ 我要如何训练和测试这个模型？ 关于loss function这一块，问我如何构建。 我说使用交叉熵，但是我忘了交叉熵的公式了。。。。 metric to evaluate 这个模型，我说可以使用confusion matrix。要求来画出混淆矩阵，紧张了一下没画出来，后来画出来了。问到了precision，recall和f值。结合案例又问了问题，问我应该重点关注哪个值，这里回答不好。。。 如何split training data set。这个数据严重不平衡，如何做。。。。我也不知道回答的好还是不好。。先说80 20 split，后来说可以使用cross validation来进行交叉检验。小姐姐针对这个问题提出疑问，可能有的fold没有fraud point。。。 这部分整体感觉，有点崩，也有些超时。感觉这里应该有自己的独立思考，根据相应的案例进行变通，应该是要跟面试官进行discuss的，我没做好心理准备，导致被面试官牵着走，效果也不好。模型不应该一成不变，应该根据相应的case有不同变通。 technical part这一块不是case，是要问理论的部分。这一块刚开始其实还是比较自信的，因为自我感觉理论掌握的还不错。 ROC curve之前看过ROC curve，但是这次死活也想不起来。。。难受，这个东西业界用的比较多，之前看过一次，但是这次之前忘了看，实属失误 逻辑回归这里小姐姐结合线性回归和逻辑回归来问我问题。 还好前几天看官网案例的时候看到逻辑回归用的比较多，提前准备了一下。这里主要看线性回归和逻辑回归的理解。分别问到了线性回归的方程表现形式，loss function是什么，梯度下降又是什么（这里画图来描述），如何使用梯度下降进行优化（不必要推导导数公式）。 接着问了逻辑回归和线性回归之间的联系。时间限制，我写了一个公式，小姐姐知道了我的意思就开始下一个问题了。 其他非线性分类的模型我回答了 SVM，接着让我描述SVM和他的原理。我说svm基本状态是线性分类的，要做到非线性要用kernel。接着让我描述kernel，kernel是什么。这一块花的时间比较多，我有时候没有搞明白她的意思。其实kernel我也没有办法说的很清楚，这一块是个失误。 tree - ensemble还好我提前也准备了这一块，集成学习这一块。可惜boosting部分忘记了细节，太紧张了没回答上来。 bagging，我描述了bagging的idea。小姐姐针对bagging问了我问题，这些models是一个model吗，是不是不同。 boosting，描述的没有很清楚。我没讲清楚如何训练互补的model。。。。。。给data set赋予权重，每个数据都有不同的权重（最开始没讲清楚），然后讲如何通过一个$\alpha$来变换之前之后的权重。（太紧张了，又没有提前准备，没回答好） 之后时间到了，结束。 经验教训 准备好开头的小介绍 *重要 练习好英语，case discuss部分要灵活变通，表现自己的思考 ****重要 ROC curve *重要，忘记准备了 SVM kernel *重要，学会讲这个东西 boosting *重要，忘记准备，本身会 技术的问题都问的很详细，不会问你深度学习相关的东西，就只是问你base model的问题。准备时候要有侧重点，还好我提前看过了官网上的往期project，对知道他应该更多的问传统机器学习模型部分。但是一些具体的细节需要更加深入的理解，达到能给别人讲的程度。 ****重要]]></content>
       <categories>
-          
-          <category> Machine Learning </category>
-          
+        <category>Others</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Note-2 Feature Engineering</title>
-      <link href="/2019/04/14/Note-2-Feature-Engineering/"/>
-      <url>/2019/04/14/Note-2-Feature-Engineering/</url>
-      
-        <content type="html"><![CDATA[<img src="http://ww1.sinaimg.cn/large/637f3c58gw1exd7mcjk7yj28k33uwaoe.jpg" class="fe_img"><h2 id="What’s-Feature-Engineering"><a href="#What’s-Feature-Engineering" class="headerlink" title="What’s Feature Engineering"></a>What’s Feature Engineering</h2><p>In the application of machine learning or the field of data science, to achieve better performance on prediction or classification, we should not only choose the most suitable algorithm/model, but also we should use the suitable features.</p><p>Definition in wiki:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Feature engineering is the process of using domain knowledge of the data to create features that make machine learning algorithms work.</span><br></pre></td></tr></table></figure></p><p>In a word, the feature engineering is to <strong>manually design what the input <code>x</code> should be and make our models work successfully</strong>.</p><h2 id="Importance"><a href="#Importance" class="headerlink" title="Importance"></a>Importance</h2><p>The features choice are important for our task.</p><ol><li><p>Better features make model have more flexibility.</p></li><li><p>Suitable features can use simple models</p></li><li><p>Achieve better performance </p></li></ol><h2 id="Sub-questions-of-Feature-Engineering"><a href="#Sub-questions-of-Feature-Engineering" class="headerlink" title="Sub-questions of Feature Engineering"></a>Sub-questions of Feature Engineering</h2><p>There are main three kinds of tasks in the feature engineering:</p><ol><li>Feature Construction<ul><li>Given a problem and raw data set, to construct the features using domain knowledge, is what I called feature construction. In this process, we should analyse our problem and convert it into mathematics problem, and come up with ideas what data we need and how to tackle this problem.</li></ul></li><li>Feature Extraction<ul><li>Extract the features from data set. Such as, in the document filtering or clustering task, to constuct the document/word vector, we use TF-IDF method to extract the information behind the documents. Another example in the CNN application, the kernels/filters in convolution layers are used to extract the features of images.</li></ul></li><li>Feature Selection<ul><li>Choose the most suitable features and feed them into our models. Ignore the non-relational features.</li></ul></li></ol><p>These three tasks sometimes will overlap and make people confused. They are basicall the good ways for me to understand, you can choose what your think to make yourself have a better understanding.</p><h2 id="How-to-do"><a href="#How-to-do" class="headerlink" title="How to do?"></a>How to do?</h2><p>A <strong>data science pipeline</strong> is basicall followed like this:</p><ol><li>given <strong>task</strong> and understand it</li><li>choose <strong>data set</strong></li><li><strong>pre-process</strong> the data set</li><li><strong>feature engineering</strong>(extract features)</li><li><strong>model</strong> data</li><li>analyse and evaluate</li></ol><p>Feature Engineering is a part of work in our data science project.</p><p>There are some ways to do features engineering:</p><ul><li>Brain storm: To come up the ideas of features which maybe useful for our project</li><li>Design features</li><li>Choose features</li><li></li></ul><p>(… TO BE CONTINUE)</p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ol><li>image and content of ideas from this <a href="http://www.csuldw.com/2015/10/24/2015-10-24%20feature%20engineering/" target="_blank" rel="noopener">blog</a></li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Interview</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Gaussian Mixed Model(GMM) and EM algorithm]]></title>
+    <url>%2F2019%2F04%2F14%2FGaussian-Mixed-Model-GMM-and-EM-algorithm%2F</url>
+    <content type="text"><![CDATA[IntroductionGaussian DistributionMixed Gaussian DistributionOptimization MethodReference： 知乎 高斯混合模型(GMM) 知乎 一文详解高斯混合模型原理 《统计学习方法》第九章 - EM算法及其推广——李航]]></content>
       <categories>
-          
-          <category> Machine Learning </category>
-          
+        <category>Machine Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-            <tag> Note </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Note-1: Linear Regression and Logistic Regression</title>
-      <link href="/2019/04/12/Note-1-Linear-Regression-and-Logistic-Regression/"/>
-      <url>/2019/04/12/Note-1-Linear-Regression-and-Logistic-Regression/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear Regression"></a>Linear Regression</h2><h3 id="What’s-Liear-Regression"><a href="#What’s-Liear-Regression" class="headerlink" title="What’s Liear Regression"></a>What’s Liear Regression</h3><p>Linear Regression is a approach to modelling the relationship between a scalar response( or a <strong>dependent variable</strong>) and one or more explanatory variables. </p><p>It is written as the linear formula: $f(x)=w^T x+b$</p><p>Given the features values of $n$ data points, we can train to get a linear model which can fit the data set properly. When the new data point is fed into the model, we can predict the value.</p><p>We are going to find the optimal weights value:</p><script type="math/tex; mode=display">(w^*,b^*)= \underset{(w,b)}{\operatorname{argmix}}\sum^m_{i=1}(f(x_i)-y_i)^2</script><p>The close form solution can be calculated through the derivative. Of course, you can also use Gradient descent to find the optimal parameters, but it’s not necessary.</p><h3 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h3><p>The advantages of linear regression are that it’s simple and easy to implement, and the time complexity is small.</p><h2 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h2><h3 id="Why-Logistic-Regression"><a href="#Why-Logistic-Regression" class="headerlink" title="Why Logistic Regression"></a>Why Logistic Regression</h3><p>Though the name of Logistic Regression includes <strong>regression</strong>, it’t not really a regression model. It’s for classification task. In this aspect, we can call <strong>Logistic Regression Analysis</strong>.</p><p>Since we have Linear Regression to do the <strong>regression</strong> task to predict the value for a new data set. Actually it can be used to predict the <strong>class</strong> for a given data. We can just set the threshold, if the predicted value is above the threshold, then it is classified into class 1, on the other hand, the data is classified into class 0.</p><p>However, there is a drawback when we use linear regression to do classification. We should set <strong>lots of thresholds</strong> according to different cases. And that’s why Logistic Regreesion came out.</p><h3 id="What’s-Logistic-Regression"><a href="#What’s-Logistic-Regression" class="headerlink" title="What’s Logistic Regression"></a>What’s Logistic Regression</h3><p><strong>Some key words in Logistic Regression</strong>:</p><ul><li>Hypothesis: Data points are Bernoulli distributed</li><li>Maximum likelihood to get the cost function </li><li>Gradient descent or Newton method to find the optimal solution</li></ul><p>Given the generalized linear model: $y=g^{-1}(w^Tx+b)$, the $g(\cdot)$ is called link function.</p><p>The $g$ function, from unit-stop function to sigmoid function, can convert the predicted value into corresponding class.</p><script type="math/tex; mode=display">sign(x)=\begin{cases}1,&x>0 \\ 0.5,&x=0 \cr 0,&x<0\end{cases}</script><p>Unit-step doesn’t have a very good property, it can easy to do derivativation. Then we use the sigmoid function. It has the format like this:</p><script type="math/tex; mode=display">y=\frac{1}{1+e^{-z}}</script><p><code>The sigmoid function squash the predicted value into 0 and 1, and now we can just set one threshold and do the classification task.</code></p><h3 id="Log-Odds-another-way-to-interprete-LR"><a href="#Log-Odds-another-way-to-interprete-LR" class="headerlink" title="Log Odds - another way to interprete LR"></a>Log Odds - another way to interprete LR</h3><p>Log odds is another way to interprete the logistic regression. For more details, see the chapter 3 in 《机器学习 周志华》.</p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>《机器学习》 周志华</li><li>Python数据科学 <a href="https://mp.weixin.qq.com/s/BJxdDz7DQg5QIWzzgNQrgA" target="_blank" rel="noopener">机器学习笔记</a></li><li><a href="https://www.zhihu.com/question/37031188" target="_blank" rel="noopener">最小二乘法的本质是什么</a></li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Note-2 Feature Engineering]]></title>
+    <url>%2F2019%2F04%2F14%2FNote-2-Feature-Engineering%2F</url>
+    <content type="text"><![CDATA[What’s Feature EngineeringIn the application of machine learning or the field of data science, to achieve better performance on prediction or classification, we should not only choose the most suitable algorithm/model, but also we should use the suitable features. Definition in wiki:1Feature engineering is the process of using domain knowledge of the data to create features that make machine learning algorithms work. In a word, the feature engineering is to manually design what the input x should be and make our models work successfully. ImportanceThe features choice are important for our task. Better features make model have more flexibility. Suitable features can use simple models Achieve better performance Sub-questions of Feature EngineeringThere are main three kinds of tasks in the feature engineering: Feature Construction Given a problem and raw data set, to construct the features using domain knowledge, is what I called feature construction. In this process, we should analyse our problem and convert it into mathematics problem, and come up with ideas what data we need and how to tackle this problem. Feature Extraction Extract the features from data set. Such as, in the document filtering or clustering task, to constuct the document/word vector, we use TF-IDF method to extract the information behind the documents. Another example in the CNN application, the kernels/filters in convolution layers are used to extract the features of images. Feature Selection Choose the most suitable features and feed them into our models. Ignore the non-relational features. These three tasks sometimes will overlap and make people confused. They are basicall the good ways for me to understand, you can choose what your think to make yourself have a better understanding. How to do?A data science pipeline is basicall followed like this: given task and understand it choose data set pre-process the data set feature engineering(extract features) model data analyse and evaluate Feature Engineering is a part of work in our data science project. There are some ways to do features engineering: Brain storm: To come up the ideas of features which maybe useful for our project Design features Choose features (… TO BE CONTINUE) Reference: image and content of ideas from this blog]]></content>
       <categories>
-          
-          <category> Machine Learning </category>
-          
+        <category>Machine Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-            <tag> Note </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Dynamic Programming in Maximum Subarray</title>
-      <link href="/2019/04/10/Dynamic-Programming-in-Maximum-Subarray/"/>
-      <url>/2019/04/10/Dynamic-Programming-in-Maximum-Subarray/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Dynamic-Programming-in-Maximum-Subarray"><a href="#Dynamic-Programming-in-Maximum-Subarray" class="headerlink" title="Dynamic Programming in Maximum Subarray"></a>Dynamic Programming in Maximum Subarray</h1><p>When I did the problem in Leetcode, the problem of <a href="https://leetcode.com/problems/maximum-subarray/" target="_blank" rel="noopener">53</a> is about the maximum subarray. I got in touch about the DP algorithm, which is very useful for solving this problem, converting the $O(n^3)$ to $O(n)$ complexity.</p><p>There are basically three approachs for this problem, the most time consuming one is the most straightforward and simple for user to come up with. Better one is the <code>DP algorithm</code>, which we are going to talk about.</p><h3 id="Problem-description"><a href="#Problem-description" class="headerlink" title="Problem description:"></a>Problem description:</h3><p>Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.</p><p><strong>Example</strong>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: [-2,1,-3,4,-1,2,1,-5,4],</span><br><span class="line">Output: 6</span><br><span class="line">Explanation: [4,-1,2,1] has the largest sum = 6.</span><br></pre></td></tr></table></figure></p><p><strong>Answer</strong>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def maxSubArray(self, nums: List[int]) -&gt; int:</span><br><span class="line">        <span class="string">''</span><span class="string">'</span></span><br><span class="line"><span class="string">        DP algorithm</span></span><br><span class="line"><span class="string">        '</span><span class="string">''</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        dp = [0]*(n)</span><br><span class="line">        dp[0] = nums[0]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(1,n):</span><br><span class="line">            dp[i] = max(dp[i-1] + nums[i], nums[i])</span><br><span class="line">        <span class="built_in">return</span> max(dp)</span><br></pre></td></tr></table></figure></p><p>See the video for more details:<br><div class="video-container"><iframe src="//www.youtube.com/embed/2MmGzdiKR9Y" frameborder="0" allowfullscreen></iframe></div></p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ol><li><a href="https://www.youtube.com/watch?v=2MmGzdiKR9Y" target="_blank" rel="noopener">Lecture</a> from Youtube. </li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+        <tag>Note</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Note-1: Linear Regression and Logistic Regression]]></title>
+    <url>%2F2019%2F04%2F12%2FNote-1-Linear-Regression-and-Logistic-Regression%2F</url>
+    <content type="text"><![CDATA[Linear RegressionWhat’s Liear RegressionLinear Regression is a approach to modelling the relationship between a scalar response( or a dependent variable) and one or more explanatory variables. It is written as the linear formula: $f(x)=w^T x+b$ Given the features values of $n$ data points, we can train to get a linear model which can fit the data set properly. When the new data point is fed into the model, we can predict the value. We are going to find the optimal weights value: (w^*,b^*)= \underset{(w,b)}{\operatorname{argmix}}\sum^m_{i=1}(f(x_i)-y_i)^2The close form solution can be calculated through the derivative. Of course, you can also use Gradient descent to find the optimal parameters, but it’s not necessary. AdvantageThe advantages of linear regression are that it’s simple and easy to implement, and the time complexity is small. Logistic RegressionWhy Logistic RegressionThough the name of Logistic Regression includes regression, it’t not really a regression model. It’s for classification task. In this aspect, we can call Logistic Regression Analysis. Since we have Linear Regression to do the regression task to predict the value for a new data set. Actually it can be used to predict the class for a given data. We can just set the threshold, if the predicted value is above the threshold, then it is classified into class 1, on the other hand, the data is classified into class 0. However, there is a drawback when we use linear regression to do classification. We should set lots of thresholds according to different cases. And that’s why Logistic Regreesion came out. What’s Logistic RegressionSome key words in Logistic Regression: Hypothesis: Data points are Bernoulli distributed Maximum likelihood to get the cost function Gradient descent or Newton method to find the optimal solution Given the generalized linear model: $y=g^{-1}(w^Tx+b)$, the $g(\cdot)$ is called link function. The $g$ function, from unit-stop function to sigmoid function, can convert the predicted value into corresponding class. sign(x)=\begin{cases} 1,&x>0 \\ 0.5,&x=0 \cr 0,&x]]></content>
       <categories>
-          
-          <category> Algorithm </category>
-          
+        <category>Machine Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Algorithm </tag>
-            
-            <tag> Dynamic Programming </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Computation Graph and Back Propagation</title>
-      <link href="/2019/04/09/Computation-Graph-and-Back-Propagation/"/>
-      <url>/2019/04/09/Computation-Graph-and-Back-Propagation/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Computation-Graph-Back-Propagation-Forward-and-Reversed-Auto-Differentiation"><a href="#Computation-Graph-Back-Propagation-Forward-and-Reversed-Auto-Differentiation" class="headerlink" title="Computation Graph, Back Propagation, Forward and Reversed Auto Differentiation"></a>Computation Graph, Back Propagation, Forward and Reversed Auto Differentiation</h1><p>计算图，反向传播，前向和后向自动求导。</p>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+        <tag>Note</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Dynamic Programming in Maximum Subarray]]></title>
+    <url>%2F2019%2F04%2F10%2FDynamic-Programming-in-Maximum-Subarray%2F</url>
+    <content type="text"><![CDATA[Dynamic Programming in Maximum SubarrayWhen I did the problem in Leetcode, the problem of 53 is about the maximum subarray. I got in touch about the DP algorithm, which is very useful for solving this problem, converting the $O(n^3)$ to $O(n)$ complexity. There are basically three approachs for this problem, the most time consuming one is the most straightforward and simple for user to come up with. Better one is the DP algorithm, which we are going to talk about. Problem description:Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum. Example:123Input: [-2,1,-3,4,-1,2,1,-5,4],Output: 6Explanation: [4,-1,2,1] has the largest sum = 6. Answer:1234567891011class Solution: def maxSubArray(self, nums: List[int]) -&gt; int: ''' DP algorithm ''' n = len(nums) dp = [0]*(n) dp[0] = nums[0] for i in range(1,n): dp[i] = max(dp[i-1] + nums[i], nums[i]) return max(dp) See the video for more details: Reference: Lecture from Youtube.]]></content>
       <categories>
-          
-          <category> Deep Learning </category>
-          
+        <category>Algorithm</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-            <tag> Deep Learning </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Print in Python3</title>
-      <link href="/2019/04/08/Print-in-Python3/"/>
-      <url>/2019/04/08/Print-in-Python3/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Print-in-Python3"><a href="#Print-in-Python3" class="headerlink" title="Print in Python3"></a>Print in Python3</h1><p>There are two kinds of ways to output to the screen, one is <code>sys.output.write</code> and <code>print</code>. When we use <code>print</code>, this built-in function actually calls the <code>stdout</code> function. </p><p><code>print</code> equals <code>stdout.write</code> plus <code>&quot;\n&quot;</code>. However, when we call <code>print</code>, we can change the optional parameter to print multi objects into a single line. </p><p>See the doc of <code>print</code>:</p><ul><li>print(*objects, sep=’ ‘, end=’\n’, file=sys.stdout, flush=False)</li></ul><p>To get the print without newline：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">"your output"</span>,end=<span class="string">" "</span>)</span><br></pre></td></tr></table></figure><hr><h4 id="My-use-experience"><a href="#My-use-experience" class="headerlink" title="My use experience:"></a>My use experience:</h4><p>See my exercise in the <a href="https://github.com/ShuoGH/datascience/blob/master/BinarySearchTree.ipynb" target="_blank" rel="noopener">binary search tree</a>, I want to travelsal the tree node and output into a single line.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    def preOrderTraversal(self,node):</span><br><span class="line">        <span class="string">''</span><span class="string">'</span></span><br><span class="line"><span class="string">        if you want to output the node in a single line:</span></span><br><span class="line"><span class="string">            - change the `print` to `print(node.data,end='</span> <span class="string">')</span></span><br><span class="line"><span class="string">        '</span><span class="string">''</span></span><br><span class="line">        <span class="keyword">if</span> node:</span><br><span class="line"><span class="comment">#             print(node.data)</span></span><br><span class="line">            <span class="built_in">print</span>(node.data,end=<span class="string">" "</span>)</span><br><span class="line">            self.preOrderTraversal(node.lchild)</span><br><span class="line">            self.preOrderTraversal(node.rchild)</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Dynamic Programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Computation Graph and Back Propagation]]></title>
+    <url>%2F2019%2F04%2F09%2FComputation-Graph-and-Back-Propagation%2F</url>
+    <content type="text"><![CDATA[Computation Graph, Back Propagation, Forward and Reversed Auto Differentiation计算图，反向传播，前向和后向自动求导。]]></content>
       <categories>
-          
-          <category> Python </category>
-          
+        <category>Deep Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Python </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>List in Python</title>
-      <link href="/2019/03/22/List-in-Python/"/>
-      <url>/2019/03/22/List-in-Python/</url>
-      
-        <content type="html"><![CDATA[<h1 id="List-and-For-loop-in-Python"><a href="#List-and-For-loop-in-Python" class="headerlink" title="List and For loop in Python"></a>List and For loop in Python</h1><p>This blog also include some information of the array in Numpy.</p><p>Now have a list of <code>[1,-1,1,1,1,-1]</code>, want to have another list of category corresponding to the <code>1</code> and <code>-1</code>.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; label=[1,-1,1,1,1,-1]</span><br><span class="line">&gt;&gt;&gt; cate =[<span class="string">'a'</span> <span class="keyword">if</span> i==1 <span class="keyword">else</span> <span class="string">'b'</span> <span class="keyword">for</span> i <span class="keyword">in</span> label]</span><br></pre></td></tr></table></figure><h2 id="set-value-using-the-filter-character-in-array-of-numpy"><a href="#set-value-using-the-filter-character-in-array-of-numpy" class="headerlink" title="set value using the filter character in array of numpy"></a>set value using the filter character in array of numpy</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import numpy as np</span><br><span class="line">&gt;&gt;&gt; label=np.array([1,-1,1,1,1,-1]) <span class="comment"># it must be the array</span></span><br><span class="line">&gt;&gt;&gt; cate=np.empty(len(label))</span><br><span class="line">&gt;&gt;&gt; cate[label==1]=11</span><br><span class="line">&gt;&gt;&gt; cate[label==-1]=-11</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+        <tag>Deep Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Print in Python3]]></title>
+    <url>%2F2019%2F04%2F08%2FPrint-in-Python3%2F</url>
+    <content type="text"><![CDATA[Print in Python3There are two kinds of ways to output to the screen, one is sys.output.write and print. When we use print, this built-in function actually calls the stdout function. print equals stdout.write plus &quot;\n&quot;. However, when we call print, we can change the optional parameter to print multi objects into a single line. See the doc of print: print(*objects, sep=’ ‘, end=’\n’, file=sys.stdout, flush=False) To get the print without newline： 1print("your output",end=" ") My use experience:See my exercise in the binary search tree, I want to travelsal the tree node and output into a single line. 12345678910 def preOrderTraversal(self,node): ''' if you want to output the node in a single line: - change the `print` to `print(node.data,end=' ') ''' if node:# print(node.data) print(node.data,end=" ") self.preOrderTraversal(node.lchild) self.preOrderTraversal(node.rchild)]]></content>
       <categories>
-          
-          <category> Python </category>
-          
+        <category>Python</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Python </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>LeetCode Note Two Sum</title>
-      <link href="/2019/03/21/LeetCode-Note-Two-Sum/"/>
-      <url>/2019/03/21/LeetCode-Note-Two-Sum/</url>
-      
-        <content type="html"><![CDATA[<p>I have tried two kinds of the algorithm.</p><ol><li><p>Do sum by loop and check whether the sum is equal to the target</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">    sumList = [nums[i]+item <span class="keyword">for</span> item <span class="keyword">in</span> nums[i+1:]]</span><br><span class="line">    <span class="keyword">for</span> sumNum <span class="keyword">in</span> sumList:</span><br><span class="line">        <span class="keyword">if</span> sumNum == target:</span><br><span class="line">            <span class="built_in">return</span> [i, sumList.index(sumNum)+i+1]</span><br></pre></td></tr></table></figure></li><li><p>Use the <code>index()</code> in List<br>By using this, the performance become much better.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">    targetNum = target-nums[i]</span><br><span class="line">    <span class="keyword">if</span> targetNum <span class="keyword">in</span> nums and nums.index(targetNum) != i:</span><br><span class="line">        <span class="built_in">return</span> i, nums.index(targetNum)</span><br></pre></td></tr></table></figure></li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[List in Python]]></title>
+    <url>%2F2019%2F03%2F22%2FList-in-Python%2F</url>
+    <content type="text"><![CDATA[List and For loop in PythonThis blog also include some information of the array in Numpy. Now have a list of [1,-1,1,1,1,-1], want to have another list of category corresponding to the 1 and -1. 12&gt;&gt;&gt; label=[1,-1,1,1,1,-1]&gt;&gt;&gt; cate =['a' if i==1 else 'b' for i in label] set value using the filter character in array of numpy12345&gt;&gt;&gt; import numpy as np&gt;&gt;&gt; label=np.array([1,-1,1,1,1,-1]) # it must be the array&gt;&gt;&gt; cate=np.empty(len(label))&gt;&gt;&gt; cate[label==1]=11&gt;&gt;&gt; cate[label==-1]=-11]]></content>
       <categories>
-          
-          <category> LeetCode </category>
-          
+        <category>Python</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> LeetCode </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Ensemble Learning</title>
-      <link href="/2019/03/20/Ensemble-Learning/"/>
-      <url>/2019/03/20/Ensemble-Learning/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Ensemble-Learning"><a href="#Ensemble-Learning" class="headerlink" title="Ensemble Learning"></a>Ensemble Learning</h1><h2 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h2><p>When to use bagging?</p><p>用于很强的model。</p><p>最容易overfitting的model其实不是神经网络，而是decision tree。如果你想，只要把树扎的足够深，甚至可以在training data上得到100%的准确率，但是那没有任何意义，只是overfitting而已。</p><p>Bagging就是将容易overfitting的一堆model结合起来，乱拳打死老师傅。随机森林就是在decision tree上进行bagging，将多个决策树组合起来组成随机森林。</p><p>How to get different classifier?</p><ul><li>Re-sampling your data set to form a new set </li><li>Re-weighting yoru data set to form a new set</li></ul><h2 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h2><p>用于比较弱的model。</p><p>Adaboost</p><p>Can convert the weak learner to strong learner(classifier).</p><p>我自己的一个简单Adaboost <a href="https://github.com/ShuoGH/datascience/blob/master/Adaboost.ipynb" target="_blank" rel="noopener">demo</a></p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>台湾大学李宏毅的<a href="https://www.youtube.com/watch?v=tH9FH1DH5n0" target="_blank" rel="noopener">视频</a></li><li>课程资源: <a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML16.html" target="_blank" rel="noopener">Hung-yi Lee</a></li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LeetCode Note Two Sum]]></title>
+    <url>%2F2019%2F03%2F21%2FLeetCode-Note-Two-Sum%2F</url>
+    <content type="text"><![CDATA[I have tried two kinds of the algorithm. Do sum by loop and check whether the sum is equal to the target 12345for i in range(len(nums)): sumList = [nums[i]+item for item in nums[i+1:]] for sumNum in sumList: if sumNum == target: return [i, sumList.index(sumNum)+i+1] Use the index() in ListBy using this, the performance become much better. 1234for i in range(len(nums)): targetNum = target-nums[i] if targetNum in nums and nums.index(targetNum) != i: return i, nums.index(targetNum)]]></content>
       <categories>
-          
-          <category> Machine Learning </category>
-          
+        <category>LeetCode</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Linux Use</title>
-      <link href="/2019/03/20/Linux-Use/"/>
-      <url>/2019/03/20/Linux-Use/</url>
-      
-        <content type="html"><![CDATA[<p>This blog records some basic commends about the use in Linux Server.</p><h1 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h1><p>SSH is used to make connection with the remote server.</p><h2 id="Connect-the-server"><a href="#Connect-the-server" class="headerlink" title="Connect the server"></a>Connect the server</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh xxx@xxx.ecs.soton.ac.uk</span><br></pre></td></tr></table></figure><h2 id="Close-the-connection"><a href="#Close-the-connection" class="headerlink" title="Close the connection"></a>Close the connection</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure><h1 id="SCP"><a href="#SCP" class="headerlink" title="SCP"></a>SCP</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SCP is <span class="keyword">for</span> transport between the <span class="built_in">local</span> and remote.</span><br></pre></td></tr></table></figure><h2 id="Transfer-the-entire-file-folder"><a href="#Transfer-the-entire-file-folder" class="headerlink" title="Transfer the entire file folder"></a>Transfer the entire file folder</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The formmer path is the `from` location, the latter one is the destination.</span><br><span class="line">scp -r xxx@xxx.ecs.soton.ac.uk:/home/sa2y18/mydocuments/4_dataMining ~/Desktop/</span><br></pre></td></tr></table></figure><h2 id="Transfer-a-single-file"><a href="#Transfer-a-single-file" class="headerlink" title="Transfer a single file"></a>Transfer a single file</h2><p>no <code>-r</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp xxx@xxx.ecs.soton.ac.uk:PATH LOCALPATH</span><br></pre></td></tr></table></figure></p><hr><h1 id="Use-Jupyter"><a href="#Use-Jupyter" class="headerlink" title="Use Jupyter"></a>Use Jupyter</h1><p>Run jupyter on the remote and open it from local port. You can follow the instruction: [<a href="http://fizzylogic.nl/2017/11/06/edit-jupyter-notebooks-over-ssh/" target="_blank" rel="noopener">http://fizzylogic.nl/2017/11/06/edit-jupyter-notebooks-over-ssh/</a>]<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --no-browser --port=8080  <span class="comment"># run on the remote machine</span></span><br><span class="line"></span><br><span class="line">ssh -N -L 8080:localhost:8080 xxx@xxx.ecs.soton.ac.uk  <span class="comment"># run in the local machine terminal</span></span><br></pre></td></tr></table></figure></p>]]></content>
-      
-      
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ensemble Learning]]></title>
+    <url>%2F2019%2F03%2F20%2FEnsemble-Learning%2F</url>
+    <content type="text"><![CDATA[Ensemble LearningBaggingWhen to use bagging? 用于很强的model。 最容易overfitting的model其实不是神经网络，而是decision tree。如果你想，只要把树扎的足够深，甚至可以在training data上得到100%的准确率，但是那没有任何意义，只是overfitting而已。 Bagging就是将容易overfitting的一堆model结合起来，乱拳打死老师傅。随机森林就是在decision tree上进行bagging，将多个决策树组合起来组成随机森林。 How to get different classifier? Re-sampling your data set to form a new set Re-weighting yoru data set to form a new set Boosting用于比较弱的model。 Adaboost Can convert the weak learner to strong learner(classifier). 我自己的一个简单Adaboost demo Reference 台湾大学李宏毅的视频 课程资源: Hung-yi Lee]]></content>
       <categories>
-          
-          <category> Linux </category>
-          
+        <category>Machine Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Linux </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Beyond Accuracy: Precision and Recall</title>
-      <link href="/2019/03/12/Beyond-Accuracy-Precision-and-Recall/"/>
-      <url>/2019/03/12/Beyond-Accuracy-Precision-and-Recall/</url>
-      
-        <content type="html"><![CDATA[<p>After training a model, there are some metrics to measure the performance of the model. The <code>accuracy</code> is the common one. Besides, there are other things to measure the performance.</p><p><strong>Given four cases of the results</strong>:<br>True positive (TP): actually positive, predictive is positive which is true<br>False positive (FP): actually negative, predictive is positive which is false (type 1 error)<br>True negative (TN): actually negative, predictive is negative which is true<br>False negative (FN): actually positive, predictive is negative which is false (type 2 error)</p><div class="table-container"><table><thead><tr><th style="text-align:left"></th><th style="text-align:right">True</th><th style="text-align:center">False</th></tr></thead><tbody><tr><td style="text-align:left">Positve</td><td style="text-align:right">TP</td><td style="text-align:center">FP</td></tr><tr><td style="text-align:left">Negative</td><td style="text-align:right">TN</td><td style="text-align:center">FN</td></tr></tbody></table></div><p>$ Precision = \frac{TP}{TP+FP} $<br>$ Recall = \frac{TP}{TP+FN} $</p>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux Use]]></title>
+    <url>%2F2019%2F03%2F20%2FLinux-Use%2F</url>
+    <content type="text"><![CDATA[This blog records some basic commends about the use in Linux Server. SSHSSH is used to make connection with the remote server. Connect the server1ssh xxx@xxx.ecs.soton.ac.uk Close the connection1exit SCP1SCP is for transport between the local and remote. Transfer the entire file folder12The formmer path is the `from` location, the latter one is the destination.scp -r xxx@xxx.ecs.soton.ac.uk:/home/sa2y18/mydocuments/4_dataMining ~/Desktop/ Transfer a single fileno -r1scp xxx@xxx.ecs.soton.ac.uk:PATH LOCALPATH Use JupyterRun jupyter on the remote and open it from local port. You can follow the instruction: [http://fizzylogic.nl/2017/11/06/edit-jupyter-notebooks-over-ssh/]123jupyter notebook --no-browser --port=8080 # run on the remote machinessh -N -L 8080:localhost:8080 xxx@xxx.ecs.soton.ac.uk # run in the local machine terminal]]></content>
       <categories>
-          
-          <category> Machine Learning </category>
-          
+        <category>Linux</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-            <tag> Performance Measurement </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hexo writing</title>
-      <link href="/2019/03/11/Hexo-writing/"/>
-      <url>/2019/03/11/Hexo-writing/</url>
-      
-        <content type="html"><![CDATA[<p>Sometimes you don’t want to see the blog in the first time as you haven’t finished it.<br>In this case, you can use the <code>draft</code>.</p><h1 id="Initialize-draft-and-publish"><a href="#Initialize-draft-and-publish" class="headerlink" title="Initialize draft and publish"></a>Initialize draft and publish</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new draft <span class="string">"draft name"</span></span><br><span class="line">$ <span class="comment">#before publishing, recommend to use Hexo clean</span></span><br><span class="line">$ <span class="comment"># hexo clean</span></span><br><span class="line">$ hexo publish <span class="string">"draft name"</span></span><br></pre></td></tr></table></figure><h1 id="Other-use-skills"><a href="#Other-use-skills" class="headerlink" title="Other use skills"></a>Other use skills</h1><p><strong> Add the link</strong><br><code>[words](link url)</code></p>]]></content>
-      
-      
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Beyond Accuracy: Precision and Recall]]></title>
+    <url>%2F2019%2F03%2F12%2FBeyond-Accuracy-Precision-and-Recall%2F</url>
+    <content type="text"><![CDATA[After training a model, there are some metrics to measure the performance of the model. The accuracy is the common one. Besides, there are other things to measure the performance. Given four cases of the results:True positive (TP): actually positive, predictive is positive which is trueFalse positive (FP): actually negative, predictive is positive which is false (type 1 error)True negative (TN): actually negative, predictive is negative which is trueFalse negative (FN): actually positive, predictive is negative which is false (type 2 error) True False Positve TP FP Negative TN FN $ Precision = \frac{TP}{TP+FP} $$ Recall = \frac{TP}{TP+FN} $]]></content>
       <categories>
-          
-          <category> Hexo </category>
-          
+        <category>Machine Learning</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Hexo </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Git add ignore</title>
-      <link href="/2019/03/11/Git-add-ignore/"/>
-      <url>/2019/03/11/Git-add-ignore/</url>
-      
-        <content type="html"><![CDATA[<h1 id="What’s-gitignore-for"><a href="#What’s-gitignore-for" class="headerlink" title="What’s gitignore for:"></a>What’s gitignore for:</h1><p>The files which you don’t want to upload or list in your git history, such as “.DS_store” or some other data files. You can achieve this by adding the <code>.gitignore</code> file into your git repo. </p><h1 id="Mac-DS-store"><a href="#Mac-DS-store" class="headerlink" title="Mac .DS_store"></a>Mac .DS_store</h1><p>gitignore can set globally or just add a single file into your repo. You can find the doc in this <a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">link</a>.</p><ul><li>所有空行或者以注释符号 ＃ 开头的行都会被 git 忽略，空行可以为了可读性分隔段落，# 表明注释。</li><li>第一个 / 会匹配路径的根目录，举个栗子，”/*.html”会匹配”index.html”，而不是”d/index.html”。</li><li>通配符 <em> 匹配任意个任意字符，? 匹配一个任意字符。需要注意的是通配符不会匹配文件路径中的 /，举个栗子，”d/</em>.html”会匹配”d/index.html”，但不会匹配”d/a/b/c/index.html”。</li><li>两个连续的星号 ** 有特殊含义：<ul><li>以 <strong>/ 开头表示匹配所有的文件夹，例如 </strong>/test.md 匹配所有的test.md文件。</li><li>以 /<strong> 结尾表示匹配文件夹内所有内容，例如 a/</strong> 匹配文件夹a中所有内容。</li><li>连续星号 <strong> 前后分别被 / 夹住表示匹配0或者多层文件夹，例如 a/</strong>/b 匹配到 a/b 、a/x/b 、a/x/y/b 等。</li></ul></li><li>前缀 ! 的模式表示如果前面匹配到被忽略，则重新添加回来。如果匹配到的父文件夹还是忽略状态，该文件还是保持忽略状态。如果路径名第一个字符为 ! ，则需要在前面增加 \ 进行转义。</li></ul><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul><li><a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">git doc</a></li><li><a href="https://orianna-zzo.github.io/sci-tech/2018-01/mac%E4%B8%ADgit%E5%BF%BD%E7%95%A5.ds_store%E6%96%87%E4%BB%B6/" target="_blank" rel="noopener">Mac中Git忽略.DS_Store文件</a></li></ul>]]></content>
-      
-      
+      <tags>
+        <tag>Machine Learning</tag>
+        <tag>Performance Measurement</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo writing]]></title>
+    <url>%2F2019%2F03%2F11%2FHexo-writing%2F</url>
+    <content type="text"><![CDATA[Sometimes you don’t want to see the blog in the first time as you haven’t finished it.In this case, you can use the draft. Initialize draft and publish1234$ hexo new draft "draft name"$ #before publishing, recommend to use Hexo clean$ # hexo clean$ hexo publish "draft name" Other use skills Add the link[words](link url)]]></content>
       <categories>
-          
-          <category> Git </category>
-          
+        <category>Hexo</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Git </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Git Use</title>
-      <link href="/2019/03/10/Git-Use/"/>
-      <url>/2019/03/10/Git-Use/</url>
-      
-        <content type="html"><![CDATA[<p>Quick guide book:</p><h1 id="Clone-repo"><a href="#Clone-repo" class="headerlink" title="Clone repo"></a>Clone repo</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span></span><br></pre></td></tr></table></figure><h1 id="Initialize-new-repo"><a href="#Initialize-new-repo" class="headerlink" title="Initialize new repo"></a>Initialize new repo</h1><p> Initialize and push it to a new repo in Github<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br><span class="line">$ git remote add origin https://github.com/ShuoGH/REPONAME.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># add the repo in the github website in advance</span></span><br><span class="line">$ git push -u origin master   <span class="comment"># first to push </span></span><br><span class="line">$ git push origin master  <span class="comment">#after the first time</span></span><br></pre></td></tr></table></figure></p><h1 id="Branch"><a href="#Branch" class="headerlink" title="Branch"></a>Branch</h1><p>Some commend about the branches:</p><h2 id="List-branches"><a href="#List-branches" class="headerlink" title="List branches:"></a>List branches:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure><h2 id="Check-out-branch"><a href="#Check-out-branch" class="headerlink" title="Check out branch"></a>Check out branch</h2><p>If you want to checkout to a branch directly, just use:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout origin/xxbranch</span><br></pre></td></tr></table></figure></p><p>To create a local branch,<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b xx origin/xxbranch</span><br><span class="line"><span class="comment"># or use </span></span><br><span class="line">git checkout -t origin/xxbranch` <span class="comment"># it will create a branch with same name.</span></span><br><span class="line"><span class="comment"># or use `fetch`</span></span><br><span class="line">git fetch origin xxbranch:xx <span class="comment"># (in this way, it won't checkout to the new branch automatically)</span></span><br></pre></td></tr></table></figure></p><h2 id="Delete-branch"><a href="#Delete-branch" class="headerlink" title="Delete branch"></a>Delete branch</h2><p>To delete the remote branch:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;remote_name&gt; --delete &lt;branch_name&gt;</span><br></pre></td></tr></table></figure></p><h1 id="Operation-on-Files"><a href="#Operation-on-Files" class="headerlink" title="Operation on Files"></a>Operation on Files</h1><p>To rm the local file and make the change into git:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git rm xx </span><br><span class="line">git commit -m <span class="string">"xxxx"</span></span><br></pre></td></tr></table></figure></p><h1 id="Show-the-git-tree"><a href="#Show-the-git-tree" class="headerlink" title="Show the git tree"></a>Show the git tree</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --graph --pretty=oneline --abbrev-commit</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Git add ignore]]></title>
+    <url>%2F2019%2F03%2F11%2FGit-add-ignore%2F</url>
+    <content type="text"><![CDATA[What’s gitignore for:The files which you don’t want to upload or list in your git history, such as “.DS_store” or some other data files. You can achieve this by adding the .gitignore file into your git repo. Mac .DS_storegitignore can set globally or just add a single file into your repo. You can find the doc in this link. 所有空行或者以注释符号 ＃ 开头的行都会被 git 忽略，空行可以为了可读性分隔段落，# 表明注释。 第一个 / 会匹配路径的根目录，举个栗子，”/*.html”会匹配”index.html”，而不是”d/index.html”。 通配符 匹配任意个任意字符，? 匹配一个任意字符。需要注意的是通配符不会匹配文件路径中的 /，举个栗子，”d/.html”会匹配”d/index.html”，但不会匹配”d/a/b/c/index.html”。 两个连续的星号 ** 有特殊含义： 以 / 开头表示匹配所有的文件夹，例如 /test.md 匹配所有的test.md文件。 以 / 结尾表示匹配文件夹内所有内容，例如 a/ 匹配文件夹a中所有内容。 连续星号 前后分别被 / 夹住表示匹配0或者多层文件夹，例如 a//b 匹配到 a/b 、a/x/b 、a/x/y/b 等。 前缀 ! 的模式表示如果前面匹配到被忽略，则重新添加回来。如果匹配到的父文件夹还是忽略状态，该文件还是保持忽略状态。如果路径名第一个字符为 ! ，则需要在前面增加 \ 进行转义。 Reference git doc Mac中Git忽略.DS_Store文件]]></content>
       <categories>
-          
-          <category> Git </category>
-          
+        <category>Git</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Git </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hello World</title>
-      <link href="/2019/03/10/hello-world/"/>
-      <url>/2019/03/10/hello-world/</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>If you want to write a draft </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new draft <span class="string">"My New Draft"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br><span class="line">or</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">or </span><br><span class="line">$ hexo g</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br><span class="line">or </span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure><p>Before deployment, you’d better use<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure></p><h3 id="Change-the-display-in-Home-page"><a href="#Change-the-display-in-Home-page" class="headerlink" title="Change the display in Home page"></a>Change the display in Home page</h3><p>If you don’t want to show the full article, it can be realised by modifying the setting<br><code>auto_excerpt</code> in the <code>_config.yml</code> file.</p><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-      
-      
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Git Use]]></title>
+    <url>%2F2019%2F03%2F10%2FGit-Use%2F</url>
+    <content type="text"><![CDATA[Quick guide book: Clone repo1$ git clone Initialize new repo Initialize and push it to a new repo in Github123456$ git init$ git remote add origin https://github.com/ShuoGH/REPONAME.git# add the repo in the github website in advance$ git push -u origin master # first to push $ git push origin master #after the first time BranchSome commend about the branches: List branches:1git branch -a Check out branchIf you want to checkout to a branch directly, just use:1git checkout origin/xxbranch To create a local branch,12345git checkout -b xx origin/xxbranch# or use git checkout -t origin/xxbranch` # it will create a branch with same name.# or use `fetch`git fetch origin xxbranch:xx # (in this way, it won't checkout to the new branch automatically) Delete branchTo delete the remote branch:1git push &lt;remote_name&gt; --delete &lt;branch_name&gt; Operation on FilesTo rm the local file and make the change into git:12git rm xx git commit -m "xxxx" Show the git tree1git log --graph --pretty=oneline --abbrev-commit]]></content>
       <categories>
-          
-          <category> Hexo </category>
-          
+        <category>Git</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Hexo </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-  
-  
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2019%2F03%2F10%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" If you want to write a draft 1$ hexo new draft "My New Draft" More info: Writing Run server123$ hexo serveror$ hexo s More info: Server Generate static files123$ hexo generateor $ hexo g More info: Generating Deploy to remote sites123$ hexo deployor $ hexo d Before deployment, you’d better use1$ hexo clean Change the display in Home pageIf you don’t want to show the full article, it can be realised by modifying the settingauto_excerpt in the _config.yml file. More info: Deployment]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
 </search>
