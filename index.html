@@ -585,7 +585,7 @@
                 
               
 
-              <time title="Created: 2019-05-27 16:12:58 / Modified: 16:15:11" itemprop="dateCreated datePublished" datetime="2019-05-27T16:12:58+01:00">2019-05-27</time>
+              <time title="Created: 2019-05-27 16:12:58 / Modified: 17:12:27" itemprop="dateCreated datePublished" datetime="2019-05-27T16:12:58+01:00">2019-05-27</time>
             
 
             
@@ -651,8 +651,8 @@
 <p>By replacing the $-\frac{1}{2\sigma^2}$ with $\lambda$ in the Gaussian Kernel, we can get the RBF kernel, which can be express as $\exp \left(-\gamma|\boldsymbol{x}-\boldsymbol{y}|^{2}\right)$.</p>
 <p><strong>Note</strong> that the feature vector that corresponds to the Gaussian kernel has infinite dimensionality.</p>
 <h2 id="Kernel-Tricks"><a href="#Kernel-Tricks" class="headerlink" title="Kernel Tricks"></a>Kernel Tricks</h2><p>So, what is kernel?</p>
-<p>In machine learning, a “<strong>kernel</strong>” is usually used to refer to the kernel trick, a method of using a linear classifier to solve a non-linear problem. The kernel function implicitly defined the mapping which maps the low-dimensionality to high dimensionality.</p>
-<p>We can therefore work directly in terms of kernels and avoid the explicit introduction of the feature vector $ \phi(x)$,</p>
+<p>In machine learning, a “<strong>kernel</strong>” is usually used to refer to the kernel trick, a method of using a linear classifier to solve a non-linear problem. </p>
+<p>The kernel trick allows us to map data into high-dimensional feature space $\boldsymbol{x} \rightarrow \phi(\boldsymbol{x})$. This can be carried out for sufficiently simple machines where parameter optimisation involve the dot product $\phi^{\mathbf{T}}(\boldsymbol{x}) \phi(\boldsymbol{y})$. The kernel function is positive semi-definite and the decomposition is always possible(see the property in the end of this blog). In fact, we never need to explicitly calculate the extended features $\phi(\boldsymbol{x})$. This often makes working in the extended feature space very efficient as $K(\boldsymbol{x},\boldsymbol{y})$ may be quick to calculate. </p>
 <h2 id="Constructing-Kernels"><a href="#Constructing-Kernels" class="headerlink" title="Constructing Kernels"></a>Constructing Kernels</h2><p>One approach to build valid kernel is to choose a feature space mapping $\phi(x)$ and use it to find the corresponding kernel. Here the kernel function is defined for one-dimensional input space by</p>
 <script type="math/tex; mode=display">k\left(x, x^{\prime}\right)=\phi(x)^{\mathrm{T}} \boldsymbol{\phi}\left(x^{\prime}\right)=\sum_{i=1}^{M} \phi_{i}(x) \phi_{i}\left(x^{\prime}\right)</script><p>Where $\phi(x)$ is the basis function.</p>
 <p>Another approach is to construct the kernel directly. In this way, we should have a method to test whether the kernel we build is valid. A <strong>necessary and sufficient condition</strong> for a function $k(x, x)$ to be a valid kernel (Shawe-Taylor and Cristianini, 2004) is that the Gram matrix K,whose elements are given by $k(x_n, x_m)$, should be positive semidefinite for all possible choices of the set ${x_n}$. Note that a positive semidefinite matrix is not the same thing as a matrix whose elements are nonnegative.</p>
