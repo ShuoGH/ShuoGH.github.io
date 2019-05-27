@@ -402,12 +402,24 @@
                 
               
 
-              <time title="Created: 2019-05-26 23:38:50 / Modified: 23:44:19" itemprop="dateCreated datePublished" datetime="2019-05-26T23:38:50+01:00">2019-05-26</time>
+              <time title="Created: 2019-05-26 23:38:50" itemprop="dateCreated datePublished" datetime="2019-05-26T23:38:50+01:00">2019-05-26</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-27 11:03:07" itemprop="dateModified" datetime="2019-05-27T11:03:07+01:00">2019-05-27</time>
               
             
           </span>
@@ -470,12 +482,13 @@
 <p>Maximizing the margin is equivalent to </p>
 <script type="math/tex; mode=display">\min _{\boldsymbol{w}, b} \frac{1}{2}\|\boldsymbol{w}\|^{2}</script><script type="math/tex; mode=display">\text { s.t. } \quad y_{i}\left(\boldsymbol{w}^{\mathrm{T}} \boldsymbol{x}_{i}+b\right) \geqslant 1, \quad i=1,2, \ldots, m</script><h2 id="Lagrangian"><a href="#Lagrangian" class="headerlink" title="Lagrangian"></a>Lagrangian</h2><p>To solve the optimization problem, apply the Lagrangian multiplier, and we get the form of the question:</p>
 <script type="math/tex; mode=display">L(w,b,\alpha)=\frac{1}{2}\|w\|^2-\sum_i^p \alpha_i(y_i(w^Tx_i+b-1))</script><script type="math/tex; mode=display">\begin{array}{l}{\text { s.t. } \sum_{i=1}^{m} \alpha_{i} y_{i}=0} \\ {\alpha_{i} \geqslant 0, \quad i=1,2, \ldots, m}\end{array}</script><h2 id="Dual-Form"><a href="#Dual-Form" class="headerlink" title="Dual Form"></a>Dual Form</h2><p>Before applying the kernel functions, the dual representations are introduced.</p>
-<p>Using the lagrandian multiplier, we convert our problem from $\min _{\boldsymbol{w}, b} \frac{1}{2}|\boldsymbol{w}|^{2}$ to $\min _{\boldsymbol{w}, b}\max_{\boldsymbol{\alpha}} L(w,b,\alpha)$.</p>
-<p>Calculating the partial derivative of $w$ and $b$, and make them equal to $0$, we get the the </p>
+<p>Using the lagrandian multiplier, we convert our problem from $\min _{\boldsymbol{w}, b} \frac{1}{2}|\boldsymbol{w}|^{2}$ to $\min _{\boldsymbol{w}, b}\max_{\boldsymbol{\alpha}} L(w,b,\alpha)$. And it is equivalent to  </p>
+<script type="math/tex; mode=display">\max_{\boldsymbol{\alpha}}\{ \min _{\boldsymbol{w}, b} L(w,b,\alpha)\}</script><p>To minimize the inner loss function, we calculate the partial derivative of $w$ and $b$, and make them equal to $0$, an then we get the the </p>
 <script type="math/tex; mode=display">\begin{aligned} \boldsymbol{w}=& \sum_{i=1}^{m} \alpha_{i} y_{i} \boldsymbol{x}_{i} \\ 0 &=\sum_{i=1}^{m} \alpha_{i} y_{i} \end{aligned}</script><p>Substitute the results back to the origin $L(w,b,\alpha)$ loss function, now the dual representation is </p>
 <script type="math/tex; mode=display">\max _{\boldsymbol{\alpha}} \left ( \sum_{i=1}^{m} \alpha_{i}-\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j} \boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j} \right)</script><script type="math/tex; mode=display">\begin{array}{l}{\text { s.t. } \sum_{i=1}^{m} \alpha_{i} y_{i}=0} \\ {\alpha_{i} \geqslant 0, \quad i=1,2, \ldots, m}\end{array}</script><p>Then we can apply the kernel.</p>
 <p>Assum the kernel function which has the form like this </p>
-<script type="math/tex; mode=display">\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\left\langle\phi\left(\boldsymbol{x}_{i}\right), \phi\left(\boldsymbol{x}_{j}\right)\right\rangle=\phi\left(\boldsymbol{x}_{i}\right)^{\mathrm{T}} \phi\left(\boldsymbol{x}_{j}\right)</script><p>Write the matrix form $K=\boldsymbol\phi(\boldsymbol x)\boldsymbol\phi(\boldsymbol y)$, and rewrite the dual representation as the matrix form $\boldsymbol\alpha-\frac{1}{2}\boldsymbol\alpha^T\boldsymbol\alpha K$</p>
+<script type="math/tex; mode=display">\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\left\langle\phi\left(\boldsymbol{x}_{i}\right), \phi\left(\boldsymbol{x}_{j}\right)\right\rangle=\phi\left(\boldsymbol{x}_{i}\right)^{\mathrm{T}} \phi\left(\boldsymbol{x}_{j}\right)</script><p>Write the matrix form $K=\boldsymbol\phi(\boldsymbol x)\boldsymbol\phi(\boldsymbol y)$, and rewrite the dual representation as the matrix form </p>
+<script type="math/tex; mode=display">\boldsymbol c^T \boldsymbol\alpha-\frac{1}{2}\boldsymbol\alpha^T K \boldsymbol\alpha</script><p>with the constraints.</p>
 <hr>
 <p>The advantage of using the kernel trick: blog <a href>Kernel Function</a></p>
 <p>Some common form of kernels: blog <a href>Kernel Function</a></p>
