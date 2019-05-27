@@ -96,25 +96,26 @@
 
 
 
-  <meta name="description" content="Ensemble LearningBaggingWhen to use bagging? 用于很强的model。 最容易overfitting的model其实不是神经网络，而是decision tree。如果你想，只要把树扎的足够深，甚至可以在training data上得到100%的准确率，但是那没有任何意义，只是overfitting而已。 Bagging就是将容易overfitting的一堆">
-<meta name="keywords" content="Machine Learning">
+  <meta name="description" content="The Structure of the LSTM, which is shown in the image above. Items in the Structure Inputs $\boldsymbol{z}(t)=(\boldsymbol{x}(t), \boldsymbol{y}(t-1))$ The input is combined the input $x(t)$ and the">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ensemble Learning">
-<meta property="og:url" content="http://yoursite.com/2019/03/20/Ensemble-Learning/index.html">
+<meta property="og:title" content="LSTM">
+<meta property="og:url" content="http://yoursite.com/2019/05/27/LSTM/index.html">
 <meta property="og:site_name" content="We Need to Go Deeper">
-<meta property="og:description" content="Ensemble LearningBaggingWhen to use bagging? 用于很强的model。 最容易overfitting的model其实不是神经网络，而是decision tree。如果你想，只要把树扎的足够深，甚至可以在training data上得到100%的准确率，但是那没有任何意义，只是overfitting而已。 Bagging就是将容易overfitting的一堆">
+<meta property="og:description" content="The Structure of the LSTM, which is shown in the image above. Items in the Structure Inputs $\boldsymbol{z}(t)=(\boldsymbol{x}(t), \boldsymbol{y}(t-1))$ The input is combined the input $x(t)$ and the">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-27T16:26:13.821Z">
+<meta property="og:image" content="https://lh3.googleusercontent.com/1a3JemZmq0O2oLdO-PWxDmmCKtqiIpYQv5mZHqjn7qyLUyd3uKrEMG95JIguwhtjGubeF2aSeEhuIKeD9YpZUabM4w8tjLQbQuieqyjwAetTlAYPdoED31q2UIMf6OrrL7V22qj3HMVkd_uTrYvUDMWYSl-ii3N95xHYoAVs8yzOrXGM7DVj_6VxGINnM-pGU1QseXuvyF0he3C4YQd-ksUnnlTfDAAQjxBcubfCpIMbi5StM-F1zq8GJuGqJq4AzbNv5FP8SZX17xbV-RpGZdMhMCIVLHrIIR2QdRrYLivdKz-9v9IULAxt8vv96rBaT8yn3KRDr_Ir5odQjnW6gVISynBsKJ4xMFMqMwISq-PGn75nzkXKZqr3aPO9nqm6uMe13lFQ1iW4-aXiHQcNIjLhUiufOIbmBuLoNxoiEfZXF-nFkKp7QNWoCcAfkzuyJDHD81B6HIE2e1eQM-bLdomLShk8f7nqJo4x7RoNk3Sw_pbXTkO4rYS7prEabrZsjqRjF15EQYU74jyRuNDU3AD8shfn1S0NPEhF3hsQILBvm67RJyQePWhhcgsAxPnh4ggVDpmaoxWxRzNTttsVd89j0SZ5w5OdKKs95ZDMOZob2MAp3cvRbyYZqrupydx2piO8D8hp0TI2BMOOELPZcvRFVfDepA=w1476-h1078-no">
+<meta property="og:updated_time" content="2019-05-27T22:31:55.570Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ensemble Learning">
-<meta name="twitter:description" content="Ensemble LearningBaggingWhen to use bagging? 用于很强的model。 最容易overfitting的model其实不是神经网络，而是decision tree。如果你想，只要把树扎的足够深，甚至可以在training data上得到100%的准确率，但是那没有任何意义，只是overfitting而已。 Bagging就是将容易overfitting的一堆">
+<meta name="twitter:title" content="LSTM">
+<meta name="twitter:description" content="The Structure of the LSTM, which is shown in the image above. Items in the Structure Inputs $\boldsymbol{z}(t)=(\boldsymbol{x}(t), \boldsymbol{y}(t-1))$ The input is combined the input $x(t)$ and the">
+<meta name="twitter:image" content="https://lh3.googleusercontent.com/1a3JemZmq0O2oLdO-PWxDmmCKtqiIpYQv5mZHqjn7qyLUyd3uKrEMG95JIguwhtjGubeF2aSeEhuIKeD9YpZUabM4w8tjLQbQuieqyjwAetTlAYPdoED31q2UIMf6OrrL7V22qj3HMVkd_uTrYvUDMWYSl-ii3N95xHYoAVs8yzOrXGM7DVj_6VxGINnM-pGU1QseXuvyF0he3C4YQd-ksUnnlTfDAAQjxBcubfCpIMbi5StM-F1zq8GJuGqJq4AzbNv5FP8SZX17xbV-RpGZdMhMCIVLHrIIR2QdRrYLivdKz-9v9IULAxt8vv96rBaT8yn3KRDr_Ir5odQjnW6gVISynBsKJ4xMFMqMwISq-PGn75nzkXKZqr3aPO9nqm6uMe13lFQ1iW4-aXiHQcNIjLhUiufOIbmBuLoNxoiEfZXF-nFkKp7QNWoCcAfkzuyJDHD81B6HIE2e1eQM-bLdomLShk8f7nqJo4x7RoNk3Sw_pbXTkO4rYS7prEabrZsjqRjF15EQYU74jyRuNDU3AD8shfn1S0NPEhF3hsQILBvm67RJyQePWhhcgsAxPnh4ggVDpmaoxWxRzNTttsVd89j0SZ5w5OdKKs95ZDMOZob2MAp3cvRbyYZqrupydx2piO8D8hp0TI2BMOOELPZcvRFVfDepA=w1476-h1078-no">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/20/Ensemble-Learning/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/27/LSTM/">
 
 
 
@@ -124,7 +125,7 @@
   };
 </script>
 
-  <title>Ensemble Learning | We Need to Go Deeper</title>
+  <title>LSTM | We Need to Go Deeper</title>
   
 
 
@@ -361,7 +362,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/Ensemble-Learning/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/LSTM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shuo An">
@@ -378,7 +379,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Ensemble Learning
+          <h1 class="post-title" itemprop="name headline">LSTM
 
               
             
@@ -404,46 +405,16 @@
                 
               
 
-              <time title="Created: 2019-03-20 18:22:54" itemprop="dateCreated datePublished" datetime="2019-03-20T18:22:54+00:00">2019-03-20</time>
+              <time title="Created: 2019-05-27 23:10:21 / Modified: 23:31:55" itemprop="dateCreated datePublished" datetime="2019-05-27T23:10:21+01:00">2019-05-27</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-05-27 17:26:13" itemprop="dateModified" datetime="2019-05-27T17:26:13+01:00">2019-05-27</time>
               
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -480,23 +451,29 @@
       
 
       
-        <h1 id="Ensemble-Learning"><a href="#Ensemble-Learning" class="headerlink" title="Ensemble Learning"></a>Ensemble Learning</h1><h2 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h2><p>When to use bagging?</p>
-<p>用于很强的model。</p>
-<p>最容易overfitting的model其实不是神经网络，而是decision tree。如果你想，只要把树扎的足够深，甚至可以在training data上得到100%的准确率，但是那没有任何意义，只是overfitting而已。</p>
-<p>Bagging就是将容易overfitting的一堆model结合起来，乱拳打死老师傅。随机森林就是在decision tree上进行bagging，将多个决策树组合起来组成随机森林。</p>
-<p>How to get different classifier?</p>
-<ul>
-<li>Re-sampling your data set to form a new set </li>
-<li>Re-weighting yoru data set to form a new set</li>
+        <p><img src="https://lh3.googleusercontent.com/1a3JemZmq0O2oLdO-PWxDmmCKtqiIpYQv5mZHqjn7qyLUyd3uKrEMG95JIguwhtjGubeF2aSeEhuIKeD9YpZUabM4w8tjLQbQuieqyjwAetTlAYPdoED31q2UIMf6OrrL7V22qj3HMVkd_uTrYvUDMWYSl-ii3N95xHYoAVs8yzOrXGM7DVj_6VxGINnM-pGU1QseXuvyF0he3C4YQd-ksUnnlTfDAAQjxBcubfCpIMbi5StM-F1zq8GJuGqJq4AzbNv5FP8SZX17xbV-RpGZdMhMCIVLHrIIR2QdRrYLivdKz-9v9IULAxt8vv96rBaT8yn3KRDr_Ir5odQjnW6gVISynBsKJ4xMFMqMwISq-PGn75nzkXKZqr3aPO9nqm6uMe13lFQ1iW4-aXiHQcNIjLhUiufOIbmBuLoNxoiEfZXF-nFkKp7QNWoCcAfkzuyJDHD81B6HIE2e1eQM-bLdomLShk8f7nqJo4x7RoNk3Sw_pbXTkO4rYS7prEabrZsjqRjF15EQYU74jyRuNDU3AD8shfn1S0NPEhF3hsQILBvm67RJyQePWhhcgsAxPnh4ggVDpmaoxWxRzNTttsVd89j0SZ5w5OdKKs95ZDMOZob2MAp3cvRbyYZqrupydx2piO8D8hp0TI2BMOOELPZcvRFVfDepA=w1476-h1078-no" alt="avatar"></p>
+<p>The Structure of the LSTM, which is shown in the image above.</p>
+<h2 id="Items-in-the-Structure"><a href="#Items-in-the-Structure" class="headerlink" title="Items in the Structure"></a>Items in the Structure</h2><ul>
+<li><p>Inputs $\boldsymbol{z}(t)=(\boldsymbol{x}(t), \boldsymbol{y}(t-1))$</p>
+<p>The input is combined the input $x(t)$ and the output of last time $y(t-1)$</p>
+</li>
+<li><p>Network Updates ($W_*$ are the free parameters)</p>
+<script type="math/tex; mode=display">\begin{array}{ll}{\boldsymbol{f}(t)=\boldsymbol{\sigma}\left(\mathbf{W}_{f} \boldsymbol{z}(t)\right)} & {\boldsymbol{g}(t)=\boldsymbol{\sigma}\left(\boldsymbol{W}_{g} \boldsymbol{z}(t)\right)} \\ {\boldsymbol{h}(t)=\tanh \left(\boldsymbol{W}_{h} \boldsymbol{z}(t)\right)} & {\boldsymbol{o}(t)=\boldsymbol{\sigma}\left(\boldsymbol{W}_{o} \boldsymbol{z}(t)\right)}\end{array}</script><p>$\boldsymbol f(t)$ is the forget gate, $\boldsymbol g(t)$ decide the whether and what to remember from the input of this time, the $\boldsymbol h(t)$ is the input block, the $\boldsymbol o(t)$ is the output gate.</p>
+</li>
+<li><p>Long-term memory update </p>
+<script type="math/tex; mode=display">\boldsymbol{c}(t)=\boldsymbol{f}(t) \otimes \boldsymbol{c}(t-1)+\boldsymbol{g}(t) \otimes \boldsymbol{h}(t)</script><p>It can be seen as the influence of the forget gate on the hidden state plus the memory update.<br>(对隐含变量是否进行遗忘，加上这次的选择记忆阶段得到下一次的隐含状态的输入$c(t)$)</p>
+</li>
+<li><p>Output $\boldsymbol{y}(t)=\boldsymbol{o}(t) \otimes \tanh (\boldsymbol{c}(t))$ </p>
+<p>The product of the output gate and the $tanh(\boldsymbol c(t))$.</p>
+</li>
 </ul>
-<h3 id="Random-Forest"><a href="#Random-Forest" class="headerlink" title="Random Forest"></a>Random Forest</h3><p>The data set is generated by the bootstrapping, which resample the data set with replacement. In random forest, we average much less correlated trees. To implement this algorithm, not only different data subsets are used, but also we choose a subset $m \ll p$ of the features to train decision tree. Typically $m$ can range from $1$ to $\sqrt{p}$. The trees are not that good, but by averaging over huge number of trees, we can get pretty good results.</p>
-<h2 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h2><p>用于比较弱的model。</p>
-<p>Adaboost</p>
-<p>Can convert the weak learner to strong learner(classifier).</p>
-<p>我自己的一个简单Adaboost <a href="https://github.com/ShuoGH/datascience/blob/master/Adaboost.ipynb" target="_blank" rel="noopener">demo</a></p>
+<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>We can train an LSTM by unwrapping it in time.</p>
+<p>It involves four dense layers with sigmoidal(or tanh) output: those gates </p>
+<p>The LSTM is typucally very slow to train.</p>
+<p>There are a few variants of LSTMs, but all are very similar. The most popular is probably <em>Gated Recurrent Unit</em> (GRU).</p>
+<p>(to be continued)</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>台湾大学李宏毅的<a href="https://www.youtube.com/watch?v=tH9FH1DH5n0" target="_blank" rel="noopener">视频</a></li>
-<li>课程资源: <a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML16.html" target="_blank" rel="noopener">Hung-yi Lee</a></li>
+<li>Adam lstm slide COMP6208</li>
 </ol>
 
       
@@ -519,12 +496,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
-          
-        </div>
-      
 
       
       
@@ -534,8 +505,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/20/Linux-Use/" rel="next" title="Linux Use">
-                <i class="fa fa-chevron-left"></i> Linux Use
+              <a href="/2019/05/27/Kernel-Tricks/" rel="next" title="Kernel Tricks">
+                <i class="fa fa-chevron-left"></i> Kernel Tricks
               </a>
             
           </div>
@@ -543,10 +514,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/21/LeetCode-Note-Two-Sum/" rel="prev" title="LeetCode Note Two Sum">
-                LeetCode Note Two Sum <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -773,7 +740,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ensemble-Learning"><span class="nav-number">1.</span> <span class="nav-text">Ensemble Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bagging"><span class="nav-number">1.1.</span> <span class="nav-text">Bagging</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Random-Forest"><span class="nav-number">1.1.1.</span> <span class="nav-text">Random Forest</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Boosting"><span class="nav-number">1.2.</span> <span class="nav-text">Boosting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">1.3.</span> <span class="nav-text">Reference</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Items-in-the-Structure"><span class="nav-number">1.</span> <span class="nav-text">Items in the Structure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Note"><span class="nav-number">2.</span> <span class="nav-text">Note</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
