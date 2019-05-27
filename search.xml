@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Kernel Tricks]]></title>
+    <url>%2F2019%2F05%2F27%2FKernel-Tricks%2F</url>
+    <content type="text"><![CDATA[KernelsMany linear parametric models can be re-written into an equivalent dual representation in which the predictions are also based on linear combinations of a kernel function evaluated at the training data points. As we shall see, for models which are based on a fixed nonlinear feature space mapping $\phi(x)$, the kernel function is given by the relation k\left(\mathbf{x}, \mathbf{x}^{\prime}\right)=\boldsymbol{\phi}(\mathbf{x})^{\mathrm{T}} \boldsymbol{\phi}\left(\mathbf{x}^{\prime}\right)Dual Representation and Kernel: See an classical example of SVM from this blog. Some common forms of kernels: Linear Kernel 线性核 $\kappa \left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) =\boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}$ Polynomial Kernel 多项式核 $\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) =\left(\boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}\right)^{d}$ Gaussian Kernel 高斯核 $\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) =\exp \left(-\frac{\left|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right|^{2}}{2 \sigma^{2}}\right)$ Laplace Kernel 拉普拉斯核 $\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) =\exp \left(-\frac{\left|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right|}{\sigma}\right)$ Sigmoid Kernel $\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) =\tanh \left(\beta \boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}+\theta\right)$ By replacing the $-\frac{1}{2\sigma^2}$ with $\lambda$ in the Gaussian Kernel, we can get the RBF kernel, which can be express as $\exp \left(-\gamma|\boldsymbol{x}-\boldsymbol{y}|^{2}\right)$. Note that the feature vector that corresponds to the Gaussian kernel has infinite dimensionality. Kernel TricksSo, what is kernel? In machine learning, a kernel is usually used to refer to the kernel trick, a method of using a linear classifier to solve a non-linear problem. The kernel trick allows us to map data into high-dimensional feature space $\boldsymbol{x} \rightarrow \phi(\boldsymbol{x})$. This can be carried out for sufficiently simple machines where parameter optimisation involve the dot product $\phi^{\mathbf{T}}(\boldsymbol{x}) \phi(\boldsymbol{y})$. The kernel function is positive semi-definite and the decomposition is always possible (see the properties in the end of this blog). In fact, we never need to explicitly calculate the extended features $\phi(\boldsymbol{x})$. This often makes working in the extended feature space very efficient as $K(\boldsymbol{x},\boldsymbol{y})$ may be quick to calculate. Constructing KernelsOne approach to build valid kernel is to choose a feature space mapping $\phi(x)$ and use it to find the corresponding kernel. Here the kernel function is defined for one-dimensional input space by k\left(x, x^{\prime}\right)=\phi(x)^{\mathrm{T}} \boldsymbol{\phi}\left(x^{\prime}\right)=\sum_{i=1}^{M} \phi_{i}(x) \phi_{i}\left(x^{\prime}\right)where $\phi(x)$ is the basis function. Another approach is to construct the kernel directly. In this way, we should have a method to test whether the kernel we build is valid. A necessary and sufficient condition for a function $k(x,x)$ to be a valid kernel is that the Gram matrix $K$, whose elements are given by $k(x,x)$, should be positive semi-definite for all possible choices of the set $x_n$. Note that a positive semi-definite matrix is not the same thing as a matrix whose elements are nonnegative. One powerful technique for constructing new kernels is to build out of simple kernels as building blocks. See the properties from the PRML book in $P_{296}$. Some questions about the Kernel Why it is important that the kernel function is positive semi-definite? Kernel functions need to be positive semi-definite so that they have sensible (nonnegative) distances. That is the margins are positive. Three properties that a positive semi-definite kernel should have: The eigenvalues of a positive semi-definite kernel function are nonnegative. A positive semi-definite kernel function can always be written as K(x,y)=\sum_i \phi_i(x)\phi_i(y)for some sets of real functions $\phi_i(x)$ The quadratic form satisfies \int f(\boldsymbol{x}) K(\boldsymbol{x}, \boldsymbol{y}) f(\boldsymbol{y}) \mathrm{d} \boldsymbol{x} \mathrm{d} \boldsymbol{y} \geq 0for any real function $f(x)$. Why kernel trick allows an SVM to seperate data points that are not linearly separable? The kernel trick projects data into the extended feature space (the space of engenfunctions of the kernel). Although an SVM finds a linear separating plane in this extended space, as the extended features are typically a non-linear function of the original features. This corresponds to finding a non-linear separating surface in the original space. Reference 周志华 《机器学习》 Bishop PRML Chapter 6]]></content>
+      <categories>
+        <category>Machine Learning</category>
+      </categories>
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hexo Local Search not Respond]]></title>
     <url>%2F2019%2F05%2F27%2FHexo-Local-Search-not-Respond%2F</url>
     <content type="text"><![CDATA[When your article have some unlegal characters, the search function will not work.See the https://segmentfault.com/q/1010000013084615 discussion for more details. To debug, go to the url to see which blog rise this issue. http://localhost:4000/search.xml (通过注释并且在本地调试，发现是kernels trick这个文件有问题。) Solution应该是有非法字符，local search无法加载出来非utf-8编码的字符。通过注释排除法，找到问题根源。 Reference hexo的local search不能使用 Hexo本地搜索失效解决办法]]></content>
@@ -162,8 +173,8 @@
         <category>Deep Learning</category>
       </categories>
       <tags>
-        <tag>Deep Learning</tag>
         <tag>Machine Learning</tag>
+        <tag>Deep Learning</tag>
       </tags>
   </entry>
   <entry>
@@ -242,8 +253,8 @@
         <category>Kaggle</category>
       </categories>
       <tags>
-        <tag>Deep Learning</tag>
         <tag>Machine Learning</tag>
+        <tag>Deep Learning</tag>
         <tag>Kaggle</tag>
       </tags>
   </entry>
@@ -313,8 +324,8 @@
         <category>Deep Learning</category>
       </categories>
       <tags>
-        <tag>Deep Learning</tag>
         <tag>Machine Learning</tag>
+        <tag>Deep Learning</tag>
       </tags>
   </entry>
   <entry>
