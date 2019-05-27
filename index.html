@@ -357,6 +357,174 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Hexo-Local-Search-not-Respond/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/27/Hexo-Local-Search-not-Respond/" class="post-title-link" itemprop="url">Hexo Local Search not Respond</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-27 18:27:44 / Modified: 18:59:30" itemprop="dateCreated datePublished" datetime="2019-05-27T18:27:44+01:00">2019-05-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>When your article have some unlegal characters, the search function will not work.<br>See the <a href="https://segmentfault.com/q/1010000013084615" target="_blank" rel="noopener">https://segmentfault.com/q/1010000013084615</a> discussion for more details.</p>
+<p>To debug, go to the url to see which blog rise this issue. <a href="http://localhost:4000/search.xml" target="_blank" rel="noopener">http://localhost:4000/search.xml</a></p>
+<p>(通过注释并且在本地调试，发现是kernels trick这个文件有问题。)</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>应该是有非法字符，local search无法加载出来非utf-8编码的字符。通过注释排除法，找到问题根源。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a href="https://segmentfault.com/q/1010000013084615" target="_blank" rel="noopener">hexo的local search不能使用</a></li>
+<li><a href="https://sherlockgy.github.io/2018/06/09/Hexo%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%A4%B1%E6%95%88%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" target="_blank" rel="noopener">Hexo本地搜索失效解决办法</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Bias-and-Variance/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -585,7 +753,7 @@
                 
               
 
-              <time title="Created: 2019-05-27 16:12:58 / Modified: 17:12:27" itemprop="dateCreated datePublished" datetime="2019-05-27T16:12:58+01:00">2019-05-27</time>
+              <time title="Created: 2019-05-27 16:12:58 / Modified: 18:58:00" itemprop="dateCreated datePublished" datetime="2019-05-27T16:12:58+01:00">2019-05-27</time>
             
 
             
@@ -644,7 +812,7 @@
       
         
           
-            <h2 id="Kernels"><a href="#Kernels" class="headerlink" title="Kernels"></a>Kernels</h2><p>Many linear parametric models can be re-cast into an equivalent ‘dual represen-<br>tation’ in which the predictions are also based on linear combinations of a <em>kernel<br>function</em> evaluated at the training data points. As we shall see, for models which are based on a fixed nonlinear <em>feature space</em> mapping $\phi(x)$, the <strong><em>kernel</em></strong> function is given by the relation</p>
+            <h2 id="Kernels"><a href="#Kernels" class="headerlink" title="Kernels"></a>Kernels</h2><p>Many linear parametric models can be re-cast into an equivalent <code>dual representation</code> in which the predictions are also based on linear combinations of a <em>kernel function</em> evaluated at the training data points. As we shall see, for models which are based on a fixed nonlinear <em>feature space</em> mapping $\phi(x)$, the <strong><em>kernel</em></strong> function is given by the relation</p>
 <script type="math/tex; mode=display">k\left(\mathbf{x}, \mathbf{x}^{\prime}\right)=\boldsymbol{\phi}(\mathbf{x})^{\mathrm{T}} \boldsymbol{\phi}\left(\mathbf{x}^{\prime}\right)</script><p><strong>Dual Representation and Kernel</strong>: See an classical example of SVM from this <a href="https://shuogh.github.io/2019/05/26/SVM-Slack-Variable-and-Kernel/" target="_blank" rel="noopener">blog</a>.</p>
 <p><strong>Some common forms of kernels</strong>:</p>
 <p>$\begin{aligned} \text{Linear Kernel 线性核 } \kappa \left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j} \\ \text{Polynomial Kernel 多项式核 }\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\left(\boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}\right)^{d} \\ \text{Gaussian Kernel 高斯核 }\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\exp \left(-\frac{\left|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right|^{2}}{2 \sigma^{2}}\right) \\ \text{Laplace Kernel 拉普拉斯核 }\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\exp \left(-\frac{\left|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right|}{\sigma}\right) \\ \text{Sigmoid Kernel }\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) &amp;=\tanh \left(\beta \boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}+\theta\right)\end{aligned}$</p>
@@ -655,7 +823,7 @@
 <p>The kernel trick allows us to map data into high-dimensional feature space $\boldsymbol{x} \rightarrow \phi(\boldsymbol{x})$. This can be carried out for sufficiently simple machines where parameter optimisation involve the dot product $\phi^{\mathbf{T}}(\boldsymbol{x}) \phi(\boldsymbol{y})$. The kernel function is positive semi-definite and the decomposition is always possible(see the property in the end of this blog). In fact, we never need to explicitly calculate the extended features $\phi(\boldsymbol{x})$. This often makes working in the extended feature space very efficient as $K(\boldsymbol{x},\boldsymbol{y})$ may be quick to calculate. </p>
 <h2 id="Constructing-Kernels"><a href="#Constructing-Kernels" class="headerlink" title="Constructing Kernels"></a>Constructing Kernels</h2><p>One approach to build valid kernel is to choose a feature space mapping $\phi(x)$ and use it to find the corresponding kernel. Here the kernel function is defined for one-dimensional input space by</p>
 <script type="math/tex; mode=display">k\left(x, x^{\prime}\right)=\phi(x)^{\mathrm{T}} \boldsymbol{\phi}\left(x^{\prime}\right)=\sum_{i=1}^{M} \phi_{i}(x) \phi_{i}\left(x^{\prime}\right)</script><p>Where $\phi(x)$ is the basis function.</p>
-<p>Another approach is to construct the kernel directly. In this way, we should have a method to test whether the kernel we build is valid. A <strong>necessary and sufficient condition</strong> for a function $k(x, x)$ to be a valid kernel (Shawe-Taylor and Cristianini, 2004) is that the Gram matrix K,whose elements are given by $k(x_n, x_m)$, should be positive semidefinite for all possible choices of the set ${x_n}$. Note that a positive semidefinite matrix is not the same thing as a matrix whose elements are nonnegative.</p>
+<p>Another approach is to construct the kernel directly. In this way, we should have a method to test whether the kernel we build is valid. A <strong>necessary</strong> and <strong>sufficient condition</strong> for a function $k(x,x)$ to be a valid kernel is that the Gram matrix $K$, whose elements are given by $k(x_n, x_m)$, should be positive semi-definite for all possible choices of the set ${x_n}$. Note that a positive semi-definite matrix is not the same thing as a matrix whose elements are nonnegative.</p>
 <p>One powerful technique for constructing new kernels is to build out of simple kernels as building blocks.</p>
 <p>See the following properties(in the PRML book $P_{296}$)</p>
 <hr>
@@ -2062,173 +2230,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/Deep-Learning-Batch-Normalization/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/13/Deep-Learning-Batch-Normalization/" class="post-title-link" itemprop="url">Deep Learning Batch Normalization</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-13 18:54:57 / Modified: 18:59:02" itemprop="dateCreated datePublished" datetime="2019-05-13T18:54:57+01:00">2019-05-13</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">Deep Learning</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Why-we-need-batch-normalization-in-neural-network"><a href="#Why-we-need-batch-normalization-in-neural-network" class="headerlink" title="Why we need batch normalization in neural network?"></a>Why we need batch normalization in neural network?</h1><h2 id><a href="#" class="headerlink" title=" "></a> </h2><p>It can help the neural network to converge more quickly.</p>
-<p>Make the different features into the same scale, get rid of the influence of different scale.</p>
-<p>防止梯度爆炸和梯度消失</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>zhihu: <a href="https://www.zhihu.com/question/281816000" target="_blank" rel="noopener">神经网络中的归一化除了减少计算量，还有什么作用？</a></li>
-<li>towards data science: <a href="https://towardsdatascience.com/batch-normalization-in-neural-networks-1ac91516821c" target="_blank" rel="noopener">Batch normalization in Neural Networks</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2277,7 +2278,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
