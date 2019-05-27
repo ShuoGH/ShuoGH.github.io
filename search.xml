@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Bayes Rule, Prior and Posterior]]></title>
+    <url>%2F2019%2F05%2F27%2FBayes-Rule-Prior-and-Posterior%2F</url>
+    <content type="text"><![CDATA[Bayes’ RuleThe form of bayes’ rule is \mathbb{P}\left(\mathcal{H}_{i} | \mathcal{D}\right)=\frac{\mathbb{P}\left(\mathcal{D} | \mathcal{H}_{i}\right) \mathbb{P}\left(\mathcal{H}_{i}\right)}{\mathbb{P}(\mathcal{D})} $\mathbb{P}\left(\mathcal{H}_{i} | \mathcal{D}\right)$ is the posterior probability of a hypothesis $\mathcal{H}_{i}$ (i.e. the probability of $\mathcal{H}_{i}$ after we know the data) $\mathbb{P}\left(\mathcal{D} | \mathcal{H}_{i}\right)$ is the likelihood of the data given the hypothesis. Note, that we calculated this from the forward problem $\mathbb{P}\left(\mathcal{H}_{i}\right)$ is the prior probability (i.e. the probability of $\mathcal{H}_{i}$ before we know the data) $\mathbb{P}(\mathcal{D})$ is the evidence. It is the normalising constant given by \mathbb{P}(\mathcal{D})=\sum_{i=1}^{n} \mathbb{P}\left(\mathcal{H}_{i}, \mathcal{D}\right)=\sum_{i=1}^{n} \mathbb{P}\left(\mathcal{D} | \mathcal{H}_{i}\right) \mathbb{P}\left(\mathcal{H}_{i}\right) In most of our task, what we want is the posterior probability. The bayes’ rule converts this into the forward problem. Prior and Posterior(to be continued) When the posterior is the same as the prior then the likelihood and prior distributions are said to be conjugate. The prior then is the conjugate prior. In the xxxxxx, we want to maximize the posterior probabilities(MAP), which is different with the fully bayesian inference.(2017-2018 exam paper AML) MAP and MLEMAP: maximize the posterior distribution MLE: maximum likelihood estimation In MAP, we should add a prior distribution and by adding observations and then to maximize the posterior distribution $p(w|X)$ to get the parameter. 最大似然估计是求参数$\theta$, 使似然函数$P(x_0|\theta)$最大。最大后验概率估计则是想求$\theta$使$P(x_0|\theta)P(\theta)$最大,求得的$ \theta $不单单让似然函数大，$ \theta $自己出现的先验概率(也是得到的后验概率）也得大. Reference Bishop PRML 详解最大似然估计（MLE）、最大后验概率估计（MAP) Adam slide bayes_prn comp6208]]></content>
+      <categories>
+        <category>Machine Learning</category>
+      </categories>
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LSTM]]></title>
     <url>%2F2019%2F05%2F27%2FLSTM%2F</url>
     <content type="text"><![CDATA[The Structure of the LSTM, which is shown in the image above. Items in the Structure Inputs $\boldsymbol{z}(t)=(\boldsymbol{x}(t), \boldsymbol{y}(t-1))$ The input is combined the input $x(t)$ and the output of last time $y(t-1)$ Network Updates ($W_*$ are the free parameters) \begin{array}{ll}{\boldsymbol{f}(t)=\boldsymbol{\sigma}\left(\mathbf{W}_{f} \boldsymbol{z}(t)\right)} & {\boldsymbol{g}(t)=\boldsymbol{\sigma}\left(\boldsymbol{W}_{g} \boldsymbol{z}(t)\right)} \\ {\boldsymbol{h}(t)=\tanh \left(\boldsymbol{W}_{h} \boldsymbol{z}(t)\right)} & {\boldsymbol{o}(t)=\boldsymbol{\sigma}\left(\boldsymbol{W}_{o} \boldsymbol{z}(t)\right)}\end{array}$\boldsymbol f(t)$ is the forget gate, $\boldsymbol g(t)$ decide the whether and what to remember from the input of this time, the $\boldsymbol h(t)$ is the input block, the $\boldsymbol o(t)$ is the output gate. Long-term memory update \boldsymbol{c}(t)=\boldsymbol{f}(t) \otimes \boldsymbol{c}(t-1)+\boldsymbol{g}(t) \otimes \boldsymbol{h}(t)It can be seen as the influence of the forget gate on the hidden state plus the memory update.(对隐含变量是否进行遗忘，加上这次的选择记忆阶段得到下一次的隐含状态的输入$c(t)$) Output $\boldsymbol{y}(t)=\boldsymbol{o}(t) \otimes \tanh (\boldsymbol{c}(t))$ The product of the output gate and the $tanh(\boldsymbol c(t))$. NoteWe can train an LSTM by unwrapping it in time. It involves four dense layers with sigmoidal(or tanh) output: those gates The LSTM is typucally very slow to train. There are a few variants of LSTMs, but all are very similar. The most popular is probably Gated Recurrent Unit (GRU). (to be continued) Reference Adam lstm slide COMP6208]]></content>
+      <categories>
+        <category>Deep Learning</category>
+      </categories>
+      <tags>
+        <tag>Deep Learning</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Kernel Tricks]]></title>
