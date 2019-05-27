@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="We Need to Go Deeper">
 <meta property="og:description" content="Maximize marginThe basic idea of SVM is to maximize the margin between the support vectors and the hyperplane.  The margin can be expressed as $r=\frac{\left|\boldsymbol{w}^{\mathrm{T}} \boldsymbol{x}">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-27T10:03:07.353Z">
+<meta property="og:updated_time" content="2019-05-27T15:15:27.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM, Slack Variable and Kernel">
 <meta name="twitter:description" content="Maximize marginThe basic idea of SVM is to maximize the margin between the support vectors and the hyperplane.  The margin can be expressed as $r=\frac{\left|\boldsymbol{w}^{\mathrm{T}} \boldsymbol{x}">
@@ -421,7 +421,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-27 11:03:07" itemprop="dateModified" datetime="2019-05-27T11:03:07+01:00">2019-05-27</time>
+                <time title="Modified: 2019-05-27 16:15:27" itemprop="dateModified" datetime="2019-05-27T16:15:27+01:00">2019-05-27</time>
               
             
           </span>
@@ -497,8 +497,8 @@
 <script type="math/tex; mode=display">\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\left\langle\phi\left(\boldsymbol{x}_{i}\right), \phi\left(\boldsymbol{x}_{j}\right)\right\rangle=\phi\left(\boldsymbol{x}_{i}\right)^{\mathrm{T}} \phi\left(\boldsymbol{x}_{j}\right)</script><p>Write the matrix form $K=\boldsymbol\phi(\boldsymbol x)\boldsymbol\phi(\boldsymbol y)$, and rewrite the dual representation as the matrix form </p>
 <script type="math/tex; mode=display">\boldsymbol c^T \boldsymbol\alpha-\frac{1}{2}\boldsymbol\alpha^T K \boldsymbol\alpha</script><p>with the constraints.</p>
 <hr>
-<p>The advantage of using the kernel trick: blog <a href>Kernel Function</a></p>
-<p>Some common form of kernels: blog <a href>Kernel Function</a></p>
+<p>The advantage of using the kernel trick: blog <a href="https://shuogh.github.io/2019/05/27/Kernel-Tricks/" target="_blank" rel="noopener">Kernel Function</a></p>
+<p>Some common form of kernels: blog <a href="https://shuogh.github.io/2019/05/27/Kernel-Tricks/" target="_blank" rel="noopener">Kernel Function</a></p>
 <hr>
 <h2 id="Slack-Variable"><a href="#Slack-Variable" class="headerlink" title="Slack Variable"></a>Slack Variable</h2><p>对于不能完全分隔开的情况，引入松弛变量，使硬间隔(hard margin)转换成弱间隔(soft margin)。落在软间隔中的点才是我们要关注的东西，所以之后的slack variable只有在间隔内的才是不等于0的。</p>
 <p>The form of classification constraints are replaced with</p>
