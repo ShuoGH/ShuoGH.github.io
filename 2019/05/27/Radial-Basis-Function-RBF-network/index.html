@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="We Need to Go Deeper">
 <meta property="og:description" content="Radial basis functionradial basis function is that each basis function depends only on the radial distance (typically Euclidean) from a centre $\mu_j$, so that $\phi_j(x)=h(x-\mu_j)$. $f(x)$ is expres">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-27T11:03:49.279Z">
+<meta property="og:updated_time" content="2019-05-27T12:38:12.115Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Radial Basis Function, RBF network">
 <meta name="twitter:description" content="Radial basis functionradial basis function is that each basis function depends only on the radial distance (typically Euclidean) from a centre $\mu_j$, so that $\phi_j(x)=h(x-\mu_j)$. $f(x)$ is expres">
@@ -404,7 +404,7 @@
                 
               
 
-              <time title="Created: 2019-05-27 11:59:59 / Modified: 12:03:49" itemprop="dateCreated datePublished" datetime="2019-05-27T11:59:59+01:00">2019-05-27</time>
+              <time title="Created: 2019-05-27 11:59:59 / Modified: 13:38:12" itemprop="dateCreated datePublished" datetime="2019-05-27T11:59:59+01:00">2019-05-27</time>
             
 
             
@@ -474,13 +474,15 @@
 <h2 id="RBF-Network"><a href="#RBF-Network" class="headerlink" title="RBF Network"></a>RBF Network</h2><p>(to be continued)</p>
 <p><strong>Question: What are the similarities and differences between MLP, RBF networks and SVMs? </strong></p>
 <ul>
-<li>All three techniques based </li>
+<li>All three techniques are based on the perceptron. In MLPs, the earlier layers are perceptrons, in RBFs they are radial basis functions and SVMs thet are the features corresponding to the eigenvalues of a kernel.</li>
+<li>All three can be used for regression and classification.</li>
+<li>MLPs are trained using back-propagation of errors. They have non-unique solution. Complexity depends on nunber of hidden nodes. Liable to over-fit the training data. Often use ad hoc methods such as early stopping to stop over-fitting. Can have many output nodes.</li>
+<li>RBFs typically use unsupervised learning to choose the centres for the input layer. The labelled data used to train the final layer(a perceptron). Training is fast. Can have many output nodes. Often use regulariser on the output layer. The solution found is unique. </li>
+<li>SVMs use a kernel function to perform a mapping into a very high dimensional feature space. An optimally stable perceptron is used in the feature space. This controls the capacity of the learning machine reducing the problem of over-fitting. The learning algorithm uses quadratic optimisation. The computation complexity grows as the number training patterns cubed. For very large datasets SVMs can become impractical. The solution found is unque.</li>
 </ul>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li><p>ML学习笔记之——<a href="http://ghx0x0.github.io/2015/06/11/ML-RBFnet/" target="_blank" rel="noopener">径向基网络</a></p>
-</li>
-<li><p>Bishop PRML chapter 6.3</p>
-</li>
+<li>ML学习笔记之——<a href="http://ghx0x0.github.io/2015/06/11/ML-RBFnet/" target="_blank" rel="noopener">径向基网络</a></li>
+<li>Bishop PRML chapter 6.3</li>
 <li>question from (COMP3008 2009-2010 Q4)</li>
 </ol>
 
