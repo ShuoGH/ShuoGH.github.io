@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="We Need to Go Deeper">
 <meta property="og:description" content="Information Theory and Feature Selection Outline: Information Entropy Mutual information for feature selection    InformationInformation, also can be seen as uncertainty and surprise. $I=-log_2{p(x)}$">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-28T21:08:20.689Z">
+<meta property="og:updated_time" content="2019-05-28T21:22:04.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Data Mining Information Theory">
 <meta name="twitter:description" content="Information Theory and Feature Selection Outline: Information Entropy Mutual information for feature selection    InformationInformation, also can be seen as uncertainty and surprise. $I=-log_2{p(x)}$">
@@ -421,7 +421,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-28 22:08:20" itemprop="dateModified" datetime="2019-05-28T22:08:20+01:00">2019-05-28</time>
+                <time title="Modified: 2019-05-28 22:22:04" itemprop="dateModified" datetime="2019-05-28T22:22:04+01:00">2019-05-28</time>
               
             
           </span>
@@ -503,7 +503,7 @@
 <p>It can be seen as the $D(f|g) =\sum_{x \in X} [-f(x)log_2 g(x)+f(x)log_2f(x)] $, the first term is to encode $f(x)$ using the the encoding method of $g(x)$.Therefore, it can be seen as the distance between two encoding function ( or distribution). </p>
 <p>When minimizing K-L against a fixed reference distribution $p$, the task is euivalent to minimizing <strong>cross entropies</strong>. It can be written as: $D(f|g) =\sum_{x \in X}f(x)log_2f(x) - \sum_{x \in X}f(x)log_2 g(x) $</p>
 <p>The second term is what we use in the cross entropy loss function.</p>
-<p><strong>Note</strong>:<br>The K-L divergence can not be used as a measure for the distance between $f$ and $g$, since it is not symmetry, $D(f | g)$ is not equal to $D(g | y)$. </p>
+<p><strong>Note</strong>:<br>The K-L divergence can not be used as a measure for the distance between $f$ and $g$, since it is not symmetric, $D(f | g)$ is not equal to $D(g | y)$. </p>
 <h2 id="Conditional-Entropy"><a href="#Conditional-Entropy" class="headerlink" title="Conditional Entropy"></a>Conditional Entropy</h2><p>The $I$ is <strong>realized information</strong>, which is the difference between the entropy of $H(C)$ and the contional entropy $H(C|X=x)$. And the realized information is defined as:</p>
 <script type="math/tex; mode=display">I[C ; X=x]=H(C)-H(C | X=x)</script><p>Given the observation of $X$, the entropy of $C$ is decrease, which is written as $H(C | X=x)$.</p>
 <p>The realized information is not necessarily positive. If it is negative, the entropy will increase.</p>
@@ -550,7 +550,8 @@
 <p>$H[C|X=”not paint”]=1.0$, which we can calculate from the distribution.</p>
 <p>$I[C;X]=H[C]-Pr(x=1)H[C|X=1]-Pr(X=0)H[C|X=0]$ = 0.99-12/102<em>0-90/102 </em>1 =0.11 </p>
 <p>Therefore, the mutual information is 0.11, which is the expected reduction in uncertainly.</p>
-<p>During the process of building the decision tree, the <strong>information gain</strong> is another form of mutual information. See the <a href="https://www.zhihu.com/question/39436574" target="_blank" rel="noopener">zhihu</a> for more detail.</p>
+<p><strong>Note</strong>:</p>
+<p>In the decision tree, mutual information is used as <strong>information gain</strong>. The information gain is the strategy used to choose the best feature for decision. See the <a href="https://www.zhihu.com/question/39436574" target="_blank" rel="noopener">zhihu</a> for more detail.</p>
 <p>And this is the way which most people use to find the informative features.</p>
 <h2 id="Joint-and-Conditional-Entropy"><a href="#Joint-and-Conditional-Entropy" class="headerlink" title="Joint and Conditional Entropy"></a>Joint and Conditional Entropy</h2><p>$H[X, Y]=-\sum_{x, y} \operatorname{Pr}(X=x, Y=y) \log _{2} \operatorname{Pr}(X=x, Y=y)$</p>
 <p>Kind of the joint distribution. </p>
@@ -695,7 +696,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">42</span>
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
