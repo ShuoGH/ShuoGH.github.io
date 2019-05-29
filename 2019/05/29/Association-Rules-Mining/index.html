@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="We Need to Go Deeper">
 <meta property="og:description" content="It also kind of Market Basket Analysis. IntroductionAn Association Rule is where X \Longrightarrow Y ($X$ implies $Y$) An item set is a set of items. If it has $k$ items, it is a $k$-itemset. Support">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-29T10:34:08.671Z">
+<meta property="og:updated_time" content="2019-05-29T11:23:41.085Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Association Rules Mining">
 <meta name="twitter:description" content="It also kind of Market Basket Analysis. IntroductionAn Association Rule is where X \Longrightarrow Y ($X$ implies $Y$) An item set is a set of items. If it has $k$ items, it is a $k$-itemset. Support">
@@ -404,7 +404,7 @@
                 
               
 
-              <time title="Created: 2019-05-29 11:30:05 / Modified: 11:34:08" itemprop="dateCreated datePublished" datetime="2019-05-29T11:30:05+01:00">2019-05-29</time>
+              <time title="Created: 2019-05-29 11:30:05 / Modified: 12:23:41" itemprop="dateCreated datePublished" datetime="2019-05-29T11:30:05+01:00">2019-05-29</time>
             
 
             
@@ -498,6 +498,7 @@
 <p>The <strong>lift</strong> of $X \Longrightarrow Y$ is:</p>
 <script type="math/tex; mode=display">\operatorname{lift}(X \Longrightarrow Y)=\frac{\operatorname{conf}(X \Longrightarrow Y)}{p(Y)}=\frac{\frac{p(X \wedge Y)}{p(X)}}{p(Y)}=\frac{p(X \wedge Y)}{p(X) p(Y)}</script><p>But lift is symmetric, the same for $X \Longrightarrow Y$ as $Y \Longrightarrow X$</p>
 <p><strong><em>Conviction</em></strong>: indicates that $X$ and $Y$ are not independent, and takes into account the direction of implication. </p>
+<p>Since the $p \rightarrow q \equiv \neg p \vee q$, and we can rewrite it as the $\neg( p \wedge \neg q)$. Therefore, the <strong>Conviction</strong> is based on this</p>
 <script type="math/tex; mode=display">\operatorname{conv}(X \Longrightarrow Y)=\frac{p(X) p(\neg Y)}{p X \wedge \neg Y )}</script><p>Conviction is a measure of the implication and has value 1 if items are unrelated. </p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
 <li>Jo slide Market Basket</li>
