@@ -953,7 +953,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-28 22:22:04" itemprop="dateModified" datetime="2019-05-28T22:22:04+01:00">2019-05-28</time>
+                <time title="Modified: 2019-05-29 13:56:58" itemprop="dateModified" datetime="2019-05-29T13:56:58+01:00">2019-05-29</time>
               
             
           </span>
@@ -1030,7 +1030,8 @@
 <p>It can be seen as the $D(f|g) =\sum_{x \in X} [-f(x)log_2 g(x)+f(x)log_2f(x)] $, the first term is to encode $f(x)$ using the the encoding method of $g(x)$.Therefore, it can be seen as the distance between two encoding function ( or distribution). </p>
 <p>When minimizing K-L against a fixed reference distribution $p$, the task is euivalent to minimizing <strong>cross entropies</strong>. It can be written as: $D(f|g) =\sum_{x \in X}f(x)log_2f(x) - \sum_{x \in X}f(x)log_2 g(x) $</p>
 <p>The second term is what we use in the cross entropy loss function.</p>
-<p><strong>Note</strong>:<br>The K-L divergence can not be used as a measure for the distance between $f$ and $g$, since it is not symmetric, $D(f | g)$ is not equal to $D(g | y)$. </p>
+<p>The form of cross entropy:</p>
+<script type="math/tex; mode=display">H(p, q)=-\sum_{x} p(x) \log _{2} q(x)</script><p><strong>Note</strong>:<br>The K-L divergence can not be used as a measure for the distance between $f$ and $g$, since it is not symmetric, $D(f | g)$ is not equal to $D(g | y)$. </p>
 <h2 id="Conditional-Entropy"><a href="#Conditional-Entropy" class="headerlink" title="Conditional Entropy"></a>Conditional Entropy</h2><p>The $I$ is <strong>realized information</strong>, which is the difference between the entropy of $H(C)$ and the contional entropy $H(C|X=x)$. And the realized information is defined as:</p>
 <script type="math/tex; mode=display">I[C ; X=x]=H(C)-H(C | X=x)</script><p>Given the observation of $X$, the entropy of $C$ is decrease, which is written as $H(C | X=x)$.</p>
 <p>The realized information is not necessarily positive. If it is negative, the entropy will increase.</p>
