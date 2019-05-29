@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="It also kind of Market Basket Analysis. IntroductionAn Association Rule is where $$X \Longrightarrow Y ($X$ implies $Y$)  An **item set** is a set of items. If it has $k$ items, it is a $k$-itemset.">
+  <meta name="description" content="It also kind of Market Basket Analysis. IntroductionAn Association Rule is where X \Longrightarrow Y ($X$ implies $Y$) An item set is a set of items. If it has $k$ items, it is a $k$-itemset. Support">
 <meta name="keywords" content="Data Mining">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Association Rules Mining">
 <meta property="og:url" content="http://yoursite.com/2019/05/29/Association-Rules-Mining/index.html">
 <meta property="og:site_name" content="We Need to Go Deeper">
-<meta property="og:description" content="It also kind of Market Basket Analysis. IntroductionAn Association Rule is where $$X \Longrightarrow Y ($X$ implies $Y$)  An **item set** is a set of items. If it has $k$ items, it is a $k$-itemset.">
+<meta property="og:description" content="It also kind of Market Basket Analysis. IntroductionAn Association Rule is where X \Longrightarrow Y ($X$ implies $Y$) An item set is a set of items. If it has $k$ items, it is a $k$-itemset. Support">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-29T10:31:41.248Z">
+<meta property="og:updated_time" content="2019-05-29T10:34:08.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Association Rules Mining">
-<meta name="twitter:description" content="It also kind of Market Basket Analysis. IntroductionAn Association Rule is where $$X \Longrightarrow Y ($X$ implies $Y$)  An **item set** is a set of items. If it has $k$ items, it is a $k$-itemset.">
+<meta name="twitter:description" content="It also kind of Market Basket Analysis. IntroductionAn Association Rule is where X \Longrightarrow Y ($X$ implies $Y$) An item set is a set of items. If it has $k$ items, it is a $k$-itemset. Support">
 
 
 
@@ -404,7 +404,7 @@
                 
               
 
-              <time title="Created: 2019-05-29 11:30:05 / Modified: 11:31:41" itemprop="dateCreated datePublished" datetime="2019-05-29T11:30:05+01:00">2019-05-29</time>
+              <time title="Created: 2019-05-29 11:30:05 / Modified: 11:34:08" itemprop="dateCreated datePublished" datetime="2019-05-29T11:30:05+01:00">2019-05-29</time>
             
 
             
@@ -469,55 +469,34 @@
 
       
         <p>It also kind of Market Basket Analysis.</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>An <strong>Association Rule</strong> is where $$<br>X \Longrightarrow Y</p>
-<script type="math/tex; mode=display">($X$ implies $Y$)
-
-An **item set** is a set of items. If it has $k$ items, it is a $k$-itemset.
-
-**Support** $s$ of an itemset $X$ is the percentage of transactions in $D$ that contains $X$. 
-
-**Support** of **association rule** $X \Longrightarrow Y$ is the support of the itemset $\{X,Y\}$. 
-
-**Confidence** of the rule $X \Longrightarrow Y$ is the ratio between the transactions that contain both $X$ and $Y$ and the number of transactions that have $X$ in $D$. 
-
-----
-
-The problem is: Find association rules.
-
-Given: 
-
-- A set $I$ of items 
-- database $D$ of transactions
-- minimum support $s$
-- minimum confidence $c$
-
-Find: Association rules $X \Longrightarrow Y$ with a minimum support $s$ and minimum confidence $c$ 
-
-----
-
-## Apriori Algorithm 
-
-There are two pinciples of the apriori algorithm:
-
-- Any subset of a frequent itemset is also frequent 
-- Any superset of an infrequent itemset is also infrequent
-
-(example see the reference 2)
-
-
-## Improvements 
-
-The limitation of **confidence**:</script><p>\operatorname{conf}(X \Longrightarrow Y)=\frac{\frac{n T \operatorname{rans}(X \cup Y)}{|D|}}{\frac{n \operatorname{Trans}(X)}{|D|}}=\frac{p(X \wedge Y)}{p(X)}=p(Y | X)</p>
-<script type="math/tex; mode=display">
-If $Y$ is independent of $X$: $$\mathrm{p}(Y)=\mathrm{p}(Y-X)$$.
-
-This means if you have a high probability of $p(Y)$ we have a rule with high confidence that associate independent itemset.
-
-***Lift***: measure indicates departure from independence of $X$ and $Y$.
-
-The **lift** of $X \Longrightarrow Y$ is:
-
-$$\operatorname{lift}(X \Longrightarrow Y)=\frac{\operatorname{conf}(X \Longrightarrow Y)}{p(Y)}=\frac{\frac{p(X \wedge Y)}{p(X)}}{p(Y)}=\frac{p(X \wedge Y)}{p(X) p(Y)}</script><p>But lift is symmetric, the same for $X \Longrightarrow Y$ as $Y \Longrightarrow X$</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>An <strong>Association Rule</strong> is where <script type="math/tex">X \Longrightarrow Y</script> ($X$ implies $Y$)</p>
+<p>An <strong>item set</strong> is a set of items. If it has $k$ items, it is a $k$-itemset.</p>
+<p><strong>Support</strong> $s$ of an itemset $X$ is the percentage of transactions in $D$ that contains $X$. </p>
+<p><strong>Support</strong> of <strong>association rule</strong> $X \Longrightarrow Y$ is the support of the itemset $\{X,Y\}$. </p>
+<p><strong>Confidence</strong> of the rule $X \Longrightarrow Y$ is the ratio between the transactions that contain both $X$ and $Y$ and the number of transactions that have $X$ in $D$. </p>
+<hr>
+<p>The problem is: Find association rules.</p>
+<p>Given: </p>
+<ul>
+<li>A set $I$ of items </li>
+<li>database $D$ of transactions</li>
+<li>minimum support $s$</li>
+<li>minimum confidence $c$</li>
+</ul>
+<p>Find: Association rules $X \Longrightarrow Y$ with a minimum support $s$ and minimum confidence $c$ </p>
+<hr>
+<h2 id="Apriori-Algorithm"><a href="#Apriori-Algorithm" class="headerlink" title="Apriori Algorithm"></a>Apriori Algorithm</h2><p>There are two pinciples of the apriori algorithm:</p>
+<ul>
+<li>Any subset of a frequent itemset is also frequent </li>
+<li>Any superset of an infrequent itemset is also infrequent</li>
+</ul>
+<p>(example see the reference 2)</p>
+<h2 id="Improvements"><a href="#Improvements" class="headerlink" title="Improvements"></a>Improvements</h2><p>The limitation of <strong>confidence</strong>:</p>
+<script type="math/tex; mode=display">\operatorname{conf}(X \Longrightarrow Y)=\frac{\frac{n T \operatorname{rans}(X \cup Y)}{|D|}}{\frac{n \operatorname{Trans}(X)}{|D|}}=\frac{p(X \wedge Y)}{p(X)}=p(Y | X)</script><p>If $Y$ is independent of $X$: <script type="math/tex">\mathrm{p}(Y)=\mathrm{p}(Y-X)</script>.</p>
+<p>This means if you have a high probability of $p(Y)$ we have a rule with high confidence that associate independent itemset.</p>
+<p><strong><em>Lift</em></strong>: measure indicates departure from independence of $X$ and $Y$.</p>
+<p>The <strong>lift</strong> of $X \Longrightarrow Y$ is:</p>
+<script type="math/tex; mode=display">\operatorname{lift}(X \Longrightarrow Y)=\frac{\operatorname{conf}(X \Longrightarrow Y)}{p(Y)}=\frac{\frac{p(X \wedge Y)}{p(X)}}{p(Y)}=\frac{p(X \wedge Y)}{p(X) p(Y)}</script><p>But lift is symmetric, the same for $X \Longrightarrow Y$ as $Y \Longrightarrow X$</p>
 <p><strong><em>Conviction</em></strong>: indicates that $X$ and $Y$ are not independent, and takes into account the direction of implication. </p>
 <script type="math/tex; mode=display">\operatorname{conv}(X \Longrightarrow Y)=\frac{p(X) p(\neg Y)}{p X \wedge \neg Y )}</script><p>Conviction is a measure of the implication and has value 1 if items are unrelated. </p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
@@ -795,7 +774,7 @@ $$\operatorname{lift}(X \Longrightarrow Y)=\frac{\operatorname{conf}(X \Longrigh
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apriori-Algorithm"><span class="nav-number">2.</span> <span class="nav-text">Apriori Algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Improvements"><span class="nav-number">3.</span> <span class="nav-text">Improvements</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
