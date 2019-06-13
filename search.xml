@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>Error Met in First Crawler Demo</title>
+      <link href="/2019/06/13/Error-Met-in-First-Crawler-Demo/"/>
+      <url>/2019/06/13/Error-Met-in-First-Crawler-Demo/</url>
+      
+        <content type="html"><![CDATA[<p>When writing the crawler program, I met across several problems. This blog is to records the solution which I used in my program.</p><h2 id="Access-denied-when-using-url-directly"><a href="#Access-denied-when-using-url-directly" class="headerlink" title="Access denied when using url directly"></a>Access denied when using url directly</h2><p>Some websites add some features to protect them from being scraped. In this case, we should add the <strong>headers</strong>. </p><p>The fields in <code>headers</code>:</p><ul><li>User-agent: like <code>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</code></li><li>Referer: like <code>https://www.google.com/</code></li></ul><p>(See the <strong>introduction</strong> of crawler: <a href="/2019/06/13/Web-Crawler-Basic/" title="Web Crawler Basic">Web Crawler Basic</a>)</p><h2 id="Max-retries-exceeded-with-url"><a href="#Max-retries-exceeded-with-url" class="headerlink" title="Max retries exceeded with url"></a>Max retries exceeded with url</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requests.exceptions.SSLError: HTTPSConnectionPool(host=&apos;www.mzitu.com&apos;, port=443): Max retries exceeded with url: /184325/8 (Caused by SSLError(SSLError(&quot;bad handshake: SysCallError(60, &apos;ETIMEDOUT&apos;)&quot;)))</span><br></pre></td></tr></table></figure><p>First time to solve this question:</p><ul><li>add <code>sleep(1)</code> in every iteration of downloading image<ul><li>It improve the problem and make the program stick longer time to do crawler work, but not solve it completely.</li></ul></li><li>(to be continued)</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web Crawler </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Web Crawler </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Web Crawler Basic</title>
+      <link href="/2019/06/13/Web-Crawler-Basic/"/>
+      <url>/2019/06/13/Web-Crawler-Basic/</url>
+      
+        <content type="html"><![CDATA[<p>There are several modules for accessing html through Python. </p><p><code>Urllib</code> and <code>requests</code> are two different modules in Python which can be used for crawler.</p><p>For beginner, the <code>requests</code> is recommended. </p><h2 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h2><p>HTTP request header is the information, in the form of a text record, that a user’s browser sends to a Web serveer containing the details of what the browser wants and will accept back from server.</p><h3 id="Referer"><a href="#Referer" class="headerlink" title="Referer"></a>Referer</h3><p>Optional HTTP header field that identifies the address of the webpage that linked to the resource being requested. By checking the referee, the new webpage can see where the request originated.</p><p>Some websites use this to ban the crawler, and you may need to update your referer. </p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li><a href="https://www.jianshu.com/p/1efa672156d3" target="_blank" rel="noopener">Python 爬虫基础之urllib和requests</a> </li><li>my demo of <a href="https://github.com/ShuoGH/web-crawler" target="_blank" rel="noopener">web crawler</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Web Crawler </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Web Crawler </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Association Rules Mining</title>
       <link href="/2019/05/29/Association-Rules-Mining/"/>
       <url>/2019/05/29/Association-Rules-Mining/</url>
@@ -587,7 +637,7 @@
       <link href="/2019/04/29/Better-style-for-Python-Programming/"/>
       <url>/2019/04/29/Better-style-for-Python-Programming/</url>
       
-        <content type="html"><![CDATA[<p>How to write better code with good style</p><p>Here is a guide.</p><p>机器之心：<a href="https://www.jiqizhixin.com/articles/2019-04-29-5" target="_blank" rel="noopener">PyTorch最佳实践，怎样才能写出一手风格优美的代码</a></p>]]></content>
+        <content type="html"><![CDATA[<p>How to write better code with good style</p><p>Here is a guide.</p><p>机器之心：<a href="https://www.jiqizhixin.com/articles/2019-04-29-5" target="_blank" rel="noopener">PyTorch最佳实践，怎样才能写出一手风格优美的代码</a></p><h2 id="Python-Name-Convention"><a href="#Python-Name-Convention" class="headerlink" title="Python Name Convention"></a>Python Name Convention</h2><p>python 命名规范</p><div class="table-container"><table><thead><tr><th style="text-align:center">Type</th><th style="text-align:center">Convention</th><th style="text-align:center">Example</th></tr></thead><tbody><tr><td style="text-align:center">Packages &amp; Modules</td><td style="text-align:center">lower_with_under</td><td style="text-align:center">from <strong>prefetch_generator</strong> import BackgroundGenerator</td></tr><tr><td style="text-align:center">Classes</td><td style="text-align:center">CapWords</td><td style="text-align:center">class <strong>Dataloader</strong></td></tr><tr><td style="text-align:center">Constants</td><td style="text-align:center">CAPS_WITH_UNDER</td><td style="text-align:center"><strong>BATCH_SIZE</strong>=16</td></tr><tr><td style="text-align:center">Instances</td><td style="text-align:center">lower_with_under</td><td style="text-align:center"><strong>dataset</strong> = Dataset</td></tr><tr><td style="text-align:center">Methods &amp; Functions</td><td style="text-align:center">lower_with_under()</td><td style="text-align:center">def <strong>visualize_tensor</strong>()</td></tr><tr><td style="text-align:center">Variables</td><td style="text-align:center">lower_with_under</td><td style="text-align:center"><strong>background_colour</strong> = ‘Blue’</td></tr></tbody></table></div>]]></content>
       
       
       <categories>
@@ -837,6 +887,8 @@
             <tag> Algorithm </tag>
             
             <tag> Dynamic Programming </tag>
+            
+            <tag> LeetCode </tag>
             
         </tags>
       

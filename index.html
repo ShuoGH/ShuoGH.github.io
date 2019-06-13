@@ -357,6 +357,353 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/13/Error-Met-in-First-Crawler-Demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/13/Error-Met-in-First-Crawler-Demo/" class="post-title-link" itemprop="url">Error Met in First Crawler Demo</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-13 18:10:29 / Modified: 18:14:30" itemprop="dateCreated datePublished" datetime="2019-06-13T18:10:29+01:00">2019-06-13</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Web-Crawler/" itemprop="url" rel="index"><span itemprop="name">Web Crawler</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>When writing the crawler program, I met across several problems. This blog is to records the solution which I used in my program.</p>
+<h2 id="Access-denied-when-using-url-directly"><a href="#Access-denied-when-using-url-directly" class="headerlink" title="Access denied when using url directly"></a>Access denied when using url directly</h2><p>Some websites add some features to protect them from being scraped. In this case, we should add the <strong>headers</strong>. </p>
+<p>The fields in <code>headers</code>:</p>
+<ul>
+<li>User-agent: like <code>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</code></li>
+<li>Referer: like <code>https://www.google.com/</code></li>
+</ul>
+<p>(See the <strong>introduction</strong> of crawler: <a href="/2019/06/13/Web-Crawler-Basic/" title="Web Crawler Basic">Web Crawler Basic</a>)</p>
+<h2 id="Max-retries-exceeded-with-url"><a href="#Max-retries-exceeded-with-url" class="headerlink" title="Max retries exceeded with url"></a>Max retries exceeded with url</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requests.exceptions.SSLError: HTTPSConnectionPool(host=&apos;www.mzitu.com&apos;, port=443): Max retries exceeded with url: /184325/8 (Caused by SSLError(SSLError(&quot;bad handshake: SysCallError(60, &apos;ETIMEDOUT&apos;)&quot;)))</span><br></pre></td></tr></table></figure>
+<p>First time to solve this question:</p>
+<ul>
+<li>add <code>sleep(1)</code> in every iteration of downloading image<ul>
+<li>It improve the problem and make the program stick longer time to do crawler work, but not solve it completely.</li>
+</ul>
+</li>
+<li>(to be continued)</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/13/Web-Crawler-Basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/13/Web-Crawler-Basic/" class="post-title-link" itemprop="url">Web Crawler Basic</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-13 18:08:08 / Modified: 18:14:54" itemprop="dateCreated datePublished" datetime="2019-06-13T18:08:08+01:00">2019-06-13</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Web-Crawler/" itemprop="url" rel="index"><span itemprop="name">Web Crawler</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>There are several modules for accessing html through Python. </p>
+<p><code>Urllib</code> and <code>requests</code> are two different modules in Python which can be used for crawler.</p>
+<p>For beginner, the <code>requests</code> is recommended. </p>
+<h2 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h2><p>HTTP request header is the information, in the form of a text record, that a user’s browser sends to a Web serveer containing the details of what the browser wants and will accept back from server.</p>
+<h3 id="Referer"><a href="#Referer" class="headerlink" title="Referer"></a>Referer</h3><p>Optional HTTP header field that identifies the address of the webpage that linked to the resource being requested. By checking the referee, the new webpage can see where the request originated.</p>
+<p>Some websites use this to ban the crawler, and you may need to update your referer. </p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a href="https://www.jianshu.com/p/1efa672156d3" target="_blank" rel="noopener">Python 爬虫基础之urllib和requests</a> </li>
+<li>my demo of <a href="https://github.com/ShuoGH/web-crawler" target="_blank" rel="noopener">web crawler</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/29/Association-Rules-Mining/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1871,390 +2218,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Radial-Basis-Function-RBF-network/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/27/Radial-Basis-Function-RBF-network/" class="post-title-link" itemprop="url">Radial Basis Function, RBF network</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-27 11:59:59 / Modified: 13:38:12" itemprop="dateCreated datePublished" datetime="2019-05-27T11:59:59+01:00">2019-05-27</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Radial-basis-function"><a href="#Radial-basis-function" class="headerlink" title="Radial basis function"></a>Radial basis function</h2><p><em>radial basis function</em> is that each basis function depends only on the radial distance (typically Euclidean) from a centre $\mu_j$, so that $\phi_j(x)=h(x-\mu_j)$.</p>
-<p>$f(x)$ is expressed as a linear combination of radial basis functions, one<br>centred on every data point</p>
-<script type="math/tex; mode=display">f(\mathbf{x})=\sum_{n=1}^{N} w_{n} h\left(\left\|\mathbf{x}-\mathbf{x}_{n}\right\|\right)</script><p>The values of the coefficients ${w_n}$ are found by least squares.</p>
-<h2 id="RBF-Network"><a href="#RBF-Network" class="headerlink" title="RBF Network"></a>RBF Network</h2><p>(to be continued)</p>
-<p><strong>Question: What are the similarities and differences between MLP, RBF networks and SVMs? </strong></p>
-<ul>
-<li>All three techniques are based on the perceptron. In MLPs, the earlier layers are perceptrons, in RBFs they are radial basis functions and SVMs thet are the features corresponding to the eigenvalues of a kernel.</li>
-<li>All three can be used for regression and classification.</li>
-<li>MLPs are trained using back-propagation of errors. They have non-unique solution. Complexity depends on nunber of hidden nodes. Liable to over-fit the training data. Often use ad hoc methods such as early stopping to stop over-fitting. Can have many output nodes.</li>
-<li>RBFs typically use unsupervised learning to choose the centres for the input layer. The labelled data used to train the final layer(a perceptron). Training is fast. Can have many output nodes. Often use regulariser on the output layer. The solution found is unique. </li>
-<li>SVMs use a kernel function to perform a mapping into a very high dimensional feature space. An optimally stable perceptron is used in the feature space. This controls the capacity of the learning machine reducing the problem of over-fitting. The learning algorithm uses quadratic optimisation. The computation complexity grows as the number training patterns cubed. For very large datasets SVMs can become impractical. The solution found is unque.</li>
-</ul>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>ML学习笔记之——<a href="http://ghx0x0.github.io/2015/06/11/ML-RBFnet/" target="_blank" rel="noopener">径向基网络</a></li>
-<li>Bishop PRML chapter 6.3</li>
-<li>question from (COMP3008 2009-2010 Q4)</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/26/SVM-Slack-Variable-and-Kernel/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/26/SVM-Slack-Variable-and-Kernel/" class="post-title-link" itemprop="url">SVM, Slack Variable and Kernel</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-26 23:38:50" itemprop="dateCreated datePublished" datetime="2019-05-26T23:38:50+01:00">2019-05-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-05-27 16:15:27" itemprop="dateModified" datetime="2019-05-27T16:15:27+01:00">2019-05-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Maximize-margin"><a href="#Maximize-margin" class="headerlink" title="Maximize margin"></a>Maximize margin</h2><p>The basic idea of SVM is to maximize the margin between the support vectors and the hyperplane. </p>
-<p>The margin can be expressed as $r=\frac{\left|\boldsymbol{w}^{\mathrm{T}} \boldsymbol{x}+b\right|}{|\boldsymbol{w}|}$</p>
-<p>For the binary classification task $y\in(-1,+1)$, the equation satisfies: </p>
-<script type="math/tex; mode=display">y_i(w^Tx_i+b)\geqslant r\|w\|</script><p>Since the $w$ and $b$ can be scaled, we can get the condition </p>
-<script type="math/tex; mode=display">y_i(w'^Tx_i+b')\geqslant 1</script><p>where $w’=\frac{w}{r}, b’=\frac{b}{r}$. </p>
-<p>In the maximizing margin process, we only consider the support vectors which locate on the margin of hyperplane. These vectors satisfy the equation, therefore, the margin can be written as $\gamma=\frac{2}{|\boldsymbol{w}|}$. </p>
-<p>Maximizing the margin is equivalent to </p>
-<script type="math/tex; mode=display">\min _{\boldsymbol{w}, b} \frac{1}{2}\|\boldsymbol{w}\|^{2}</script><script type="math/tex; mode=display">\text { s.t. } \quad y_{i}\left(\boldsymbol{w}^{\mathrm{T}} \boldsymbol{x}_{i}+b\right) \geqslant 1, \quad i=1,2, \ldots, m</script><h2 id="Lagrangian"><a href="#Lagrangian" class="headerlink" title="Lagrangian"></a>Lagrangian</h2><p>To solve the optimization problem, apply the Lagrangian multiplier, and we get the form of the question:</p>
-<script type="math/tex; mode=display">L(w,b,\alpha)=\frac{1}{2}\|w\|^2-\sum_i^p \alpha_i(y_i(w^Tx_i+b-1))</script><script type="math/tex; mode=display">\begin{array}{l}{\text { s.t. } \sum_{i=1}^{m} \alpha_{i} y_{i}=0} \\ {\alpha_{i} \geqslant 0, \quad i=1,2, \ldots, m}\end{array}</script><h2 id="Dual-Form"><a href="#Dual-Form" class="headerlink" title="Dual Form"></a>Dual Form</h2><p>Before applying the kernel functions, the dual representations are introduced.</p>
-<p>Using the lagrandian multiplier, we convert our problem from $\min _{\boldsymbol{w}, b} \frac{1}{2}|\boldsymbol{w}|^{2}$ to $\min _{\boldsymbol{w}, b}\max_{\boldsymbol{\alpha}} L(w,b,\alpha)$. And it is equivalent to  </p>
-<script type="math/tex; mode=display">\max_{\boldsymbol{\alpha}}\{ \min _{\boldsymbol{w}, b} L(w,b,\alpha)\}</script><p>To minimize the inner loss function, we calculate the partial derivative of $w$ and $b$, and make them equal to $0$, an then we get the the </p>
-<script type="math/tex; mode=display">\begin{aligned} \boldsymbol{w}=& \sum_{i=1}^{m} \alpha_{i} y_{i} \boldsymbol{x}_{i} \\ 0 &=\sum_{i=1}^{m} \alpha_{i} y_{i} \end{aligned}</script><p>Substitute the results back to the origin $L(w,b,\alpha)$ loss function, now the dual representation is </p>
-<script type="math/tex; mode=display">\max _{\boldsymbol{\alpha}} \left ( \sum_{i=1}^{m} \alpha_{i}-\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j} \boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j} \right)</script><script type="math/tex; mode=display">\begin{array}{l}{\text { s.t. } \sum_{i=1}^{m} \alpha_{i} y_{i}=0} \\ {\alpha_{i} \geqslant 0, \quad i=1,2, \ldots, m}\end{array}</script><p>Then we can apply the kernel.</p>
-<p>Assum the kernel function which has the form like this </p>
-<script type="math/tex; mode=display">\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right)=\left\langle\phi\left(\boldsymbol{x}_{i}\right), \phi\left(\boldsymbol{x}_{j}\right)\right\rangle=\phi\left(\boldsymbol{x}_{i}\right)^{\mathrm{T}} \phi\left(\boldsymbol{x}_{j}\right)</script><p>Write the matrix form $K=\boldsymbol\phi(\boldsymbol x)\boldsymbol\phi(\boldsymbol y)$, and rewrite the dual representation as the matrix form </p>
-<script type="math/tex; mode=display">\boldsymbol c^T \boldsymbol\alpha-\frac{1}{2}\boldsymbol\alpha^T K \boldsymbol\alpha</script><p>with the constraints.</p>
-<hr>
-<p>The advantage of using the kernel trick: blog <a href="https://shuogh.github.io/2019/05/27/Kernel-Tricks/" target="_blank" rel="noopener">Kernel Function</a></p>
-<p>Some common form of kernels: blog <a href="https://shuogh.github.io/2019/05/27/Kernel-Tricks/" target="_blank" rel="noopener">Kernel Function</a></p>
-<hr>
-<h2 id="Slack-Variable"><a href="#Slack-Variable" class="headerlink" title="Slack Variable"></a>Slack Variable</h2><p>对于不能完全分隔开的情况，引入松弛变量，使硬间隔(hard margin)转换成弱间隔(soft margin)。落在软间隔中的点才是我们要关注的东西，所以之后的slack variable只有在间隔内的才是不等于0的。</p>
-<p>The form of classification constraints are replaced with</p>
-<script type="math/tex; mode=display">\begin{array}{c}{\text { s.t. } \quad y_{i}\left(\boldsymbol{w}^{\mathrm{T}} \boldsymbol{x}_{i}+b\right) \geqslant 1-\xi_{i}} \\ {\xi_{i} \geqslant 0, i=1,2, \ldots, m}\end{array}</script><p>Each slack variable is for one training data point. </p>
-<p>Data points with $ \xi_n=0$ are correctly classified and are either on the margin or on the correct side of the margin. Points for which $0&lt;\xi_{n} \leqslant 1$ lie inside the margin, but on the correct boundary, and those data points for which $\xi_n&gt;1$ lie on the wrong side of the decision boundary and are misclassified. </p>
-<p>Slack variable allow for overlapping class distributions, however this framework is still sensitive to outliers because the penalty for misclassification increase linearly with $\xi$. (错误分类的离群点，会有很大的 $\xi$ 绝对值)</p>
-<p>Therefore, the function we are going to <strong>minimize</strong> is </p>
-<script type="math/tex; mode=display">C \sum_{n=1}^{N} \xi_{n}+\frac{1}{2}\|\mathbf{w}\|^{2}</script><p>where the parameter $C&gt;0$ controls the trade-off between the salck variable penality and the margin. Because any point that is misclassified has $\xi_n&gt;1$, it follows that the $\sum_{n} \xi_{n}$ is an upper bound on the number of misclassified points. Therefore, the parameter $C$ is analogous to a regularization coefficient because it controls the trade-off between minimizing training errors and controlling the model complexity. In the limit $C \rightarrow \infty$, we will recover the earlier SVM with the hard margin. </p>
-<p>The corresponding Lagrangian is given by</p>
-<script type="math/tex; mode=display">L(\mathbf{w}, b, \mathbf{a})=\frac{1}{2}\|\mathbf{w}\|^{2}+C \sum_{n=1}^{N} \xi_{n}-\sum_{n=1}^{N} a_{n}\left\{t_{n} y\left(\mathbf{x}_{n}\right)-1+\xi_{n}\right\}-\sum_{n=1}^{N} \mu_{n} \xi_{n}</script><p>and there are the constraints(see the book)</p>
-<p>We can also convert it to the dual form and during the calculating the derivative, we get the another constraint $0 \leqslant a_{n} \leqslant C$. </p>
-<p><code>(since there are a lot of content which can be written down. I will omit these information. If you want to get to know more, see the Chapter 7.1.1 of PRML of Bishop)</code></p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>周志华 《机器学习》</li>
-<li>Bishop PRML Chapter 7.1.1</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2303,7 +2266,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2344,7 +2307,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2397,7 +2362,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">18</span>
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

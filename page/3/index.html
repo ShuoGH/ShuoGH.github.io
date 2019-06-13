@@ -357,6 +357,352 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/Git-Rebase-to-keep-commit-log-clean/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/05/Git-Rebase-to-keep-commit-log-clean/" class="post-title-link" itemprop="url">Git Rebase to keep commit log clean</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-05 11:00:33 / Modified: 11:11:41" itemprop="dateCreated datePublished" datetime="2019-05-05T11:00:33+01:00">2019-05-05</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>There always be the cases that we are developing a new feature on seperate branch when we are using <code>Git</code>. There are many commit log like “fix type”, “correct the error” etc. When we merge the branch to <code>master</code> branch, we don’t want these stupid commit log appear in the commit log of <code>master</code> branch. </p>
+<p>To merge <code>development</code> branch to <code>master</code> branch:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git merge development</span><br></pre></td></tr></table></figure></p>
+<p>If we want to make our commit log clean, then you should use <code>rebase</code>.</p>
+<h2 id="Rebase"><a href="#Rebase" class="headerlink" title="Rebase"></a>Rebase</h2><p>example:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开始开发一个新 feature</span></span><br><span class="line">$ git checkout -b new-feature master</span><br><span class="line"><span class="comment"># 改了一些代码</span></span><br><span class="line">$ git commit -a -m <span class="string">"Start developing a feature"</span></span><br><span class="line"><span class="comment"># 刚刚的修改有点问题，再改一下</span></span><br><span class="line">$ git commit -a -m <span class="string">"Fix something from the previous commit"</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 紧急修复，直接在 master 分支上改点东西</span></span><br><span class="line">$ git checkout master</span><br><span class="line"><span class="comment"># 改了一些代码</span></span><br><span class="line">$ git commit -a -m <span class="string">"Fix security hole"</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 开始交互式地 rebase 了</span></span><br><span class="line">$ git checkout new-feature</span><br><span class="line">$ git rebase -i master</span><br></pre></td></tr></table></figure></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Git tips: <a href="https://www.lovelucy.info/git-tips-combine-commits-keep-your-branch-clean.html" target="_blank" rel="noopener">合并 commit 保持分支干净整洁</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/02/Linux-Run-Script-even-after-logging-out/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/02/Linux-Run-Script-even-after-logging-out/" class="post-title-link" itemprop="url">Linux Run Script even after logging out</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-02 10:35:19" itemprop="dateCreated datePublished" datetime="2019-05-02T10:35:19+01:00">2019-05-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-04 12:01:21" itemprop="dateModified" datetime="2019-05-04T12:01:21+01:00">2019-05-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Nohup"><a href="#Nohup" class="headerlink" title="Nohup"></a>Nohup</h2><ul>
+<li>image_haha</li>
+</ul>
+<h2 id="Rerference"><a href="#Rerference" class="headerlink" title="Rerference"></a>Rerference</h2><ol>
+<li>linux后台执行命令：<a href="https://blog.csdn.net/liuyanfeier/article/details/62422742" target="_blank" rel="noopener">&amp;和nohup</a></li>
+<li>Nohup Command in Linux: <a href="https://linuxhint.com/nohup_command_linux/" target="_blank" rel="noopener">Linux Hint</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/01/VAE-Variational-Autoencoder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -901,12 +1247,24 @@
                 
               
 
-              <time title="Created: 2019-04-29 12:17:55 / Modified: 12:20:27" itemprop="dateCreated datePublished" datetime="2019-04-29T12:17:55+01:00">2019-04-29</time>
+              <time title="Created: 2019-04-29 12:17:55" itemprop="dateCreated datePublished" datetime="2019-04-29T12:17:55+01:00">2019-04-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-13 12:00:43" itemprop="dateModified" datetime="2019-06-13T12:00:43+01:00">2019-06-13</time>
               
             
           </span>
@@ -963,6 +1321,50 @@
             <p>How to write better code with good style</p>
 <p>Here is a guide.</p>
 <p>机器之心：<a href="https://www.jiqizhixin.com/articles/2019-04-29-5" target="_blank" rel="noopener">PyTorch最佳实践，怎样才能写出一手风格优美的代码</a></p>
+<h2 id="Python-Name-Convention"><a href="#Python-Name-Convention" class="headerlink" title="Python Name Convention"></a>Python Name Convention</h2><p>python 命名规范</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Type</th>
+<th style="text-align:center">Convention</th>
+<th style="text-align:center">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Packages &amp; Modules</td>
+<td style="text-align:center">lower_with_under</td>
+<td style="text-align:center">from <strong>prefetch_generator</strong> import BackgroundGenerator</td>
+</tr>
+<tr>
+<td style="text-align:center">Classes</td>
+<td style="text-align:center">CapWords</td>
+<td style="text-align:center">class <strong>Dataloader</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">Constants</td>
+<td style="text-align:center">CAPS_WITH_UNDER</td>
+<td style="text-align:center"><strong>BATCH_SIZE</strong>=16</td>
+</tr>
+<tr>
+<td style="text-align:center">Instances</td>
+<td style="text-align:center">lower_with_under</td>
+<td style="text-align:center"><strong>dataset</strong> = Dataset</td>
+</tr>
+<tr>
+<td style="text-align:center">Methods &amp; Functions</td>
+<td style="text-align:center">lower_with_under()</td>
+<td style="text-align:center">def <strong>visualize_tensor</strong>()</td>
+</tr>
+<tr>
+<td style="text-align:center">Variables</td>
+<td style="text-align:center">lower_with_under</td>
+<td style="text-align:center"><strong>background_colour</strong> = ‘Blue’</td>
+</tr>
+</tbody>
+</table>
+</div>
 
           
         
@@ -1749,369 +2151,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/Interview-1-QuantumBlack-Experience/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/15/Interview-1-QuantumBlack-Experience/" class="post-title-link" itemprop="url">Interview-1 QuantumBlack Data Science Intern</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-15 16:11:59 / Modified: 16:46:26" itemprop="dateCreated datePublished" datetime="2019-04-15T16:11:59+01:00">2019-04-15</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>记第一次在英国公司面试</p>
-<h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><p>第一次面试，quantum black这个公司，面试官是两个小姐姐。公司整体人很好，刚进门的时候有小哥路过还打招呼问我，后来在餐厅等候的时候还有小哥问我吃不吃巧克力，公司整体氛围相当不错。面试官也特别友善。</p>
-<p>面试开始先有一个简单的introduction，让面试官认识你。没有准备好这个brief introduction。</p>
-<p>面试过程表现不太好。。。感觉一是因为英语不够熟练，刚开始不太能get到小姐姐的问题，表现不好。二是后面technical方面的问题的时候，我忘了一些模型的细节，后面详细写。</p>
-<h2 id="case-part"><a href="#case-part" class="headerlink" title="case part"></a>case part</h2><p>第一部分是实际案例部分，案例问题是关于fraud detection。给定一组很大的银行的交易数据，such as 100million条，其中200条是诈骗交易，我们要进行诈骗交易的检测。</p>
-<p>第一步让我构建feature，觉得能从之前的数据中构建出来什么feature。最开始没太理解，后来也没答好，确实不知道能构建什么feature</p>
-<p>第二步让我建立模型来解决这个问题。我提出使用逻辑回归模型来进行预测。接着会来一连串的问题，为什么会选用逻辑回归来预测？ 我要如何训练和测试这个模型？</p>
-<ul>
-<li>关于loss function这一块，问我如何构建。 我说使用交叉熵，但是我忘了交叉熵的公式了。。。。</li>
-<li>metric to evaluate 这个模型，我说可以使用confusion matrix。要求来画出混淆矩阵，紧张了一下没画出来，后来画出来了。问到了precision，recall和f值。结合案例又问了问题，问我应该重点关注哪个值，这里回答不好。。。</li>
-<li>如何split training data set。这个数据严重不平衡，如何做。。。。我也不知道回答的好还是不好。。先说80 20 split，后来说可以使用cross validation来进行交叉检验。小姐姐针对这个问题提出疑问，可能有的fold没有fraud point。。。</li>
-</ul>
-<p>这部分整体感觉，有点崩，也有些超时。感觉这里应该有自己的独立思考，根据相应的案例进行变通，应该是要跟面试官进行discuss的，我没做好心理准备，导致被面试官牵着走，效果也不好。模型不应该一成不变，应该根据相应的case有不同变通。</p>
-<h2 id="technical-part"><a href="#technical-part" class="headerlink" title="technical part"></a>technical part</h2><p>这一块不是case，是要问理论的部分。这一块刚开始其实还是比较自信的，因为自我感觉理论掌握的还不错。</p>
-<ol>
-<li><p>ROC curve<br>之前看过ROC curve，但是这次死活也想不起来。。。难受，这个东西业界用的比较多，之前看过一次，但是这次之前忘了看，实属失误</p>
-</li>
-<li><p>逻辑回归<br>这里小姐姐结合线性回归和逻辑回归来问我问题。 还好前几天看官网案例的时候看到逻辑回归用的比较多，提前准备了一下。这里主要看线性回归和逻辑回归的理解。分别问到了线性回归的方程表现形式，loss function是什么，梯度下降又是什么（这里画图来描述），如何使用梯度下降进行优化（不必要推导导数公式）。</p>
-</li>
-</ol>
-<p>接着问了逻辑回归和线性回归之间的联系。时间限制，我写了一个公式，小姐姐知道了我的意思就开始下一个问题了。</p>
-<ol>
-<li><p>其他非线性分类的模型<br>我回答了 SVM，接着让我描述SVM和他的原理。我说svm基本状态是线性分类的，要做到非线性要用kernel。接着让我描述kernel，kernel是什么。这一块花的时间比较多，我有时候没有搞明白她的意思。其实kernel我也没有办法说的很清楚，这一块是个失误。</p>
-</li>
-<li><p>tree - ensemble<br>还好我提前也准备了这一块，集成学习这一块。可惜boosting部分忘记了细节，太紧张了没回答上来。</p>
-</li>
-</ol>
-<p>bagging，我描述了bagging的idea。小姐姐针对bagging问了我问题，这些models是一个model吗，是不是不同。</p>
-<p>boosting，描述的没有很清楚。我没讲清楚如何训练互补的model。。。。。。给data set赋予权重，每个数据都有不同的权重（最开始没讲清楚），然后讲如何通过一个$\alpha$来变换之前之后的权重。（太紧张了，又没有提前准备，没回答好）</p>
-<p>之后时间到了，结束。</p>
-<h2 id="经验教训"><a href="#经验教训" class="headerlink" title="经验教训"></a>经验教训</h2><ol>
-<li>准备好开头的小介绍  *重要</li>
-<li>练习好英语，case discuss部分要灵活变通，表现自己的思考  ****重要</li>
-<li>ROC curve  *重要，忘记准备了</li>
-<li>SVM kernel *重要，学会讲这个东西</li>
-<li>boosting  *重要，忘记准备，本身会</li>
-<li>技术的问题都问的很详细，不会问你深度学习相关的东西，就只是问你base model的问题。准备时候要有侧重点，还好我提前看过了官网上的往期project，对知道他应该更多的问传统机器学习模型部分。但是一些具体的细节需要更加深入的理解，达到能给别人讲的程度。  ****重要 </li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/14/Gaussian-Mixed-Model-GMM-and-EM-algorithm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/14/Gaussian-Mixed-Model-GMM-and-EM-algorithm/" class="post-title-link" itemprop="url">Gaussian Mixed Model(GMM) and EM algorithm</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-14 17:33:50 / Modified: 17:45:37" itemprop="dateCreated datePublished" datetime="2019-04-14T17:33:50+01:00">2019-04-14</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Gaussian-Distribution"><a href="#Gaussian-Distribution" class="headerlink" title="Gaussian Distribution"></a>Gaussian Distribution</h2><h2 id="Mixed-Gaussian-Distribution"><a href="#Mixed-Gaussian-Distribution" class="headerlink" title="Mixed Gaussian Distribution"></a>Mixed Gaussian Distribution</h2><h2 id="Optimization-Method"><a href="#Optimization-Method" class="headerlink" title="Optimization Method"></a>Optimization Method</h2><h2 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h2><ol>
-<li>知乎 <a href="https://zhuanlan.zhihu.com/p/30483076" target="_blank" rel="noopener">高斯混合模型(GMM)</a></li>
-<li>知乎 <a href="https://zhuanlan.zhihu.com/p/31103654" target="_blank" rel="noopener">一文详解高斯混合模型原理</a></li>
-<li>《统计学习方法》第九章 - EM算法及其推广——李航</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2160,7 +2199,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2201,7 +2240,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -2254,7 +2295,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">18</span>
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
