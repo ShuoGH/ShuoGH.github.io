@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-14 09:47:25" itemprop="dateModified" datetime="2019-06-14T09:47:25+01:00">2019-06-14</time>
+                <time title="Modified: 2019-06-14 10:13:02" itemprop="dateModified" datetime="2019-06-14T10:13:02+01:00">2019-06-14</time>
               
             
           </span>
@@ -473,7 +473,7 @@
       
         
           
-            <p>There are several common ways to get the user-agent and use it to scrape the website.</p>
+            <h2 id="How-to-Get-User-Agent-for-your-Crawler"><a href="#How-to-Get-User-Agent-for-your-Crawler" class="headerlink" title="How to Get User-Agent for your Crawler"></a>How to Get User-Agent for your Crawler</h2><p>There are several common ways to get the user-agent and use it to scrape the website.</p>
 <ol>
 <li><p><code>about:version</code> in your browser, and check the User-Agent.</p>
 </li>
@@ -482,7 +482,7 @@
 <li><p>install the <code>fake_agent</code> in your computer and import it for using in Python</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install fake_useragent</span><br></pre></td></tr></table></figure>
 <p>When using:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fake_useragent <span class="keyword">import</span> UserAgent</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">fake_ua=UserAgent()</span><br><span class="line">headers=&#123;<span class="string">'User-Agent'</span>:fake_ua.random&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fake_useragent <span class="keyword">import</span> UserAgent</span><br><span class="line"><span class="comment"># import random</span></span><br><span class="line"></span><br><span class="line">fake_ua=UserAgent()</span><br><span class="line">headers=&#123;<span class="string">'User-Agent'</span>:fake_ua.random&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <ol>
@@ -490,6 +490,7 @@
 </ol>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
 <li>CSDN blog: <a href="https://blog.csdn.net/python_neophyte/article/details/82491359" target="_blank" rel="noopener">爬虫之UserAgent的获得方法</a></li>
+<li>fake_useragent <a href="https://pypi.org/project/fake-useragent/" target="_blank" rel="noopener">doc</a></li>
 </ol>
 
           
@@ -592,12 +593,24 @@
                 
               
 
-              <time title="Created: 2019-06-13 18:10:29 / Modified: 18:28:48" itemprop="dateCreated datePublished" datetime="2019-06-13T18:10:29+01:00">2019-06-13</time>
+              <time title="Created: 2019-06-13 18:10:29" itemprop="dateCreated datePublished" datetime="2019-06-13T18:10:29+01:00">2019-06-13</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-14 10:31:26" itemprop="dateModified" datetime="2019-06-14T10:31:26+01:00">2019-06-14</time>
               
             
           </span>
@@ -664,11 +677,19 @@
 <ul>
 <li>add <code>sleep(1)</code> in every iteration of downloading image<ul>
 <li>It improve the problem and make the program stick longer time to do crawler work, but not solve it completely.</li>
+<li>In this way, I was able to download almost 300 images until failing.</li>
 </ul>
 </li>
-<li>(to be continued)</li>
+<li>To improve the ability of anti-anti-spider, in the second version, I added two other functions:<ul>
+<li>Randomly sleep some time when accessing the images</li>
+<li>Randomly choose the User-Agent using <code>fake_useragent</code> Python module.</li>
+<li>(wait to test the performance.)</li>
 </ul>
-<h2 id="Connection-reset-by-peer"><a href="#Connection-reset-by-peer" class="headerlink" title="Connection reset by peer"></a>Connection reset by peer</h2>
+</li>
+<li>(To be continued)</li>
+</ul>
+<h2 id="Connection-reset-by-peer"><a href="#Connection-reset-by-peer" class="headerlink" title="Connection reset by peer"></a>Connection reset by peer</h2><p>I’m not sure what’s the reason of this problem.</p>
+
           
         
       

@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="We Need to Go Deeper">
 <meta property="og:description" content="When writing the crawler program, I met across several problems. This blog is to records the solution which I used in my program. Access denied when using url directlySome websites add some features t">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-13T17:28:48.368Z">
+<meta property="og:updated_time" content="2019-06-14T09:31:26.839Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Error Met in First Crawler Demo">
 <meta name="twitter:description" content="When writing the crawler program, I met across several problems. This blog is to records the solution which I used in my program. Access denied when using url directlySome websites add some features t">
@@ -404,12 +404,24 @@
                 
               
 
-              <time title="Created: 2019-06-13 18:10:29 / Modified: 18:28:48" itemprop="dateCreated datePublished" datetime="2019-06-13T18:10:29+01:00">2019-06-13</time>
+              <time title="Created: 2019-06-13 18:10:29" itemprop="dateCreated datePublished" datetime="2019-06-13T18:10:29+01:00">2019-06-13</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-14 10:31:26" itemprop="dateModified" datetime="2019-06-14T10:31:26+01:00">2019-06-14</time>
               
             
           </span>
@@ -481,11 +493,19 @@
 <ul>
 <li>add <code>sleep(1)</code> in every iteration of downloading image<ul>
 <li>It improve the problem and make the program stick longer time to do crawler work, but not solve it completely.</li>
+<li>In this way, I was able to download almost 300 images until failing.</li>
 </ul>
 </li>
-<li>(to be continued)</li>
+<li>To improve the ability of anti-anti-spider, in the second version, I added two other functions:<ul>
+<li>Randomly sleep some time when accessing the images</li>
+<li>Randomly choose the User-Agent using <code>fake_useragent</code> Python module.</li>
+<li>(wait to test the performance.)</li>
 </ul>
-<h2 id="Connection-reset-by-peer"><a href="#Connection-reset-by-peer" class="headerlink" title="Connection reset by peer"></a>Connection reset by peer</h2>
+</li>
+<li>(To be continued)</li>
+</ul>
+<h2 id="Connection-reset-by-peer"><a href="#Connection-reset-by-peer" class="headerlink" title="Connection reset by peer"></a>Connection reset by peer</h2><p>I’m not sure what’s the reason of this problem.</p>
+
       
     </div>
 
