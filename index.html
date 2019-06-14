@@ -357,6 +357,196 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/13/Web-Crawler-Get-the-User-Agent/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/13/Web-Crawler-Get-the-User-Agent/" class="post-title-link" itemprop="url">Web Crawler Get the User-Agent</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-13 23:27:21" itemprop="dateCreated datePublished" datetime="2019-06-13T23:27:21+01:00">2019-06-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-14 09:47:25" itemprop="dateModified" datetime="2019-06-14T09:47:25+01:00">2019-06-14</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Web-Crawler/" itemprop="url" rel="index"><span itemprop="name">Web Crawler</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>There are several common ways to get the user-agent and use it to scrape the website.</p>
+<ol>
+<li><p><code>about:version</code> in your browser, and check the User-Agent.</p>
+</li>
+<li><p>Use the inspect tool within your browser. Network -&gt; refresh your page -&gt; find the current page -&gt; Headers -&gt; check the User-Agent</p>
+</li>
+<li><p>install the <code>fake_agent</code> in your computer and import it for using in Python</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install fake_useragent</span><br></pre></td></tr></table></figure>
+<p>When using:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fake_useragent <span class="keyword">import</span> UserAgent</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">fake_ua=UserAgent()</span><br><span class="line">headers=&#123;<span class="string">'User-Agent'</span>:fake_ua.random&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>Google to find some User-Agent, sush as <a href="https://blog.csdn.net/bone_ace/article/details/52476016" target="_blank" rel="noopener">User-Agent 汇总</a></li>
+</ol>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>CSDN blog: <a href="https://blog.csdn.net/python_neophyte/article/details/82491359" target="_blank" rel="noopener">爬虫之UserAgent的获得方法</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/13/Error-Met-in-First-Crawler-Demo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -402,7 +592,7 @@
                 
               
 
-              <time title="Created: 2019-06-13 18:10:29 / Modified: 18:14:30" itemprop="dateCreated datePublished" datetime="2019-06-13T18:10:29+01:00">2019-06-13</time>
+              <time title="Created: 2019-06-13 18:10:29 / Modified: 18:28:48" itemprop="dateCreated datePublished" datetime="2019-06-13T18:10:29+01:00">2019-06-13</time>
             
 
             
@@ -478,7 +668,7 @@
 </li>
 <li>(to be continued)</li>
 </ul>
-
+<h2 id="Connection-reset-by-peer"><a href="#Connection-reset-by-peer" class="headerlink" title="Connection reset by peer"></a>Connection reset by peer</h2>
           
         
       
@@ -579,12 +769,24 @@
                 
               
 
-              <time title="Created: 2019-06-13 18:08:08 / Modified: 18:14:54" itemprop="dateCreated datePublished" datetime="2019-06-13T18:08:08+01:00">2019-06-13</time>
+              <time title="Created: 2019-06-13 18:08:08" itemprop="dateCreated datePublished" datetime="2019-06-13T18:08:08+01:00">2019-06-13</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-14 09:49:43" itemprop="dateModified" datetime="2019-06-14T09:49:43+01:00">2019-06-14</time>
               
             
           </span>
@@ -642,11 +844,14 @@
 <p><code>Urllib</code> and <code>requests</code> are two different modules in Python which can be used for crawler.</p>
 <p>For beginner, the <code>requests</code> is recommended. </p>
 <h2 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h2><p>HTTP request header is the information, in the form of a text record, that a user’s browser sends to a Web serveer containing the details of what the browser wants and will accept back from server.</p>
+<h3 id="User-Agent"><a href="#User-Agent" class="headerlink" title="User-Agent"></a>User-Agent</h3><p>The User-Agent appears in an HTTP Request Header, not an HTTP Response one. In general, the request is sent from browser to the web application. So the user-agent is filled by the browser. Different browsers will fill up this field with different values.</p>
+<p>Blog:  <a href="/2019/06/13/Web-Crawler-Get-the-User-Agent/" title="Web Crawler Get the User-Agent">Web Crawler Get the User-Agent</a></p>
 <h3 id="Referer"><a href="#Referer" class="headerlink" title="Referer"></a>Referer</h3><p>Optional HTTP header field that identifies the address of the webpage that linked to the resource being requested. By checking the referee, the new webpage can see where the request originated.</p>
 <p>Some websites use this to ban the crawler, and you may need to update your referer. </p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
 <li><a href="https://www.jianshu.com/p/1efa672156d3" target="_blank" rel="noopener">Python 爬虫基础之urllib和requests</a> </li>
 <li>my demo of <a href="https://github.com/ShuoGH/web-crawler" target="_blank" rel="noopener">web crawler</a></li>
+<li>stackoverflow: <a href="https://stackoverflow.com/questions/15069533/http-request-header-useragent-variable" target="_blank" rel="noopener">HTTP request header</a></li>
 </ol>
 
           
@@ -2035,189 +2240,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Bias-and-Variance/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/27/Bias-and-Variance/" class="post-title-link" itemprop="url">Bias and Variance</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-27 16:53:50 / Modified: 17:01:05" itemprop="dateCreated datePublished" datetime="2019-05-27T16:53:50+01:00">2019-05-27</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Bias-and-Variance"><a href="#Bias-and-Variance" class="headerlink" title="Bias and Variance"></a>Bias and Variance</h2><p>A good learner classifier should have a good <strong>generalisation error</strong>.     </p>
-<ul>
-<li>Generalisation: how well do we do on unseen data as opposed to the training data</li>
-</ul>
-<p>The problems in the Machine Learning can be over-constrained and under-constrained.</p>
-<ul>
-<li>Over-constrained: We have conflicting data to deal with. There are more equations than variables. In this case, the learner has insufficient flexibility to correctly predict all the training data. To solve this problem, we can minimise an error function, which means that we find a machine that explained the training data as best it can.</li>
-<li>Under-constrained: There are many possible solutions that are consistent with the data . Need to choose a plausible solution.</li>
-</ul>
-<p><strong>Bias</strong>: the generalisation performance of the mean machine. </p>
-<script type="math/tex; mode=display">\hat{f}_{m}(\boldsymbol{x})=\mathbb{E}_{\mathcal{D}}\left[\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)\right]</script><p>which $\hat{f}_{m}(\boldsymbol{x})$ is the mean predictor(machine) value. And the bias is defined as</p>
-<script type="math/tex; mode=display">B=\sum_{x \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}</script><p>（可以看成最终训练出的分类器在训练集上进行预测，得到的所有值的平均值与每一个原target计算error）</p>
-<p><strong>Variance</strong>: measures the expected variation from the average machine due to the fluctuations caused by the using a finite training set.</p>
-<script type="math/tex; mode=display">V=\mathbb{E}_{\mathcal{D}}\left[\sum_{x \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}\right]</script><p>（训练出来的分类器，对每个训练集的输入进行预测，计算这些值的分布的方差）</p>
-<h2 id="Decomposition"><a href="#Decomposition" class="headerlink" title="Decomposition"></a>Decomposition</h2><p>The formulas of bias and variance are already defined above. Here we are going to show the decomposition.</p>
-<p>The expected generalisation（平均泛化误差） is written as</p>
-<script type="math/tex; mode=display">\overline{E}_{G}=\mathbb{E}_{\mathcal{D}}\left[E_{G}\left(\boldsymbol{w}_{\mathcal{D}}\right)\right]=\mathbb{E}_{\mathcal{D}}\left[\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-f(\boldsymbol{x})\right)^{2}\right]</script><script type="math/tex; mode=display">=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x}) \mathbb{E}_{\mathcal{D}}\left[\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-f(\boldsymbol{x})\right)^{2}\right]</script><script type="math/tex; mode=display">=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x}) \mathbb{E}_{\mathcal{D}}\left[\left(\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)+\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)\right)^{2}\right]</script><script type="math/tex; mode=display">\begin{aligned}=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})( & \mathbb{E}_{\mathcal{D}}\left[\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}+\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}\right] \\ &+\mathbb{E}_{\mathcal{D}}\left[2\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)\right] ) \end{aligned}</script><p>The second term will vanish sicne the $\hat{f}_{m}(\boldsymbol{x})=\mathbb{E}_{\mathcal{D}}\left[\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)\right]$. Finally we can rewrite the generalisation formula as </p>
-<script type="math/tex; mode=display">\begin{aligned} \mathbb{E}_{\mathcal{D}}\left[E_{G}\left(\boldsymbol{w}_{\mathcal{D}}\right)\right]=\mathbb{E}_{\mathcal{D}} &\left[\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}\right] \\+\sum & \sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}=V+B \end{aligned}</script><h2 id="Bias-Variance-Dilemma"><a href="#Bias-Variance-Dilemma" class="headerlink" title="Bias-Variance Dilemma"></a>Bias-Variance Dilemma</h2><p>The composition mentioned above encodes how sensitive the machine is to the data. </p>
-<p>The dilemma arises because a simple machine will typically have a large bias, but small variance, while a complicated machine will have a small bias but large variance.</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>Adam slide01 COMP6208</li>
-<li>Additional reading Bishop PRML Chapter 3.2</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2266,7 +2288,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

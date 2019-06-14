@@ -357,6 +357,206 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/27/Kaggle-Competition-Humpback-Whale-Identification/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/27/Kaggle-Competition-Humpback-Whale-Identification/" class="post-title-link" itemprop="url">Kaggle Competition: Humpback Whale Identification</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-27 14:49:12" itemprop="dateCreated datePublished" datetime="2019-04-27T14:49:12+01:00">2019-04-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-28 14:05:58" itemprop="dateModified" datetime="2019-04-28T14:05:58+01:00">2019-04-28</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kaggle/" itemprop="url" rel="index"><span itemprop="name">Kaggle</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Kaggle竞赛第一名方案解读</p>
+<h2 id="Description-of-Competition"><a href="#Description-of-Competition" class="headerlink" title="Description of Competition"></a>Description of Competition</h2><p>目的：构建算法识别鲸鱼个体</p>
+<p>难点：</p>
+<ul>
+<li>训练样本的严重不均衡</li>
+<li>存在接近三分之一的无标注（new whale）数据</li>
+</ul>
+<p>Some new terminology:</p>
+<ul>
+<li>Few-shot learning: <a href="https://blog.csdn.net/xhw205/article/details/79491649" target="_blank" rel="noopener">what’s few shot learning</a></li>
+<li>细粒度分类: that’s why we need mask. <a href="https://www.imooc.com/article/30053" target="_blank" rel="noopener">mask-CNN</a>,<a href="https://cloud.tencent.com/developer/article/1010499" target="_blank" rel="noopener">什么是mask</a></li>
+<li>triplet loss: ？？？</li>
+<li>SE-resneXt154: 一个新的分类模型</li>
+<li>伪标签：？？</li>
+</ul>
+<hr>
+<p><strong>Pipeline：</strong></p>
+<h2 id="Input-of-the-models"><a href="#Input-of-the-models" class="headerlink" title="Input of the models"></a>Input of the models</h2><ul>
+<li>RGB+mask</li>
+<li>Data Augmentation:<ul>
+<li>有人提出鲸鱼尾部不对称，翻转之后是新的类别</li>
+</ul>
+</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>kaggle competition: <a href="https://www.kaggle.com/c/humpback-whale-identification" target="_blank" rel="noopener">Humpback Whale Identification</a></li>
+<li>机器之心: <a href="https://zhuanlan.zhihu.com/p/58496385" target="_blank" rel="noopener">Kaggle第一名竞赛方案解读</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/Interview-1-QuantumBlack-Experience/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1948,196 +2148,6 @@ sign(x)=\begin{cases}
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/Ensemble-Learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/20/Ensemble-Learning/" class="post-title-link" itemprop="url">Ensemble Learning</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-20 18:22:54" itemprop="dateCreated datePublished" datetime="2019-03-20T18:22:54+00:00">2019-03-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-05-27 17:26:13" itemprop="dateModified" datetime="2019-05-27T17:26:13+01:00">2019-05-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Ensemble-Learning"><a href="#Ensemble-Learning" class="headerlink" title="Ensemble Learning"></a>Ensemble Learning</h1><h2 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h2><p>When to use bagging?</p>
-<p>用于很强的model。</p>
-<p>最容易overfitting的model其实不是神经网络，而是decision tree。如果你想，只要把树扎的足够深，甚至可以在training data上得到100%的准确率，但是那没有任何意义，只是overfitting而已。</p>
-<p>Bagging就是将容易overfitting的一堆model结合起来，乱拳打死老师傅。随机森林就是在decision tree上进行bagging，将多个决策树组合起来组成随机森林。</p>
-<p>How to get different classifier?</p>
-<ul>
-<li>Re-sampling your data set to form a new set </li>
-<li>Re-weighting yoru data set to form a new set</li>
-</ul>
-<h3 id="Random-Forest"><a href="#Random-Forest" class="headerlink" title="Random Forest"></a>Random Forest</h3><p>The data set is generated by the bootstrapping, which resample the data set with replacement. In random forest, we average much less correlated trees. To implement this algorithm, not only different data subsets are used, but also we choose a subset $m \ll p$ of the features to train decision tree. Typically $m$ can range from $1$ to $\sqrt{p}$. The trees are not that good, but by averaging over huge number of trees, we can get pretty good results.</p>
-<h2 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h2><p>用于比较弱的model。</p>
-<p>Adaboost</p>
-<p>Can convert the weak learner to strong learner(classifier).</p>
-<p>我自己的一个简单Adaboost <a href="https://github.com/ShuoGH/datascience/blob/master/Adaboost.ipynb" target="_blank" rel="noopener">demo</a></p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>台湾大学李宏毅的<a href="https://www.youtube.com/watch?v=tH9FH1DH5n0" target="_blank" rel="noopener">视频</a></li>
-<li>课程资源: <a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML16.html" target="_blank" rel="noopener">Hung-yi Lee</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2186,7 +2196,7 @@ sign(x)=\begin{cases}
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

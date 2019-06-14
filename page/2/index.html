@@ -357,6 +357,189 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Bias-and-Variance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/27/Bias-and-Variance/" class="post-title-link" itemprop="url">Bias and Variance</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-27 16:53:50 / Modified: 17:01:05" itemprop="dateCreated datePublished" datetime="2019-05-27T16:53:50+01:00">2019-05-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Bias-and-Variance"><a href="#Bias-and-Variance" class="headerlink" title="Bias and Variance"></a>Bias and Variance</h2><p>A good learner classifier should have a good <strong>generalisation error</strong>.     </p>
+<ul>
+<li>Generalisation: how well do we do on unseen data as opposed to the training data</li>
+</ul>
+<p>The problems in the Machine Learning can be over-constrained and under-constrained.</p>
+<ul>
+<li>Over-constrained: We have conflicting data to deal with. There are more equations than variables. In this case, the learner has insufficient flexibility to correctly predict all the training data. To solve this problem, we can minimise an error function, which means that we find a machine that explained the training data as best it can.</li>
+<li>Under-constrained: There are many possible solutions that are consistent with the data . Need to choose a plausible solution.</li>
+</ul>
+<p><strong>Bias</strong>: the generalisation performance of the mean machine. </p>
+<script type="math/tex; mode=display">\hat{f}_{m}(\boldsymbol{x})=\mathbb{E}_{\mathcal{D}}\left[\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)\right]</script><p>which $\hat{f}_{m}(\boldsymbol{x})$ is the mean predictor(machine) value. And the bias is defined as</p>
+<script type="math/tex; mode=display">B=\sum_{x \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}</script><p>（可以看成最终训练出的分类器在训练集上进行预测，得到的所有值的平均值与每一个原target计算error）</p>
+<p><strong>Variance</strong>: measures the expected variation from the average machine due to the fluctuations caused by the using a finite training set.</p>
+<script type="math/tex; mode=display">V=\mathbb{E}_{\mathcal{D}}\left[\sum_{x \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}\right]</script><p>（训练出来的分类器，对每个训练集的输入进行预测，计算这些值的分布的方差）</p>
+<h2 id="Decomposition"><a href="#Decomposition" class="headerlink" title="Decomposition"></a>Decomposition</h2><p>The formulas of bias and variance are already defined above. Here we are going to show the decomposition.</p>
+<p>The expected generalisation（平均泛化误差） is written as</p>
+<script type="math/tex; mode=display">\overline{E}_{G}=\mathbb{E}_{\mathcal{D}}\left[E_{G}\left(\boldsymbol{w}_{\mathcal{D}}\right)\right]=\mathbb{E}_{\mathcal{D}}\left[\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-f(\boldsymbol{x})\right)^{2}\right]</script><script type="math/tex; mode=display">=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x}) \mathbb{E}_{\mathcal{D}}\left[\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-f(\boldsymbol{x})\right)^{2}\right]</script><script type="math/tex; mode=display">=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x}) \mathbb{E}_{\mathcal{D}}\left[\left(\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)+\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)\right)^{2}\right]</script><script type="math/tex; mode=display">\begin{aligned}=\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})( & \mathbb{E}_{\mathcal{D}}\left[\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}+\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}\right] \\ &+\mathbb{E}_{\mathcal{D}}\left[2\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)\right] ) \end{aligned}</script><p>The second term will vanish sicne the $\hat{f}_{m}(\boldsymbol{x})=\mathbb{E}_{\mathcal{D}}\left[\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)\right]$. Finally we can rewrite the generalisation formula as </p>
+<script type="math/tex; mode=display">\begin{aligned} \mathbb{E}_{\mathcal{D}}\left[E_{G}\left(\boldsymbol{w}_{\mathcal{D}}\right)\right]=\mathbb{E}_{\mathcal{D}} &\left[\sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}\left(\boldsymbol{x} | \boldsymbol{w}_{\mathcal{D}}\right)-\hat{f}_{m}(\boldsymbol{x})\right)^{2}\right] \\+\sum & \sum_{\boldsymbol{x} \in \mathcal{X}} p(\boldsymbol{x})\left(\hat{f}_{m}(\boldsymbol{x})-f(\boldsymbol{x})\right)^{2}=V+B \end{aligned}</script><h2 id="Bias-Variance-Dilemma"><a href="#Bias-Variance-Dilemma" class="headerlink" title="Bias-Variance Dilemma"></a>Bias-Variance Dilemma</h2><p>The composition mentioned above encodes how sensitive the machine is to the data. </p>
+<p>The dilemma arises because a simple machine will typically have a large bias, but small variance, while a complicated machine will have a small bias but large variance.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Adam slide01 COMP6208</li>
+<li>Additional reading Bishop PRML Chapter 3.2</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Radial-Basis-Function-RBF-network/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2024,170 +2207,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/07/Linux-Server-set-thread-for-Pytorch/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/07/Linux-Server-set-thread-for-Pytorch/" class="post-title-link" itemprop="url">Linux Server set thread for Pytorch</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-07 01:57:42 / Modified: 02:02:38" itemprop="dateCreated datePublished" datetime="2019-05-07T01:57:42+01:00">2019-05-07</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>During the time of doing my course work for Advanced Machine Learning, I ran my deep learning scripts on the server. In the first time, I saw the %CPU of my job was always very high. (And then, the admin killed my job since it stuck other jobs…sorry, i didn’t know this at that time)</p>
-<p>To avoid the effect on other users, before runing our Pytorch scripts, we should run the following code in the beginning to set the thread. </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OMP_NUM_THREADS=1</span><br><span class="line"><span class="built_in">export</span> OMP_NUM_THREADS</span><br></pre></td></tr></table></figure>
-<p>This allow us to use only one thread in our one job.</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2236,7 +2255,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
