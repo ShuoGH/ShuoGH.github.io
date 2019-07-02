@@ -402,7 +402,7 @@
                 
               
 
-              <time title="Created: 2019-07-02 16:23:20 / Modified: 16:23:51" itemprop="dateCreated datePublished" datetime="2019-07-02T16:23:20+01:00">2019-07-02</time>
+              <time title="Created: 2019-07-02 16:23:20 / Modified: 16:45:26" itemprop="dateCreated datePublished" datetime="2019-07-02T16:23:20+01:00">2019-07-02</time>
             
 
             
@@ -467,8 +467,26 @@
 <p>Non-interactive means that it can work in the background. </p>
 <p>To invoke:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget [option]… [URL]…</span><br></pre></td></tr></table></figure>
+<h2 id="Some-more-about-Using"><a href="#Some-more-about-Using" class="headerlink" title="Some more about Using"></a>Some more about Using</h2><ol>
+<li>Download file in the background: </li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -b [URL]</span><br></pre></td></tr></table></figure>
+<p>Check the information of the downloading:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f wget-log</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Download file and change the name</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O [name] [URL]</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Download multiple files </li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -i filelist.txt</span><br></pre></td></tr></table></figure>
+<p>The <code>filelist.txt</code> should have the urls of the targets files.</p>
+<p>To unzip the <code>.tar.gz</code> file, use the command <code>tar</code>. See the blog .</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ol>
 <li>GNU Wget <a href="https://www.gnu.org/software/wget/manual/wget.html" target="_blank" rel="noopener">1.20 Manual</a></li>
+<li>每天一个linux命令（61）：<a href="https://www.cnblogs.com/peida/archive/2013/03/18/2965369.html" target="_blank" rel="noopener">wget命令</a></li>
+<li></li>
 </ol>
 
           
