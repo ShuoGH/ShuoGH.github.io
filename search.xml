@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Linux wget for downloading</title>
+      <link href="/2019/07/02/Linux-wget-for-downloading/"/>
+      <url>/2019/07/02/Linux-wget-for-downloading/</url>
+      
+        <content type="html"><![CDATA[<p>wget for downloading files in Terminal.</p><p>When I was doing my summer project, I should download the datasets into the server. To achieve this, I used the <code>wget</code> and records the infor of this command by this chance.</p><h2 id="Introduction-of-wget"><a href="#Introduction-of-wget" class="headerlink" title="Introduction of wget"></a>Introduction of wget</h2><p>GNU Wget is a free utility for non-interactive download of files from Web. It supports HTTP, HTTPS, and FTP protocols, as well as retrieval through HTTP proxies. </p><p>Non-interactive means that it can work in the background. </p><p>To invoke:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget [option]… [URL]…</span><br></pre></td></tr></table></figure><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ol><li>GNU Wget <a href="https://www.gnu.org/software/wget/manual/wget.html" target="_blank" rel="noopener">1.20 Manual</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Can Python Interprete itself?</title>
       <link href="/2019/07/02/Can-Python-Interprete-itself/"/>
       <url>/2019/07/02/Can-Python-Interprete-itself/</url>
