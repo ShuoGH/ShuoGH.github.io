@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Can Python Interprete itself?</title>
+      <link href="/2019/07/02/Can-Python-Interprete-itself/"/>
+      <url>/2019/07/02/Can-Python-Interprete-itself/</url>
+      
+        <content type="html"><![CDATA[<p>The interpreter of Python can be written with Python, such as the most famous one <a href="http://pypy.org/" target="_blank" rel="noopener">PyPy</a>.</p><p>There are several advantages using <code>PyPy</code>, like the speed, memory usage, compatibility and stackless. </p><p>In the tutorial of Allison Kaptur, the Python interpreter is a stack machine: it manipulates several stacks to perform its operations( as contrasted with a register machine, which writes to and reads from particular memory locations).</p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h2><ol><li>Allison Kaptur <a href="[http://aosabook.org/en/500L/a-python-interpreter-written-in-python.html](http://aosabook.org/en/500L/a-python-interpreter-written-in-python.html">A Python Interpreter Written in Python</a>)</li><li></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Python </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Python Interpreter</title>
       <link href="/2019/07/02/Python-Interpreter/"/>
       <url>/2019/07/02/Python-Interpreter/</url>
