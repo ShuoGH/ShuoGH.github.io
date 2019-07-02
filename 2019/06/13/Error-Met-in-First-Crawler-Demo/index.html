@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="We Need to Go Deeper">
 <meta property="og:description" content="When writing the crawler program, I met across several problems. This blog is to records the solution which I used in my program. Access denied when using url directlySome websites add some features t">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-14T10:27:10.289Z">
+<meta property="og:updated_time" content="2019-06-14T14:56:21.343Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Error Met in First Crawler Demo">
 <meta name="twitter:description" content="When writing the crawler program, I met across several problems. This blog is to records the solution which I used in my program. Access denied when using url directlySome websites add some features t">
@@ -421,7 +421,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-14 11:27:10" itemprop="dateModified" datetime="2019-06-14T11:27:10+01:00">2019-06-14</time>
+                <time title="Modified: 2019-06-14 15:56:21" itemprop="dateModified" datetime="2019-06-14T15:56:21+01:00">2019-06-14</time>
               
             
           </span>
@@ -505,6 +505,14 @@
 <li>If want to have more ability of scraping, more IPs are needed in my program.(To be continued)</li>
 </ul>
 <h2 id="Connection-reset-by-peer"><a href="#Connection-reset-by-peer" class="headerlink" title="Connection reset by peer"></a>Connection reset by peer</h2><p>I’m not sure what’s the reason of this problem.</p>
+<p>I add the proxies to avoid this problem. </p>
+<ol>
+<li><p>how to <a href="https://github.com/ShuoGH/web-crawler/blob/master/get_proxies.py" target="_blank" rel="noopener">get the proxies</a>.</p>
+</li>
+<li><p>Use it in the <code>requests.get</code> function. </p>
+</li>
+</ol>
+<p>Although the program become slow, it become much more robust during scraping.</p>
 
       
     </div>
@@ -624,7 +632,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">47</span>
+                    <span class="site-state-item-count">48</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

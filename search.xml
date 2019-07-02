@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Python Interpreter</title>
+      <link href="/2019/07/02/Python-Interpreter/"/>
+      <url>/2019/07/02/Python-Interpreter/</url>
+      
+        <content type="html"><![CDATA[<p>python解释器</p><p>编写python代码时，得到的是一个包含python代码的<code>.py</code>为拓展名的文本文件。要运行代码的时候，需要python解释器去执行<code>.py</code>文件。</p><p>事实上，存在有很多python解释器。</p><h2 id="CPython"><a href="#CPython" class="headerlink" title="CPython"></a>CPython</h2><p>从python官网下载并安装好python3.x之后，我们会直接获得一个官方版本的解释器CPython. 这个解释器是用C语言开发的，所以叫CPython。</p><p>CPython是使用最广的Python解释器。当<code>.py</code>执行的时候，解释器会先解释成cpython文件，进而编译执行。</p><h2 id="IPython"><a href="#IPython" class="headerlink" title="IPython"></a>IPython</h2><p>IPython是基于CPython之上的一个交互式解释器，即IPython只是在交互方式上有增强，除此之外，其执行Python代码的功能和CPython是一样的。</p><p>CPython用<code>&gt;&gt;&gt;</code> 作为提示符，而IPython用<code>In[no.]:</code>作为提示符。</p><h2 id="PyPy"><a href="#PyPy" class="headerlink" title="PyPy"></a>PyPy</h2><p>PyPy是另一个解释器，目标是执行速度。PyPy采用了JIT技术，对Python代码进行动态编译（不是解释），所以可以显著提高Python代码的执行速度。</p><p>绝大部份Python代码都可以在PyPy下运行，但是PyPy和CPython有一些是不同的，导致相同的Python代码在两种解释器下执行可能有不同的结果。使用前要先了解其不同点。</p><h2 id="Jython"><a href="#Jython" class="headerlink" title="Jython"></a>Jython</h2><p>Jython是运行在Java平台上的Python解释器，可以直接把Python代码编译成Java字节码运行。</p><h2 id="IronPython"><a href="#IronPython" class="headerlink" title="IronPython"></a>IronPython</h2><p>IronPython和Jython类似，只不过其是运行在微软.NET平台上的Python解释器，可以直接把Python代码编译成.NET的字节码。</p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li>廖雪峰 <a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1016966024263840" target="_blank" rel="noopener">python解释器</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Python </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Web Crawler Get the User-Agent</title>
       <link href="/2019/06/13/Web-Crawler-Get-the-User-Agent/"/>
       <url>/2019/06/13/Web-Crawler-Get-the-User-Agent/</url>
@@ -33,7 +58,7 @@
       <link href="/2019/06/13/Error-Met-in-First-Crawler-Demo/"/>
       <url>/2019/06/13/Error-Met-in-First-Crawler-Demo/</url>
       
-        <content type="html"><![CDATA[<p>When writing the crawler program, I met across several problems. This blog is to records the solution which I used in my program.</p><h2 id="Access-denied-when-using-url-directly"><a href="#Access-denied-when-using-url-directly" class="headerlink" title="Access denied when using url directly"></a>Access denied when using url directly</h2><p>Some websites add some features to protect them from being scraped. In this case, we should add the <strong>headers</strong>. </p><p>The fields in <code>headers</code>:</p><ul><li>User-agent: like <code>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</code></li><li>Referer: like <code>https://www.google.com/</code></li></ul><p>(See the <strong>introduction</strong> of crawler: <a href="/2019/06/13/Web-Crawler-Basic/" title="Web Crawler Basic">Web Crawler Basic</a>)</p><h2 id="Max-retries-exceeded-with-url"><a href="#Max-retries-exceeded-with-url" class="headerlink" title="Max retries exceeded with url"></a>Max retries exceeded with url</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requests.exceptions.SSLError: HTTPSConnectionPool(host=&apos;www.mzitu.com&apos;, port=443): Max retries exceeded with url: /184325/8 (Caused by SSLError(SSLError(&quot;bad handshake: SysCallError(60, &apos;ETIMEDOUT&apos;)&quot;)))</span><br></pre></td></tr></table></figure><p>First time to solve this question:</p><ul><li>add <code>sleep(1)</code> in every iteration of downloading image<ul><li>It improve the problem and make the program stick longer time to do crawler work, but not solve it completely.</li><li>Be able to download around 300 images until failing.</li></ul></li><li>To improve the ability of anti-anti-spider, in the second version, I added two other functions:<ul><li>Randomly sleep some time when accessing the images</li><li>Randomly choose the User-Agent using <code>fake_useragent</code> Python module.</li><li>The performance is not very good. I’m not sure whether it is due to the problem of my ip.</li></ul></li><li>If want to have more ability of scraping, more IPs are needed in my program.(To be continued)</li></ul><h2 id="Connection-reset-by-peer"><a href="#Connection-reset-by-peer" class="headerlink" title="Connection reset by peer"></a>Connection reset by peer</h2><p>I’m not sure what’s the reason of this problem.</p>]]></content>
+        <content type="html"><![CDATA[<p>When writing the crawler program, I met across several problems. This blog is to records the solution which I used in my program.</p><h2 id="Access-denied-when-using-url-directly"><a href="#Access-denied-when-using-url-directly" class="headerlink" title="Access denied when using url directly"></a>Access denied when using url directly</h2><p>Some websites add some features to protect them from being scraped. In this case, we should add the <strong>headers</strong>. </p><p>The fields in <code>headers</code>:</p><ul><li>User-agent: like <code>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</code></li><li>Referer: like <code>https://www.google.com/</code></li></ul><p>(See the <strong>introduction</strong> of crawler: <a href="/2019/06/13/Web-Crawler-Basic/" title="Web Crawler Basic">Web Crawler Basic</a>)</p><h2 id="Max-retries-exceeded-with-url"><a href="#Max-retries-exceeded-with-url" class="headerlink" title="Max retries exceeded with url"></a>Max retries exceeded with url</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requests.exceptions.SSLError: HTTPSConnectionPool(host=&apos;www.mzitu.com&apos;, port=443): Max retries exceeded with url: /184325/8 (Caused by SSLError(SSLError(&quot;bad handshake: SysCallError(60, &apos;ETIMEDOUT&apos;)&quot;)))</span><br></pre></td></tr></table></figure><p>First time to solve this question:</p><ul><li>add <code>sleep(1)</code> in every iteration of downloading image<ul><li>It improve the problem and make the program stick longer time to do crawler work, but not solve it completely.</li><li>Be able to download around 300 images until failing.</li></ul></li><li>To improve the ability of anti-anti-spider, in the second version, I added two other functions:<ul><li>Randomly sleep some time when accessing the images</li><li>Randomly choose the User-Agent using <code>fake_useragent</code> Python module.</li><li>The performance is not very good. I’m not sure whether it is due to the problem of my ip.</li></ul></li><li>If want to have more ability of scraping, more IPs are needed in my program.(To be continued)</li></ul><h2 id="Connection-reset-by-peer"><a href="#Connection-reset-by-peer" class="headerlink" title="Connection reset by peer"></a>Connection reset by peer</h2><p>I’m not sure what’s the reason of this problem.</p><p>I add the proxies to avoid this problem. </p><ol><li><p>how to <a href="https://github.com/ShuoGH/web-crawler/blob/master/get_proxies.py" target="_blank" rel="noopener">get the proxies</a>.</p></li><li><p>Use it in the <code>requests.get</code> function. </p></li></ol><p>Although the program become slow, it become much more robust during scraping.</p>]]></content>
       
       
       <categories>
