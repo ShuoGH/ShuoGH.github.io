@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Linux Counting Files in Directory]]></title>
+    <url>%2F2019%2F07%2F03%2FLinux-Counting-Files-in-Directory%2F</url>
+    <content type="text"><![CDATA[Counting the files in a directory. When I was doing my summer project, I downloaded the datasets into the server and unzipped the zip file. Since it has a large amount of files in the dir, I want to count the number of files just through the terminal. First try1ls -1 | wc -l Use this command after getting into the dir, it can count the number of files in the current dir. Note: the first 1 is ONE, and the second l is the l for large. Result: it seems that I can’t perform well, since the speed is slow and need to spend a lot of time to get the result( I didn’t wait for that long to get the final result). Note: wc is great when I search this command. 12wc -l &lt; file.txtwc -w file2.txt The first line of code can count the number of lines in a text file. The second line of code can count the words in the text file. Improvement to get my resultSince I have the nohup.out, I can count the line number to know how many files I have uncompressed. The uncompressing process is a really long journey…for my project Reference Bash Prompt HOWTO: Counting Files in the Current Directory]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux Delete Files Bash Command]]></title>
+    <url>%2F2019%2F07%2F03%2FLinux-Delete-Files-Bash-Command%2F</url>
+    <content type="text"><![CDATA[To delete files on Linux server, there are multi ways to achieve this. rm bash command1rm [options] ...file... I usually use rm -rf file folder_name to remove a non-empty filefolder. Options: -f, —force Ignore nonexistent files, never prompt -r, -R, —recursive Remove directories and their contents recursively. and some other options, see the reference 1 for the doc. rsyncrsync is an alternative method which can be used in deleting files. It is suitable for the folder which contains a large amount of files, in which case rm -rf can’t behave well. 12mkdir emptyrsync -a --delete empty/ your_folder/ Reference Bash man doc: rm Bash man doc: rsync StackExchange: Efficiently delete large directory containing thousands of files]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Linux tar for unzipping]]></title>
     <url>%2F2019%2F07%2F02%2FLinux-tar-for-unzipping%2F</url>
-    <content type="text"><![CDATA[1tar xvzf file.tar.gz x: This option tells tar to extract the files. v: The “v” stands for “verbose.” This option will list all of the files one by one in the archive. z: The z option is very important and tells the tar command to uncompress the file (gzip). f: This options tells tar that you are going to give it a file name to work with. Reference How To Extract .tar.gz Files using Linux Command Line]]></content>
+    <content type="text"><![CDATA[1tar xvzf file.tar.gz x: This option tells tar to extract the files. v: The “v” stands for “verbose.” This option will list all of the files one by one in the archive. z: The z option is very important and tells the tar command to uncompress the file (gzip). f: This options tells tar that you are going to give it a file name to work with. Note:For compressing files, you can use1tar cvfz file.tar.gz dir/ The z tell that the files are compressed using gzip, and we usually name the zipped file .tar.gz. Reference How To Extract .tar.gz Files using Linux Command Line 每天一个linux命令（61）：tar命令]]></content>
       <tags>
         <tag>Linux</tag>
       </tags>
@@ -528,7 +550,7 @@
   <entry>
     <title><![CDATA[Hexo writing]]></title>
     <url>%2F2019%2F03%2F11%2FHexo-writing%2F</url>
-    <content type="text"><![CDATA[Sometimes you don’t want to see the blog in the first time as you haven’t finished it.In this case, you can use the draft. Initialize draft and publish1234$ hexo new draft "draft name"$ #before publishing, recommend to use Hexo clean$ # hexo clean$ hexo publish "draft name" Other use skills Add the link[words](link url) 站内链接link_name可以不添加，不添加情况下默认提取文章标题]]></content>
+    <content type="text"><![CDATA[Sometimes you don’t want to see the blog in the first time as you haven’t finished it.In this case, you can use the draft. Initialize draft and publish1234$ hexo new draft "draft name"$ #before publishing, recommend to use Hexo clean$ # hexo clean$ hexo publish "draft name" Other use skills Add the link[words](link url) 站内链接link_name可以不添加，不添加情况下默认提取文章标题 Note: be careful when you add the article title, what you input through terminal may not the title of real name]]></content>
       <categories>
         <category>Hexo</category>
       </categories>
