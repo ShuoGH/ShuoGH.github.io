@@ -357,6 +357,190 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/Python-argparse-for-Command-Line/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/23/Python-argparse-for-Command-Line/" class="post-title-link" itemprop="url">Python argparse for Command Line</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-23 15:16:57 / Modified: 15:20:15" itemprop="dateCreated datePublished" datetime="2019-07-23T15:16:57+01:00">2019-07-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Intro-of-argparse"><a href="#Intro-of-argparse" class="headerlink" title="Intro of argparse"></a>Intro of <code>argparse</code></h2><p>The <a href="https://docs.python.org/3/library/argparse.html#module-argparse" target="_blank" rel="noopener"><code>argparse</code></a> module makes it easy to write user-friendly command-line interfaces. The program defines what arguments it requires, and <code>argparse</code> will figure out how to parse those out of <code>sys.argv</code>(see the following part for the details of this).  </p>
+<p>You can’t keep using Jupyter notebook all the time. The scripts files and a whole projects needs to be created for our task. The <code>argparse</code> is the communication tools which let developers to make changes to the script from the terminal and don’t need to go into the code and change the parameters.</p>
+<p><strong>example</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">'Process some integers.'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'integers'</span>, metavar=<span class="string">'N'</span>, type=int, nargs=<span class="string">'+'</span>,</span><br><span class="line">                    help=<span class="string">'an integer for the accumulator'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'--sum'</span>, dest=<span class="string">'accumulate'</span>, action=<span class="string">'store_const'</span>,</span><br><span class="line">                    const=sum, default=max,</span><br><span class="line">                    help=<span class="string">'sum the integers (default: find the max)'</span>)</span><br><span class="line"></span><br><span class="line">args = parser.parse_args()</span><br><span class="line">print(args.accumulate(args.integers))</span><br></pre></td></tr></table></figure>
+<p>This is a program that takes a list of integers and produce either the sum or the max. </p>
+<p>Assume the name of file is <code>prog.py</code>, and execute the file:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ python prog.py 1 2 3 4</span><br><span class="line">4</span><br><span class="line"></span><br><span class="line">$ python prog.py 1 2 3 4 --sum</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
+<p>See the details from docs of <a href="https://docs.python.org/3/library/argparse.html#module-argparse" target="_blank" rel="noopener">argparse</a>.</p>
+<h2 id="Else"><a href="#Else" class="headerlink" title="Else"></a>Else</h2><h3 id="sys-argv"><a href="#sys-argv" class="headerlink" title="sys.argv"></a><code>sys.argv</code></h3><p>During using the <code>argparse</code> module, <code>sys.argv</code> is important since you may need it in the <code>main()</code>function. </p>
+<p>Code is sometimes like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> sys </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(argv)</span>:</span></span><br><span class="line">    parser = argparse.ArgumentParser()</span><br><span class="line">    <span class="comment"># parser.add_argument()</span></span><br><span class="line">    <span class="comment"># Do some argument parsing</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main(sys.argv)</span><br></pre></td></tr></table></figure>
+<h3 id="Intro-of-sys-argv"><a href="#Intro-of-sys-argv" class="headerlink" title="Intro of sys.argv"></a>Intro of <code>sys.argv</code></h3><p><code>sys.argv</code> is the list of commandline arguments passed to the Python program. It represents all the items that come along via the command line input.</p>
+<p>For the content of <code>argv</code>, the first argument is always the script name, and it is also counted in the number of arguments. So even if you don’t pass any argument into your script, the <code>sys.argv</code> variable always contains at least one element and it’s the script name.</p>
+<p><strong>Example</strong></p>
+<p>Execute this python script, assume it is named <code>test.py</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">print</span> <span class="string">"This is the name of the script: "</span>, sys.argv[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Number of arguments: "</span>, len(sys.argv)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"The arguments are: "</span> , str(sys.argv)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python test.py</span><br></pre></td></tr></table></figure>
+<p>The output should be:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">This is the name of the script:  sysargv.py</span><br><span class="line">Number of arguments <span class="keyword">in</span>:  1</span><br><span class="line">The arguments are:  [<span class="string">'test.py'</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>python docs: <a href="https://docs.python.org/3/library/argparse.html#nargs" target="_blank" rel="noopener">argparse</a></li>
+<li>How to use sys.argv in Python ](<a href="https://www.pythonforbeginners.com/system/python-sys-argv" target="_blank" rel="noopener">https://www.pythonforbeginners.com/system/python-sys-argv</a>)</li>
+<li><a href="https://appdividend.com/2019/01/22/python-sys-argv-tutorial-command-line-arguments-example/" target="_blank" rel="noopener">https://appdividend.com/2019/01/22/python-sys-argv-tutorial-command-line-arguments-example/</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/Linux-Counting-Files-in-Directory/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1973,202 +2157,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/29/Association-Rules-Mining/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/29/Association-Rules-Mining/" class="post-title-link" itemprop="url">Association Rules Mining</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-29 11:30:05 / Modified: 12:23:41" itemprop="dateCreated datePublished" datetime="2019-05-29T11:30:05+01:00">2019-05-29</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Data-Mining/" itemprop="url" rel="index"><span itemprop="name">Data Mining</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>It also kind of Market Basket Analysis.</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>An <strong>Association Rule</strong> is where <script type="math/tex">X \Longrightarrow Y</script> ($X$ implies $Y$)</p>
-<p>An <strong>item set</strong> is a set of items. If it has $k$ items, it is a $k$-itemset.</p>
-<p><strong>Support</strong> $s$ of an itemset $X$ is the percentage of transactions in $D$ that contains $X$. </p>
-<p><strong>Support</strong> of <strong>association rule</strong> $X \Longrightarrow Y$ is the support of the itemset $\{X,Y\}$. </p>
-<p><strong>Confidence</strong> of the rule $X \Longrightarrow Y$ is the ratio between the transactions that contain both $X$ and $Y$ and the number of transactions that have $X$ in $D$. </p>
-<hr>
-<p>The problem is: Find association rules.</p>
-<p>Given: </p>
-<ul>
-<li>A set $I$ of items </li>
-<li>database $D$ of transactions</li>
-<li>minimum support $s$</li>
-<li>minimum confidence $c$</li>
-</ul>
-<p>Find: Association rules $X \Longrightarrow Y$ with a minimum support $s$ and minimum confidence $c$ </p>
-<hr>
-<h2 id="Apriori-Algorithm"><a href="#Apriori-Algorithm" class="headerlink" title="Apriori Algorithm"></a>Apriori Algorithm</h2><p>There are two pinciples of the apriori algorithm:</p>
-<ul>
-<li>Any subset of a frequent itemset is also frequent </li>
-<li>Any superset of an infrequent itemset is also infrequent</li>
-</ul>
-<p>(example see the reference 2)</p>
-<h2 id="Improvements"><a href="#Improvements" class="headerlink" title="Improvements"></a>Improvements</h2><p>The limitation of <strong>confidence</strong>:</p>
-<script type="math/tex; mode=display">\operatorname{conf}(X \Longrightarrow Y)=\frac{\frac{n T \operatorname{rans}(X \cup Y)}{|D|}}{\frac{n \operatorname{Trans}(X)}{|D|}}=\frac{p(X \wedge Y)}{p(X)}=p(Y | X)</script><p>If $Y$ is independent of $X$: <script type="math/tex">\mathrm{p}(Y)=\mathrm{p}(Y-X)</script>.</p>
-<p>This means if you have a high probability of $p(Y)$ we have a rule with high confidence that associate independent itemset.</p>
-<p><strong><em>Lift</em></strong>: measure indicates departure from independence of $X$ and $Y$.</p>
-<p>The <strong>lift</strong> of $X \Longrightarrow Y$ is:</p>
-<script type="math/tex; mode=display">\operatorname{lift}(X \Longrightarrow Y)=\frac{\operatorname{conf}(X \Longrightarrow Y)}{p(Y)}=\frac{\frac{p(X \wedge Y)}{p(X)}}{p(Y)}=\frac{p(X \wedge Y)}{p(X) p(Y)}</script><p>But lift is symmetric, the same for $X \Longrightarrow Y$ as $Y \Longrightarrow X$</p>
-<p><strong><em>Conviction</em></strong>: indicates that $X$ and $Y$ are not independent, and takes into account the direction of implication. </p>
-<p>Since the $p \rightarrow q \equiv \neg p \vee q$, and we can rewrite it as the $\neg( p \wedge \neg q)$. Therefore, the <strong>Conviction</strong> is based on this</p>
-<script type="math/tex; mode=display">\operatorname{conv}(X \Longrightarrow Y)=\frac{p(X) p(\neg Y)}{p X \wedge \neg Y )}</script><p>Conviction is a measure of the implication and has value 1 if items are unrelated. </p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>Jo slide Market Basket</li>
-<li><a href="https://paginas.fe.up.pt/~ec/files_0506/slides/04_AssociationRules.pdf" target="_blank" rel="noopener">Mining Association Rules</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2217,7 +2205,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
