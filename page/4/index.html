@@ -918,7 +918,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-13 12:00:43" itemprop="dateModified" datetime="2019-06-13T12:00:43+01:00">2019-06-13</time>
+                <time title="Modified: 2019-07-30 13:44:58" itemprop="dateModified" datetime="2019-07-30T13:44:58+01:00">2019-07-30</time>
               
             
           </span>
@@ -973,8 +973,6 @@
         
           
             <p>How to write better code with good style</p>
-<p>Here is a guide.</p>
-<p>机器之心：<a href="https://www.jiqizhixin.com/articles/2019-04-29-5" target="_blank" rel="noopener">PyTorch最佳实践，怎样才能写出一手风格优美的代码</a></p>
 <h2 id="Python-Name-Convention"><a href="#Python-Name-Convention" class="headerlink" title="Python Name Convention"></a>Python Name Convention</h2><p>python 命名规范</p>
 <div class="table-container">
 <table>
@@ -1019,6 +1017,13 @@
 </tbody>
 </table>
 </div>
+<h2 id="Main"><a href="#Main" class="headerlink" title="Main"></a>Main</h2><p><code>tip:</code><br>即使是一个打算被用作脚本的文件, 也应该是可导入的. 并且简单的导入不应该导致这个脚本的主功能(main functionality)被执行, 这是一种副作用. 主功能应该放在一个main()函数中.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>所有的顶级代码在模块导入时都会被执行. 要小心不要去调用函数, 创建对象, 或者执行那些不应该在使用pydoc时执行的操作.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Python风格规范 : <a href="https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_style_rules/" target="_blank" rel="noopener">https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_style_rules/</a></li>
+<li>机器之心：<a href="https://www.jiqizhixin.com/articles/2019-04-29-5" target="_blank" rel="noopener">PyTorch最佳实践，怎样才能写出一手风格优美的代码</a></li>
+</ol>
 
           
         
