@@ -357,6 +357,705 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/06/Python-os-path-module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/06/Python-os-path-module/" class="post-title-link" itemprop="url">Python os.path module</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-06 22:45:29 / Modified: 22:46:47" itemprop="dateCreated datePublished" datetime="2019-08-06T22:45:29+01:00">2019-08-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Common-Usage-of-os-path-module"><a href="#Common-Usage-of-os-path-module" class="headerlink" title="Common Usage of os.path module"></a>Common Usage of <code>os.path</code> module</h1><p>This article records some very common usages of <code>os.path</code> module in Python. </p>
+<p>Since there are few examples in the docs of <code>os.path</code> module, I added examples for all part in this article.</p>
+<h2 id="os-path-expanduser"><a href="#os-path-expanduser" class="headerlink" title="os.path.expanduser()"></a><code>os.path.expanduser()</code></h2><p>Expand ~ and ~user constructions.  If user or $HOME is unknown, do nothing.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">path = <span class="string">"~/file.txt"</span></span><br><span class="line">full_path = os.path.expanduser(path)</span><br><span class="line"><span class="comment"># return: '/Users/shuo/file.txt'</span></span><br><span class="line"></span><br><span class="line">os.environ[<span class="string">"HOME"</span>] = <span class="string">"/home / GeeksForGeeks"</span></span><br><span class="line">full_path = os.path.expanduser(path)</span><br><span class="line"><span class="comment"># return: '/home / GeeksForGeeks/file.txt'</span></span><br></pre></td></tr></table></figure>
+<h2 id="os-path-join"><a href="#os-path-join" class="headerlink" title="os.path.join()"></a><code>os.path.join()</code></h2><p>Join one or more path components intelligently.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.join(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>)</span><br><span class="line"><span class="string">'a/b/c'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.join(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">''</span>)</span><br><span class="line"><span class="string">'a/b/c/'</span></span><br></pre></td></tr></table></figure>
+<h2 id="os-path-split"><a href="#os-path-split" class="headerlink" title="os.path.split()"></a><code>os.path.split()</code></h2><p>Split the pathname path into a pair, <code>(head, tail)</code> where tail is the last pathname component and head is everything leading up to that.</p>
+<ul>
+<li>The tail part will never contain a slash; <ul>
+<li>if path ends in a slash, tail will be empty. </li>
+<li>If there is no slash in path, head will be empty.</li>
+<li>If path is empty, both head and tail are empty. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>test_s=<span class="string">"/home/sa2y18/mydocuments"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.split(test_s)</span><br><span class="line">(<span class="string">'/home/sa2y18'</span>, <span class="string">'mydocuments'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>test_s=test_s+<span class="string">'/'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.split(test_s)</span><br><span class="line">(<span class="string">'/home/sa2y18/mydocuments'</span>, <span class="string">''</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a href="https://docs.python.org/2/library/os.path.html" target="_blank" rel="noopener">https://docs.python.org/2/library/os.path.html</a></li>
+<li>my gist</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/06/Python-with-statement-in-IO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/06/Python-with-statement-in-IO/" class="post-title-link" itemprop="url">Python with statement in IO</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-06 22:29:23 / Modified: 22:33:08" itemprop="dateCreated datePublished" datetime="2019-08-06T22:29:23+01:00">2019-08-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>In Python you need to give access to a file by opening it.</p>
+<h2 id="open-in-usual-case"><a href="#open-in-usual-case" class="headerlink" title="open() in usual case"></a><code>open()</code> in usual case</h2><p>If you don’t use with statement, you should write like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">file = open(<span class="string">"welcome.txt"</span>)</span><br><span class="line"></span><br><span class="line">data = file.read()</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> data</span><br><span class="line"></span><br><span class="line">file.close()  <span class="comment"># It's important to close the file when you're done with it</span></span><br></pre></td></tr></table></figure>
+<p><code>file.close()</code> is important, especially in the writing mode. If you don’t <code>close()</code>, the writing action can’t really take effect.</p>
+<h2 id="use-with-in-Python-IO"><a href="#use-with-in-Python-IO" class="headerlink" title="use with in Python IO"></a>use <code>with</code> in Python IO</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">"welcome.txt"</span>) <span class="keyword">as</span> file: <span class="comment"># Use file to refer to the file object</span></span><br><span class="line"></span><br><span class="line">   data = file.read()</span><br><span class="line"></span><br><span class="line">   do something <span class="keyword">with</span> data</span><br><span class="line">   </span><br><span class="line"><span class="comment"># open in write mode </span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'output.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> file:  <span class="comment"># Use file to refer to the file object</span></span><br><span class="line"></span><br><span class="line">    file.write(<span class="string">'Hi there!'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>Notice, that we didn’t have to write <code>file.close()</code> in the case of using <code>with open() as xx</code>. That will automatically be called. </strong></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>With statement in Python : <a href="https://www.pythonforbeginners.com/files/with-statement-in-python" target="_blank" rel="noopener">https://www.pythonforbeginners.com/files/with-statement-in-python</a></li>
+<li></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/06/Pytorch-torch-no-grad/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/06/Pytorch-torch-no-grad/" class="post-title-link" itemprop="url">Pytorch torch.no_grad()</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-06 22:16:21 / Modified: 22:28:37" itemprop="dateCreated datePublished" datetime="2019-08-06T22:16:21+01:00">2019-08-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">Deep Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="What-is-torch-no-grad-for"><a href="#What-is-torch-no-grad-for" class="headerlink" title="What is torch.no_grad() for?"></a>What is <code>torch.no_grad()</code> for?</h2><p>When using Pytorch, if we want to do testing after the training, the <code>model.eval()</code> switches the mode into <code>eval</code> mode. The batchnorm and dropout layers would not work on that case and make sure the values pass through the network. </p>
+<p>When I read more code, I found that the <code>torch.no_grad()</code> is also widely used in Pytorch project. What is this for?</p>
+<hr>
+<p>According to the discussion on <a href="https://discuss.pytorch.org/t/model-eval-vs-with-torch-no-grad/19615" target="_blank" rel="noopener">https://discuss.pytorch.org/t/model-eval-vs-with-torch-no-grad/19615</a>.</p>
+<p>The <code>model.eval()</code> and <code>with torch.no_grad()</code> two functions have different goals:</p>
+<ul>
+<li><code>model.eval()</code> will notify all your layers that you are in eval mode, that way, batchnorm or dropout layers will work in eval mode instead of training mode.</li>
+<li><code>torch.no_grad()</code> impacts the autograd engine and deactivate it. It will reduce memory usage and speed up computations but you won’t be able to backprop (which you don’t want in an eval script).</li>
+</ul>
+<p>— answered by @<strong>albanD</strong></p>
+<h2 id="Example-of-torch-no-grad"><a href="#Example-of-torch-no-grad" class="headerlink" title="Example of torch.no_grad()"></a>Example of <code>torch.no_grad()</code></h2><ul>
+<li>SPATIAL TRANSFORMER NETWORKS TUTORIAL:<br><a href="https://pytorch.org/tutorials/intermediate/spatial_transformer_tutorial.html" target="_blank" rel="noopener">https://pytorch.org/tutorials/intermediate/spatial_transformer_tutorial.html</a><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        model.eval()</span><br><span class="line">        test_loss = <span class="number">0</span></span><br><span class="line">        correct = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> data, target <span class="keyword">in</span> test_loader:</span><br><span class="line">            data, target = data.to(device), target.to(device)</span><br><span class="line">            output = model(data)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># sum up batch loss</span></span><br><span class="line">            test_loss += F.nll_loss(output, target, size_average=<span class="literal">False</span>).item()</span><br><span class="line">            <span class="comment"># get the index of the max log-probability</span></span><br><span class="line">            pred = output.max(<span class="number">1</span>, keepdim=<span class="literal">True</span>)[<span class="number">1</span>]</span><br><span class="line">            correct += pred.eq(target.view_as(pred)).sum().item()</span><br><span class="line"></span><br><span class="line">        test_loss /= len(test_loader.dataset)</span><br><span class="line">        print(<span class="string">'\nTest set: Average loss: &#123;:.4f&#125;, Accuracy: &#123;&#125;/&#123;&#125; (&#123;:.0f&#125;%)\n'</span></span><br><span class="line">              .format(test_loss, correct, len(test_loader.dataset),</span><br><span class="line">                      <span class="number">100.</span> * correct / len(test_loader.dataset)))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>I also reproduce this code on my github repo: <a href="https://github.com/ShuoGH/deepLearningAl" target="_blank" rel="noopener">https://github.com/ShuoGH/deepLearningAl</a></p>
+<hr>
+<p>Using <code>torch.no_grad()</code> would accelerate the computation of neural network.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Pytorch Forum: ‘model.eval()’ vs ‘with torch.no_grad()’: <a href="https://discuss.pytorch.org/t/model-eval-vs-with-torch-no-grad/19615" target="_blank" rel="noopener">https://discuss.pytorch.org/t/model-eval-vs-with-torch-no-grad/19615</a></li>
+<li></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/06/Linux-Server-Miniconda-Installation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/06/Linux-Server-Miniconda-Installation/" class="post-title-link" itemprop="url">Linux Server Miniconda Installation</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-06 22:03:14 / Modified: 22:15:06" itemprop="dateCreated datePublished" datetime="2019-08-06T22:03:14+01:00">2019-08-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Install-the-Miniconda-environment-on-Remote-Server"><a href="#Install-the-Miniconda-environment-on-Remote-Server" class="headerlink" title="Install the Miniconda environment on Remote Server"></a>Install the Miniconda environment on Remote Server</h1><p>Anaconda installation doesn’t need to ask for the admin permission. So it’s a good choice used on server. I would show how to install on the server in the following.</p>
+<h2 id="Download-the-Miniconda-package"><a href="#Download-the-Miniconda-package" class="headerlink" title="Download the Miniconda package"></a>Download the Miniconda package</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># use `curl` to download the package from miniconda. In own computer of MacOS.</span></span><br><span class="line">curl -O <span class="string">"https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># use `wget` to download the package, in the server</span></span><br><span class="line">wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda_package</span><br></pre></td></tr></table></figure>
+<h2 id="Install-on-the-Server"><a href="#Install-on-the-Server" class="headerlink" title="Install on the Server"></a>Install on the Server</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># give the execute permission of the file</span></span><br><span class="line">chmod +x /path/to/yourscript.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># run. `./` is important, since it points to the current path</span></span><br><span class="line">./yourscript.sh</span><br></pre></td></tr></table></figure>
+<h2 id="Activate-the-Environment"><a href="#Activate-the-Environment" class="headerlink" title="Activate the Environment"></a>Activate the Environment</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> Miniconda/bin/activate </span><br><span class="line"></span><br><span class="line"><span class="comment"># deactivate the environment, just type in the terminal</span></span><br><span class="line">deactivate</span><br></pre></td></tr></table></figure>
+<p>Then you have the environment for your project, you can just use <code>pip install xx</code> to install the modules you need.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Reddit: <a href="https://www.reddit.com/r/Python/comments/3t23vv/what_advantages_are_there_of_using_anaconda/" target="_blank" rel="noopener">what advantages of using anaconda</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/Python-argparse-for-Command-Line/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -402,12 +1101,24 @@
                 
               
 
-              <time title="Created: 2019-07-23 15:16:57 / Modified: 15:20:15" itemprop="dateCreated datePublished" datetime="2019-07-23T15:16:57+01:00">2019-07-23</time>
+              <time title="Created: 2019-07-23 15:16:57" itemprop="dateCreated datePublished" datetime="2019-07-23T15:16:57+01:00">2019-07-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-06 22:02:17" itemprop="dateModified" datetime="2019-08-06T22:02:17+01:00">2019-08-06</time>
               
             
           </span>
@@ -467,12 +1178,12 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">'Process some integers.'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'integers'</span>, metavar=<span class="string">'N'</span>, type=int, nargs=<span class="string">'+'</span>,</span><br><span class="line">                    help=<span class="string">'an integer for the accumulator'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'--sum'</span>, dest=<span class="string">'accumulate'</span>, action=<span class="string">'store_const'</span>,</span><br><span class="line">                    const=sum, default=max,</span><br><span class="line">                    help=<span class="string">'sum the integers (default: find the max)'</span>)</span><br><span class="line"></span><br><span class="line">args = parser.parse_args()</span><br><span class="line">print(args.accumulate(args.integers))</span><br></pre></td></tr></table></figure>
 <p>This is a program that takes a list of integers and produce either the sum or the max. </p>
 <p>Assume the name of file is <code>prog.py</code>, and execute the file:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ python prog.py 1 2 3 4</span><br><span class="line">4</span><br><span class="line"></span><br><span class="line">$ python prog.py 1 2 3 4 --sum</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python prog.py 1 2 3 4</span><br><span class="line"><span class="comment"># output: 4</span></span><br><span class="line"></span><br><span class="line">python prog.py 1 2 3 4 --sum</span><br><span class="line"><span class="comment"># output: 10</span></span><br></pre></td></tr></table></figure>
 <p>See the details from docs of <a href="https://docs.python.org/3/library/argparse.html#module-argparse" target="_blank" rel="noopener">argparse</a>.</p>
 <h2 id="Else"><a href="#Else" class="headerlink" title="Else"></a>Else</h2><h3 id="sys-argv"><a href="#sys-argv" class="headerlink" title="sys.argv"></a><code>sys.argv</code></h3><p>During using the <code>argparse</code> module, <code>sys.argv</code> is important since you may need it in the <code>main()</code>function. </p>
 <p>Code is sometimes like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> sys </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(argv)</span>:</span></span><br><span class="line">    parser = argparse.ArgumentParser()</span><br><span class="line">    <span class="comment"># parser.add_argument()</span></span><br><span class="line">    <span class="comment"># Do some argument parsing</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main(sys.argv)</span><br></pre></td></tr></table></figure>
-<h3 id="Intro-of-sys-argv"><a href="#Intro-of-sys-argv" class="headerlink" title="Intro of sys.argv"></a>Intro of <code>sys.argv</code></h3><p><code>sys.argv</code> is the list of commandline arguments passed to the Python program. It represents all the items that come along via the command line input.</p>
+<p><code>sys.argv</code> is the list of commandline arguments passed to the Python program. It represents all the items that come along via the command line input.</p>
 <p>For the content of <code>argv</code>, the first argument is always the script name, and it is also counted in the number of arguments. So even if you don’t pass any argument into your script, the <code>sys.argv</code> variable always contains at least one element and it’s the script name.</p>
 <p><strong>Example</strong></p>
 <p>Execute this python script, assume it is named <code>test.py</code>.</p>
@@ -1402,761 +2113,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/02/Python-Interpreter/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/02/Python-Interpreter/" class="post-title-link" itemprop="url">Python Interpreter</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-07-02 11:04:02 / Modified: 11:04:33" itemprop="dateCreated datePublished" datetime="2019-07-02T11:04:02+01:00">2019-07-02</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>python解释器</p>
-<p>编写python代码时，得到的是一个包含python代码的<code>.py</code>为拓展名的文本文件。要运行代码的时候，需要python解释器去执行<code>.py</code>文件。</p>
-<p>事实上，存在有很多python解释器。</p>
-<h2 id="CPython"><a href="#CPython" class="headerlink" title="CPython"></a>CPython</h2><p>从python官网下载并安装好python3.x之后，我们会直接获得一个官方版本的解释器CPython. 这个解释器是用C语言开发的，所以叫CPython。</p>
-<p>CPython是使用最广的Python解释器。当<code>.py</code>执行的时候，解释器会先解释成cpython文件，进而编译执行。</p>
-<h2 id="IPython"><a href="#IPython" class="headerlink" title="IPython"></a>IPython</h2><p>IPython是基于CPython之上的一个交互式解释器，即IPython只是在交互方式上有增强，除此之外，其执行Python代码的功能和CPython是一样的。</p>
-<p>CPython用<code>&gt;&gt;&gt;</code> 作为提示符，而IPython用<code>In[no.]:</code>作为提示符。</p>
-<h2 id="PyPy"><a href="#PyPy" class="headerlink" title="PyPy"></a>PyPy</h2><p>PyPy是另一个解释器，目标是执行速度。PyPy采用了JIT技术，对Python代码进行动态编译（不是解释），所以可以显著提高Python代码的执行速度。</p>
-<p>绝大部份Python代码都可以在PyPy下运行，但是PyPy和CPython有一些是不同的，导致相同的Python代码在两种解释器下执行可能有不同的结果。使用前要先了解其不同点。</p>
-<h2 id="Jython"><a href="#Jython" class="headerlink" title="Jython"></a>Jython</h2><p>Jython是运行在Java平台上的Python解释器，可以直接把Python代码编译成Java字节码运行。</p>
-<h2 id="IronPython"><a href="#IronPython" class="headerlink" title="IronPython"></a>IronPython</h2><p>IronPython和Jython类似，只不过其是运行在微软.NET平台上的Python解释器，可以直接把Python代码编译成.NET的字节码。</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>廖雪峰 <a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1016966024263840" target="_blank" rel="noopener">python解释器</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/13/Web-Crawler-Get-the-User-Agent/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/13/Web-Crawler-Get-the-User-Agent/" class="post-title-link" itemprop="url">Web Crawler Get the User-Agent</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-06-13 23:27:21" itemprop="dateCreated datePublished" datetime="2019-06-13T23:27:21+01:00">2019-06-13</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-06-14 10:13:02" itemprop="dateModified" datetime="2019-06-14T10:13:02+01:00">2019-06-14</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Web-Crawler/" itemprop="url" rel="index"><span itemprop="name">Web Crawler</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="How-to-Get-User-Agent-for-your-Crawler"><a href="#How-to-Get-User-Agent-for-your-Crawler" class="headerlink" title="How to Get User-Agent for your Crawler"></a>How to Get User-Agent for your Crawler</h2><p>There are several common ways to get the user-agent and use it to scrape the website.</p>
-<ol>
-<li><p><code>about:version</code> in your browser, and check the User-Agent.</p>
-</li>
-<li><p>Use the inspect tool within your browser. Network -&gt; refresh your page -&gt; find the current page -&gt; Headers -&gt; check the User-Agent</p>
-</li>
-<li><p>install the <code>fake_agent</code> in your computer and import it for using in Python</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install fake_useragent</span><br></pre></td></tr></table></figure>
-<p>When using:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fake_useragent <span class="keyword">import</span> UserAgent</span><br><span class="line"><span class="comment"># import random</span></span><br><span class="line"></span><br><span class="line">fake_ua=UserAgent()</span><br><span class="line">headers=&#123;<span class="string">'User-Agent'</span>:fake_ua.random&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li>Google to find some User-Agent, sush as <a href="https://blog.csdn.net/bone_ace/article/details/52476016" target="_blank" rel="noopener">User-Agent 汇总</a></li>
-</ol>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>CSDN blog: <a href="https://blog.csdn.net/python_neophyte/article/details/82491359" target="_blank" rel="noopener">爬虫之UserAgent的获得方法</a></li>
-<li>fake_useragent <a href="https://pypi.org/project/fake-useragent/" target="_blank" rel="noopener">doc</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/13/Error-Met-in-First-Crawler-Demo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/13/Error-Met-in-First-Crawler-Demo/" class="post-title-link" itemprop="url">Error Met in First Crawler Demo</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-06-13 18:10:29" itemprop="dateCreated datePublished" datetime="2019-06-13T18:10:29+01:00">2019-06-13</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-06-14 15:56:21" itemprop="dateModified" datetime="2019-06-14T15:56:21+01:00">2019-06-14</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Web-Crawler/" itemprop="url" rel="index"><span itemprop="name">Web Crawler</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>When writing the crawler program, I met across several problems. This blog is to records the solution which I used in my program.</p>
-<h2 id="Access-denied-when-using-url-directly"><a href="#Access-denied-when-using-url-directly" class="headerlink" title="Access denied when using url directly"></a>Access denied when using url directly</h2><p>Some websites add some features to protect them from being scraped. In this case, we should add the <strong>headers</strong>. </p>
-<p>The fields in <code>headers</code>:</p>
-<ul>
-<li>User-agent: like <code>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36</code></li>
-<li>Referer: like <code>https://www.google.com/</code></li>
-</ul>
-<p>(See the <strong>introduction</strong> of crawler: <a href="/2019/06/13/Web-Crawler-Basic/" title="Web Crawler Basic">Web Crawler Basic</a>)</p>
-<h2 id="Max-retries-exceeded-with-url"><a href="#Max-retries-exceeded-with-url" class="headerlink" title="Max retries exceeded with url"></a>Max retries exceeded with url</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requests.exceptions.SSLError: HTTPSConnectionPool(host=&apos;www.mzitu.com&apos;, port=443): Max retries exceeded with url: /184325/8 (Caused by SSLError(SSLError(&quot;bad handshake: SysCallError(60, &apos;ETIMEDOUT&apos;)&quot;)))</span><br></pre></td></tr></table></figure>
-<p>First time to solve this question:</p>
-<ul>
-<li>add <code>sleep(1)</code> in every iteration of downloading image<ul>
-<li>It improve the problem and make the program stick longer time to do crawler work, but not solve it completely.</li>
-<li>Be able to download around 300 images until failing.</li>
-</ul>
-</li>
-<li>To improve the ability of anti-anti-spider, in the second version, I added two other functions:<ul>
-<li>Randomly sleep some time when accessing the images</li>
-<li>Randomly choose the User-Agent using <code>fake_useragent</code> Python module.</li>
-<li>The performance is not very good. I’m not sure whether it is due to the problem of my ip.</li>
-</ul>
-</li>
-<li>If want to have more ability of scraping, more IPs are needed in my program.(To be continued)</li>
-</ul>
-<h2 id="Connection-reset-by-peer"><a href="#Connection-reset-by-peer" class="headerlink" title="Connection reset by peer"></a>Connection reset by peer</h2><p>I’m not sure what’s the reason of this problem.</p>
-<p>I add the proxies to avoid this problem. </p>
-<ol>
-<li><p>how to <a href="https://github.com/ShuoGH/web-crawler/blob/master/get_proxies.py" target="_blank" rel="noopener">get the proxies</a>.</p>
-</li>
-<li><p>Use it in the <code>requests.get</code> function. </p>
-</li>
-</ol>
-<p>Although the program become slow, it become much more robust during scraping.</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/13/Web-Crawler-Basic/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/13/Web-Crawler-Basic/" class="post-title-link" itemprop="url">Web Crawler Basic</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-06-13 18:08:08" itemprop="dateCreated datePublished" datetime="2019-06-13T18:08:08+01:00">2019-06-13</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-06-14 09:49:43" itemprop="dateModified" datetime="2019-06-14T09:49:43+01:00">2019-06-14</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Web-Crawler/" itemprop="url" rel="index"><span itemprop="name">Web Crawler</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>There are several modules for accessing html through Python. </p>
-<p><code>Urllib</code> and <code>requests</code> are two different modules in Python which can be used for crawler.</p>
-<p>For beginner, the <code>requests</code> is recommended. </p>
-<h2 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h2><p>HTTP request header is the information, in the form of a text record, that a user’s browser sends to a Web serveer containing the details of what the browser wants and will accept back from server.</p>
-<h3 id="User-Agent"><a href="#User-Agent" class="headerlink" title="User-Agent"></a>User-Agent</h3><p>The User-Agent appears in an HTTP Request Header, not an HTTP Response one. In general, the request is sent from browser to the web application. So the user-agent is filled by the browser. Different browsers will fill up this field with different values.</p>
-<p>Blog:  <a href="/2019/06/13/Web-Crawler-Get-the-User-Agent/" title="Web Crawler Get the User-Agent">Web Crawler Get the User-Agent</a></p>
-<h3 id="Referer"><a href="#Referer" class="headerlink" title="Referer"></a>Referer</h3><p>Optional HTTP header field that identifies the address of the webpage that linked to the resource being requested. By checking the referee, the new webpage can see where the request originated.</p>
-<p>Some websites use this to ban the crawler, and you may need to update your referer. </p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li><a href="https://www.jianshu.com/p/1efa672156d3" target="_blank" rel="noopener">Python 爬虫基础之urllib和requests</a> </li>
-<li>my demo of <a href="https://github.com/ShuoGH/web-crawler" target="_blank" rel="noopener">web crawler</a></li>
-<li>stackoverflow: <a href="https://stackoverflow.com/questions/15069533/http-request-header-useragent-variable" target="_blank" rel="noopener">HTTP request header</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2205,7 +2161,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

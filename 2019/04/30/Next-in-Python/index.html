@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="We Need to Go Deeper">
 <meta property="og:description" content="To fetch a item from generator, next() can be used: Return the next item from the iterator. If a variable is not a generator, next() can be used along with iter(). Python code snippet:1234567891011121">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-30T13:46:39.970Z">
+<meta property="og:updated_time" content="2019-08-06T21:34:17.864Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Next() in Python">
 <meta name="twitter:description" content="To fetch a item from generator, next() can be used: Return the next item from the iterator. If a variable is not a generator, next() can be used along with iter(). Python code snippet:1234567891011121">
@@ -404,12 +404,24 @@
                 
               
 
-              <time title="Created: 2019-04-30 14:32:43 / Modified: 14:46:39" itemprop="dateCreated datePublished" datetime="2019-04-30T14:32:43+01:00">2019-04-30</time>
+              <time title="Created: 2019-04-30 14:32:43" itemprop="dateCreated datePublished" datetime="2019-04-30T14:32:43+01:00">2019-04-30</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-06 22:34:17" itemprop="dateModified" datetime="2019-08-06T22:34:17+01:00">2019-08-06</time>
               
             
           </span>
@@ -471,7 +483,7 @@
         <p>To fetch a item from generator, <code>next()</code> can be used: <code>Return the next item from the iterator.</code></p>
 <p>If a variable is not a generator, <code>next()</code> can be used along with <code>iter()</code>.</p>
 <p><strong>Python code snippet</strong>:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">next(a)</span><br><span class="line"><span class="comment"># output: TypeError: 'list' object is not an iterator</span></span><br><span class="line"></span><br><span class="line">b=iter(a)</span><br><span class="line">next(b)</span><br><span class="line"><span class="comment"># output: 1</span></span><br><span class="line">next(b)</span><br><span class="line"><span class="comment">#  output: 2</span></span><br><span class="line">next(b)</span><br><span class="line"><span class="comment">#  output: 3</span></span><br><span class="line">next(b)</span><br><span class="line"><span class="comment">#  StopIteration</span></span><br></pre></td></tr></table></figure></p>
-<p>My case:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># dataset construction</span></span><br><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.ToTensor(), <span class="comment"># convert to tensor</span></span><br><span class="line">    transforms.Lambda(<span class="keyword">lambda</span> x: x.view(image_dim)) <span class="comment"># flatten into vector</span></span><br><span class="line">    ])</span><br><span class="line"></span><br><span class="line">train_set = torchvision.datasets.FashionMNIST(</span><br><span class="line">    root=<span class="string">'./data/FashionMNIST'</span></span><br><span class="line">    ,train=<span class="literal">True</span></span><br><span class="line">    ,download=<span class="literal">True</span></span><br><span class="line">    ,transform=transform</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">train_loader = torch.utils.data.DataLoader(</span><br><span class="line">    train_set, batch_size=batch_size</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Fetch images by next() function</span></span><br><span class="line"><span class="comment"># Since the obj returned by DataLoader was not iterator, I also used iter()</span></span><br><span class="line">images = next(iter(train_loader))</span><br></pre></td></tr></table></figure></p>
+<p>Example:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># dataset construction</span></span><br><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.ToTensor(), <span class="comment"># convert to tensor</span></span><br><span class="line">    transforms.Lambda(<span class="keyword">lambda</span> x: x.view(image_dim)) <span class="comment"># flatten into vector</span></span><br><span class="line">    ])</span><br><span class="line"></span><br><span class="line">train_set = torchvision.datasets.FashionMNIST(</span><br><span class="line">    root=<span class="string">'./data/FashionMNIST'</span></span><br><span class="line">    ,train=<span class="literal">True</span></span><br><span class="line">    ,download=<span class="literal">True</span></span><br><span class="line">    ,transform=transform</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">train_loader = torch.utils.data.DataLoader(</span><br><span class="line">    train_set, batch_size=batch_size</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Fetch images by next() function</span></span><br><span class="line"><span class="comment"># Since the obj returned by DataLoader was not iterator, I also used iter()</span></span><br><span class="line">images = next(iter(train_loader))</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -582,7 +594,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

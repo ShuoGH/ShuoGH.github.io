@@ -357,6 +357,679 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/09/Deep-Learning-RNN-sequence-model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/09/Deep-Learning-RNN-sequence-model/" class="post-title-link" itemprop="url">Deep Learning RNN sequence model</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-09 00:40:19 / Modified: 00:43:54" itemprop="dateCreated datePublished" datetime="2019-05-09T00:40:19+01:00">2019-05-09</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">Deep Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Take down the note when I came accross the bugs during doing the lab 7.3. </p>
+<p>The key words:<br><code>pack padded sequence</code>, <code>pad packed sequence</code>, the output of <code>lstm</code> model.</p>
+<p>The code is listed below:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImprovedRNN</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, input_dim, embedding_dim, hidden_dim, output_dim)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        </span><br><span class="line">        self.embedding = nn.Embedding(input_dim, embedding_dim)</span><br><span class="line">        <span class="comment"># YOUR CODE HERE</span></span><br><span class="line">        self.lstm=nn.LSTM(embedding_dim,hidden_dim,batch_first=<span class="literal">True</span>)</span><br><span class="line"><span class="comment">#         raise NotImplementedError()</span></span><br><span class="line">        self.fc = nn.Linear(hidden_dim, output_dim)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, text_len)</span>:</span></span><br><span class="line">        text, lengths = text_len</span><br><span class="line">        embedded = self.embedding(text)</span><br><span class="line"><span class="comment">#         print(embedded.data.size())  # (sentence length, batch_size,hidden_dim)</span></span><br><span class="line"><span class="comment">#         print(lengths)           # the tensor(size 64), contains the length of sizes</span></span><br><span class="line">        embedded = nn.utils.rnn.pack_padded_sequence(embedded, lengths)</span><br><span class="line"><span class="comment">#         print(embedded.data.size()) # the packed_sequence record the series data and the tensor recording each length </span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># YOUR CODE HERE</span></span><br><span class="line"><span class="comment">#         print(embedded[0].size())</span></span><br><span class="line">        _,(last_state,_)=self.lstm(embedded)</span><br><span class="line"><span class="comment">#         lstm_out_pad,length_sentence=nn.utils.rnn.pad_packed_sequence(lstm_out)</span></span><br><span class="line">        print(last_state.size())</span><br><span class="line"><span class="comment">#         lstm_final_out=lstm_out_pad[length_sentence-1]  # just use the final timestep output</span></span><br><span class="line"><span class="comment">#       lstm_out_pad [0] is the data and [1] records the length of each sentence</span></span><br><span class="line"><span class="comment">#         print("...",lstm_out.data.size(),"\n ssss",type(lstm_out.data))</span></span><br><span class="line"><span class="comment">#         print("\n haha...",lstm_out_pad)</span></span><br><span class="line"><span class="comment">#         print(lstm_out_pad[0][-1][63])</span></span><br><span class="line"><span class="comment">#         length_63=lstm_out_pad[-1][63]  # Use [-1] can't get real last one </span></span><br><span class="line"><span class="comment">#         print("I'm the length of first sentence:",length_63)</span></span><br><span class="line"><span class="comment">#         print("i'm the data:",lstm_out_pad[0][length_63-1],lstm_out_pad[0][length_63 - 1][63])</span></span><br><span class="line"><span class="comment">#         print("im the length list:",lstm_out_pad[-1])</span></span><br><span class="line"><span class="comment">#         print(lstm_final_out.size())</span></span><br><span class="line">        out=self.fc(lstm_final_out)</span><br><span class="line"><span class="comment">#         print("emm heng?")</span></span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"><span class="comment">#         raise NotImplementedError()</span></span><br><span class="line">        </span><br><span class="line">INPUT_DIM = len(TEXT.vocab)  <span class="comment"># 25002</span></span><br><span class="line">EMBEDDING_DIM = <span class="number">50</span></span><br><span class="line">HIDDEN_DIM = <span class="number">100</span></span><br><span class="line">OUTPUT_DIM = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">imodel = ImprovedRNN(INPUT_DIM, EMBEDDING_DIM, HIDDEN_DIM, OUTPUT_DIM)</span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Train and evaluate the model</span></span><br><span class="line"><span class="comment"># YOUR CODE HERE</span></span><br><span class="line">optimizer = optim.Adam(model.parameters(), lr=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">torchbearer_trial = Trial(imodel, optimizer, criterion, metrics=[<span class="string">'acc'</span>, <span class="string">'loss'</span>]).to(device)</span><br><span class="line">torchbearer_trial.with_generators(train_generator=MyIter(train_iterator), val_generator=MyIter(valid_iterator), test_generator=MyIter(test_iterator))</span><br><span class="line"><span class="comment"># torchbearer_trial.with_train_generator(MyIter(train_iterator))</span></span><br><span class="line">torchbearer_trial.run(epochs=<span class="number">5</span>)</span><br><span class="line">torchbearer_trial.predict()</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/07/Linux-Server-set-thread-for-Pytorch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/07/Linux-Server-set-thread-for-Pytorch/" class="post-title-link" itemprop="url">Linux Server set thread for Pytorch</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-07 01:57:42 / Modified: 02:02:38" itemprop="dateCreated datePublished" datetime="2019-05-07T01:57:42+01:00">2019-05-07</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>During the time of doing my course work for Advanced Machine Learning, I ran my deep learning scripts on the server. In the first time, I saw the %CPU of my job was always very high. (And then, the admin killed my job since it stuck other jobs…sorry, i didn’t know this at that time)</p>
+<p>To avoid the effect on other users, before runing our Pytorch scripts, we should run the following code in the beginning to set the thread. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OMP_NUM_THREADS=1</span><br><span class="line"><span class="built_in">export</span> OMP_NUM_THREADS</span><br></pre></td></tr></table></figure>
+<p>This allow us to use only one thread in our one job.</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/Git-Rebase-to-keep-commit-log-clean/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/05/Git-Rebase-to-keep-commit-log-clean/" class="post-title-link" itemprop="url">Git Rebase to keep commit log clean</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-05 11:00:33 / Modified: 11:11:41" itemprop="dateCreated datePublished" datetime="2019-05-05T11:00:33+01:00">2019-05-05</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>There always be the cases that we are developing a new feature on seperate branch when we are using <code>Git</code>. There are many commit log like “fix type”, “correct the error” etc. When we merge the branch to <code>master</code> branch, we don’t want these stupid commit log appear in the commit log of <code>master</code> branch. </p>
+<p>To merge <code>development</code> branch to <code>master</code> branch:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git merge development</span><br></pre></td></tr></table></figure></p>
+<p>If we want to make our commit log clean, then you should use <code>rebase</code>.</p>
+<h2 id="Rebase"><a href="#Rebase" class="headerlink" title="Rebase"></a>Rebase</h2><p>example:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开始开发一个新 feature</span></span><br><span class="line">$ git checkout -b new-feature master</span><br><span class="line"><span class="comment"># 改了一些代码</span></span><br><span class="line">$ git commit -a -m <span class="string">"Start developing a feature"</span></span><br><span class="line"><span class="comment"># 刚刚的修改有点问题，再改一下</span></span><br><span class="line">$ git commit -a -m <span class="string">"Fix something from the previous commit"</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 紧急修复，直接在 master 分支上改点东西</span></span><br><span class="line">$ git checkout master</span><br><span class="line"><span class="comment"># 改了一些代码</span></span><br><span class="line">$ git commit -a -m <span class="string">"Fix security hole"</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 开始交互式地 rebase 了</span></span><br><span class="line">$ git checkout new-feature</span><br><span class="line">$ git rebase -i master</span><br></pre></td></tr></table></figure></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Git tips: <a href="https://www.lovelucy.info/git-tips-combine-commits-keep-your-branch-clean.html" target="_blank" rel="noopener">合并 commit 保持分支干净整洁</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/02/Linux-Run-Script-even-after-logging-out/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/02/Linux-Run-Script-even-after-logging-out/" class="post-title-link" itemprop="url">Linux Run Script even after logging out</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-02 10:35:19" itemprop="dateCreated datePublished" datetime="2019-05-02T10:35:19+01:00">2019-05-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-04 12:01:21" itemprop="dateModified" datetime="2019-05-04T12:01:21+01:00">2019-05-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Nohup"><a href="#Nohup" class="headerlink" title="Nohup"></a>Nohup</h2><ul>
+<li>image_haha</li>
+</ul>
+<h2 id="Rerference"><a href="#Rerference" class="headerlink" title="Rerference"></a>Rerference</h2><ol>
+<li>linux后台执行命令：<a href="https://blog.csdn.net/liuyanfeier/article/details/62422742" target="_blank" rel="noopener">&amp;和nohup</a></li>
+<li>Nohup Command in Linux: <a href="https://linuxhint.com/nohup_command_linux/" target="_blank" rel="noopener">Linux Hint</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/01/VAE-Variational-Autoencoder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -573,12 +1246,24 @@
                 
               
 
-              <time title="Created: 2019-04-30 14:32:43 / Modified: 14:46:39" itemprop="dateCreated datePublished" datetime="2019-04-30T14:32:43+01:00">2019-04-30</time>
+              <time title="Created: 2019-04-30 14:32:43" itemprop="dateCreated datePublished" datetime="2019-04-30T14:32:43+01:00">2019-04-30</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-06 22:34:17" itemprop="dateModified" datetime="2019-08-06T22:34:17+01:00">2019-08-06</time>
               
             
           </span>
@@ -635,7 +1320,7 @@
             <p>To fetch a item from generator, <code>next()</code> can be used: <code>Return the next item from the iterator.</code></p>
 <p>If a variable is not a generator, <code>next()</code> can be used along with <code>iter()</code>.</p>
 <p><strong>Python code snippet</strong>:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">next(a)</span><br><span class="line"><span class="comment"># output: TypeError: 'list' object is not an iterator</span></span><br><span class="line"></span><br><span class="line">b=iter(a)</span><br><span class="line">next(b)</span><br><span class="line"><span class="comment"># output: 1</span></span><br><span class="line">next(b)</span><br><span class="line"><span class="comment">#  output: 2</span></span><br><span class="line">next(b)</span><br><span class="line"><span class="comment">#  output: 3</span></span><br><span class="line">next(b)</span><br><span class="line"><span class="comment">#  StopIteration</span></span><br></pre></td></tr></table></figure></p>
-<p>My case:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># dataset construction</span></span><br><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.ToTensor(), <span class="comment"># convert to tensor</span></span><br><span class="line">    transforms.Lambda(<span class="keyword">lambda</span> x: x.view(image_dim)) <span class="comment"># flatten into vector</span></span><br><span class="line">    ])</span><br><span class="line"></span><br><span class="line">train_set = torchvision.datasets.FashionMNIST(</span><br><span class="line">    root=<span class="string">'./data/FashionMNIST'</span></span><br><span class="line">    ,train=<span class="literal">True</span></span><br><span class="line">    ,download=<span class="literal">True</span></span><br><span class="line">    ,transform=transform</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">train_loader = torch.utils.data.DataLoader(</span><br><span class="line">    train_set, batch_size=batch_size</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Fetch images by next() function</span></span><br><span class="line"><span class="comment"># Since the obj returned by DataLoader was not iterator, I also used iter()</span></span><br><span class="line">images = next(iter(train_loader))</span><br></pre></td></tr></table></figure></p>
+<p>Example:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># dataset construction</span></span><br><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.ToTensor(), <span class="comment"># convert to tensor</span></span><br><span class="line">    transforms.Lambda(<span class="keyword">lambda</span> x: x.view(image_dim)) <span class="comment"># flatten into vector</span></span><br><span class="line">    ])</span><br><span class="line"></span><br><span class="line">train_set = torchvision.datasets.FashionMNIST(</span><br><span class="line">    root=<span class="string">'./data/FashionMNIST'</span></span><br><span class="line">    ,train=<span class="literal">True</span></span><br><span class="line">    ,download=<span class="literal">True</span></span><br><span class="line">    ,transform=transform</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">train_loader = torch.utils.data.DataLoader(</span><br><span class="line">    train_set, batch_size=batch_size</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Fetch images by next() function</span></span><br><span class="line"><span class="comment"># Since the obj returned by DataLoader was not iterator, I also used iter()</span></span><br><span class="line">images = next(iter(train_loader))</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1433,746 +2118,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/28/Linux-Server-virtual-env/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/28/Linux-Server-virtual-env/" class="post-title-link" itemprop="url">Linux Server virtual env</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-28 11:28:39 / Modified: 11:51:01" itemprop="dateCreated datePublished" datetime="2019-04-28T11:28:39+01:00">2019-04-28</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>How to create the virtual env in the server of lab.</strong></p>
-<p>In my group coursework for the advanced ML, I want to run the code of the first solution in this competition. The requirments wasn’t satisfied in the server, so I want to create virtual env to built such environment. This blog records the process of building envirment to run deep learning task.</p>
-<h2 id="virtualenv"><a href="#virtualenv" class="headerlink" title="virtualenv"></a>virtualenv</h2><p>If your linux server already has the <code>virtualenv</code> module, you can use virtual env to create virtual environment. You can check it using <code>pip list</code>.</p>
-<p>In my try, I tried to install the <code>virtualenv</code> in the beginning. I found that the permmission is denied, since I don’t have the root access on this server supplied by teachers.</p>
-<p>I found the reason and solution in this <a href="https://github.com/googlesamples/assistant-sdk-python/issues/236" target="_blank" rel="noopener">issue</a>. Therefore, I did another try which is the following one.</p>
-<h2 id="Python-m-venv"><a href="#Python-m-venv" class="headerlink" title="Python -m venv"></a>Python -m venv</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 -m venv env</span><br><span class="line">source ./env/bin/activate</span><br></pre></td></tr></table></figure>
-<p>This solution just needs you to have the Python in your system (any Linux has the Python within system). In this way, I can activate the virual environment and <code>pip install</code> the specific modules.</p>
-<h2 id="我的解决方案"><a href="#我的解决方案" class="headerlink" title="我的解决方案"></a>我的解决方案</h2><p>目标：python3.6 </p>
-<p>过程：    </p>
-<ol>
-<li>python -m env</li>
-<li>在python创建出来的虚拟环境中安装virtualenv</li>
-<li>通过virtualenv创建对应python3.6版本的虚拟环境</li>
-</ol>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>an issue on Github: <a href="https://github.com/googlesamples/assistant-sdk-python/issues/236" target="_blank" rel="noopener">Permission denied</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/27/Kaggle-Competition-Humpback-Whale-Identification/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/27/Kaggle-Competition-Humpback-Whale-Identification/" class="post-title-link" itemprop="url">Kaggle Competition: Humpback Whale Identification</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-27 14:49:12" itemprop="dateCreated datePublished" datetime="2019-04-27T14:49:12+01:00">2019-04-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-28 14:05:58" itemprop="dateModified" datetime="2019-04-28T14:05:58+01:00">2019-04-28</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kaggle/" itemprop="url" rel="index"><span itemprop="name">Kaggle</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Kaggle竞赛第一名方案解读</p>
-<h2 id="Description-of-Competition"><a href="#Description-of-Competition" class="headerlink" title="Description of Competition"></a>Description of Competition</h2><p>目的：构建算法识别鲸鱼个体</p>
-<p>难点：</p>
-<ul>
-<li>训练样本的严重不均衡</li>
-<li>存在接近三分之一的无标注（new whale）数据</li>
-</ul>
-<p>Some new terminology:</p>
-<ul>
-<li>Few-shot learning: <a href="https://blog.csdn.net/xhw205/article/details/79491649" target="_blank" rel="noopener">what’s few shot learning</a></li>
-<li>细粒度分类: that’s why we need mask. <a href="https://www.imooc.com/article/30053" target="_blank" rel="noopener">mask-CNN</a>,<a href="https://cloud.tencent.com/developer/article/1010499" target="_blank" rel="noopener">什么是mask</a></li>
-<li>triplet loss: ？？？</li>
-<li>SE-resneXt154: 一个新的分类模型</li>
-<li>伪标签：？？</li>
-</ul>
-<hr>
-<p><strong>Pipeline：</strong></p>
-<h2 id="Input-of-the-models"><a href="#Input-of-the-models" class="headerlink" title="Input of the models"></a>Input of the models</h2><ul>
-<li>RGB+mask</li>
-<li>Data Augmentation:<ul>
-<li>有人提出鲸鱼尾部不对称，翻转之后是新的类别</li>
-</ul>
-</li>
-</ul>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>kaggle competition: <a href="https://www.kaggle.com/c/humpback-whale-identification" target="_blank" rel="noopener">Humpback Whale Identification</a></li>
-<li>机器之心: <a href="https://zhuanlan.zhihu.com/p/58496385" target="_blank" rel="noopener">Kaggle第一名竞赛方案解读</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/Interview-1-QuantumBlack-Experience/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/15/Interview-1-QuantumBlack-Experience/" class="post-title-link" itemprop="url">Interview-1 QuantumBlack Data Science Intern</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-15 16:11:59 / Modified: 16:46:26" itemprop="dateCreated datePublished" datetime="2019-04-15T16:11:59+01:00">2019-04-15</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>记第一次在英国公司面试</p>
-<h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><p>第一次面试，quantum black这个公司，面试官是两个小姐姐。公司整体人很好，刚进门的时候有小哥路过还打招呼问我，后来在餐厅等候的时候还有小哥问我吃不吃巧克力，公司整体氛围相当不错。面试官也特别友善。</p>
-<p>面试开始先有一个简单的introduction，让面试官认识你。没有准备好这个brief introduction。</p>
-<p>面试过程表现不太好。。。感觉一是因为英语不够熟练，刚开始不太能get到小姐姐的问题，表现不好。二是后面technical方面的问题的时候，我忘了一些模型的细节，后面详细写。</p>
-<h2 id="case-part"><a href="#case-part" class="headerlink" title="case part"></a>case part</h2><p>第一部分是实际案例部分，案例问题是关于fraud detection。给定一组很大的银行的交易数据，such as 100million条，其中200条是诈骗交易，我们要进行诈骗交易的检测。</p>
-<p>第一步让我构建feature，觉得能从之前的数据中构建出来什么feature。最开始没太理解，后来也没答好，确实不知道能构建什么feature</p>
-<p>第二步让我建立模型来解决这个问题。我提出使用逻辑回归模型来进行预测。接着会来一连串的问题，为什么会选用逻辑回归来预测？ 我要如何训练和测试这个模型？</p>
-<ul>
-<li>关于loss function这一块，问我如何构建。 我说使用交叉熵，但是我忘了交叉熵的公式了。。。。</li>
-<li>metric to evaluate 这个模型，我说可以使用confusion matrix。要求来画出混淆矩阵，紧张了一下没画出来，后来画出来了。问到了precision，recall和f值。结合案例又问了问题，问我应该重点关注哪个值，这里回答不好。。。</li>
-<li>如何split training data set。这个数据严重不平衡，如何做。。。。我也不知道回答的好还是不好。。先说80 20 split，后来说可以使用cross validation来进行交叉检验。小姐姐针对这个问题提出疑问，可能有的fold没有fraud point。。。</li>
-</ul>
-<p>这部分整体感觉，有点崩，也有些超时。感觉这里应该有自己的独立思考，根据相应的案例进行变通，应该是要跟面试官进行discuss的，我没做好心理准备，导致被面试官牵着走，效果也不好。模型不应该一成不变，应该根据相应的case有不同变通。</p>
-<h2 id="technical-part"><a href="#technical-part" class="headerlink" title="technical part"></a>technical part</h2><p>这一块不是case，是要问理论的部分。这一块刚开始其实还是比较自信的，因为自我感觉理论掌握的还不错。</p>
-<ol>
-<li><p>ROC curve<br>之前看过ROC curve，但是这次死活也想不起来。。。难受，这个东西业界用的比较多，之前看过一次，但是这次之前忘了看，实属失误</p>
-</li>
-<li><p>逻辑回归<br>这里小姐姐结合线性回归和逻辑回归来问我问题。 还好前几天看官网案例的时候看到逻辑回归用的比较多，提前准备了一下。这里主要看线性回归和逻辑回归的理解。分别问到了线性回归的方程表现形式，loss function是什么，梯度下降又是什么（这里画图来描述），如何使用梯度下降进行优化（不必要推导导数公式）。</p>
-</li>
-</ol>
-<p>接着问了逻辑回归和线性回归之间的联系。时间限制，我写了一个公式，小姐姐知道了我的意思就开始下一个问题了。</p>
-<ol>
-<li><p>其他非线性分类的模型<br>我回答了 SVM，接着让我描述SVM和他的原理。我说svm基本状态是线性分类的，要做到非线性要用kernel。接着让我描述kernel，kernel是什么。这一块花的时间比较多，我有时候没有搞明白她的意思。其实kernel我也没有办法说的很清楚，这一块是个失误。</p>
-</li>
-<li><p>tree - ensemble<br>还好我提前也准备了这一块，集成学习这一块。可惜boosting部分忘记了细节，太紧张了没回答上来。</p>
-</li>
-</ol>
-<p>bagging，我描述了bagging的idea。小姐姐针对bagging问了我问题，这些models是一个model吗，是不是不同。</p>
-<p>boosting，描述的没有很清楚。我没讲清楚如何训练互补的model。。。。。。给data set赋予权重，每个数据都有不同的权重（最开始没讲清楚），然后讲如何通过一个$\alpha$来变换之前之后的权重。（太紧张了，又没有提前准备，没回答好）</p>
-<p>之后时间到了，结束。</p>
-<h2 id="经验教训"><a href="#经验教训" class="headerlink" title="经验教训"></a>经验教训</h2><ol>
-<li>准备好开头的小介绍  *重要</li>
-<li>练习好英语，case discuss部分要灵活变通，表现自己的思考  ****重要</li>
-<li>ROC curve  *重要，忘记准备了</li>
-<li>SVM kernel *重要，学会讲这个东西</li>
-<li>boosting  *重要，忘记准备，本身会</li>
-<li>技术的问题都问的很详细，不会问你深度学习相关的东西，就只是问你base model的问题。准备时候要有侧重点，还好我提前看过了官网上的往期project，对知道他应该更多的问传统机器学习模型部分。但是一些具体的细节需要更加深入的理解，达到能给别人讲的程度。  ****重要 </li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/14/Gaussian-Mixed-Model-GMM-and-EM-algorithm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/14/Gaussian-Mixed-Model-GMM-and-EM-algorithm/" class="post-title-link" itemprop="url">Gaussian Mixed Model(GMM) and EM algorithm</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-14 17:33:50 / Modified: 17:45:37" itemprop="dateCreated datePublished" datetime="2019-04-14T17:33:50+01:00">2019-04-14</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Gaussian-Distribution"><a href="#Gaussian-Distribution" class="headerlink" title="Gaussian Distribution"></a>Gaussian Distribution</h2><h2 id="Mixed-Gaussian-Distribution"><a href="#Mixed-Gaussian-Distribution" class="headerlink" title="Mixed Gaussian Distribution"></a>Mixed Gaussian Distribution</h2><h2 id="Optimization-Method"><a href="#Optimization-Method" class="headerlink" title="Optimization Method"></a>Optimization Method</h2><h2 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h2><ol>
-<li>知乎 <a href="https://zhuanlan.zhihu.com/p/30483076" target="_blank" rel="noopener">高斯混合模型(GMM)</a></li>
-<li>知乎 <a href="https://zhuanlan.zhihu.com/p/31103654" target="_blank" rel="noopener">一文详解高斯混合模型原理</a></li>
-<li>《统计学习方法》第九章 - EM算法及其推广——李航</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2221,7 +2166,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

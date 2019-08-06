@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="We Need to Go Deeper">
 <meta property="og:description" content="Intro of argparseThe argparse module makes it easy to write user-friendly command-line interfaces. The program defines what arguments it requires, and argparse will figure out how to parse those out o">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-23T14:20:15.669Z">
+<meta property="og:updated_time" content="2019-08-06T21:02:17.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python argparse for Command Line">
 <meta name="twitter:description" content="Intro of argparseThe argparse module makes it easy to write user-friendly command-line interfaces. The program defines what arguments it requires, and argparse will figure out how to parse those out o">
@@ -404,12 +404,24 @@
                 
               
 
-              <time title="Created: 2019-07-23 15:16:57 / Modified: 15:20:15" itemprop="dateCreated datePublished" datetime="2019-07-23T15:16:57+01:00">2019-07-23</time>
+              <time title="Created: 2019-07-23 15:16:57" itemprop="dateCreated datePublished" datetime="2019-07-23T15:16:57+01:00">2019-07-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-06 22:02:17" itemprop="dateModified" datetime="2019-08-06T22:02:17+01:00">2019-08-06</time>
               
             
           </span>
@@ -474,12 +486,12 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">'Process some integers.'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'integers'</span>, metavar=<span class="string">'N'</span>, type=int, nargs=<span class="string">'+'</span>,</span><br><span class="line">                    help=<span class="string">'an integer for the accumulator'</span>)</span><br><span class="line">parser.add_argument(<span class="string">'--sum'</span>, dest=<span class="string">'accumulate'</span>, action=<span class="string">'store_const'</span>,</span><br><span class="line">                    const=sum, default=max,</span><br><span class="line">                    help=<span class="string">'sum the integers (default: find the max)'</span>)</span><br><span class="line"></span><br><span class="line">args = parser.parse_args()</span><br><span class="line">print(args.accumulate(args.integers))</span><br></pre></td></tr></table></figure>
 <p>This is a program that takes a list of integers and produce either the sum or the max. </p>
 <p>Assume the name of file is <code>prog.py</code>, and execute the file:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ python prog.py 1 2 3 4</span><br><span class="line">4</span><br><span class="line"></span><br><span class="line">$ python prog.py 1 2 3 4 --sum</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python prog.py 1 2 3 4</span><br><span class="line"><span class="comment"># output: 4</span></span><br><span class="line"></span><br><span class="line">python prog.py 1 2 3 4 --sum</span><br><span class="line"><span class="comment"># output: 10</span></span><br></pre></td></tr></table></figure>
 <p>See the details from docs of <a href="https://docs.python.org/3/library/argparse.html#module-argparse" target="_blank" rel="noopener">argparse</a>.</p>
 <h2 id="Else"><a href="#Else" class="headerlink" title="Else"></a>Else</h2><h3 id="sys-argv"><a href="#sys-argv" class="headerlink" title="sys.argv"></a><code>sys.argv</code></h3><p>During using the <code>argparse</code> module, <code>sys.argv</code> is important since you may need it in the <code>main()</code>function. </p>
 <p>Code is sometimes like this:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> sys </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(argv)</span>:</span></span><br><span class="line">    parser = argparse.ArgumentParser()</span><br><span class="line">    <span class="comment"># parser.add_argument()</span></span><br><span class="line">    <span class="comment"># Do some argument parsing</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main(sys.argv)</span><br></pre></td></tr></table></figure>
-<h3 id="Intro-of-sys-argv"><a href="#Intro-of-sys-argv" class="headerlink" title="Intro of sys.argv"></a>Intro of <code>sys.argv</code></h3><p><code>sys.argv</code> is the list of commandline arguments passed to the Python program. It represents all the items that come along via the command line input.</p>
+<p><code>sys.argv</code> is the list of commandline arguments passed to the Python program. It represents all the items that come along via the command line input.</p>
 <p>For the content of <code>argv</code>, the first argument is always the script name, and it is also counted in the number of arguments. So even if you don’t pass any argument into your script, the <code>sys.argv</code> variable always contains at least one element and it’s the script name.</p>
 <p><strong>Example</strong></p>
 <p>Execute this python script, assume it is named <code>test.py</code>.</p>
@@ -537,6 +549,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/06/Linux-Server-Miniconda-Installation/" rel="prev" title="Linux Server Miniconda Installation">
+                Linux Server Miniconda Installation <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -607,7 +623,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -767,7 +783,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intro-of-argparse"><span class="nav-number">1.</span> <span class="nav-text">Intro of argparse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Else"><span class="nav-number">2.</span> <span class="nav-text">Else</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sys-argv"><span class="nav-number">2.1.</span> <span class="nav-text">sys.argv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-of-sys-argv"><span class="nav-number">2.2.</span> <span class="nav-text">Intro of sys.argv</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intro-of-argparse"><span class="nav-number">1.</span> <span class="nav-text">Intro of argparse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Else"><span class="nav-number">2.</span> <span class="nav-text">Else</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sys-argv"><span class="nav-number">2.1.</span> <span class="nav-text">sys.argv</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
