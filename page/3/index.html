@@ -357,6 +357,405 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/LSTM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/27/LSTM/" class="post-title-link" itemprop="url">LSTM</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-27 23:10:21" itemprop="dateCreated datePublished" datetime="2019-05-27T23:10:21+01:00">2019-05-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-30 23:28:41" itemprop="dateModified" datetime="2019-07-30T23:28:41+01:00">2019-07-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">Deep Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="https://lh3.googleusercontent.com/1a3JemZmq0O2oLdO-PWxDmmCKtqiIpYQv5mZHqjn7qyLUyd3uKrEMG95JIguwhtjGubeF2aSeEhuIKeD9YpZUabM4w8tjLQbQuieqyjwAetTlAYPdoED31q2UIMf6OrrL7V22qj3HMVkd_uTrYvUDMWYSl-ii3N95xHYoAVs8yzOrXGM7DVj_6VxGINnM-pGU1QseXuvyF0he3C4YQd-ksUnnlTfDAAQjxBcubfCpIMbi5StM-F1zq8GJuGqJq4AzbNv5FP8SZX17xbV-RpGZdMhMCIVLHrIIR2QdRrYLivdKz-9v9IULAxt8vv96rBaT8yn3KRDr_Ir5odQjnW6gVISynBsKJ4xMFMqMwISq-PGn75nzkXKZqr3aPO9nqm6uMe13lFQ1iW4-aXiHQcNIjLhUiufOIbmBuLoNxoiEfZXF-nFkKp7QNWoCcAfkzuyJDHD81B6HIE2e1eQM-bLdomLShk8f7nqJo4x7RoNk3Sw_pbXTkO4rYS7prEabrZsjqRjF15EQYU74jyRuNDU3AD8shfn1S0NPEhF3hsQILBvm67RJyQePWhhcgsAxPnh4ggVDpmaoxWxRzNTttsVd89j0SZ5w5OdKKs95ZDMOZob2MAp3cvRbyYZqrupydx2piO8D8hp0TI2BMOOELPZcvRFVfDepA=w1476-h1078-no" alt="avatar"></p>
+<p>The Structure of the LSTM, which is shown in the image above.</p>
+<h2 id="Items-in-the-Structure"><a href="#Items-in-the-Structure" class="headerlink" title="Items in the Structure"></a>Items in the Structure</h2><ul>
+<li><p>Inputs $\boldsymbol{z}(t)=(\boldsymbol{x}(t), \boldsymbol{y}(t-1))$</p>
+<p>The input is combined the input $x(t)$ and the output of last time $y(t-1)$</p>
+</li>
+<li><p>Network Updates ($W_*$ are the free parameters)</p>
+<script type="math/tex; mode=display">\begin{array}{ll}{\boldsymbol{f}(t)=\boldsymbol{\sigma}\left(\mathbf{W}_{f} \boldsymbol{z}(t)\right)} & {\boldsymbol{g}(t)=\boldsymbol{\sigma}\left(\boldsymbol{W}_{g} \boldsymbol{z}(t)\right)} \\ {\boldsymbol{h}(t)=\tanh \left(\boldsymbol{W}_{h} \boldsymbol{z}(t)\right)} & {\boldsymbol{o}(t)=\boldsymbol{\sigma}\left(\boldsymbol{W}_{o} \boldsymbol{z}(t)\right)}\end{array}</script><p>$\boldsymbol f(t)$ is the forget gate, $\boldsymbol g(t)$ decide the whether and what to remember from the input of this time, the $\boldsymbol h(t)$ is the input block, the $\boldsymbol o(t)$ is the output gate.</p>
+</li>
+<li><p>Long-term memory update </p>
+<script type="math/tex; mode=display">\boldsymbol{c}(t)=\boldsymbol{f}(t) \otimes \boldsymbol{c}(t-1)+\boldsymbol{g}(t) \otimes \boldsymbol{h}(t)</script><p>It can be seen as the influence of the forget gate on the hidden state plus the memory update.<br>(对隐含变量是否进行遗忘，加上这次的选择记忆阶段得到下一次的隐含状态的输入$c(t)$)</p>
+</li>
+<li><p>Output $\boldsymbol{y}(t)=\boldsymbol{o}(t) \otimes \tanh (\boldsymbol{c}(t))$ </p>
+<p>The product of the output gate and the $tanh(\boldsymbol c(t))$.</p>
+</li>
+</ul>
+<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>We can train an LSTM by unwrapping it in time.</p>
+<p>It involves four dense layers with sigmoidal(or tanh) output: those gates </p>
+<p>The LSTM is typucally very slow to train.</p>
+<p>There are a few variants of LSTMs, but all are very similar. The most popular is probably <em>Gated Recurrent Unit</em> (GRU).</p>
+<p>(to be continued)</p>
+<h2 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a>GRU</h2><p>LSTM有很多变体，其中较大改动的是Gated Recurrent Unit (GRU)，这是由 Cho, et al. (2014)提出。它将忘记门和输入门合成了一个单一的 更新门。同样还混合了细胞状态和隐藏状态，和其他一些改动。最终的模型比标准的 LSTM模型要简单。效果和LSTM差不多，但是参数少了1/3，不容易过拟合。</p>
+<p><img src="https://lh3.googleusercontent.com/EokZmbf0OhGC2D56XyXZPf8rcXxaDUHBLA2yCk0LtHk9Zx4mN3tYiMHj1ftCbonwv2OMdLITJENFMlP5VTfYKvwNr0LhSozQ4MBDWY-IveL283la5olGbI_i6d6jXBSl54rFH-PiIsafhl4-3TjfCtClQYD4hZg9Z_ZeNZgDXP--mQRYQRclVV5Ga1G53rEgzrbMQtRz2yZAOgZa69De1d-dY10opVueqZ2mtBpU9tfTknBBqZ_A2QSGyf89RSyrfEsgp7pdUCyhPojB811ttTAw7hiN_3S2EanbVXL42nzVoVxpONFa79IRi3IKLOx7gN_oMjwel2T_BKpQKYbgKzK2Q7K-my6gjMxFOjFaFfwABo7QUC-3KkrKfhxx5njR-PzN4FGM2diZllGO0UvI9Aly06LHjCLXpQHUyR2K-hRHE8TWK1fg6acdkbo8D2dNWIVM0-xVnsgh09az9a-ng3Si1HqcELSgb9O46hfLlgubLIr-aso4j1E2JZ3Hz6YdLbqkBAKfV_WGDqG3X-V8vVO8oysIhnxTL4oMgSYhmMcTrg9uqZVSfwFF_yW0tXuBsQ0QSCIhsdtI2FaWU8OBZhlpBxvrNFx2yCCc8UhZwtb843fvinK8VpO_WYef6oapgvPf9XiYATp654MQb9qR9TDD71Qe2Zg=w1826-h564-no" alt="avatar"></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Adam lstm slide COMP6208</li>
+<li><a href="https://www.cnblogs.com/jins-note/p/9715610.html" target="_blank" rel="noopener">RNN, LSTM and GRU </a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Kernel-Tricks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/27/Kernel-Tricks/" class="post-title-link" itemprop="url">Kernel Tricks</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-27 21:03:05 / Modified: 21:27:55" itemprop="dateCreated datePublished" datetime="2019-05-27T21:03:05+01:00">2019-05-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Kernels"><a href="#Kernels" class="headerlink" title="Kernels"></a>Kernels</h2><p>Many linear parametric models can be re-written into an equivalent <em>dual representation</em> in which the predictions are also based on linear combinations of a kernel function evaluated at the training data points. As we shall see, for models which are based on a fixed nonlinear feature space mapping $\phi(x)$, the <strong>kernel</strong> function is given by the relation</p>
+<script type="math/tex; mode=display">k\left(\mathbf{x}, \mathbf{x}^{\prime}\right)=\boldsymbol{\phi}(\mathbf{x})^{\mathrm{T}} \boldsymbol{\phi}\left(\mathbf{x}^{\prime}\right)</script><p><strong>Dual Representation and Kernel</strong>: See an classical example of SVM from this <a href="https://shuogh.github.io/2019/05/26/SVM-Slack-Variable-and-Kernel/" target="_blank" rel="noopener">blog</a>.</p>
+<p>Some common forms of kernels:</p>
+<ul>
+<li><p>Linear Kernel 线性核 $\kappa \left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) =\boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}$</p>
+</li>
+<li><p>Polynomial Kernel 多项式核 $\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) =\left(\boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}\right)^{d}$</p>
+</li>
+<li><p>Gaussian Kernel 高斯核 $\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) =\exp \left(-\frac{\left|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right|^{2}}{2 \sigma^{2}}\right)$</p>
+</li>
+<li><p>Laplace Kernel 拉普拉斯核 $\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) =\exp \left(-\frac{\left|\boldsymbol{x}_{i}-\boldsymbol{x}_{j}\right|}{\sigma}\right)$</p>
+</li>
+<li><p>Sigmoid Kernel $\kappa\left(\boldsymbol{x}_{i}, \boldsymbol{x}_{j}\right) =\tanh \left(\beta \boldsymbol{x}_{i}^{\mathrm{T}} \boldsymbol{x}_{j}+\theta\right)$</p>
+</li>
+</ul>
+<p>By replacing the $-\frac{1}{2\sigma^2}$ with $\lambda$ in the Gaussian Kernel, we can get the RBF kernel, which can be express as $\exp \left(-\gamma|\boldsymbol{x}-\boldsymbol{y}|^{2}\right)$.</p>
+<p><strong>Note</strong> that the feature vector that corresponds to the Gaussian kernel has infinite dimensionality.</p>
+<h2 id="Kernel-Tricks"><a href="#Kernel-Tricks" class="headerlink" title="Kernel Tricks"></a>Kernel Tricks</h2><p>So, what is kernel?</p>
+<p>In machine learning, a <strong>kernel</strong> is usually used to refer to the kernel trick, a method of using a linear classifier to solve a non-linear problem.</p>
+<p>The kernel trick allows us to map data into high-dimensional feature space $\boldsymbol{x} \rightarrow \phi(\boldsymbol{x})$. This can be carried out for sufficiently simple machines where parameter optimisation involve the dot product $\phi^{\mathbf{T}}(\boldsymbol{x}) \phi(\boldsymbol{y})$. The kernel function is positive semi-definite and the decomposition is always possible (see the properties in the end of this blog). In fact, we never need to explicitly calculate the extended features $\phi(\boldsymbol{x})$. This often makes working in the extended feature space very efficient as $K(\boldsymbol{x},\boldsymbol{y})$ may be quick to calculate.</p>
+<h2 id="Constructing-Kernels"><a href="#Constructing-Kernels" class="headerlink" title="Constructing Kernels"></a>Constructing Kernels</h2><p>One approach to build valid kernel is to choose a feature space mapping $\phi(x)$ and use it to find the corresponding kernel. Here the kernel function is defined for one-dimensional input space by </p>
+<script type="math/tex; mode=display">k\left(x, x^{\prime}\right)=\phi(x)^{\mathrm{T}} \boldsymbol{\phi}\left(x^{\prime}\right)=\sum_{i=1}^{M} \phi_{i}(x) \phi_{i}\left(x^{\prime}\right)</script><p>where $\phi(x)$ is the basis function. </p>
+<p>Another approach is to construct the kernel directly. In this way, we should have a method to test whether the kernel we build is valid. A <strong>necessary and sufficient condition</strong> for a function $k(x,x)$ to be a valid kernel is that the <strong>Gram</strong> matrix $K$, whose elements are given by $k(x,x)$, should be positive semi-definite for all possible choices of the set $x_n$. Note that a positive semi-definite matrix is not the same thing as a matrix whose elements are nonnegative.</p>
+<p>One powerful technique for constructing new kernels is to build out of simple kernels as building blocks. See the properties from the PRML book in $P_{296}$.</p>
+<hr>
+<h2 id="Some-questions-about-the-Kernel"><a href="#Some-questions-about-the-Kernel" class="headerlink" title="Some questions about the Kernel"></a>Some questions about the Kernel</h2><ol>
+<li>Why it is important that the kernel function is positive semi-definite?<br> Kernel functions need to be positive semi-definite so that they have sensible (nonnegative) distances. That is the margins are positive.</li>
+<li>Three properties that a positive semi-definite kernel should have:<ul>
+<li>The eigenvalues of a positive semi-definite kernel function are nonnegative.</li>
+<li>A positive semi-definite kernel function can always be written as <script type="math/tex; mode=display">K(x,y)=\sum_i \phi_i(x)\phi_i(y)</script>for some sets of real functions $\phi_i(x)$</li>
+<li>The quadratic form satisfies <script type="math/tex; mode=display">\int f(\boldsymbol{x}) K(\boldsymbol{x}, \boldsymbol{y}) f(\boldsymbol{y}) \mathrm{d} \boldsymbol{x} \mathrm{d} \boldsymbol{y} \geq 0</script>for any real function $f(x)$.</li>
+</ul>
+</li>
+<li>Why kernel trick allows an SVM to seperate data points that are not linearly separable?<br> The kernel trick projects data into the extended feature space (the space of engenfunctions of the kernel). Although an SVM finds a linear separating plane in this extended space, as the extended features are typically a non-linear function of the original features. This corresponds to finding a non-linear separating surface in the original space.</li>
+</ol>
+<hr>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>周志华 《机器学习》</li>
+<li>Bishop PRML Chapter 6</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Hexo-Local-Search-not-Respond/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1881,353 +2280,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/14/Python-Init-Modules/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/14/Python-Init-Modules/" class="post-title-link" itemprop="url">Python Init Modules</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-14 16:28:47" itemprop="dateCreated datePublished" datetime="2019-05-14T16:28:47+01:00">2019-05-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-31 12:04:24" itemprop="dateModified" datetime="2019-07-31T12:04:24+01:00">2019-07-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>__init__.py 文件的作用是将文件夹变为一个Python模块,Python 中的每个模块的包中，都有__init__.py 文件。</p>
-<hr>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__all__=[]</span><br></pre></td></tr></table></figure>
-<p>The <code>__all__</code> is a special variable, which defines what attribute, functions or modules can be imported into other modules. </p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>Python __init__.py <a href="https://www.cnblogs.com/Lands-ljk/p/5880483.html" target="_blank" rel="noopener">作用详解</a> </li>
-<li>Python模块导入时全局变量”__all__“的作用  <a href="https://blog.csdn.net/chuan_day/article/details/79694319" target="_blank" rel="noopener">https://blog.csdn.net/chuan_day/article/details/79694319</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/Deep-Learning-Batch-Normalization/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/13/Deep-Learning-Batch-Normalization/" class="post-title-link" itemprop="url">Deep Learning Batch Normalization</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-13 18:54:57 / Modified: 18:59:02" itemprop="dateCreated datePublished" datetime="2019-05-13T18:54:57+01:00">2019-05-13</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">Deep Learning</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Why-we-need-batch-normalization-in-neural-network"><a href="#Why-we-need-batch-normalization-in-neural-network" class="headerlink" title="Why we need batch normalization in neural network?"></a>Why we need batch normalization in neural network?</h1><h2 id><a href="#" class="headerlink" title=" "></a> </h2><p>It can help the neural network to converge more quickly.</p>
-<p>Make the different features into the same scale, get rid of the influence of different scale.</p>
-<p>防止梯度爆炸和梯度消失</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>zhihu: <a href="https://www.zhihu.com/question/281816000" target="_blank" rel="noopener">神经网络中的归一化除了减少计算量，还有什么作用？</a></li>
-<li>towards data science: <a href="https://towardsdatascience.com/batch-normalization-in-neural-networks-1ac91516821c" target="_blank" rel="noopener">Batch normalization in Neural Networks</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2276,7 +2328,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-count">60</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

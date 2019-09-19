@@ -357,6 +357,341 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/08/Print-in-Python3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/08/Print-in-Python3/" class="post-title-link" itemprop="url">Print in Python3</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-08 15:44:39 / Modified: 15:58:46" itemprop="dateCreated datePublished" datetime="2019-04-08T15:44:39+01:00">2019-04-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Print-in-Python3"><a href="#Print-in-Python3" class="headerlink" title="Print in Python3"></a>Print in Python3</h1><p>There are two kinds of ways to output to the screen, one is <code>sys.output.write</code> and <code>print</code>. When we use <code>print</code>, this built-in function actually calls the <code>stdout</code> function. </p>
+<p><code>print</code> equals <code>stdout.write</code> plus <code>&quot;\n&quot;</code>. However, when we call <code>print</code>, we can change the optional parameter to print multi objects into a single line. </p>
+<p>See the doc of <code>print</code>:</p>
+<ul>
+<li>print(*objects, sep=’ ‘, end=’\n’, file=sys.stdout, flush=False)</li>
+</ul>
+<p>To get the print without newline：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">"your output"</span>,end=<span class="string">" "</span>)</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="My-use-experience"><a href="#My-use-experience" class="headerlink" title="My use experience:"></a>My use experience:</h4><p>See my exercise in the <a href="https://github.com/ShuoGH/datascience/blob/master/BinarySearchTree.ipynb" target="_blank" rel="noopener">binary search tree</a>, I want to travelsal the tree node and output into a single line.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    def preOrderTraversal(self,node):</span><br><span class="line">        <span class="string">''</span><span class="string">'</span></span><br><span class="line"><span class="string">        if you want to output the node in a single line:</span></span><br><span class="line"><span class="string">            - change the `print` to `print(node.data,end='</span> <span class="string">')</span></span><br><span class="line"><span class="string">        '</span><span class="string">''</span></span><br><span class="line">        <span class="keyword">if</span> node:</span><br><span class="line"><span class="comment">#             print(node.data)</span></span><br><span class="line">            <span class="built_in">print</span>(node.data,end=<span class="string">" "</span>)</span><br><span class="line">            self.preOrderTraversal(node.lchild)</span><br><span class="line">            self.preOrderTraversal(node.rchild)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/22/List-in-Python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/22/List-in-Python/" class="post-title-link" itemprop="url">List in Python</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-22 15:44:36 / Modified: 16:11:44" itemprop="dateCreated datePublished" datetime="2019-03-22T15:44:36+00:00">2019-03-22</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="List-and-For-loop-in-Python"><a href="#List-and-For-loop-in-Python" class="headerlink" title="List and For loop in Python"></a>List and For loop in Python</h1><p>This blog also include some information of the array in Numpy.</p>
+<p>Now have a list of <code>[1,-1,1,1,1,-1]</code>, want to have another list of category corresponding to the <code>1</code> and <code>-1</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; label=[1,-1,1,1,1,-1]</span><br><span class="line">&gt;&gt;&gt; cate =[<span class="string">'a'</span> <span class="keyword">if</span> i==1 <span class="keyword">else</span> <span class="string">'b'</span> <span class="keyword">for</span> i <span class="keyword">in</span> label]</span><br></pre></td></tr></table></figure>
+<h2 id="set-value-using-the-filter-character-in-array-of-numpy"><a href="#set-value-using-the-filter-character-in-array-of-numpy" class="headerlink" title="set value using the filter character in array of numpy"></a>set value using the filter character in array of numpy</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import numpy as np</span><br><span class="line">&gt;&gt;&gt; label=np.array([1,-1,1,1,1,-1]) <span class="comment"># it must be the array</span></span><br><span class="line">&gt;&gt;&gt; cate=np.empty(len(label))</span><br><span class="line">&gt;&gt;&gt; cate[label==1]=11</span><br><span class="line">&gt;&gt;&gt; cate[label==-1]=-11</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/21/LeetCode-Note-Two-Sum/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1802,7 +2137,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-count">60</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2458,6 +2793,10 @@
 
   
   
+    
+      
+    
+      
     
       
     
