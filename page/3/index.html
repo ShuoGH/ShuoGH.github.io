@@ -13,7 +13,7 @@
 
 
 <html class="theme-next pisces" lang>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -341,6 +341,191 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/Bayes-Rule-Prior-and-Posterior/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/27/Bayes-Rule-Prior-and-Posterior/" class="post-title-link" itemprop="url">Bayes Rule, Prior and Posterior</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-27 23:57:15 / Modified: 23:57:54" itemprop="dateCreated datePublished" datetime="2019-05-27T23:57:15+01:00">2019-05-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Bayes’-Rule"><a href="#Bayes’-Rule" class="headerlink" title="Bayes’ Rule"></a>Bayes’ Rule</h2><p>The form of bayes’ rule is </p>
+<script type="math/tex; mode=display">\mathbb{P}\left(\mathcal{H}_{i} | \mathcal{D}\right)=\frac{\mathbb{P}\left(\mathcal{D} | \mathcal{H}_{i}\right) \mathbb{P}\left(\mathcal{H}_{i}\right)}{\mathbb{P}(\mathcal{D})}</script><ul>
+<li><p>$\mathbb{P}\left(\mathcal{H}_{i} | \mathcal{D}\right)$ is the <strong>posterior</strong> probability of a hypothesis $\mathcal{H}_{i}$ (i.e. the probability of $\mathcal{H}_{i}$ after we know the data)</p>
+</li>
+<li><p>$\mathbb{P}\left(\mathcal{D} | \mathcal{H}_{i}\right)$ is the <strong>likelihood</strong> of the data given the hypothesis. Note, that we calculated this from the forward problem</p>
+</li>
+<li><p>$\mathbb{P}\left(\mathcal{H}_{i}\right)$ is the <strong>prior</strong> probability (i.e. the probability of $\mathcal{H}_{i}$ before we know the data)</p>
+</li>
+<li><p>$\mathbb{P}(\mathcal{D})$ is the <strong>evidence</strong>. It is the normalising constant given by </p>
+<script type="math/tex; mode=display">\mathbb{P}(\mathcal{D})=\sum_{i=1}^{n} \mathbb{P}\left(\mathcal{H}_{i}, \mathcal{D}\right)=\sum_{i=1}^{n} \mathbb{P}\left(\mathcal{D} | \mathcal{H}_{i}\right) \mathbb{P}\left(\mathcal{H}_{i}\right)</script></li>
+</ul>
+<p>In most of our task, what we want is the posterior probability.</p>
+<p>The bayes’ rule converts this into the forward problem.</p>
+<h1 id="Prior-and-Posterior"><a href="#Prior-and-Posterior" class="headerlink" title="Prior and Posterior"></a>Prior and Posterior</h1><p>(to be continued)</p>
+<p>When the posterior is the same as the prior then the likelihood and prior distributions are said to be <strong>conjugate</strong>. The prior then is the conjugate prior. </p>
+<p>In the xxxxxx, we want to maximize the posterior probabilities(MAP), which is different with the fully bayesian inference.(2017-2018 exam paper AML)</p>
+<h2 id="MAP-and-MLE"><a href="#MAP-and-MLE" class="headerlink" title="MAP and MLE"></a>MAP and MLE</h2><p>MAP: maximize the posterior distribution </p>
+<p>MLE: maximum likelihood estimation </p>
+<p>In MAP, we should add a prior distribution and by adding observations and then to maximize the posterior distribution $p(w|X)$ to get the parameter. </p>
+<p>最大似然估计是求参数$\theta$, 使似然函数$P(x_0|\theta)$最大。最大后验概率估计则是想求$\theta$使$P(x_0|\theta)P(\theta)$最大,求得的$ \theta $不单单让似然函数大，$ \theta $自己出现的先验概率(也是得到的后验概率）也得大.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Bishop PRML</li>
+<li><a href="ttps://blog.csdn.net/u011508640/article/details/72815981" target="_blank" rel="noopener">详解最大似然估计（MLE）、最大后验概率估计（MAP)</a></li>
+<li>Adam slide bayes_prn comp6208</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -2010,281 +2195,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/25/Data-Mining-Information-Theory/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/25/Data-Mining-Information-Theory/" class="post-title-link" itemprop="url">Data Mining Information Theory</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-25 11:14:32" itemprop="dateCreated datePublished" datetime="2019-05-25T11:14:32+01:00">2019-05-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-05-29 13:56:58" itemprop="dateModified" datetime="2019-05-29T13:56:58+01:00">2019-05-29</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Data-Mining/" itemprop="url" rel="index"><span itemprop="name">Data Mining</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Information-Theory-and-Feature-Selection"><a href="#Information-Theory-and-Feature-Selection" class="headerlink" title="Information Theory and Feature Selection"></a>Information Theory and Feature Selection</h1><ul>
-<li>Outline:<ul>
-<li>Information</li>
-<li>Entropy</li>
-<li>Mutual information</li>
-<li>for feature selection</li>
-</ul>
-</li>
-</ul>
-<h2 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h2><p>Information, also can be seen as <strong>uncertainty</strong> and <strong>surprise</strong>.</p>
-<p>$I=-log_2{p(x)}$ Since the $p(x)$ is the probability of event $x$, the value $&lt;1$.</p>
-<p><strong>Shannon entropy:</strong></p>
-<script type="math/tex; mode=display">H(p)=-\sum_{x} p(x) \log _{2} p(x)</script><p>( entropy = the probability of an event * information of this event )</p>
-<p>Shannon entropy is the measure of uncertainty. </p>
-<p>(香农熵描述的是混乱程度，而且information这个概念其实也是从这个角度给出的，不确定性越大，这个事件携带的信息越多。)</p>
-<h2 id="K-L-Divergence"><a href="#K-L-Divergence" class="headerlink" title="K-L Divergence"></a>K-L Divergence</h2><p>Two probability distribution $f(x)$ and $g(x)$, the K-L divergence is :</p>
-<script type="math/tex; mode=display">D(f \| g)=\sum_{x \in X} f(x) \log \frac{f(x)}{g(x)}</script><ul>
-<li>Compare the entropy of two distribution over the same random variable</li>
-<li>Heuristically: number of additional bits encoding a random variable with distribution $f(x)$ using $g(x)$.</li>
-</ul>
-<p>It can be seen as the $D(f|g) =\sum_{x \in X} [-f(x)log_2 g(x)+f(x)log_2f(x)] $, the first term is to encode $f(x)$ using the the encoding method of $g(x)$.Therefore, it can be seen as the distance between two encoding function ( or distribution). </p>
-<p>When minimizing K-L against a fixed reference distribution $p$, the task is euivalent to minimizing <strong>cross entropies</strong>. It can be written as: $D(f|g) =\sum_{x \in X}f(x)log_2f(x) - \sum_{x \in X}f(x)log_2 g(x) $</p>
-<p>The second term is what we use in the cross entropy loss function.</p>
-<p>The form of cross entropy:</p>
-<script type="math/tex; mode=display">H(p, q)=-\sum_{x} p(x) \log _{2} q(x)</script><p><strong>Note</strong>:<br>The K-L divergence can not be used as a measure for the distance between $f$ and $g$, since it is not symmetric, $D(f | g)$ is not equal to $D(g | y)$. </p>
-<h2 id="Conditional-Entropy"><a href="#Conditional-Entropy" class="headerlink" title="Conditional Entropy"></a>Conditional Entropy</h2><p>The $I$ is <strong>realized information</strong>, which is the difference between the entropy of $H(C)$ and the contional entropy $H(C|X=x)$. And the realized information is defined as:</p>
-<script type="math/tex; mode=display">I[C ; X=x]=H(C)-H(C | X=x)</script><p>Given the observation of $X$, the entropy of $C$ is decrease, which is written as $H(C | X=x)$.</p>
-<p>The realized information is not necessarily positive. If it is negative, the entropy will increase.</p>
-<p>Form of the contional entropy (from <strong>PRML</strong>): $H(Y | X)=-\sum_{x_{i}, y_{j}}^{m, n} p\left(x_{i}, y_{j}\right) \cdot \log _{2} p\left(y_{j} | x_{i}\right)$ </p>
-<h2 id="Mutual-Information"><a href="#Mutual-Information" class="headerlink" title="Mutual Information"></a>Mutual Information</h2><p>Mutual information is the expected information a <strong>feature</strong> gives us about a classs:</p>
-<p>$I[C ; X]=H(C)-\sum \operatorname{Pr}(X=x) H(C | X=x)$</p>
-<p>Note:</p>
-<ul>
-<li>Mutual information is always positive.</li>
-<li>Is only 0 when the X and C are statistically independent.</li>
-<li>Is symmetric in X and C</li>
-</ul>
-<p><strong>Example of calculating the mutual information</strong>:</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th></th>
-<th style="text-align:center">Indicator X</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Class $C$</td>
-<td style="text-align:center">“Paint”</td>
-<td>“Not Paint”</td>
-</tr>
-<tr>
-<td>Art</td>
-<td style="text-align:center">12</td>
-<td>45</td>
-</tr>
-<tr>
-<td>Music</td>
-<td style="text-align:center"></td>
-<td>45</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>The entropy of C: $H(C)=57/102 \cdot log_2(57/102)+ 45/102\cdot log_2(45/102)=0.99$</p>
-<p>$H[C|X=”paint”]=0$ ,since the “paint” can be certain that the story is about art.</p>
-<p>$H[C|X=”not paint”]=1.0$, which we can calculate from the distribution.</p>
-<p>$I[C;X]=H[C]-Pr(x=1)H[C|X=1]-Pr(X=0)H[C|X=0]$ = 0.99-12/102<em>0-90/102 </em>1 =0.11 </p>
-<p>Therefore, the mutual information is 0.11, which is the expected reduction in uncertainly.</p>
-<p><strong>Note</strong>:</p>
-<p>In the decision tree, mutual information is used as <strong>information gain</strong>. The information gain is the strategy used to choose the best feature for decision. See the <a href="https://www.zhihu.com/question/39436574" target="_blank" rel="noopener">zhihu</a> for more detail.</p>
-<p>And this is the way which most people use to find the informative features.</p>
-<h2 id="Joint-and-Conditional-Entropy"><a href="#Joint-and-Conditional-Entropy" class="headerlink" title="Joint and Conditional Entropy"></a>Joint and Conditional Entropy</h2><p>$H[X, Y]=-\sum_{x, y} \operatorname{Pr}(X=x, Y=y) \log _{2} \operatorname{Pr}(X=x, Y=y)$</p>
-<p>Kind of the joint distribution. </p>
-<p>Using this, conditional mutual information can be derivated:</p>
-<p>$I[C ; Y | X]=H[C | X]-H[C | Y, X]$</p>
-<ul>
-<li>we ask how much information does Y contain about C if we “control” for X.</li>
-</ul>
-<h2 id="Interaction"><a href="#Interaction" class="headerlink" title="Interaction"></a>Interaction</h2><p>Contional mutual information $I [C ; Y | X]$ is positive:</p>
-<ul>
-<li><p>But might be smaller/larger/equal to $I[C;Y]$</p>
-</li>
-<li><p>If $I[C;Y|X]=0$: C and Y are conditionally independent given X; Otherwise there is an interaction between X and Y(regarding their information about C)</p>
-</li>
-<li><p>$I[C;Y|X]&lt;I[C;Y]$: Some of the information in Y about C is redundant given X</p>
-</li>
-<li><p>Use this to define the <strong>interaction information</strong>: $I(C;Y;X)=I(C;Y|X)-I(C;Y)$</p>
-<p>(Actually not very familiar with this interaction)</p>
-</li>
-</ul>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>CAML机器学习系列2：<a href="https://www.cnblogs.com/maybe2030/p/5514841.html" target="_blank" rel="noopener">深入浅出ML之Entropy-Based家族</a></li>
-<li>The slide from Markus: <a href="https://www.southampton.ac.uk/~mb1a10/stats/Information.pdf" target="_blank" rel="noopener">information</a> </li>
-<li>Bishop PRML</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2328,7 +2243,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">60</span>
+                    <span class="site-state-item-count">61</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2504,7 +2419,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
 
 
 

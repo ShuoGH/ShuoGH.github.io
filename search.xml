@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Python decorator pattern]]></title>
+    <url>%2F2019%2F10%2F24%2FPython-decorator-pattern%2F</url>
+    <content type="text"><![CDATA[DecoratorsWhat is decorators? It accepts the functions and add the decorator-like function into the original functions to achieve certain functions. Examples: Apply the function of measuring execution time on each function. 12345678910111213141516171819202122# -*- coding: utf-8 -*-import time# --exe_timedef exe_time(func): def new_func(*args, **args2): t0 = time.time() print "@%s, &#123;%s&#125; start" % (time.strftime("%X", time.localtime()), func.__name__) back = func(*args, **args2) print "@%s, &#123;%s&#125; end" % (time.strftime("%X", time.localtime()), func.__name__) print "@%.3fs taken for &#123;%s&#125;" % (time.time() - t0, func.__name__) return back return new_func# --end of exe_time@exe_timedef foo(): for i in xrange(10000000): passif __name__ == "__main__": foo() See more details in the blog of liaoxuefeng. Reference liaoxuefeng: Decorators https://www.liaoxuefeng.com/wiki/1016959663602400/1017451662295584 Python: 使用装饰器“@”取得函数执行时间 https://oldj.net/blog/2010/05/22/decorator-get-execution-time]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Python map filter and reduce]]></title>
     <url>%2F2019%2F09%2F19%2FPython-map-filter-and-reduce%2F</url>
     <content type="text"><![CDATA[Map, Filter and ReduceMapMap applies a function to all the items in an input_list. Given an example: 12items = [1, 2, 3, 4, 5]squared = list(map(lambda x: x**2, items)) The use blueprint is 1map(function_to_apply, list_of_inputs) Note that the function could be list of functions. FilterAs the name suggests, filter returns the list of elements for which a function returns true. Given an example: 12345number_list = range(-5, 5)less_than_zero = list(filter(lambda x: x &lt; 0, number_list))print(less_than_zero)# Output: [-5, -4, -3, -2, -1] ReduceReduce is a really useful function for performing some computation on a list and returning the result. It applies a rolling computation to sequential pairs of values in a list. For example, if you wanted to compute the product of a list of integers. So the normal way you might go about doing this task in python is using a basic for loop: 123456product = 1list = [1, 2, 3, 4]for num in list: product = product * num# product = 24 Now let’s try it with reduce: 123456from functools import reduceproduct = reduce((lambda x, y: x * y), [1, 2, 3, 4])# Output: 24# map and filter are both in built-in module. # The REDUCE need to be imported. Reference Map, Filter and Reduce https://book.pythontips.com/en/latest/map_filter.html]]></content>
