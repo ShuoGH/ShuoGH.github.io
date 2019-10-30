@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Python Unit Testing]]></title>
+    <url>%2F2019%2F10%2F30%2FPython-Unit-Testing%2F</url>
+    <content type="text"><![CDATA[Unit TestingWhat is unit testing? Unit testing simply verifies that individual units of code (mostly functions) work as expected. Usually you write the test cases yourself, but some can be automatically generated. The unit testing should be done as often as possible. The most obvious benefit is knowing down the road that when a change is made, no other individual units of code were affected by it if they all pass the tests. Example of testing Student classHere I’m going to make a very simple example to show how it works. First, build the Student class: 123456789101112131415161718class Student(): def __init__(self, name, score): self.name = name self.score = score self.grade = None def to_grade(self): if self.score &gt;= 60: self.grade = 'Pass' else: self.grade = 'Fail' def get_grade(self): if self.grade: return self.grade else: self.to_grade() return self.grade Then, build the unit testing script: 12345678910111213141516171819import unittestfrom Student import Studentclass TestStudent(unittest.TestCase): def test_above_60(self): s1 = Student('bart', 60) self.assertEqual(s1.get_grade(), 'Pass') def test_below_60(self): s1 = Student('bart', 50) self.assertEqual(s1.get_grade(), 'Fail') def test_invalid(self): passif __name__ == "__main__": unittest.main() ExecutionExecute the script to make testing: 1python test_student.py to make the outut more verbose, add the -v into the command. 1python test_student.py -v Reference blog of liaoxuefeng: https://www.liaoxuefeng.com/wiki/1016959663602400/1017604210683936 doc of Python 3.8: https://docs.python.org/3/library/unittest.html]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Python decorator pattern]]></title>
     <url>%2F2019%2F10%2F24%2FPython-decorator-pattern%2F</url>
     <content type="text"><![CDATA[DecoratorsWhat is decorators? It accepts the functions and add the decorator-like function into the original functions to achieve certain functions. Examples: Apply the function of measuring execution time on each function. 12345678910111213141516171819202122# -*- coding: utf-8 -*-import time# --exe_timedef exe_time(func): def new_func(*args, **args2): t0 = time.time() print "@%s, &#123;%s&#125; start" % (time.strftime("%X", time.localtime()), func.__name__) back = func(*args, **args2) print "@%s, &#123;%s&#125; end" % (time.strftime("%X", time.localtime()), func.__name__) print "@%.3fs taken for &#123;%s&#125;" % (time.time() - t0, func.__name__) return back return new_func# --end of exe_time@exe_timedef foo(): for i in xrange(10000000): passif __name__ == "__main__": foo() See more details in the blog of liaoxuefeng. Reference liaoxuefeng: Decorators https://www.liaoxuefeng.com/wiki/1016959663602400/1017451662295584 Python: 使用装饰器“@”取得函数执行时间 https://oldj.net/blog/2010/05/22/decorator-get-execution-time]]></content>

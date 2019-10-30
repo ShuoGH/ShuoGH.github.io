@@ -357,6 +357,194 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/25/Discriminative-and-Generative-Models/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/25/Discriminative-and-Generative-Models/" class="post-title-link" itemprop="url">Discriminative and Generative Models</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-25 23:47:24 / Modified: 23:50:15" itemprop="dateCreated datePublished" datetime="2019-05-25T23:47:24+01:00">2019-05-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>The classification problem can be broken down into two seperate stages: </p>
+<ul>
+<li>The <em>inference</em> stage: train data to learn a model for $p(C_k|x)$</li>
+<li>The <em>decision</em> stage: use these posterior probabilities to make optimal class assignments </li>
+</ul>
+<p>To solve the classification, there are actually <strong>three</strong> distinct approaches.</p>
+<h2 id="Generative-Models"><a href="#Generative-Models" class="headerlink" title="Generative Models"></a>Generative Models</h2><p>To solve the <em>inference</em> problem, we should determine the class-conditional densities $p(x|C_k)$ for each class $C_k$ individually. Also infer the prior class probabilities $p(C_k)$. Then use Bayes’ theorem in the form</p>
+<script type="math/tex; mode=display">p\left(\mathcal{C}_{k} | \mathbf{x}\right)=\frac{p\left(\mathbf{x} | \mathcal{C}_{k}\right) p\left(\mathcal{C}_{k}\right)}{p(\mathbf{x})}</script><p>to find the posterior class probabilities $p(C_k|x)$. </p>
+<p>For the denominator, it can be calculated by <script type="math/tex">p(\mathbf{x})=\sum_{k} p\left(\mathbf{x} | \mathcal{C}_{k}\right) p\left(\mathcal{C}_{k}\right)</script>.</p>
+<p>Equivalently, the joint distribution $p(x,C_k)$ can also be modelled directly and then normalize to obtain the posterior probabilities. </p>
+<p>Given the posterior probabilities, we use decision theory to determine class membership for each input $x$. This kind of method is called <em>generative models</em>, which model the distribution of inputs as well as the outputs. The name “<em>generative</em>“ is because by sampling from them it is possible to generate synthetic data points in the input space.</p>
+<p>The <strong>examples</strong> of generative models:</p>
+<ul>
+<li>Naive Bayes, Latent Dirichlet allocation, Gaussian Process…</li>
+</ul>
+<h2 id="Discriminative-Models"><a href="#Discriminative-Models" class="headerlink" title="Discriminative Models"></a>Discriminative Models</h2><p>Solve the inference problem of determining the posterior class probabilities $p(C_k|x)$, and then make prediction using decision theory. </p>
+<p>The methods which model the posterior probabilities $p(C_k|x)$ <strong><em>directly</em></strong> are called <em>discriminative models</em>. </p>
+<p><strong>or </strong></p>
+<p>Find a function $f(x)$, called a discriminant function, which maps each input $x$ directly onto a class label. </p>
+<p><strong>Examples</strong> of discriminative models:</p>
+<ul>
+<li>kNN, perceptron, decision tree, linear regression, logistics regression, SVM, neural network…</li>
+</ul>
+<h2 id="The-Merits-of-Each-Method"><a href="#The-Merits-of-Each-Method" class="headerlink" title="The Merits of Each Method"></a>The Merits of Each Method</h2><p><strong><em>Generative models</em></strong> are most demanding, since it involve finding the joint distribution over both $x$ and $C_k$. For many application, $X$ have high dimensionality and consequently we may need a large training set in order to be able to determine the <strong>class-conditional densities</strong> （类条件概率密度，就是后验概率，我们的目标）to reasonable accuracy.<br>One distinctive use case of the generative models is <em>outlier detection</em> （离群点检测）. The margin density of data $p(x)$ can be determined using the formula menetioned above. It is usefule for detecting new data points that have low probability under the model and for which the predictions may be of low accuracy, which is know as <em>outlier detection</em> and <em>novelty detection</em>.</p>
+<p><strong><em>Discriminative approaches</em></strong> is simpler. The second approach can obtain the posterior probabilities $p(C_k|x)$ directly from the data points. The thrid approach is much simpler, in which we use the training data to find a discriminant function $f(x)$ that maps each $x$ directly onto a class label (It combine the inference and decision stages into a single learning problem). However, in the third method, we no loner have access to posterior probabilities.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Bishop PRML Chapter 1.5.4</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/25/Data-Mining-Information-Theory/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1979,170 +2167,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/30/Sklearn-Split-Train-and-Test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/30/Sklearn-Split-Train-and-Test/" class="post-title-link" itemprop="url">Sklearn Split Train and Test</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-30 10:43:50 / Modified: 10:46:41" itemprop="dateCreated datePublished" datetime="2019-04-30T10:43:50+01:00">2019-04-30</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>There are several ways to split the data set into training data set and test data set.</p>
-<p>In this blog, I will talk about the difference between these approaches.</p>
-<h2 id="sklearn-model-selection-train-test-split"><a href="#sklearn-model-selection-train-test-split" class="headerlink" title="sklearn.model_selection.train_test_split"></a>sklearn.model_selection.train_test_split</h2><p>Doc: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html" target="_blank" rel="noopener">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html</a></p>
-<h2 id="sklearn-model-selection-ShuffleSplit"><a href="#sklearn-model-selection-ShuffleSplit" class="headerlink" title="sklearn.model_selection.ShuffleSplit"></a>sklearn.model_selection.ShuffleSplit</h2><p>Doc: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ShuffleSplit.html" target="_blank" rel="noopener">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ShuffleSplit.html</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2191,7 +2215,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

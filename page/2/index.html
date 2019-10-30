@@ -357,6 +357,187 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/Linux-Delete-Files-Bash-Command/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shuo An">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_loki.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="We Need to Go Deeper">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/03/Linux-Delete-Files-Bash-Command/" class="post-title-link" itemprop="url">Linux Delete Files Bash Command</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-03 15:11:53 / Modified: 15:22:07" itemprop="dateCreated datePublished" datetime="2019-07-03T15:11:53+01:00">2019-07-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>To delete files on Linux server, there are multi ways to achieve this. </p>
+<h2 id="rm-bash-command"><a href="#rm-bash-command" class="headerlink" title="rm bash command"></a>rm bash command</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm [options] ...file...</span><br></pre></td></tr></table></figure>
+<p>I usually use <code>rm -rf file folder_name</code> to remove a non-empty filefolder.</p>
+<p>Options:</p>
+<ul>
+<li><p>-f, —force </p>
+<p>Ignore nonexistent files, never prompt</p>
+</li>
+<li><p>-r, -R, —recursive</p>
+<p>Remove directories and their contents recursively.</p>
+</li>
+</ul>
+<p>and some other options, see the reference 1 for the doc.</p>
+<h2 id="rsync"><a href="#rsync" class="headerlink" title="rsync"></a>rsync</h2><p><code>rsync</code> is an alternative method which can be used in deleting files. It is suitable for the folder which contains a large amount of files, in which case <code>rm -rf</code> can’t behave well.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir empty</span><br><span class="line">rsync -a --delete empty/ your_folder/</span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Bash man doc: <a href="https://ss64.com/bash/rm.html" target="_blank" rel="noopener">rm</a></li>
+<li>Bash man doc: <a href="https://ss64.com/bash/rsync.html" target="_blank" rel="noopener">rsync</a></li>
+<li>StackExchange: <a href="https://unix.stackexchange.com/questions/37329/efficiently-delete-large-directory-containing-thousands-of-files" target="_blank" rel="noopener">Efficiently delete large directory containing thousands of files</a></li>
+<li></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/02/Linux-tar-for-unzipping/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2020,211 +2201,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/28/EM-Algorithm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shuo An">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar_loki.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="We Need to Go Deeper">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/28/EM-Algorithm/" class="post-title-link" itemprop="url">EM Algorithm</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-28 10:52:37 / Modified: 10:53:42" itemprop="dateCreated datePublished" datetime="2019-05-28T10:52:37+01:00">2019-05-28</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>EM algorithm is used to solve the problems which have the latent variable. Like the example mentioned in the <a href="https://zhuanlan.zhihu.com/p/36331115" target="_blank" rel="noopener">reference 1</a> about the heights of boys and girls.</p>
-<p>Before explaining the EM algorith, we review the generative models. See the blog of <a href="https://shuogh.github.io/2019/05/25/Discriminative-and-Generative-Models/" target="_blank" rel="noopener">Discriminative and Generative models</a> and <a href="https://shuogh.github.io/2019/05/26/Naive-Bayes/" target="_blank" rel="noopener">Naive Bayes</a>. </p>
-<h2 id="Building-Probabilistic-Models"><a href="#Building-Probabilistic-Models" class="headerlink" title="Building Probabilistic Models"></a>Building Probabilistic Models</h2><p>To describe a system with uncertainty we use random variables, $X$, $Y$, $Z$, etc.  </p>
-<p>The variables are described by probability mass function $\mathbb{P}(X, Y, Z)$ or if our variables are continuous, but probability densities $f_{X, Y, Z}(x, y, z)$. We build in dependencies in this joint distribution.</p>
-<p>We often think of our observations as given and the predictions as random variables. The object is to find a probability $\mathbb{P}(C | \boldsymbol{x})$. Modeling this directly is what we know as <strong>discriminative model</strong>. </p>
-<p>In <strong>generative models</strong>, we think of the problem as the joint process of generating the features and outputs together. This leads to a joint distribution $\mathbb{P}(\boldsymbol{X}, Y)$ where $X$ are your features and $Y$ is your output you are trying to predict. Write  the approach like </p>
-<script type="math/tex; mode=display">\mathbb{P}(Y | \boldsymbol{X})=\frac{\mathbb{P}(\boldsymbol{X}, Y)}{\mathbb{P}(\boldsymbol{X})}=\frac{\mathbb{P}(\boldsymbol{X}, Y)}{\sum_{Y} \mathbb{P}(\boldsymbol{X}, Y)}</script><h2 id="Latent-Variable"><a href="#Latent-Variable" class="headerlink" title="Latent Variable"></a>Latent Variable</h2><p><strong>Latent variables</strong>: The random variables involed in our models, but we don’t observe and we don’t care about.</p>
-<p>If we have a latent variable $Z$ and observed variable $\boldsymbol{X}$ and we are predicting a variable $Y$ then we would marginalise over the latent variable</p>
-<script type="math/tex; mode=display">\mathbb{P}(\boldsymbol{X}, Y)=\sum_{Z} \mathbb{P}(\boldsymbol{X}, Y, Z)</script><p>Suppose we were observing the decays from two types of short-lived particle. $X$ is our observation. Assume $X$ is normally distributed with unknown means and variances: $\Theta=\left\{\mu_{1}, \sigma_{1}^{2}, \mu_{2}, \sigma_{2}^{2}\right\}$. Let $Z\in \{0,1\}$ be an indicator that it is particle 1. </p>
-<p>The probability of $X$ is given by </p>
-<script type="math/tex; mode=display">f(X | Z, \mathbf{\Theta})=Z \mathcal{N}\left(X | \mu_{1}, \sigma_{1}^{2}\right)+(1-Z) \mathcal{N}\left(X | \mu_{2}, \sigma_{2}^{2}\right)</script><ul>
-<li><p><strong>Note</strong>:</p>
-<script type="math/tex; mode=display">\begin{aligned} f(X | \Theta) &=\sum_{Z \in\{0,1\}} f(X, Z | \Theta)=\sum_{Z \in\{0,1\}} f(X | Z, \Theta) \mathbb{P}(Z) \\ &=\mathbb{E}_{Z}[f(X | Z, \Theta)]=p \mathcal{N}\left(X | \mu_{1}, \sigma_{1}^{2}\right)+(1-p) \mathcal{N}\left(X | \mu_{2}, \sigma_{2}^{2}\right) \end{aligned}</script></li>
-</ul>
-<p>Then the likelihood of our observed data</p>
-<script type="math/tex; mode=display">f(\mathcal{D} | \Theta)=\prod_{X \in \mathcal{D}} f(X | \Theta)</script><p>The likelihood function is a non-linear function of the parameters so cannot be immediately maximised. We have a difficulty in that our latent variable $Z$ will depend on the parameter $\Theta$, and our likelihood will depend on the latent variable.</p>
-<p><strong>Solution</strong>:</p>
-<script type="math/tex; mode=display">\Theta^{(t+1)}=\underset{\Theta}{\operatorname{argmax}} \sum_{Z} \mathbb{P}\left(Z | \mathcal{D}, \Theta^{(t)}\right) \log (f(\mathcal{D} | Z, \Theta))</script><p>proceed iteratively by maximising the <strong>expected log-likelihood</strong> with respect to the current set of parameters.</p>
-<h2 id="EM-for-Mixture-of-Gaussians"><a href="#EM-for-Mixture-of-Gaussians" class="headerlink" title="EM for Mixture of Gaussians"></a>EM for Mixture of Gaussians</h2><p>(EM算法是求基于隐变量上的似然函数的期望。就像这样的形式$p\cdot log(f(D|Z,\Theta))+(1-p)\cdot log(f(D|Z,\Theta))$)</p>
-<p>(to be continued)</p>
-<p>The algorithm (Bishop PRML): </p>
-<ol>
-<li><p>Initialize the $\boldsymbol{\mu}_{k}$, covariance $\boldsymbol{\Sigma}_{k}$ and mixing coefficients $\pi_{k}$, and evaluate the initial value of the log likelihood.</p>
-</li>
-<li><p><strong>E step</strong>. Evaluate the responsibilities using the current parameter values</p>
-<script type="math/tex; mode=display">\gamma\left(z_{n k}\right)=\frac{\pi_{k} \mathcal{N}\left(\mathbf{x}_{n} | \boldsymbol{\mu}_{k}, \mathbf{\Sigma}_{k}\right)}{\sum_{j=1}^{K} \pi_{j} \mathcal{N}\left(\mathbf{x}_{n} | \boldsymbol{\mu}_{j}, \boldsymbol{\Sigma}_{j}\right)}</script><p>（计算每个点n对应到k隐变量的概率）</p>
-</li>
-<li><p><strong>M step</strong>. Re-estimate the parameters using the current responsibilities. </p>
-<script type="math/tex; mode=display">\begin{aligned} \boldsymbol{\mu}_{k}^{\mathrm{new}} &=\frac{1}{N_{k}} \sum_{n=1}^{N} \gamma\left(z_{n k}\right) \mathbf{x}_{n} \\ \boldsymbol{\Sigma}_{k}^{\mathrm{new}} &=\frac{1}{N_{k}} \sum_{n=1}^{N} \gamma\left(z_{n k}\right)\left(\mathbf{x}_{n}-\boldsymbol{\mu}_{k}^{\mathrm{new}}\right)\left(\mathbf{x}_{n}-\boldsymbol{\mu}_{k}^{\mathrm{new}}\right)^{\mathrm{T}} \\ \pi_{k}^{\mathrm{new}} &=\frac{N_{k}}{N} \end{aligned}</script><p>where </p>
-<script type="math/tex; mode=display">N_{k}=\sum_{n=1}^{N} \gamma\left(z_{n k}\right)</script><p>（重新计算每类隐变量k的均值$\mu$和发那个方差矩阵$\Sigma$，以及重新分配隐变量分布的概率）</p>
-</li>
-<li><p>Evaluate the log likelihood</p>
-<script type="math/tex; mode=display">\ln p(\mathbf{X} | \boldsymbol{\mu}, \boldsymbol{\Sigma}, \boldsymbol{\pi})=\sum_{n=1}^{N} \ln \left\{\sum_{k=1}^{K} \pi_{k} \mathcal{N}\left(\mathbf{x}_{n} | \boldsymbol{\mu}_{k}, \boldsymbol{\Sigma}_{k}\right)\right\}</script><p>and check for convergence of either the parameters or the log likelihood. If the convergence criterion is not satisfied return to step 2.</p>
-<p>（计算log 似然函数，这个在最开始也计算了一次。如果没有达到要求，重新迭代再进行计算）</p>
-</li>
-</ol>
-<p>(not fully understand…)</p>
-<h3 id="Example-of-Coin-Tossing"><a href="#Example-of-Coin-Tossing" class="headerlink" title="Example of Coin Tossing"></a>Example of Coin Tossing</h3><p><em>MLE</em>: there is no latent variable. The event are all belong to one distribution.</p>
-<p><em>EM</em>: There are latent variables. And we don’t know the $p(Z)$ where $Z$ is the latent variable. </p>
-<p>(See the example mentioned in reference 1)</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>zhihu <a href="https://zhuanlan.zhihu.com/p/36331115" target="_blank" rel="noopener">人人都懂EM算法</a></li>
-<li>adam slide <a href="https://secure.ecs.soton.ac.uk/notes/comp6208/lectures/generativeModels.pdf" target="_blank" rel="noopener">Generative Models</a></li>
-<li>Bishop PRML Chapter 9.2</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2273,7 +2249,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
